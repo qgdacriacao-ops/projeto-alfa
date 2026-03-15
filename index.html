@@ -8,9 +8,9 @@
     <style>
         :root { --gold: #FFD700; --bg: #000; --white: #fff; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body, html { height: 100%; background-color: var(--bg); font-family: 'Inter', sans-serif; overflow-x: hidden; }
+        body, html { height: 100%; background-color: var(--bg); font-family: 'Inter', sans-serif; overflow-x: hidden; display: flex; flex-direction: column; }
 
-        /* BRILHO 65% FIXO */
+        /* FUNDO HOME - BRILHO 65% */
         #bg { 
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
             background: url('capa.png') no-repeat center center; 
@@ -27,40 +27,50 @@
         .logo img { height: 60px; }
         .logo span { color: var(--white); font-weight: 700; text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem; }
 
-        nav ul { list-style: none; display: flex; gap: 18px; }
+        nav { display: flex; align-items: center; gap: 20px; }
+        nav ul { list-style: none; display: flex; gap: 15px; }
         nav a { text-decoration: none; color: #fff; font-size: 0.65rem; font-weight: 700; text-transform: uppercase; cursor: pointer; transition: 0.3s; }
-        nav a:hover { color: var(--gold); }
-
-        .main-container { height: 100vh; display: flex; justify-content: space-between; align-items: center; padding: 0 5%; position: relative; z-index: 10; }
+        nav a:hover { color: var(--gold); text-shadow: 0 0 10px var(--gold); }
         
-        /* COLUNAS HOME */
+        #menu-sinopse { opacity: 0.3; pointer-events: none; } 
+        #menu-sinopse.active { opacity: 1; pointer-events: auto; color: var(--gold); }
+
+        #btn-voltar { display: none; color: var(--gold); border: 1px solid var(--gold); padding: 5px 12px; font-size: 0.6rem; font-weight: 700; text-transform: uppercase; cursor: pointer; transition: 0.3s; border-radius: 2px; margin-left: 15px; }
+        #btn-voltar:hover { background: var(--gold); color: #000; box-shadow: 0 0 15px var(--gold); }
+
+        /* CONTAINER DA HOME */
+        .main-container { min-height: 100vh; display: flex; justify-content: space-between; align-items: center; padding: 100px 5% 50px; position: relative; z-index: 10; flex: 1; }
+        
         .column-box { width: 280px; text-align: center; }
-        .column-title { color: var(--gold); font-size: 0.8rem; letter-spacing: 5px; text-transform: uppercase; font-weight: 700; margin-bottom: 20px; }
+        .column-title { color: var(--gold); font-size: 0.8rem; letter-spacing: 5px; text-transform: uppercase; font-weight: 700; margin-bottom: 5px; }
         .display-box { width: 100%; height: 420px; cursor: pointer; transition: 0.5s; }
+        .display-box:hover { transform: scale(1.03); box-shadow: 0 0 30px rgba(255, 215, 0, 0.4); }
         .display-box img { width: 100%; height: 100%; object-fit: contain; }
 
         .hero-center { flex: 1; text-align: center; }
-        .hero-center h1 { color: var(--white); font-size: clamp(1.2rem, 3vw, 2.5rem); text-transform: uppercase; }
-        .line-hero { width: 80%; height: 5px; background: var(--gold); margin: 20px auto; box-shadow: 0 0 15px var(--gold); }
+        .hero-center h1 { color: var(--white); font-size: 2.2rem; text-transform: uppercase; font-weight: 700; line-height: 1.2; }
+        .line-hero { width: 85%; height: 5px; background: var(--gold); margin: 15px auto; box-shadow: 0 0 20px var(--gold); }
 
-        /* GRID DE PRODUTOS FLUTUANTES */
-        #content-overlay { display: none; width: 100%; min-height: 100vh; position: absolute; top: 0; left: 0; z-index: 50; padding: 120px 5% 50px; }
-        .grid-produtos { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 40px; max-width: 1400px; margin: 0 auto; }
+        /* GRID EBOOK - 4 POR LINHA */
+        .content-active { z-index: 50; position: relative; background-color: #000; min-height: 100vh; display: none; padding: 120px 5% 50px; }
+        .grid-produtos { display: grid; grid-template-columns: repeat(4, 1fr); gap: 50px; max-width: 1400px; margin: 0 auto; }
         
         .card-flutuante { text-align: center; cursor: pointer; animation: flutuar 4s ease-in-out infinite; transition: 0.4s; }
-        .card-flutuante:hover { transform: scale(1.05); animation-play-state: paused; }
-        .card-flutuante img { width: 100%; height: 260px; object-fit: contain; margin-bottom: 10px; }
-        .stars { color: var(--gold); font-size: 1rem; letter-spacing: 2px; }
+        .card-flutuante:hover { transform: translateY(-15px) scale(1.05); animation-play-state: paused; }
+        .card-flutuante img { width: 100%; height: 320px; object-fit: contain; transition: 0.4s; }
+        .card-flutuante:hover img { box-shadow: 0 0 35px rgba(255, 215, 0, 0.6); filter: brightness(1.2); }
+        .stars { color: var(--gold); font-size: 1rem; margin-top: 10px; }
 
-        @keyframes flutuar {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
-        }
+        @keyframes flutuar { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
 
-        /* PAGINA SINOPSE */
-        #sinopse-page { display: none; width: 100%; padding: 120px 5%; color: #fff; z-index: 100; position: relative; }
-        .sinopse-layout { display: grid; grid-template-columns: 1fr 1.5fr; gap: 60px; }
-        .sinopse-layout img { width: 100%; border: 1px solid var(--gold); }
+        /* SINOPSE */
+        .sinopse-layout { display: grid; grid-template-columns: 1fr 1.5fr; gap: 60px; color: #fff; }
+        .sinopse-layout img { width: 100%; border: 2px solid var(--gold); box-shadow: 0 0 20px rgba(255,215,0,0.3); }
+
+        /* RODAPÉ INTERATIVO */
+        footer { background-color: #000; width: 100%; padding: 35px 0; border-top: 1px solid var(--gold); text-align: center; position: relative; z-index: 100; margin-top: auto; }
+        .copyright { color: var(--gold); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 4px; cursor: pointer; transition: 0.4s; display: inline-block; }
+        .copyright:hover { transform: scale(1.05); text-shadow: 0 0 15px var(--gold); letter-spacing: 6px; }
     </style>
 </head>
 <body>
@@ -68,21 +78,22 @@
     <header>
         <div class="logo"><img src="selo.png"><span>Portal Pleno O Código</span></div>
         <nav>
-            <ul id="nav-links">
+            <ul>
                 <li><a onclick="irHome()">Início</a></li>
-                <li><a onclick="irTitulos()">Títulos Ebook</a></li>
-                <li id="menu-sinopse" style="display:none;"><a onclick="irSinopse()">Sinopse</a></li>
-                <li><a href="#">Avaliações</a></li>
-                <li><a href="#">Degustação</a></li>
-                <li><a href="#">Sobre</a></li>
-                <li><a href="#">Contato</a></li>
+                <li><a onclick="irTitulos()">Ebook</a></li>
+                <li><a id="menu-sinopse" onclick="irSinopseManual()">Sinopse</a></li>
+                <li><a href="avaliacoes.html">Avaliações</a></li>
+                <li><a href="degustacao.html">Degustação</a></li>
+                <li><a href="sobre.html">Sobre</a></li>
+                <li><a href="contato.html">Contato</a></li>
             </ul>
+            <div id="btn-voltar" onclick="voltarFluxo()">Voltar</div>
         </nav>
     </header>
 
     <main class="main-container" id="view-home">
         <div class="column-box">
-            <div class="column-title">Ebooks</div>
+            <p class="column-title">EBOOKS</p>
             <div class="display-box" onclick="irTitulos()"><img id="loop-e" src="ebook01.png"></div>
         </div>
         <div class="hero-center">
@@ -91,25 +102,29 @@
             <h1>O CÓDIGO É A CHAVE</h1>
         </div>
         <div class="column-box">
-            <div class="column-title">Audiobooks</div>
+            <p class="column-title">AUDIOBOOKS</p>
             <div class="display-box" onclick="irTitulos()"><img id="loop-a" src="audio01.png"></div>
         </div>
     </main>
 
-    <section id="content-overlay">
+    <section id="titulos-view" class="content-active">
         <div class="grid-produtos" id="render-grid"></div>
     </section>
 
-    <section id="sinopse-page">
+    <section id="sinopse-view" class="content-active">
         <div class="sinopse-layout">
             <div class="sin-img"><img id="target-img" src=""></div>
             <div class="sin-text">
                 <h2 id="target-title" style="color:var(--gold); font-size:2.5rem; text-transform:uppercase;"></h2>
-                <p style="margin-top:30px; line-height:1.8; font-size:1.1rem;">Análise visceral e técnica da supremacia intelectual. O hardware mental em sua máxima performance.</p>
-                <div class="stars" style="margin-top:20px;">★★★★★</div>
+                <p style="margin-top:20px; line-height:1.8; font-size:1.1rem;">Análise técnica da soberania intelectual.</p>
+                <div class="stars">★★★★★</div>
             </div>
         </div>
     </section>
+
+    <footer>
+        <div class="copyright" onclick="irTitulos()">© 2026 PORTAL PLENO O CÓDIGO</div>
+    </footer>
 
     <script>
         const hardware = {
@@ -117,45 +132,63 @@
             a: ['audio01.png', 'audio02.png', 'audio03.png', 'audio04.png', 'audio05.png', 'audio06.png']
         };
 
-        // LOOP AUTOMÁTICO
         let iE = 0, iA = 0;
-        setInterval(() => { iE = (iE + 1) % hardware.e.length; document.getElementById('loop-e').src = hardware.e[iE]; }, 3000);
-        setInterval(() => { iA = (iA + 1) % hardware.a.length; document.getElementById('loop-a').src = hardware.a[iA]; }, 3000);
+        setInterval(() => { 
+            iE = (iE + 1) % hardware.e.length; 
+            document.getElementById('loop-e').src = hardware.e[iE]; 
+        }, 3000);
+        setInterval(() => { 
+            iA = (iA + 1) % hardware.a.length; 
+            document.getElementById('loop-a').src = hardware.a[iA]; 
+        }, 3000);
+
+        let historico = 'home';
+        let ativoAtual = null;
 
         function irHome() {
-            reset();
+            resetTelas();
             document.getElementById('view-home').style.display = 'flex';
-            document.getElementById('bg').style.backgroundImage = "url('capa.png')";
+            document.getElementById('bg').style.opacity = "1";
+            document.getElementById('btn-voltar').style.display = 'none';
+            document.getElementById('menu-sinopse').classList.remove('active');
+            historico = 'home';
         }
 
         function irTitulos() {
-            reset();
-            const overlay = document.getElementById('content-overlay');
+            resetTelas();
+            document.getElementById('bg').style.opacity = "0";
             const grid = document.getElementById('render-grid');
-            overlay.style.display = 'block';
-            document.getElementById('bg').style.backgroundImage = "url('banner.png')";
-            
-            const all = [...hardware.e, ...hardware.a];
-            grid.innerHTML = all.map(img => `
+            grid.innerHTML = [...hardware.e, ...hardware.a].map(img => `
                 <div class="card-flutuante" onclick="abrirSinopse('${img}')">
-                    <img src="${img}">
-                    <div class="stars">★★★★★</div>
-                </div>
-            `).join('');
+                    <img src="${img}"><div class="stars">★★★★★</div>
+                </div>`).join('');
+            document.getElementById('titulos-view').style.display = 'block';
+            document.getElementById('btn-voltar').style.display = 'block';
+            document.getElementById('menu-sinopse').classList.remove('active');
+            historico = 'titulos';
         }
 
         function abrirSinopse(img) {
-            reset();
+            resetTelas();
+            ativoAtual = img;
             document.getElementById('target-img').src = img;
             document.getElementById('target-title').innerText = img.replace('.png', '').toUpperCase();
-            document.getElementById('sinopse-page').style.display = 'block';
-            document.getElementById('menu-sinopse').style.display = 'block';
-            document.getElementById('bg').style.backgroundImage = "url('banner.png')";
+            document.getElementById('sinopse-view').style.display = 'block';
+            document.getElementById('btn-voltar').style.display = 'block';
+            document.getElementById('menu-sinopse').classList.add('active');
+            historico = 'sinopse';
         }
 
-        function reset() {
-            ['view-home', 'content-overlay', 'sinopse-page'].forEach(id => document.getElementById(id).style.display = 'none');
-            document.getElementById('menu-sinopse').style.display = 'none';
+        function irSinopseManual() { if(ativoAtual) abrirSinopse(ativoAtual); }
+
+        function voltarFluxo() {
+            if (historico === 'sinopse') irTitulos();
+            else irHome();
+        }
+
+        function resetTelas() {
+            document.querySelectorAll('.content-active, #view-home').forEach(el => el.style.display = 'none');
+            window.scrollTo(0,0);
         }
     </script>
 </body>

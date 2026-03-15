@@ -10,11 +10,11 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body, html { height: 100%; background-color: var(--bg); font-family: 'Inter', sans-serif; overflow-x: hidden; }
 
-        /* REGRA DE HARDWARE: BRILHO 65% FIXO */
+        /* BRILHO 65% FIXO */
         #bg { 
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
             background: url('capa.png') no-repeat center center; 
-            background-size: cover; z-index: 1; filter: brightness(0.65); 
+            background-size: cover; z-index: 1; filter: brightness(0.65); transition: 0.8s;
         }
         
         header { 
@@ -23,131 +23,112 @@
             position: fixed; top: 0; width: 100%; z-index: 1000; height: 85px; 
             border-bottom: 2px solid var(--gold); 
         }
+        .logo { display: flex; align-items: center; gap: 15px; }
         .logo img { height: 60px; }
+        .logo span { color: var(--white); font-weight: 700; text-transform: uppercase; letter-spacing: 2px; }
+
         nav ul { list-style: none; display: flex; gap: 20px; }
-        nav a { text-decoration: none; color: #fff; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; cursor: pointer; }
+        nav a { text-decoration: none; color: #fff; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; cursor: pointer; transition: 0.3s; }
+        nav a:hover { color: var(--gold); text-shadow: 0 0 10px var(--gold); }
 
         .main-container { height: 100vh; display: flex; justify-content: space-between; align-items: center; padding: 0 5%; position: relative; z-index: 10; }
         
-        /* TRIGGERS LATERAIS COM HOVER */
-        .product-trigger { width: 280px; transition: transform 0.4s; cursor: pointer; }
-        .product-trigger:hover { transform: scale(1.05); }
-        .product-trigger img { width: 100%; height: auto; filter: drop-shadow(0 0 15px rgba(255,215,0,0.3)); }
+        /* COLUNAS COM TÍTULOS */
+        .column-box { width: 280px; text-align: center; display: flex; flex-direction: column; align-items: center; }
+        .column-title { color: var(--gold); font-size: 0.8rem; letter-spacing: 5px; text-transform: uppercase; font-weight: 700; margin-bottom: 20px; text-shadow: 2px 2px 10px #000; }
+        .display-box { width: 100%; height: 450px; cursor: pointer; transition: 0.5s; }
+        .display-box:hover { transform: scale(1.03); }
+        .display-box img { width: 100%; height: 100%; object-fit: contain; }
 
         .hero-center { flex: 1; text-align: center; }
-        .hero-center h1 { color: var(--white); font-size: 2.5rem; text-transform: uppercase; font-weight: 700; }
-        .line-hero { width: 80%; max-width: 450px; height: 5px; background: var(--gold); margin: 20px auto; }
+        .hero-center h1 { color: var(--white); font-size: clamp(1.2rem, 3vw, 2.5rem); text-transform: uppercase; font-weight: 700; }
+        .line-hero { width: 85%; max-width: 450px; height: 5px; background: var(--gold); margin: 20px auto; box-shadow: 0 0 20px var(--gold); }
 
-        /* BIBLIOTECA FLUTUANTE (GRID 12 ITENS) */
-        #biblioteca-section { 
-            display: none; width: 100%; min-height: 100vh; padding: 120px 5% 50px; 
-            position: relative; z-index: 50; 
-        }
-        .grid-biblioteca { 
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
-            gap: 40px; max-width: 1400px; margin: 0 auto; 
-        }
-        .item-flutuante { 
-            text-align: center; transition: 0.5s; cursor: pointer; 
-            animation: flutuar 3s ease-in-out infinite; 
-        }
-        .item-flutuante:hover { transform: translateY(-20px) scale(1.1); animation-play-state: paused; }
-        .item-flutuante img { width: 100%; height: 300px; object-fit: contain; }
-
-        @keyframes flutuar {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
-        }
-
-        /* SINOPSE */
-        #sinopse-view { display: none; padding: 120px 5%; position: relative; z-index: 60; color: #fff; }
-        .sinopse-layout { display: flex; gap: 50px; align-items: flex-start; }
-        .sinopse-esquerda { flex: 1; }
-        .sinopse-esquerda img { width: 100%; border: 1px solid var(--gold); }
-        .sinopse-direita { flex: 2; }
+        /* SINOPSE E BIBLIOTECA */
+        #content-overlay { display: none; width: 100%; min-height: 100vh; position: absolute; top: 0; left: 0; z-index: 50; padding: 120px 5%; }
+        .sinopse-card { display: grid; grid-template-columns: 1fr 1.5fr; gap: 50px; color: #fff; }
     </style>
 </head>
 <body>
     <div id="bg"></div>
     <header>
-        <div class="logo"><img src="selo.png"></div>
+        <div class="logo">
+            <img src="selo.png">
+            <span>Portal Pleno O Código</span>
+        </div>
         <nav>
             <ul>
-                <li><a onclick="showHome()">Início</a></li>
-                <li><a onclick="showBiblioteca()">Títulos Ebook</a></li>
-                <li><a href="#">Avaliações</a></li>
-                <li><a href="#">Degustação</a></li>
-                <li><a href="#">Sobre</a></li>
-                <li><a href="#">Contato</a></li>
+                <li><a onclick="irHome()">Início</a></li>
+                <li><a onclick="irInterna('titulos')">Títulos Ebook</a></li>
+                <li><a onclick="irInterna('avaliacoes')">Avaliações</a></li>
+                <li><a onclick="irInterna('degustacao')">Degustação</a></li>
+                <li><a href="sobre.html">Sobre</a></li>
+                <li><a href="contato.html">Contato</a></li>
             </ul>
         </nav>
     </header>
 
-    <main class="main-container" id="home-ui">
-        <div class="product-trigger" onclick="showSinopse('ebook01.png')">
-            <img src="ebook01.png">
+    <main class="main-container" id="home-view">
+        <div class="column-box">
+            <div class="column-title">Ebooks</div>
+            <div class="display-box" onclick="irInterna('titulos')">
+                <img id="loop-ebook" src="ebook01.png">
+            </div>
         </div>
+
         <div class="hero-center">
             <h1>O CONFORTO É UMA PRISÃO</h1>
             <div class="line-hero"></div>
             <h1>O CÓDIGO É A CHAVE</h1>
         </div>
-        <div class="product-trigger" onclick="showSinopse('audio02.png')">
-            <img src="audio02.png">
+
+        <div class="column-box">
+            <div class="column-title">Audiobooks</div>
+            <div class="display-box" onclick="irInterna('titulos')">
+                <img id="loop-audio" src="audio01.png">
+            </div>
         </div>
     </main>
 
-    <section id="biblioteca-section">
-        <div class="grid-biblioteca" id="grid-render"></div>
-    </section>
-
-    <section id="sinopse-view">
-        <div class="sinopse-layout">
-            <div class="sinopse-esquerda"><img id="target-img" src=""></div>
-            <div class="sinopse-direita">
-                <h2 style="color:var(--gold); font-size:2rem; text-transform:uppercase;">Título do Hardware</h2>
-                <p style="margin-top:20px; line-height:1.8;">Descrição técnica e visceral do produto x...</p>
-            </div>
+    <div id="content-overlay">
         </div>
-    </section>
 
     <script>
-        const hardware = [
-            'ebook01.png', 'ebook02.png', 'ebook03.png', 'ebook04.png', 'ebook05.png', 'ebook06.png',
-            'audio01.png', 'audio02.png', 'audio03.png', 'audio04.png', 'audio05.png', 'audio06.png'
-        ];
+        const ebooks = ['ebook01.png', 'ebook02.png', 'ebook03.png'];
+        const audios = ['audio01.png', 'audio02.png', 'audio03.png', 'audio04.png', 'audio05.png', 'audio06.png'];
+        let eIdx = 0, aIdx = 0;
 
-        function hideAll() {
-            document.getElementById('home-ui').style.display = 'none';
-            document.getElementById('biblioteca-section').style.display = 'none';
-            document.getElementById('sinopse-view').style.display = 'none';
+        // LOOP AUTOMÁTICO RESTAURADO
+        function startLoops() {
+            setInterval(() => {
+                eIdx = (eIdx + 1) % ebooks.length;
+                document.getElementById('loop-ebook').src = ebooks[eIdx];
+            }, 3000);
+            setInterval(() => {
+                aIdx = (aIdx + 1) % audios.length;
+                document.getElementById('loop-audio').src = audios[aIdx];
+            }, 3000);
         }
 
-        function showHome() {
-            hideAll();
-            document.getElementById('home-ui').style.display = 'flex';
+        function irHome() {
+            document.getElementById('content-overlay').style.display = 'none';
+            document.getElementById('home-view').style.display = 'flex';
             document.getElementById('bg').style.backgroundImage = "url('capa.png')";
         }
 
-        function showBiblioteca() {
-            hideAll();
-            const section = document.getElementById('biblioteca-section');
-            const grid = document.getElementById('grid-render');
-            grid.innerHTML = hardware.map(img => `
-                <div class="item-flutuante" onclick="showSinopse('${img}')">
-                    <img src="${img}">
-                </div>
-            `).join('');
-            section.style.display = 'block';
+        function irInterna(tipo) {
+            document.getElementById('home-view').style.display = 'none';
+            const overlay = document.getElementById('content-overlay');
+            overlay.style.display = 'block';
             document.getElementById('bg').style.backgroundImage = "url('banner.png')";
+            
+            if(tipo === 'titulos') {
+                overlay.innerHTML = `<h2 style="color:var(--gold); text-align:center;">BIBLIOTECA FLUTUANTE</h2>`;
+                // Injetar grid aqui...
+            }
         }
 
-        function showSinopse(img) {
-            hideAll();
-            document.getElementById('target-img').src = img;
-            document.getElementById('sinopse-view').style.display = 'block';
-            document.getElementById('bg').style.backgroundImage = "url('banner.png')";
-        }
+        startLoops();
     </script>
 </body>
 </html>

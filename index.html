@@ -15,8 +15,8 @@
         .logo { display: flex; align-items: center; gap: 15px; color: #fff; font-weight: 700; text-transform: uppercase; font-size: 0.9rem; }
         .logo img { height: 60px; }
         nav ul { list-style: none; display: flex; gap: 20px; align-items: center; }
-        nav a { text-decoration: none; color: #fff; font-size: 0.65rem; font-weight: 700; text-transform: uppercase; cursor: pointer; transition: 0.3s; border-bottom: 2px solid transparent; padding-bottom: 5px; }
-        nav a:hover, nav a.active { color: var(--gold); border-bottom: 2px solid var(--gold); }
+        nav a { text-decoration: none; color: #fff; font-size: 0.65rem; font-weight: 700; text-transform: uppercase; cursor: pointer; transition: 0.3s; }
+        nav a:hover { color: var(--gold); }
         #btn-voltar { display: none; color: var(--gold); border: 1px solid var(--gold); padding: 5px 12px; font-size: 0.6rem; font-weight: 700; text-transform: uppercase; cursor: pointer; }
 
         /* FUNDO */
@@ -26,21 +26,21 @@
         /* VIEW HOME */
         .view-home { min-height: calc(100vh - 85px); display: flex; justify-content: space-between; align-items: center; padding: 0 5%; }
         .column-box { width: 280px; text-align: center; }
-        .column-box p { color: var(--gold); letter-spacing: 5px; font-size: 0.7rem; margin-bottom: 0; padding-bottom: 5px; font-weight: 700; }
-        .display-box { width: 100%; height: 420px; cursor: pointer; transition: 0.5s; }
+        .column-box p { color: var(--gold); letter-spacing: 5px; font-size: 0.7rem; margin-bottom: 5px; font-weight: 700; }
+        .display-box { width: 100%; height: 420px; cursor: pointer; }
         .display-box img { width: 100%; height: 100%; object-fit: contain; }
         .hero-center h1 { color: #fff; font-size: 2.2rem; text-transform: uppercase; line-height: 1.2; text-align: center; }
         .line-hero { width: 85%; height: 5px; background: var(--gold); margin: 15px auto; box-shadow: 0 0 20px var(--gold); }
 
         /* VIEW GALERIA */
         .view-galeria { display: none; background: #000; min-height: 100vh; padding: 60px 5% 100px; }
-        .grid-produtos { display: grid; grid-template-columns: repeat(4, 1fr); gap: 60px; max-width: 1400px; margin: 0 auto; }
-        .card-flutuante { text-align: center; cursor: pointer; transition: transform 0.4s ease; animation: flutuar 4s ease-in-out infinite; }
+        .grid-produtos { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 60px; max-width: 1400px; margin: 0 auto; }
+        .card-flutuante { text-align: center; cursor: pointer; animation: flutuar 4s ease-in-out infinite; }
         .card-flutuante img { width: 100%; height: 350px; object-fit: contain; transition: 0.4s; }
         .card-flutuante:hover img { transform: scale(1.05); filter: drop-shadow(0 0 20px var(--glow)); }
-        @keyframes flutuar { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+        @keyframes flutuar { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
 
-        /* VIEW SINOPSE */
+        /* VIEW SINOPSE (ONDE A TABELA RESIDE) */
         .view-sinopse { display: none; background: #fff; min-height: 100vh; padding: 60px 0 80px; color: #000; }
         .container-trindade { max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: 350px 1fr 320px; gap: 50px; padding: 0 40px; }
         .col-mockup img { width: 100%; filter: drop-shadow(0 15px 30px rgba(0,0,0,0.2)); }
@@ -48,25 +48,20 @@
         .author { color: var(--gold); font-weight: 700; text-transform: uppercase; margin-bottom: 30px; font-size: 0.9rem; letter-spacing: 2px; }
         .section-title { font-weight: 700; text-transform: uppercase; font-size: 0.8rem; margin: 40px 0 20px; color: #000; border-bottom: 3px solid var(--gold); display: inline-block; padding-bottom: 5px; }
         .description p { margin-bottom: 20px; font-size: 1.05rem; line-height: 1.7; color: #333; text-align: justify; }
-        
-        /* CARD COMPRA */
-        .buy-card { background: #1a1a1a; border-radius: 8px; padding: 30px 25px; color: #fff; text-align: center; }
-        .price-label { font-size: 0.6rem; text-transform: uppercase; color: var(--gold); letter-spacing: 2px; margin-bottom: 10px; }
-        .price-value { font-size: 2.5rem; font-weight: 700; margin-bottom: 30px; }
-        .btn-gold { background: var(--gold); color: #000; width: 100%; border: none; padding: 15px; font-weight: 900; cursor: pointer; margin-bottom: 15px; text-transform: uppercase; font-size: 0.7rem; }
-        .btn-red { background: var(--red-btn); color: #fff; width: 100%; border: none; padding: 12px; font-weight: 700; cursor: pointer; margin-bottom: 10px; text-transform: uppercase; font-size: 0.65rem; }
 
-        /* TABELA TÉCNICA SINOPSE */
+        /* TABELA TÉCNICA - EXCLUSIVA SINOPSE */
         .detalhes-tecnicos-container { max-width: 1300px; margin: 60px auto 0; padding: 0 40px; }
         .grid-tecnico-espec { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; border-top: 1px solid #eee; padding-top: 20px; }
         .item-espec span { display: block; font-size: 0.65rem; text-transform: uppercase; color: #888; font-weight: 700; margin-bottom: 5px; }
         .item-espec p { font-size: 0.9rem; font-weight: 600; color: #222; }
 
-        /* RODAPÉ TÉCNICO E FINAL */
-        footer { background: var(--bg-light); padding: 60px 0; border-top: 1px solid #ddd; width: 100%; position: relative; z-index: 100; display: none; }
-        .tech-grid { max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 40px; padding: 0 40px; }
-        .tech-item h4 { font-size: 0.7rem; text-transform: uppercase; color: #000; margin-bottom: 10px; font-weight: 700; }
-        .tech-item p { font-size: 0.85rem; color: #555; border-bottom: 1px solid #ccc; padding-bottom: 8px; }
+        /* COMPRA */
+        .buy-card { background: #1a1a1a; border-radius: 8px; padding: 30px 25px; color: #fff; text-align: center; }
+        .price-value { font-size: 2.5rem; font-weight: 700; margin-bottom: 30px; }
+        .btn-gold { background: var(--gold); color: #000; width: 100%; border: none; padding: 15px; font-weight: 900; cursor: pointer; margin-bottom: 15px; text-transform: uppercase; font-size: 0.7rem; }
+        .btn-red { background: var(--red-btn); color: #fff; width: 100%; border: none; padding: 12px; font-weight: 700; cursor: pointer; margin-bottom: 10px; text-transform: uppercase; font-size: 0.65rem; }
+
+        /* FOOTER FINAL */
         .final-footer { background: #000; color: #666; font-size: 0.65rem; text-align: center; padding: 30px 0; border-top: 1px solid #111; text-transform: uppercase; letter-spacing: 2px; width: 100%; position: relative; z-index: 1000; }
     </style>
 </head>
@@ -75,13 +70,10 @@
     <header>
         <div class="logo"><img src="selo.png"><span>Portal Pleno O Código</span></div>
         <nav>
-            <ul id="main-nav">
-                <li><a id="nav-home" class="active" onclick="irHome()">Início</a></li>
-                <li><a id="nav-ebook" onclick="irTitulos()">Ebook</a></li>
-                <li><a id="nav-sinopse" onclick="abrirSinopseDefault()">Sinopse</a></li>
-                <li><a id="nav-avaliacoes" onclick="abrirInfo('avaliacoes')">Avaliações</a></li>
-                <li><a id="nav-degustacao" onclick="abrirInfo('degustacao')">Degustação</a></li>
-                <li><a id="nav-sobre" onclick="abrirInfo('sobre')">Sobre</a></li>
+            <ul>
+                <li><a onclick="irHome()">Início</a></li>
+                <li><a onclick="irTitulos()">Ebook</a></li>
+                <li><a onclick="abrirSinopseDefault()">Sinopse</a></li>
                 <li><div id="btn-voltar" onclick="voltarFluxo()">Voltar</div></li>
             </ul>
         </nav>
@@ -112,96 +104,75 @@
             <div class="container-trindade">
                 <div class="col-mockup"><img id="target-img" src=""></div>
                 <div class="col-texto">
-                    <h1 id="target-title">TÍTULO DO ATIVO</h1>
+                    <h1 id="target-title">TÍTULO</h1>
                     <p class="author">POR JÚLIO BHRÓSZ</p>
                     <div class="description">
-                        <p>Análise técnica da soberania intelectual e engenharia de comportamento humano aplicada ao alto desempenho mental.</p>
+                        <p>Análise técnica da soberania intelectual aplicada ao alto desempenho mental.</p>
                         <h3 class="section-title">SINOPSE</h3>
-                        <p id="target-desc">O Código não é apenas um manual, é a autópsia da personalidade necessária para a quebra de padrões limitantes.</p>
+                        <p id="target-desc">O Código é a autópsia da personalidade necessária para a quebra de padrões limitantes.</p>
                     </div>
                 </div>
                 <div class="col-compra">
                     <div class="buy-card">
-                        <p class="price-label">POR APENAS</p>
+                        <p style="font-size:0.6rem; color:var(--gold); letter-spacing:2px;">POR APENAS</p>
                         <p class="price-value" id="target-price">R$ 0,00</p>
-                        <button class="btn-gold" onclick="checkout()">Adicionar ao Carrinho</button>
-                        <button class="btn-red" onclick="checkout()">Compre Agora</button>
+                        <button class="btn-gold" onclick="checkout()">Compre Agora</button>
                         <button class="btn-red" onclick="checkout()">Combo Ebooks</button>
-                        <button class="btn-red">Combo Audiobook</button>
-                        <button class="btn-red">Combo Completo</button>
+                        <button class="btn-red">Combo Coletânea</button>
                     </div>
                 </div>
             </div>
-            
+
             <div class="detalhes-tecnicos-container">
-                <h3 class="section-title">Detalhes do eBook</h3>
+                <h3 class="section-title">Detalhes do Ativo</h3>
                 <div class="grid-tecnico-espec">
                     <div class="item-espec"><span>Editora</span><p>Portal Pleno O Código</p></div>
-                    <div class="item-espec"><span>Data de Lançamento</span><p>Março de 2026</p></div>
-                    <div class="item-espec"><span>ISBN</span><p>978-X-XXXX-XXXX-X</p></div>
+                    <div class="item-espec"><span>Data</span><p>2026</p></div>
                     <div class="item-espec"><span>Idioma</span><p>Português</p></div>
-                    <div class="item-espec"><span>Opções de Download</span><p>EPUB 3 (Fluxo Adaptável)</p></div>
-                    <div class="item-espec"><span>Hardware Compatível</span><p>iOS, Android, e-Readers, Desktop</p></div>
+                    <div class="item-espec"><span>Formato</span><p>Digital (Instantâneo)</p></div>
+                    <div class="item-espec"><span>Acesso</span><p>Vitalício</p></div>
+                    <div class="item-espec"><span>Suporte</span><p>Portal Pleno</p></div>
                 </div>
             </div>
         </section>
-
-        <section id="view-info-extra" class="view-info-extra">
-            <div id="content-info"></div>
-        </section>
     </main>
 
-    <footer id="main-footer">
-        <div class="tech-grid">
-            <div style="font-family:'Playfair Display'; font-size:1.4rem; font-weight:700">DETALHES DO ATIVO</div>
-            <div class="tech-item"><h4>EDITORA</h4><p>Portal Pleno O Código</p></div>
-            <div class="tech-item"><h4>IDIOMA</h4><p>Português / Inglês</p></div>
-            <div class="tech-item"><h4>FORMATO</h4><p>Digital (Instantâneo)</p></div>
-        </div>
-    </footer>
-
-    <div class="final-footer">
-        © 2026 Portal Pleno | O Código
-    </div>
+    <div class="final-footer">© 2026 Portal Pleno | O Código</div>
 
     <script>
         const hardware = {
             e: [
                 {img: 'ebook01.png', title: 'Know Yourself First', price: '$ 11.00', link: 'https://pay.kiwify.com/8S4FCE0'},
                 {img: 'ebook02.png', title: 'The Engineering of Collision', price: '$ 11.50', link: 'https://pay.kiwify.com/ZjtlaGh'},
+                {img: 'ebook03.png', title: 'The Supremacy Code', price: '$ 11.99', link: 'https://pay.kiwify.com/NcdLsaN'},
                 {img: 'ebook04.png', title: 'Descubra Você', price: 'R$ 29,50', link: 'https://pay.kiwify.com.br/P8UTO6L'},
-                {img: 'ebook05.png', title: 'Engenharia da Colisão', price: 'R$ 39,00', link: 'https://pay.kiwify.com.br/oRZAlbz'}
+                {img: 'ebook05.png', title: 'Engenharia da Colisão', price: 'R$ 39,00', link: 'https://pay.kiwify.com.br/oRZAlbz'},
+                {img: 'ebook06.png', title: 'Autópsia da Personalidade', price: 'R$ 59,90', link: 'https://pay.kiwify.com.br/sD4nqRO'}
             ],
             a: [
-                {img: 'audio01.png', title: 'Know Yourself First', price: '$ 13.95', link: 'https://pay.kiwify.com/ilgU4Kg'},
-                {img: 'audio04.png', title: 'Descubra Você', price: 'R$ 37,50', link: 'https://pay.kiwify.com.br/lDiv2Do'}
+                {img: 'audio01.png', title: 'Audio: Know Yourself', price: '$ 13.95', link: 'https://pay.kiwify.com/ilgU4Kg'},
+                {img: 'audio02.png', title: 'Audio: Collision', price: '$ 14.95', link: 'https://pay.kiwify.com/2LTHnl0'},
+                {img: 'audio04.png', title: 'Audio: Descubra Você', price: 'R$ 37,50', link: 'https://pay.kiwify.com.br/lDiv2Do'},
+                {img: 'audio05.png', title: 'Audio: Engenharia', price: 'R$ 39,50', link: 'https://pay.kiwify.com.br/PmaKDGV'},
+                {img: 'audio06.png', title: 'Audio: Autópsia', price: 'R$ 57,50', link: 'https://pay.kiwify.com.br/nJO91Ia'}
             ]
         };
 
-        let iE = 0, iA = 0, linkAtual = '', historico = 'home';
+        let linkAtual = '', historico = 'home';
         
-        setInterval(() => { iE = (iE + 1) % hardware.e.length; document.getElementById('loop-e').src = hardware.e[iE].img; }, 3000);
-        setInterval(() => { iA = (iA + 1) % hardware.a.length; document.getElementById('loop-a').src = hardware.a[iA].img; }, 3000);
-
-        function ativarMenu(id) {
-            document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
-            const alvo = document.getElementById('nav-' + id);
-            if(alvo) alvo.classList.add('active');
-        }
-
-        function irHome() { resetTelas(); document.getElementById('view-home').style.display = 'flex'; ativarMenu('home'); historico = 'home'; }
+        function irHome() { resetTelas(); document.getElementById('view-home').style.display = 'flex'; historico = 'home'; }
         
         function irTitulos() {
             resetTelas();
             const grid = document.getElementById('render-grid');
             grid.innerHTML = [...hardware.e, ...hardware.a].map(item => `
                 <div class="card-flutuante" onclick="abrirSinopse('${item.img}', '${item.title}', '${item.price}', '${item.link}')">
-                    <img src="${item.img}"><div style="color:var(--gold); margin-top:10px;">★★★★★</div>
+                    <img src="${item.img}">
+                    <div style="color:var(--gold); margin-top:10px;">★★★★★</div>
+                    <p style="color:#fff; font-size:0.6rem; margin-top:5px; font-weight:700;">${item.title}</p>
                 </div>`).join('');
             document.getElementById('view-galeria').style.display = 'block';
             document.getElementById('btn-voltar').style.display = 'block';
-            document.getElementById('main-footer').style.display = 'block';
-            ativarMenu('ebook');
             historico = 'titulos';
         }
 
@@ -213,36 +184,17 @@
             document.getElementById('target-price').innerText = price;
             document.getElementById('view-sinopse').style.display = 'block';
             document.getElementById('btn-voltar').style.display = 'block';
-            document.getElementById('main-footer').style.display = 'block';
-            ativarMenu('sinopse');
             historico = 'sinopse';
-        }
-
-        function abrirInfo(tipo) {
-            resetTelas();
-            const container = document.getElementById('content-info');
-            document.getElementById('view-info-extra').style.display = 'block';
-            document.getElementById('btn-voltar').style.display = 'block';
-            document.getElementById('main-footer').style.display = 'block';
-            ativarMenu(tipo);
-            
-            if(tipo === 'avaliacoes') {
-                container.innerHTML = `<div class="info-header"><h2>Avaliações</h2></div><p>Análise técnica de satisfação dos alunos...</p>`;
-            } else if(tipo === 'degustacao') {
-                container.innerHTML = `<div class="info-header"><h2>Degustação</h2></div><p>Amostras técnicas em breve.</p>`;
-            } else if(tipo === 'sobre') {
-                container.innerHTML = `<div class="info-header"><h2>Sobre</h2></div><p>O Portal Pleno é o centro de soberania mental.</p>`;
-            }
-            historico = 'info';
         }
 
         function abrirSinopseDefault() { const d = hardware.e[0]; abrirSinopse(d.img, d.title, d.price, d.link); }
         function checkout() { if(linkAtual) window.open(linkAtual, '_blank'); }
-        function voltarFluxo() { if (historico === 'sinopse' || historico === 'info') irTitulos(); else irHome(); }
+        function voltarFluxo() { if (historico !== 'home') irTitulos(); else irHome(); }
         
         function resetTelas() { 
-            ['view-home', 'view-galeria', 'view-sinopse', 'view-info-extra', 'btn-voltar', 'main-footer'].forEach(id => {
-                document.getElementById(id).style.display = 'none';
+            ['view-home', 'view-galeria', 'view-sinopse', 'btn-voltar'].forEach(id => {
+                const el = document.getElementById(id);
+                if(el) el.style.display = 'none';
             });
             window.scrollTo(0,0); 
         }

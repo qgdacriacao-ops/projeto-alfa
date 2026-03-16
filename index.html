@@ -40,17 +40,17 @@
         .card-flutuante:hover img { transform: scale(1.05); filter: drop-shadow(0 0 20px var(--glow)); }
         @keyframes flutuar { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
 
-        /* VIEW SINOPSE - TRAVADA */
+        /* VIEW SINOPSE - COLUNA REDUZIDA PARA MAIS TEXTO */
         .view-sinopse { display: none; background: #fff; min-height: 100vh; padding: 60px 0 80px; color: #000; }
-        .container-trindade { max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: 350px 1fr 320px; gap: 50px; padding: 0 40px; }
+        .container-trindade { max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: 280px 1fr 280px; gap: 40px; padding: 0 40px; }
         .col-mockup img { width: 100%; filter: drop-shadow(0 15px 30px rgba(0,0,0,0.2)); }
         .col-texto h1 { font-family: 'Playfair Display', serif; font-size: 3rem; color: #000; line-height: 1.1; margin-bottom: 10px; }
         .author { color: var(--gold); font-weight: 700; text-transform: uppercase; margin-bottom: 30px; font-size: 0.9rem; letter-spacing: 2px; }
         .section-title { font-weight: 700; text-transform: uppercase; font-size: 0.8rem; margin: 40px 0 20px; color: #000; border-bottom: 3px solid var(--gold); display: inline-block; padding-bottom: 5px; }
         .description p { margin-bottom: 20px; font-size: 1.05rem; line-height: 1.7; color: #333; text-align: justify; }
-        .buy-card { background: #1a1a1a; border-radius: 8px; padding: 30px 25px; color: #fff; text-align: center; }
+        .buy-card { background: #1a1a1a; border-radius: 8px; padding: 30px 20px; color: #fff; text-align: center; }
         .price-label { font-size: 0.6rem; text-transform: uppercase; color: var(--gold); letter-spacing: 2px; margin-bottom: 10px; }
-        .price-value { font-size: 2.5rem; font-weight: 700; margin-bottom: 30px; }
+        .price-value { font-size: 2.2rem; font-weight: 700; margin-bottom: 30px; }
         .btn-gold { background: var(--gold); color: #000; width: 100%; border: none; padding: 15px; font-weight: 900; cursor: pointer; margin-bottom: 15px; text-transform: uppercase; font-size: 0.7rem; }
         .btn-red { background: var(--red-btn); color: #fff; width: 100%; border: none; padding: 12px; font-weight: 700; cursor: pointer; margin-bottom: 10px; text-transform: uppercase; font-size: 0.65rem; }
         .detalhes-tecnicos-container { max-width: 1300px; margin: 60px auto 0; padding: 0 40px; }
@@ -58,11 +58,6 @@
         .item-espec span { display: block; font-size: 0.65rem; text-transform: uppercase; color: #888; font-weight: 700; margin-bottom: 5px; }
         .item-espec p { font-size: 0.9rem; font-weight: 600; color: #222; }
 
-        /* RODAPÉ TÉCNICO - ELIMINADO DAS TRANSIÇÕES */
-        #main-footer { background: var(--bg-light); padding: 60px 0; border-top: 1px solid #ddd; width: 100%; display: none; }
-        .tech-grid { max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 40px; padding: 0 40px; }
-        .tech-item h4 { font-size: 0.7rem; text-transform: uppercase; color: #000; margin-bottom: 10px; font-weight: 700; }
-        .tech-item p { font-size: 0.85rem; color: #555; border-bottom: 1px solid #ccc; padding-bottom: 8px; }
         .final-footer { background: #000; color: #666; font-size: 0.65rem; text-align: center; padding: 30px 0; border-top: 1px solid #111; text-transform: uppercase; letter-spacing: 2px; width: 100%; z-index: 1000; }
     </style>
 </head>
@@ -129,14 +124,11 @@
                 </div>
             </div>
             <div class="detalhes-tecnicos-container">
-                <h3 class="section-title">Detalhes do eBook</h3>
+                <h3 class="section-title">Detalhes do Ativo</h3>
                 <div class="grid-tecnico-espec">
                     <div class="item-espec"><span>Editora</span><p>Portal Pleno O Código</p></div>
                     <div class="item-espec"><span>Data de Lançamento</span><p>Março de 2026</p></div>
-                    <div class="item-espec"><span>ISBN</span><p>978-X-XXXX-XXXX-X</p></div>
-                    <div class="item-espec"><span>Idioma</span><p>Português</p></div>
-                    <div class="item-espec"><span>Opções de Download</span><p>EPUB 3 (Fluxo Adaptável)</p></div>
-                    <div class="item-espec"><span>Hardware Compatível</span><p>iOS, Android, e-Readers, Desktop</p></div>
+                    <div class="item-espec"><span>Idioma</span><p>Português / Inglês</p></div>
                 </div>
             </div>
         </section>
@@ -145,15 +137,6 @@
             <div id="content-info"></div>
         </section>
     </main>
-
-    <footer id="main-footer">
-        <div class="tech-grid">
-            <div style="font-family:'Playfair Display'; font-size:1.4rem; font-weight:700">DETALHES DO ATIVO</div>
-            <div class="tech-item"><h4>EDITORA</h4><p>Portal Pleno O Código</p></div>
-            <div class="tech-item"><h4>IDIOMA</h4><p>Português / Inglês</p></div>
-            <div class="tech-item"><h4>FORMATO</h4><p>Digital (Instantâneo)</p></div>
-        </div>
-    </footer>
 
     <div class="final-footer">
         © 2026 Portal Pleno | O Código
@@ -180,8 +163,16 @@
         };
 
         let iE = 0, iA = 0, linkAtual = '', historico = 'home';
-        setInterval(() => { iE = (iE + 1) % hardware.e.length; document.getElementById('loop-e').src = hardware.e[iE].img; }, 3000);
-        setInterval(() => { iA = (iA + 1) % hardware.a.length; document.getElementById('loop-a').src = hardware.a[iA].img; }, 3000);
+        setInterval(() => { 
+            iE = (iE + 1) % hardware.e.length; 
+            const imgE = document.getElementById('loop-e');
+            if(imgE) imgE.src = hardware.e[iE].img;
+        }, 3000);
+        setInterval(() => { 
+            iA = (iA + 1) % hardware.a.length; 
+            const imgA = document.getElementById('loop-a');
+            if(imgA) imgA.src = hardware.a[iA].img;
+        }, 3000);
 
         function ativarMenu(id) {
             document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
@@ -223,7 +214,7 @@
             document.getElementById('btn-voltar').style.display = 'block';
             ativarMenu(tipo);
             if(tipo === 'avaliacoes') container.innerHTML = `<h2>Avaliações</h2><p>Análise técnica de satisfação...</p>`;
-            else if(tipo === 'degustacao') container.innerHTML = `<h2>Degustação</h2><p>Amostras em breve.</p>`;
+            else if(tipo === 'degustacao') container.innerHTML = `<h2>Degustação</h2><p>Amostras técnicas em breve.</p>`;
             else if(tipo === 'sobre') container.innerHTML = `<h2>Sobre</h2><p>Portal Pleno: O Código.</p>`;
             historico = 'info';
         }
@@ -233,7 +224,7 @@
         function voltarFluxo() { if (historico === 'sinopse' || historico === 'info') irTitulos(); else irHome(); }
         
         function resetTelas() { 
-            ['view-home', 'view-galeria', 'view-sinopse', 'view-info-extra', 'btn-voltar', 'main-footer'].forEach(id => {
+            ['view-home', 'view-galeria', 'view-sinopse', 'view-info-extra', 'btn-voltar'].forEach(id => {
                 const el = document.getElementById(id);
                 if(el) el.style.display = 'none';
             });

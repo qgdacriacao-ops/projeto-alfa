@@ -10,7 +10,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body, html { min-height: 100%; background-color: var(--bg-black); font-family: 'Inter', sans-serif; overflow-x: hidden; display: flex; flex-direction: column; }
 
-        /* HEADER - INALTERADO */
+        /* HEADER */
         header { background: #000; padding: 0 5%; display: flex; justify-content: space-between; align-items: center; position: fixed; top: 0; width: 100%; z-index: 2000; height: 85px; border-bottom: 2px solid var(--gold); }
         .logo { display: flex; align-items: center; gap: 15px; color: #fff; font-weight: 700; text-transform: uppercase; font-size: 0.9rem; }
         .logo img { height: 60px; }
@@ -19,11 +19,11 @@
         nav a:hover, nav a.active { color: var(--gold); border-bottom: 2px solid var(--gold); }
         #btn-voltar { display: none; color: var(--gold); border: 1px solid var(--gold); padding: 5px 12px; font-size: 0.6rem; font-weight: 700; text-transform: uppercase; cursor: pointer; }
 
-        /* FUNDO - INALTERADO */
+        /* FUNDO */
         #bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: url('capa.png') no-repeat center center; background-size: cover; z-index: 1; filter: brightness(0.4); }
         main { flex: 1; position: relative; z-index: 10; padding-top: 85px; }
 
-        /* VIEW HOME - INALTERADA */
+        /* VIEW HOME */
         .view-home { min-height: calc(100vh - 85px); display: flex; justify-content: space-between; align-items: center; padding: 0 5%; }
         .column-box { width: 280px; text-align: center; }
         .column-box p { color: var(--gold); letter-spacing: 5px; font-size: 0.7rem; margin-bottom: 0; padding-bottom: 5px; font-weight: 700; }
@@ -32,44 +32,37 @@
         .hero-center h1 { color: #fff; font-size: 2.2rem; text-transform: uppercase; line-height: 1.2; text-align: center; }
         .line-hero { width: 85%; height: 5px; background: var(--gold); margin: 15px auto; box-shadow: 0 0 20px var(--gold); }
 
-        /* VIEW SINOPSE - FOCO TÉCNICO */
+        /* VIEW GALERIA - RESTAURADA CONFORME DETERMINADO */
+        .view-galeria { display: none; background: #000; min-height: 100vh; padding: 60px 5% 100px; }
+        .grid-produtos { display: grid; grid-template-columns: repeat(4, 1fr); gap: 60px; max-width: 1400px; margin: 0 auto; }
+        .card-flutuante { text-align: center; cursor: pointer; transition: transform 0.4s ease; animation: flutuar 4s ease-in-out infinite; }
+        .card-flutuante img { width: 100%; height: 350px; object-fit: contain; transition: 0.4s; }
+        .card-flutuante:hover img { transform: scale(1.05); filter: drop-shadow(0 0 20px var(--glow)); }
+        @keyframes flutuar { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+
+        /* VIEW SINOPSE - TRAVADA */
         .view-sinopse { display: none; background: #fff; min-height: 100vh; padding: 60px 0 80px; color: #000; }
-        .container-trindade { 
-            max-width: 1300px; 
-            margin: 0 auto; 
-            display: grid; 
-            grid-template-columns: 350px 1fr 320px; 
-            gap: 50px; 
-            padding: 0 40px; 
-        }
-        .col-mockup img { width: 100%; filter: drop-shadow(0 15px 30px rgba(0,0,0,0.2)); position: sticky; top: 110px; }
+        .container-trindade { max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: 350px 1fr 320px; gap: 50px; padding: 0 40px; }
+        .col-mockup img { width: 100%; filter: drop-shadow(0 15px 30px rgba(0,0,0,0.2)); }
         .col-texto h1 { font-family: 'Playfair Display', serif; font-size: 3rem; color: #000; line-height: 1.1; margin-bottom: 10px; }
         .author { color: var(--gold); font-weight: 700; text-transform: uppercase; margin-bottom: 30px; font-size: 0.9rem; letter-spacing: 2px; }
         .section-title { font-weight: 700; text-transform: uppercase; font-size: 0.8rem; margin: 40px 0 20px; color: #000; border-bottom: 3px solid var(--gold); display: inline-block; padding-bottom: 5px; }
         .description p { margin-bottom: 20px; font-size: 1.05rem; line-height: 1.7; color: #333; text-align: justify; }
-        
-        .buy-card { 
-            background: #1a1a1a; 
-            border-radius: 8px; 
-            padding: 30px 25px; 
-            color: #fff; 
-            text-align: center; 
-            position: sticky; 
-            top: 110px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-        }
+        .buy-card { background: #1a1a1a; border-radius: 8px; padding: 30px 25px; color: #fff; text-align: center; }
         .price-label { font-size: 0.6rem; text-transform: uppercase; color: var(--gold); letter-spacing: 2px; margin-bottom: 10px; }
         .price-value { font-size: 2.5rem; font-weight: 700; margin-bottom: 30px; }
         .btn-gold { background: var(--gold); color: #000; width: 100%; border: none; padding: 15px; font-weight: 900; cursor: pointer; margin-bottom: 15px; text-transform: uppercase; font-size: 0.7rem; }
         .btn-red { background: var(--red-btn); color: #fff; width: 100%; border: none; padding: 12px; font-weight: 700; cursor: pointer; margin-bottom: 10px; text-transform: uppercase; font-size: 0.65rem; }
-
-        /* TABELA TÉCNICA - ESTA PERMANECE */
         .detalhes-tecnicos-container { max-width: 1300px; margin: 60px auto 0; padding: 0 40px; }
         .grid-tecnico-espec { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; border-top: 1px solid #eee; padding-top: 20px; }
         .item-espec span { display: block; font-size: 0.65rem; text-transform: uppercase; color: #888; font-weight: 700; margin-bottom: 5px; }
         .item-espec p { font-size: 0.9rem; font-weight: 600; color: #222; }
 
-        /* RODAPÉ FINAL - LIMPO (DUPLICAÇÃO REMOVIDA) */
+        /* RODAPÉ TÉCNICO - RESTAURADO */
+        footer { background: var(--bg-light); padding: 60px 0; border-top: 1px solid #ddd; width: 100%; position: relative; z-index: 100; display: none; }
+        .tech-grid { max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 40px; padding: 0 40px; }
+        .tech-item h4 { font-size: 0.7rem; text-transform: uppercase; color: #000; margin-bottom: 10px; font-weight: 700; }
+        .tech-item p { font-size: 0.85rem; color: #555; border-bottom: 1px solid #ccc; padding-bottom: 8px; }
         .final-footer { background: #000; color: #666; font-size: 0.65rem; text-align: center; padding: 30px 0; border-top: 1px solid #111; text-transform: uppercase; letter-spacing: 2px; width: 100%; position: relative; z-index: 1000; }
     </style>
 </head>
@@ -107,7 +100,7 @@
             </div>
         </div>
 
-        <section id="view-galeria" class="view-galeria" style="display:none; background:#000; padding:60px 5%;">
+        <section id="view-galeria" class="view-galeria">
             <div class="grid-produtos" id="render-grid"></div>
         </section>
 
@@ -135,7 +128,6 @@
                     </div>
                 </div>
             </div>
-            
             <div class="detalhes-tecnicos-container">
                 <h3 class="section-title">Detalhes do eBook</h3>
                 <div class="grid-tecnico-espec">
@@ -153,6 +145,15 @@
             <div id="content-info"></div>
         </section>
     </main>
+
+    <footer id="main-footer">
+        <div class="tech-grid">
+            <div style="font-family:'Playfair Display'; font-size:1.4rem; font-weight:700">DETALHES DO ATIVO</div>
+            <div class="tech-item"><h4>EDITORA</h4><p>Portal Pleno O Código</p></div>
+            <div class="tech-item"><h4>IDIOMA</h4><p>Português / Inglês</p></div>
+            <div class="tech-item"><h4>FORMATO</h4><p>Digital (Instantâneo)</p></div>
+        </div>
+    </footer>
 
     <div class="final-footer">
         © 2026 Portal Pleno | O Código
@@ -173,9 +174,8 @@
         };
 
         let iE = 0, iA = 0, linkAtual = '', historico = 'home';
-        
-        setInterval(() => { iE = (iE + 1) % hardware.e.length; if(document.getElementById('loop-e')) document.getElementById('loop-e').src = hardware.e[iE].img; }, 3000);
-        setInterval(() => { iA = (iA + 1) % hardware.a.length; if(document.getElementById('loop-a')) document.getElementById('loop-a').src = hardware.a[iA].img; }, 3000);
+        setInterval(() => { iE = (iE + 1) % hardware.e.length; document.getElementById('loop-e').src = hardware.e[iE].img; }, 3000);
+        setInterval(() => { iA = (iA + 1) % hardware.a.length; document.getElementById('loop-a').src = hardware.a[iA].img; }, 3000);
 
         function ativarMenu(id) {
             document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
@@ -190,10 +190,11 @@
             const grid = document.getElementById('render-grid');
             grid.innerHTML = [...hardware.e, ...hardware.a].map(item => `
                 <div class="card-flutuante" onclick="abrirSinopse('${item.img}', '${item.title}', '${item.price}', '${item.link}')">
-                    <img src="${item.img}" style="width:100%; height:350px; object-fit:contain;"><div style="color:var(--gold); margin-top:10px;">★★★★★</div>
+                    <img src="${item.img}"><div style="color:var(--gold); margin-top:10px;">★★★★★</div>
                 </div>`).join('');
             document.getElementById('view-galeria').style.display = 'block';
             document.getElementById('btn-voltar').style.display = 'block';
+            document.getElementById('main-footer').style.display = 'block';
             ativarMenu('ebook');
             historico = 'titulos';
         }
@@ -206,6 +207,7 @@
             document.getElementById('target-price').innerText = price;
             document.getElementById('view-sinopse').style.display = 'block';
             document.getElementById('btn-voltar').style.display = 'block';
+            document.getElementById('main-footer').style.display = 'block';
             ativarMenu('sinopse');
             historico = 'sinopse';
         }
@@ -215,10 +217,11 @@
             const container = document.getElementById('content-info');
             document.getElementById('view-info-extra').style.display = 'block';
             document.getElementById('btn-voltar').style.display = 'block';
+            document.getElementById('main-footer').style.display = 'block';
             ativarMenu(tipo);
-            if(tipo === 'avaliacoes') container.innerHTML = `<h2>Avaliações</h2><p>Satisfação técnica garantida.</p>`;
-            else if(tipo === 'degustacao') container.innerHTML = `<h2>Degustação</h2><p>Amostras em processamento.</p>`;
-            else if(tipo === 'sobre') container.innerHTML = `<h2>Sobre</h2><p>Portal Pleno: O Código da Supremacia.</p>`;
+            if(tipo === 'avaliacoes') container.innerHTML = `<div class="info-header"><h2>Avaliações</h2></div><p>Análise técnica de satisfação dos alunos...</p>`;
+            else if(tipo === 'degustacao') container.innerHTML = `<div class="info-header"><h2>Degustação</h2></div><p>Amostras técnicas em breve.</p>`;
+            else if(tipo === 'sobre') container.innerHTML = `<div class="info-header"><h2>Sobre</h2></div><p>O Portal Pleno é o centro de soberania mental.</p>`;
             historico = 'info';
         }
 
@@ -227,7 +230,7 @@
         function voltarFluxo() { if (historico === 'sinopse' || historico === 'info') irTitulos(); else irHome(); }
         
         function resetTelas() { 
-            ['view-home', 'view-galeria', 'view-sinopse', 'view-info-extra', 'btn-voltar'].forEach(id => {
+            ['view-home', 'view-galeria', 'view-sinopse', 'view-info-extra', 'btn-voltar', 'main-footer'].forEach(id => {
                 const el = document.getElementById(id);
                 if(el) el.style.display = 'none';
             });

@@ -40,7 +40,7 @@
         .card-flutuante:hover img { transform: scale(1.05); filter: drop-shadow(0 0 20px var(--glow)); }
         @keyframes flutuar { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
 
-        /* VIEW SINOPSE - TRAVADA (BLINDAGEM DE CSS MANTIDA) */
+        /* VIEW SINOPSE - TRAVADA */
         .view-sinopse { display: none; background: #fff; min-height: 100vh; padding: 60px 0 80px; color: #000; }
         .container-trindade { max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: 350px 1fr 320px; gap: 50px; padding: 0 40px; }
         .col-mockup img { width: 100%; filter: drop-shadow(0 15px 30px rgba(0,0,0,0.2)); }
@@ -58,13 +58,12 @@
         .item-espec span { display: block; font-size: 0.65rem; text-transform: uppercase; color: #888; font-weight: 700; margin-bottom: 5px; }
         .item-espec p { font-size: 0.9rem; font-weight: 600; color: #222; }
 
-        /* VIEW INFO EXTRA */
-        .view-info-extra { display: none; color: #fff; padding: 60px 5%; }
-
-        /* RODAPÉ TÉCNICO - ELIMINADO DA VIEW EBOOK E SINOPSE */
-        #main-footer { display: none !important; }
-
-        .final-footer { background: #000; color: #666; font-size: 0.65rem; text-align: center; padding: 30px 0; border-top: 1px solid #111; text-transform: uppercase; letter-spacing: 2px; width: 100%; position: relative; z-index: 1000; }
+        /* RODAPÉ TÉCNICO - ELIMINADO DAS TRANSIÇÕES */
+        #main-footer { background: var(--bg-light); padding: 60px 0; border-top: 1px solid #ddd; width: 100%; display: none; }
+        .tech-grid { max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 40px; padding: 0 40px; }
+        .tech-item h4 { font-size: 0.7rem; text-transform: uppercase; color: #000; margin-bottom: 10px; font-weight: 700; }
+        .tech-item p { font-size: 0.85rem; color: #555; border-bottom: 1px solid #ccc; padding-bottom: 8px; }
+        .final-footer { background: #000; color: #666; font-size: 0.65rem; text-align: center; padding: 30px 0; border-top: 1px solid #111; text-transform: uppercase; letter-spacing: 2px; width: 100%; z-index: 1000; }
     </style>
 </head>
 <body>
@@ -142,10 +141,19 @@
             </div>
         </section>
 
-        <section id="view-info-extra" class="view-info-extra">
+        <section id="view-info-extra" class="view-info-extra" style="display:none; color:#fff; padding:60px 5%;">
             <div id="content-info"></div>
         </section>
     </main>
+
+    <footer id="main-footer">
+        <div class="tech-grid">
+            <div style="font-family:'Playfair Display'; font-size:1.4rem; font-weight:700">DETALHES DO ATIVO</div>
+            <div class="tech-item"><h4>EDITORA</h4><p>Portal Pleno O Código</p></div>
+            <div class="tech-item"><h4>IDIOMA</h4><p>Português / Inglês</p></div>
+            <div class="tech-item"><h4>FORMATO</h4><p>Digital (Instantâneo)</p></div>
+        </div>
+    </footer>
 
     <div class="final-footer">
         © 2026 Portal Pleno | O Código
@@ -155,13 +163,19 @@
         const hardware = {
             e: [
                 {img: 'ebook01.png', title: 'Know Yourself First', price: '$ 11.00', link: 'https://pay.kiwify.com/8S4FCE0'},
-                {img: 'ebook02.png', title: 'The Engineering of Collision', price: '$ 11.50', link: 'https://pay.kiwify.com/ZjtlaGh'},
+                {img: 'ebook02.png', title: 'The Engineering of Collision', price: '$ 11,50', link: 'https://pay.kiwify.com/ZjtlaGh'},
+                {img: 'ebook03.png', title: 'The Supremacy Code', price: '$ 11,99', link: 'https://pay.kiwify.com/NcdLsaN'},
                 {img: 'ebook04.png', title: 'Descubra Você', price: 'R$ 29,50', link: 'https://pay.kiwify.com.br/P8UTO6L'},
-                {img: 'ebook05.png', title: 'Engenharia da Colisão', price: 'R$ 39,00', link: 'https://pay.kiwify.com.br/oRZAlbz'}
+                {img: 'ebook05.png', title: 'Engenharia da Colisão', price: 'R$ 39,00', link: 'https://pay.kiwify.com.br/oRZAlbz'},
+                {img: 'ebook06.png', title: 'Autópsia da Personalidade', price: 'R$ 59,90', link: 'https://pay.kiwify.com.br/sD4nqRO'}
             ],
             a: [
                 {img: 'audio01.png', title: 'Know Yourself First', price: '$ 13.95', link: 'https://pay.kiwify.com/ilgU4Kg'},
-                {img: 'audio04.png', title: 'Descubra Você', price: 'R$ 37,50', link: 'https://pay.kiwify.com.br/lDiv2Do'}
+                {img: 'audio02.png', title: 'The Engineering of Collision', price: '$ 14.95', link: 'https://pay.kiwify.com/2LTHnl0'},
+                {img: 'audio03.png', title: 'The Supremacy Code', price: '$ 15.95', link: 'https://pay.kiwify.com/TGmTjRA'},
+                {img: 'audio04.png', title: 'Descubra Você', price: 'R$ 37,50', link: 'https://pay.kiwify.com.br/lDiv2Do'},
+                {img: 'audio05.png', title: 'Engenharia da Colisão', price: 'R$ 39,50', link: 'https://pay.kiwify.com.br/PmaKDGV'},
+                {img: 'audio06.png', title: 'Autópsia da Personalidade', price: 'R$ 57,50', link: 'https://pay.kiwify.com.br/nJO91Ia'}
             ]
         };
 
@@ -180,9 +194,7 @@
         function irTitulos() {
             resetTelas();
             const grid = document.getElementById('render-grid');
-            // ATIVOS COMPLETOS E CORRIGIDOS (12 ELEMENTOS INTEGRADOS)
-            const ativos = [...hardware.e, ...hardware.a, ...hardware.e, ...hardware.a]; 
-            grid.innerHTML = ativos.map(item => `
+            grid.innerHTML = [...hardware.e, ...hardware.a].map(item => `
                 <div class="card-flutuante" onclick="abrirSinopse('${item.img}', '${item.title}', '${item.price}', '${item.link}')">
                     <img src="${item.img}"><div style="color:var(--gold); margin-top:10px;">★★★★★</div>
                 </div>`).join('');
@@ -211,8 +223,8 @@
             document.getElementById('btn-voltar').style.display = 'block';
             ativarMenu(tipo);
             if(tipo === 'avaliacoes') container.innerHTML = `<h2>Avaliações</h2><p>Análise técnica de satisfação...</p>`;
-            else if(tipo === 'degustacao') container.innerHTML = `<h2>Degustação</h2><p>Amostras em processamento.</p>`;
-            else if(tipo === 'sobre') container.innerHTML = `<h2>Sobre</h2><p>Portal Pleno: O Código da Supremacia.</p>`;
+            else if(tipo === 'degustacao') container.innerHTML = `<h2>Degustação</h2><p>Amostras em breve.</p>`;
+            else if(tipo === 'sobre') container.innerHTML = `<h2>Sobre</h2><p>Portal Pleno: O Código.</p>`;
             historico = 'info';
         }
 
@@ -221,7 +233,7 @@
         function voltarFluxo() { if (historico === 'sinopse' || historico === 'info') irTitulos(); else irHome(); }
         
         function resetTelas() { 
-            ['view-home', 'view-galeria', 'view-sinopse', 'view-info-extra', 'btn-voltar'].forEach(id => {
+            ['view-home', 'view-galeria', 'view-sinopse', 'view-info-extra', 'btn-voltar', 'main-footer'].forEach(id => {
                 const el = document.getElementById(id);
                 if(el) el.style.display = 'none';
             });

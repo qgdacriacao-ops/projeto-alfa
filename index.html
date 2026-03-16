@@ -32,7 +32,7 @@
         .hero-center h1 { color: #fff; font-size: 2.2rem; text-transform: uppercase; line-height: 1.2; text-align: center; }
         .line-hero { width: 85%; height: 5px; background: var(--gold); margin: 15px auto; box-shadow: 0 0 20px var(--gold); }
 
-        /* VIEW GALERIA */
+        /* VIEW GALERIA - 4 COLUNAS */
         .view-galeria { display: none; background: #000; min-height: 100vh; padding: 60px 5% 100px; }
         .grid-produtos { display: grid; grid-template-columns: repeat(4, 1fr); gap: 60px; max-width: 1400px; margin: 0 auto; }
         .card-flutuante { text-align: center; cursor: pointer; transition: transform 0.4s ease; animation: flutuar 4s ease-in-out infinite; }
@@ -40,7 +40,7 @@
         .card-flutuante:hover img { transform: scale(1.05); filter: drop-shadow(0 0 20px var(--glow)); }
         @keyframes flutuar { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
 
-        /* VIEW SINOPSE - TRAVADA */
+        /* VIEW SINOPSE - TRAVADA (SEM FOOTER) */
         .view-sinopse { display: none; background: #fff; min-height: 100vh; padding: 60px 0 80px; color: #000; }
         .container-trindade { max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: 350px 1fr 320px; gap: 50px; padding: 0 40px; }
         .col-mockup img { width: 100%; filter: drop-shadow(0 15px 30px rgba(0,0,0,0.2)); }
@@ -53,16 +53,12 @@
         .price-value { font-size: 2.5rem; font-weight: 700; margin-bottom: 30px; }
         .btn-gold { background: var(--gold); color: #000; width: 100%; border: none; padding: 15px; font-weight: 900; cursor: pointer; margin-bottom: 15px; text-transform: uppercase; font-size: 0.7rem; }
         .btn-red { background: var(--red-btn); color: #fff; width: 100%; border: none; padding: 12px; font-weight: 700; cursor: pointer; margin-bottom: 10px; text-transform: uppercase; font-size: 0.65rem; }
+        
         .detalhes-tecnicos-container { max-width: 1300px; margin: 60px auto 0; padding: 0 40px; }
         .grid-tecnico-espec { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; border-top: 1px solid #eee; padding-top: 20px; }
         .item-espec span { display: block; font-size: 0.65rem; text-transform: uppercase; color: #888; font-weight: 700; margin-bottom: 5px; }
         .item-espec p { font-size: 0.9rem; font-weight: 600; color: #222; }
 
-        /* RODAPÉ TÉCNICO ELIMINADO DAS TRANSIÇÕES */
-        footer { background: var(--bg-light); padding: 60px 0; border-top: 1px solid #ddd; width: 100%; position: relative; z-index: 100; display: none; }
-        .tech-grid { max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 40px; padding: 0 40px; }
-        .tech-item h4 { font-size: 0.7rem; text-transform: uppercase; color: #000; margin-bottom: 10px; font-weight: 700; }
-        .tech-item p { font-size: 0.85rem; color: #555; border-bottom: 1px solid #ccc; padding-bottom: 8px; }
         .final-footer { background: #000; color: #666; font-size: 0.65rem; text-align: center; padding: 30px 0; border-top: 1px solid #111; text-transform: uppercase; letter-spacing: 2px; width: 100%; position: relative; z-index: 1000; }
     </style>
 </head>
@@ -146,15 +142,6 @@
         </section>
     </main>
 
-    <footer id="main-footer" style="display:none;">
-        <div class="tech-grid">
-            <div style="font-family:'Playfair Display'; font-size:1.4rem; font-weight:700">DETALHES DO ATIVO</div>
-            <div class="tech-item"><h4>EDITORA</h4><p>Portal Pleno O Código</p></div>
-            <div class="tech-item"><h4>IDIOMA</h4><p>Português / Inglês</p></div>
-            <div class="tech-item"><h4>FORMATO</h4><p>Digital (Instantâneo)</p></div>
-        </div>
-    </footer>
-
     <div class="final-footer">
         © 2026 Portal Pleno | O Código
     </div>
@@ -163,13 +150,19 @@
         const hardware = {
             e: [
                 {img: 'ebook01.png', title: 'Know Yourself First', price: '$ 11.00', link: 'https://pay.kiwify.com/8S4FCE0'},
-                {img: 'ebook02.png', title: 'The Engineering of Collision', price: '$ 11.50', link: 'https://pay.kiwify.com/ZjtlaGh'},
+                {img: 'ebook02.png', title: 'Engineering of Collision', price: '$ 11.50', link: 'https://pay.kiwify.com/ZjtlaGh'},
                 {img: 'ebook04.png', title: 'Descubra Você', price: 'R$ 29,50', link: 'https://pay.kiwify.com.br/P8UTO6L'},
-                {img: 'ebook05.png', title: 'Engenharia da Colisão', price: 'R$ 39,00', link: 'https://pay.kiwify.com.br/oRZAlbz'}
+                {img: 'ebook05.png', title: 'Engenharia da Colisão', price: 'R$ 39,00', link: 'https://pay.kiwify.com.br/oRZAlbz'},
+                {img: 'ebook06.png', title: 'Autópsia da Personalidade', price: 'R$ 47,00', link: '#'},
+                {img: 'ebook07.png', title: 'The Supremacy Code', price: '$ 15.00', link: '#'},
+                {img: 'ebook08.png', title: 'Mito da Unidade', price: 'R$ 32,00', link: '#'},
+                {img: 'ebook09.png', title: 'Soberania Mental', price: 'R$ 45,00', link: '#'}
             ],
             a: [
                 {img: 'audio01.png', title: 'Know Yourself First', price: '$ 13.95', link: 'https://pay.kiwify.com/ilgU4Kg'},
-                {img: 'audio04.png', title: 'Descubra Você', price: 'R$ 37,50', link: 'https://pay.kiwify.com.br/lDiv2Do'}
+                {img: 'audio04.png', title: 'Descubra Você', price: 'R$ 37,50', link: 'https://pay.kiwify.com.br/lDiv2Do'},
+                {img: 'audio05.png', title: 'Engenharia de Colisão (Audio)', price: 'R$ 42,00', link: '#'},
+                {img: 'audio06.png', title: 'Soberania (Audio)', price: 'R$ 49,00', link: '#'}
             ]
         };
 
@@ -216,18 +209,18 @@
             document.getElementById('view-info-extra').style.display = 'block';
             document.getElementById('btn-voltar').style.display = 'block';
             ativarMenu(tipo);
-            if(tipo === 'avaliacoes') container.innerHTML = `<div class="info-header"><h2>Avaliações</h2></div><p>Análise técnica de satisfação dos alunos...</p>`;
-            else if(tipo === 'degustacao') container.innerHTML = `<div class="info-header"><h2>Degustação</h2></div><p>Amostras técnicas em breve.</p>`;
-            else if(tipo === 'sobre') container.innerHTML = `<div class="info-header"><h2>Sobre</h2></div><p>O Portal Pleno é o centro de soberania mental.</p>`;
+            if(tipo === 'avaliacoes') container.innerHTML = `<h2>Avaliações</h2><p>Análise técnica de satisfação...</p>`;
+            else if(tipo === 'degustacao') container.innerHTML = `<h2>Degustação</h2><p>Amostras técnicas em breve.</p>`;
+            else if(tipo === 'sobre') container.innerHTML = `<h2>Sobre</h2><p>Portal Pleno: Soberania Mental.</p>`;
             historico = 'info';
         }
 
         function abrirSinopseDefault() { const d = hardware.e[0]; abrirSinopse(d.img, d.title, d.price, d.link); }
-        function checkout() { if(linkAtual) window.open(linkAtual, '_blank'); }
+        function checkout() { if(linkAtual && linkAtual !== '#') window.open(linkAtual, '_blank'); }
         function voltarFluxo() { if (historico === 'sinopse' || historico === 'info') irTitulos(); else irHome(); }
         
         function resetTelas() { 
-            ['view-home', 'view-galeria', 'view-sinopse', 'view-info-extra', 'btn-voltar', 'main-footer'].forEach(id => {
+            ['view-home', 'view-galeria', 'view-sinopse', 'view-info-extra', 'btn-voltar'].forEach(id => {
                 const el = document.getElementById(id);
                 if(el) el.style.display = 'none';
             });

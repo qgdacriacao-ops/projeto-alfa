@@ -6,7 +6,7 @@
     <title>Portal Pleno | O Código</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <style>
-        :root { --gold: #FFD700; --bg-black: #000; --white: #fff; --bg-light: #f9f9f9; --red-btn: #d30000; --glow: rgba(255, 215, 0, 0.6); }
+        :root { --gold: #FFD700; --bg-black: #000; --white: #fff; --bg-light: #f9f9f9; --red-btn: #d30000; --glow: rgba(255, 215, 0, 0.8); }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body, html { min-height: 100%; background-color: var(--bg-black); font-family: 'Inter', sans-serif; overflow-x: hidden; display: flex; flex-direction: column; }
 
@@ -19,8 +19,8 @@
         nav a:hover, nav a.active { color: var(--gold); border-bottom: 2px solid var(--gold); }
         #btn-voltar { display: none; color: var(--gold); border: 1px solid var(--gold); padding: 5px 12px; font-size: 0.6rem; font-weight: 700; text-transform: uppercase; cursor: pointer; }
 
-        /* FUNDO - Gerenciado via JS para visibilidade seletiva */
-        #bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: url('capa.png') no-repeat center center; background-size: cover; z-index: 1; filter: brightness(0.4); display: block; }
+        /* FUNDO DINÂMICO */
+        #bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: url('capa.png') no-repeat center center; background-size: cover; z-index: 1; filter: brightness(0.4); transition: opacity 0.5s ease; }
         main { flex: 1; position: relative; z-index: 10; padding-top: 85px; }
 
         /* VIEW HOME */
@@ -28,7 +28,10 @@
         .column-box { width: 280px; text-align: center; }
         .column-box p { color: var(--gold); letter-spacing: 5px; font-size: 0.7rem; margin-bottom: 0; padding-bottom: 5px; font-weight: 700; }
         .display-box { width: 100%; height: 420px; cursor: pointer; transition: 0.5s; }
-        .display-box img { width: 100%; height: 100%; object-fit: contain; }
+        .display-box img { width: 100%; height: 100%; object-fit: contain; transition: 0.4s; }
+        /* Efeito Aceso no Hover das Colunas */
+        .display-box:hover img { filter: drop-shadow(0 0 25px var(--glow)) brightness(1.2); transform: scale(1.02); }
+        
         .hero-center h1 { color: #fff; font-size: 2.2rem; text-transform: uppercase; line-height: 1.2; text-align: center; }
         .line-hero { width: 85%; height: 5px; background: var(--gold); margin: 15px auto; box-shadow: 0 0 20px var(--gold); }
 
@@ -53,16 +56,16 @@
         .price-value { font-size: 2.2rem; font-weight: 700; margin-bottom: 30px; }
         .btn-gold { background: var(--gold); color: #000; width: 100%; border: none; padding: 15px; font-weight: 900; cursor: pointer; margin-bottom: 15px; text-transform: uppercase; font-size: 0.7rem; }
         .btn-red { background: var(--red-btn); color: #fff; width: 100%; border: none; padding: 12px; font-weight: 700; cursor: pointer; margin-bottom: 10px; text-transform: uppercase; font-size: 0.65rem; }
-        .detalhes-tecnicos-container { max-width: 1300px; margin: 60px auto 0; padding: 0 40px; }
         .grid-tecnico-espec { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; border-top: 1px solid #eee; padding-top: 20px; }
         .item-espec span { display: block; font-size: 0.65rem; text-transform: uppercase; color: #888; font-weight: 700; margin-bottom: 5px; }
         .item-espec p { font-size: 0.9rem; font-weight: 600; color: #222; }
 
-        /* VIEW AVALIAÇÕES (COMPARTILHADO) */
+        /* VIEW COMPARTILHADO */
+        .view-info-extra { display:none; color:#fff; padding:20px 5%; background: #000; min-height: 100vh; }
         .layout-avaliacoes { display: grid; grid-template-columns: 1fr 360px 1fr; gap: 20px; align-items: start; margin-top: 15px; }
         .col-depoimentos { display: flex; flex-direction: column; gap: 20px; }
         .card-review { background: rgba(255,255,255,0.05); padding: 20px; border-left: 3px solid var(--gold); border-radius: 4px; font-size: 0.85rem; }
-        .card-review .stars { color: var(--gold); margin-bottom: 10px; }
+        .card-review .rating-text { color: var(--gold); font-weight: 700; text-transform: uppercase; font-size: 0.7rem; margin-bottom: 10px; }
         .card-review .text { font-style: italic; margin-bottom: 10px; color: #ccc; }
         .card-review .author-info { border-top: 1px solid #333; padding-top: 10px; font-size: 0.75rem; }
 
@@ -85,7 +88,7 @@
                 <li><a id="nav-home" class="active" onclick="irHome()">Início</a></li>
                 <li><a id="nav-ebook" onclick="irTitulos()">Ebook</a></li>
                 <li><a id="nav-sinopse" onclick="abrirSinopseDefault()">Sinopse</a></li>
-                <li><a id="nav-avaliacoes" onclick="abrirInfo('avaliacoes')">Compartilhado</a></li>
+                <li><a id="nav-compartilhado" onclick="abrirInfo('compartilhado')">Compartilhado</a></li>
                 <li><a id="nav-degustacao" onclick="abrirInfo('degustacao')">Degustação</a></li>
                 <li><a id="nav-sobre" onclick="abrirInfo('sobre')">Sobre</a></li>
                 <li><div id="btn-voltar" onclick="voltarFluxo()">Voltar</div></li>
@@ -138,7 +141,7 @@
                     </div>
                 </div>
             </div>
-            <div class="detalhes-tecnicos-container">
+            <div style="max-width: 1300px; margin: 60px auto 0; padding: 0 40px;">
                 <h3 class="section-title">Detalhes do Ativo</h3>
                 <div class="grid-tecnico-espec">
                     <div class="item-espec"><span>Editora</span><p>Portal Pleno O Código</p></div>
@@ -148,14 +151,12 @@
             </div>
         </section>
 
-        <section id="view-info-extra" class="view-info-extra" style="display:none; color:#fff; padding:20px 5%;">
+        <section id="view-info-extra" class="view-info-extra">
             <div id="content-info"></div>
         </section>
     </main>
 
-    <div class="final-footer">
-        © 2026 Portal Pleno | O Código
-    </div>
+    <div class="final-footer">© 2026 Portal Pleno | O Código</div>
 
     <script>
         const hardware = {
@@ -178,12 +179,12 @@
         };
 
         const staticReviews = [
-            {id: 1, text: "Descubra Você mudou completamente minha perspectiva.", author: "Maria Silva", email: "maria.silva@ficticio.com", book: "Descubra Você", rating: 5},
-            {id: 2, text: "A Autópsia da Personalidade foi transformadora.", author: "João Santos", email: "joao.santos@ficticio.com", book: "Autópsia", rating: 5},
-            {id: 3, text: "Engenharia da Colisão trouxe ferramentas práticas.", author: "Ana Costa", email: "ana.costa@ficticio.com", book: "Engenharia", rating: 5},
-            {id: 4, text: "Júlio Bhrósz entrega profundidade incomparável.", author: "Carlos Oliveira", email: "carlos.o@ficticio.com", book: "O Código", rating: 5},
-            {id: 5, text: "Excelente combinação de teoria e prática.", author: "Fernanda Lima", email: "fernanda.l@ficticio.com", book: "Descubra Você", rating: 5},
-            {id: 6, text: "Qualidade técnica absurda. Recomendo.", author: "Roberto Martins", email: "roberto.m@ficticio.com", book: "Engenharia", rating: 5}
+            {id: 1, text: "La méthode est très efficace pour comprendre soi-même.", author: "Jean Pierre", email: "j.pierre@fictif.fr", book: "Descubra Você", rating: "BOM"},
+            {id: 2, text: "The architectural depth of this work is mind-blowing.", author: "Sarah Connor", email: "s.connor@fictional.com", book: "THE SUPREMACY CODE", rating: "EXCELENTE"},
+            {id: 3, text: "A literal autopsy of human limitations. Essential.", author: "Mark Spector", email: "m.spector@fictional.com", book: "THE SUPREMACY CODE", rating: "EXCELENTE"},
+            {id: 4, text: "Júlio Bhrósz entrega profundidade incomparável.", author: "Carlos Oliveira", email: "carlos.o@ficticio.com", book: "O Código", rating: "ÓTIMO"},
+            {id: 5, text: "Excelente combinação de teoria e prática.", author: "Fernanda Lima", email: "fernanda.l@ficticio.com", book: "Descubra Você", rating: "ÓTIMO"},
+            {id: 6, text: "Qualidade técnica absurda. Recomendo.", author: "Roberto Martins", email: "roberto.m@ficticio.com", book: "Engenharia", rating: "ÓTIMO"}
         ];
 
         let iE = 0, iA = 0, linkAtual = '', historico = 'home';
@@ -192,30 +193,28 @@
         setInterval(() => { iA = (iA + 1) % hardware.a.length; if(document.getElementById('loop-a')) document.getElementById('loop-a').src = hardware.a[iA].img; }, 3000);
 
         function resetTelas() { 
-            ['view-home', 'view-galeria', 'view-sinopse', 'view-info-extra', 'btn-voltar'].forEach(id => { const el = document.getElementById(id); if(el) el.style.display = 'none'; }); 
-            // ELIMINAR CAPA (BG) EM TODAS AS PÁGINAS EXCETO HOME
-            document.getElementById('bg').style.display = 'none';
+            ['view-home', 'view-galeria', 'view-sinopse', 'view-info-extra', 'btn-voltar'].forEach(id => { 
+                const el = document.getElementById(id); if(el) el.style.display = 'none'; 
+            }); 
             window.scrollTo(0,0); 
+        }
+
+        function toggleBackground(show) {
+            document.getElementById('bg').style.opacity = show ? "1" : "0";
         }
 
         function ativarMenu(id) { 
             document.querySelectorAll('nav a').forEach(a => a.classList.remove('active')); 
-            const alvo = document.getElementById('nav-' + id); 
-            if(alvo) alvo.classList.add('active'); 
+            const alvo = document.getElementById('nav-' + id); if(alvo) alvo.classList.add('active'); 
         }
 
-        function irHome() { 
-            resetTelas(); 
-            document.getElementById('bg').style.display = 'block'; // MANTER APENAS NA HOME
-            document.getElementById('view-home').style.display = 'flex'; 
-            ativarMenu('home'); 
-            historico = 'home'; 
-        }
-
+        function irHome() { resetTelas(); toggleBackground(true); document.getElementById('view-home').style.display = 'flex'; ativarMenu('home'); historico = 'home'; }
+        
         function irTitulos() { 
             resetTelas(); 
+            toggleBackground(false);
             const grid = document.getElementById('render-grid'); 
-            grid.innerHTML = [...hardware.e, ...hardware.a].map(item => `<div class="card-flutuante" onclick="abrirSinopse('${item.img}', '${item.title}', '${item.price}', '${item.link}')"><img src="${item.img}"><div style="color:var(--gold); margin-top:10px;">★★★★★</div></div>`).join(''); 
+            grid.innerHTML = [...hardware.e, ...hardware.a].map(item => `<div class="card-flutuante" onclick="abrirSinopse('${item.img}', '${item.title}', '${item.price}', '${item.link}')"><img src="${item.img}"><div style="color:var(--gold); margin-top:10px;">EXCELENTE</div></div>`).join(''); 
             document.getElementById('view-galeria').style.display = 'block'; 
             document.getElementById('btn-voltar').style.display = 'block'; 
             ativarMenu('ebook'); 
@@ -224,6 +223,7 @@
         
         function abrirSinopse(img, title, price, link) { 
             resetTelas(); 
+            toggleBackground(false);
             linkAtual = link; 
             document.getElementById('target-img').src = img; 
             document.getElementById('target-title').innerText = title; 
@@ -240,12 +240,13 @@
 
         function abrirInfo(tipo) {
             resetTelas();
+            toggleBackground(false);
             const container = document.getElementById('content-info');
             document.getElementById('view-info-extra').style.display = 'block';
             document.getElementById('btn-voltar').style.display = 'block';
             ativarMenu(tipo);
 
-            if(tipo === 'avaliacoes') {
+            if(tipo === 'compartilhado') {
                 const colEsq = staticReviews.slice(0,3).map(r => renderReview(r)).join('');
                 const colDir = staticReviews.slice(3,6).map(r => renderReview(r)).join('');
                 
@@ -257,8 +258,16 @@
                             <div class="input-group"><label>Nome</label><input type="text" placeholder="Seu nome"></div>
                             <div class="input-group"><label>E-mail</label><input type="email" placeholder="seu@email.com"></div>
                             <div class="input-group"><label>Texto (Máx 100 char)</label><textarea maxlength="100" rows="3"></textarea></div>
-                            <div class="input-group"><label>Estrelas</label><select><option>★★★★★</option><option>★★★★</option></select></div>
-                            <button class="btn-enviar" onclick="this.innerText='ENVIADO'">Enviar Avaliação</button>
+                            <div class="input-group"><label>Nota</label>
+                                <select>
+                                    <option>REGULAR</option>
+                                    <option>BOM</option>
+                                    <option>MUITO BOM</option>
+                                    <option>ÓTIMO</option>
+                                    <option selected>EXCELENTE</option>
+                                </select>
+                            </div>
+                            <button class="btn-enviar" onclick="this.innerText='ENVIADO'">Enviar Compartilhamento</button>
                         </div>
                         <div class="col-depoimentos">${colDir}</div>
                     </div>
@@ -272,7 +281,7 @@
         function renderReview(r) {
             return `
                 <div class="card-review">
-                    <div class="stars">${'★'.repeat(r.rating)}</div>
+                    <div class="rating-text">${r.rating}</div>
                     <div class="text">"${r.text}"</div>
                     <div class="author-info">
                         <strong>${r.author}</strong><br>

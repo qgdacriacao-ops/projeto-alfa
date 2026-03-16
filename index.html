@@ -40,7 +40,7 @@
         .card-flutuante:hover img { transform: scale(1.05); filter: drop-shadow(0 0 20px var(--glow)); }
         @keyframes flutuar { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
 
-        /* VIEW SINOPSE - AJUSTE DE 3 COLUNAS */
+        /* VIEW SINOPSE - AJUSTE TÉCNICO DE 3 COLUNAS */
         .view-sinopse { display: none; background: #fff; min-height: 100vh; padding: 60px 0 80px; color: #000; }
         .container-trindade { 
             max-width: 1300px; 
@@ -50,14 +50,13 @@
             gap: 50px; 
             padding: 0 40px; 
         }
-        .col-mockup img { width: 100%; filter: drop-shadow(0 15px 30px rgba(0,0,0,0.2)); }
+        .col-mockup img { width: 100%; filter: drop-shadow(0 15px 30px rgba(0,0,0,0.2)); position: sticky; top: 110px; }
         .col-texto h1 { font-family: 'Playfair Display', serif; font-size: 3rem; color: #000; line-height: 1.1; margin-bottom: 10px; }
         .author { color: var(--gold); font-weight: 700; text-transform: uppercase; margin-bottom: 30px; font-size: 0.9rem; letter-spacing: 2px; }
         .section-title { font-weight: 700; text-transform: uppercase; font-size: 0.8rem; margin: 40px 0 20px; color: #000; border-bottom: 3px solid var(--gold); display: inline-block; padding-bottom: 5px; }
         .description p { margin-bottom: 20px; font-size: 1.05rem; line-height: 1.7; color: #333; text-align: justify; }
         
-        /* CARD COMPRA STICKY */
-        .col-compra { position: relative; }
+        /* CARD COMPRA - ESTADO STICKY ATIVADO */
         .buy-card { 
             background: #1a1a1a; 
             border-radius: 8px; 
@@ -65,15 +64,13 @@
             color: #fff; 
             text-align: center; 
             position: sticky; 
-            top: 110px; /* Mantém visível no scroll */
+            top: 110px; /* Fixa o hardware de venda na rolagem */
             box-shadow: 0 20px 40px rgba(0,0,0,0.3);
         }
         .price-label { font-size: 0.6rem; text-transform: uppercase; color: var(--gold); letter-spacing: 2px; margin-bottom: 10px; }
         .price-value { font-size: 2.5rem; font-weight: 700; margin-bottom: 30px; }
-        .btn-gold { background: var(--gold); color: #000; width: 100%; border: none; padding: 15px; font-weight: 900; cursor: pointer; margin-bottom: 15px; text-transform: uppercase; font-size: 0.7rem; transition: 0.3s; }
-        .btn-gold:hover { filter: brightness(1.2); }
-        .btn-red { background: var(--red-btn); color: #fff; width: 100%; border: none; padding: 12px; font-weight: 700; cursor: pointer; margin-bottom: 10px; text-transform: uppercase; font-size: 0.65rem; transition: 0.3s; }
-        .btn-red:hover { background: #ff0000; }
+        .btn-gold { background: var(--gold); color: #000; width: 100%; border: none; padding: 15px; font-weight: 900; cursor: pointer; margin-bottom: 15px; text-transform: uppercase; font-size: 0.7rem; }
+        .btn-red { background: var(--red-btn); color: #fff; width: 100%; border: none; padding: 12px; font-weight: 700; cursor: pointer; margin-bottom: 10px; text-transform: uppercase; font-size: 0.65rem; }
 
         /* TABELA TÉCNICA SINOPSE */
         .detalhes-tecnicos-container { max-width: 1300px; margin: 60px auto 0; padding: 0 40px; }
@@ -256,8 +253,10 @@
         
         function resetTelas() { 
             ['view-home', 'view-galeria', 'view-sinopse', 'view-info-extra', 'btn-voltar', 'main-footer'].forEach(id => {
-                const el = document.getElementById(id);
-                if(el) el.style.display = 'none';
+                document.getElementById(id).style.display = 'none';
             });
             window.scrollTo(0,0); 
         }
+    </script>
+</body>
+</html>

@@ -32,7 +32,7 @@
         .hero-center h1 { color: #fff; font-size: 2.2rem; text-transform: uppercase; line-height: 1.2; text-align: center; }
         .line-hero { width: 85%; height: 5px; background: var(--gold); margin: 15px auto; box-shadow: 0 0 20px var(--gold); }
 
-        /* VIEW GALERIA - RESTAURADA CONFORME DETERMINADO */
+        /* VIEW GALERIA */
         .view-galeria { display: none; background: #000; min-height: 100vh; padding: 60px 5% 100px; }
         .grid-produtos { display: grid; grid-template-columns: repeat(4, 1fr); gap: 60px; max-width: 1400px; margin: 0 auto; }
         .card-flutuante { text-align: center; cursor: pointer; transition: transform 0.4s ease; animation: flutuar 4s ease-in-out infinite; }
@@ -58,7 +58,7 @@
         .item-espec span { display: block; font-size: 0.65rem; text-transform: uppercase; color: #888; font-weight: 700; margin-bottom: 5px; }
         .item-espec p { font-size: 0.9rem; font-weight: 600; color: #222; }
 
-        /* RODAPÉ TÉCNICO - RESTAURADO */
+        /* RODAPÉ TÉCNICO ELIMINADO DAS TRANSIÇÕES */
         footer { background: var(--bg-light); padding: 60px 0; border-top: 1px solid #ddd; width: 100%; position: relative; z-index: 100; display: none; }
         .tech-grid { max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 40px; padding: 0 40px; }
         .tech-item h4 { font-size: 0.7rem; text-transform: uppercase; color: #000; margin-bottom: 10px; font-weight: 700; }
@@ -146,7 +146,7 @@
         </section>
     </main>
 
-    <footer id="main-footer">
+    <footer id="main-footer" style="display:none;">
         <div class="tech-grid">
             <div style="font-family:'Playfair Display'; font-size:1.4rem; font-weight:700">DETALHES DO ATIVO</div>
             <div class="tech-item"><h4>EDITORA</h4><p>Portal Pleno O Código</p></div>
@@ -194,7 +194,6 @@
                 </div>`).join('');
             document.getElementById('view-galeria').style.display = 'block';
             document.getElementById('btn-voltar').style.display = 'block';
-            document.getElementById('main-footer').style.display = 'block';
             ativarMenu('ebook');
             historico = 'titulos';
         }
@@ -207,7 +206,6 @@
             document.getElementById('target-price').innerText = price;
             document.getElementById('view-sinopse').style.display = 'block';
             document.getElementById('btn-voltar').style.display = 'block';
-            document.getElementById('main-footer').style.display = 'block';
             ativarMenu('sinopse');
             historico = 'sinopse';
         }
@@ -217,7 +215,6 @@
             const container = document.getElementById('content-info');
             document.getElementById('view-info-extra').style.display = 'block';
             document.getElementById('btn-voltar').style.display = 'block';
-            document.getElementById('main-footer').style.display = 'block';
             ativarMenu(tipo);
             if(tipo === 'avaliacoes') container.innerHTML = `<div class="info-header"><h2>Avaliações</h2></div><p>Análise técnica de satisfação dos alunos...</p>`;
             else if(tipo === 'degustacao') container.innerHTML = `<div class="info-header"><h2>Degustação</h2></div><p>Amostras técnicas em breve.</p>`;

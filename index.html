@@ -7,200 +7,193 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <style>
         :root { --gold: #FFD700; --bg-black: #000; --white: #fff; --bg-light: #E8EAEB; --red-btn: #d30000; --glow: rgba(255, 215, 0, 0.6); }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body, html { min-height: 100%; background-color: var(--bg-black); font-family: 'Inter', sans-serif; overflow-x: hidden; display: flex; flex-direction: column; }
+        
+        /* PROTEÇÃO DE HARDWARE - BLOQUEIO DE SELEÇÃO */
+        * { 
+            margin: 0; padding: 0; box-sizing: border-box; 
+            -webkit-user-select: none; /* Safari */
+            -ms-user-select: none; /* IE 10+ */
+            user-select: none; /* Padrão */
+        }
+        
+        body, html { min-height: 100%; background-color: var(--bg-black); font-family: 'Inter', sans-serif; overflow-x: hidden; color: var(--white); }
 
-        /* HEADER & NAV */
+        /* HEADER & NAVEGAÇÃO SOBERANA */
         header { background: #000; padding: 0 5%; display: flex; justify-content: space-between; align-items: center; position: fixed; top: 0; width: 100%; z-index: 2000; height: 85px; border-bottom: 2px solid var(--gold); }
-        .logo { display: flex; align-items: center; gap: 15px; color: #fff; font-weight: 700; text-transform: uppercase; font-size: 0.9rem; }
-        .logo img { height: 60px; }
+        .logo { display: flex; align-items: center; gap: 15px; font-weight: 700; text-transform: uppercase; font-size: 0.9rem; }
         nav ul { list-style: none; display: flex; gap: 20px; align-items: center; }
         nav a { text-decoration: none; color: #fff; font-size: 0.65rem; font-weight: 700; text-transform: uppercase; cursor: pointer; transition: 0.3s; border-bottom: 2px solid transparent; padding-bottom: 5px; }
         nav a:hover, nav a.active { color: var(--gold); border-bottom: 2px solid var(--gold); }
         #btn-voltar { display: none; color: var(--gold); border: 1px solid var(--gold); padding: 5px 12px; font-size: 0.6rem; font-weight: 700; text-transform: uppercase; cursor: pointer; }
 
-        /* FUNDO */
-        #bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: url('capa.png') no-repeat center center; background-size: cover; z-index: 1; filter: brightness(0.4); }
-        main { flex: 1; position: relative; z-index: 10; padding-top: 85px; }
+        /* FUNDO E ESTRUTURA */
+        #bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: url('capa.png') no-repeat center center; background-size: cover; z-index: 1; filter: brightness(0.3); }
+        main { position: relative; z-index: 10; padding-top: 85px; min-height: 100vh; }
 
-        /* VIEWS GERAIS */
-        .view-home { min-height: calc(100vh - 85px); display: flex; justify-content: space-between; align-items: center; padding: 0 5%; }
-        .column-box { width: 280px; text-align: center; }
-        .display-box { width: 100%; height: 420px; cursor: pointer; transition: 0.5s; }
-        .display-box img { width: 100%; height: 100%; object-fit: contain; }
-        .hero-center h1 { color: #fff; font-size: 2.2rem; text-transform: uppercase; line-height: 1.2; text-align: center; }
+        /* VIEWS */
+        .view-section { display: none; padding: 60px 5%; width: 100%; }
+        #view-home { display: flex; justify-content: space-between; align-items: center; min-height: calc(100vh - 85px); }
+        
+        .hero-center h1 { font-size: 2.2rem; text-transform: uppercase; line-height: 1.2; text-align: center; }
         .line-hero { width: 85%; height: 5px; background: var(--gold); margin: 15px auto; box-shadow: 0 0 20px var(--gold); }
 
-        /* VIEW GALERIA */
-        .view-galeria { display: none; background: #000; min-height: 100vh; padding: 60px 5% 100px; }
-        .grid-produtos { display: grid; grid-template-columns: repeat(4, 1fr); gap: 60px; max-width: 1400px; margin: 0 auto; }
-        .card-flutuante { text-align: center; cursor: pointer; transition: 0.4s ease; animation: flutuar 4s ease-in-out infinite; }
-        .card-flutuante img { width: 100%; height: 350px; object-fit: contain; transition: 0.4s; }
-        @keyframes flutuar { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+        /* GRID DE PRODUTOS */
+        .grid-produtos { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; max-width: 1400px; margin: 0 auto; }
+        .card-flutuante { text-align: center; cursor: pointer; transition: 0.4s; }
+        .card-flutuante img { width: 100%; height: 350px; object-fit: contain; }
+        .card-flutuante:hover { transform: scale(1.05); }
 
-        /* VIEW SINOPSE */
-        .view-sinopse { display: none; background: #fff; min-height: 100vh; padding: 60px 0 80px; color: #000; }
-        .container-trindade { max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: 280px 1fr 280px; gap: 40px; padding: 0 40px; }
-        .col-mockup img { width: 100%; filter: drop-shadow(0 15px 30px rgba(0,0,0,0.2)); }
-        .col-texto h1 { font-family: 'Playfair Display', serif; font-size: 3rem; color: #000; line-height: 1.1; margin-bottom: 10px; }
-        .buy-card { background: #1a1a1a; border-radius: 8px; padding: 30px 20px; color: #fff; text-align: center; }
-        .btn-gold { background: var(--gold); color: #000; width: 100%; border: none; padding: 15px; font-weight: 900; cursor: pointer; text-transform: uppercase; font-size: 0.7rem; }
-        .btn-red { background: var(--red-btn); color: #fff; width: 100%; border: none; padding: 12px; font-weight: 700; cursor: pointer; margin-bottom: 10px; text-transform: uppercase; font-size: 0.65rem; }
+        /* DEGUSTAÇÃO - CARDS */
+        .degustacao-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; max-width: 1200px; margin: 40px auto; }
+        .degustacao-card { background: var(--white); padding: 35px; border-radius: 4px; border-left: 8px solid #000; color: #000; transition: 0.3s; }
+        .degustacao-card h2 { font-family: 'Playfair Display', serif; font-size: 1.5rem; margin-bottom: 10px; }
+        .degustacao-quote { font-style: italic; color: #444; border-left: 3px solid var(--gold); padding-left: 15px; margin-bottom: 20px; font-size: 0.9rem; }
 
-        /* MÓDULO AVALIAÇÕES */
-        .layout-avaliacoes { display: grid; grid-template-columns: 1fr 360px 1fr; gap: 20px; align-items: start; margin-top: 15px; }
-        .card-review { background: rgba(255,255,255,0.05); padding: 20px; border-left: 3px solid var(--gold); border-radius: 4px; font-size: 0.85rem; margin-bottom: 20px; }
-        .form-review-container { background: #fff; padding: 25px; border-radius: 4px; color: #000; }
+        /* LEITURA DE MÁXIMA DENSIDADE */
+        #leitura-container { display: none; background: #fff; color: #111; padding: 60px; max-width: 900px; margin: 40px auto; border-radius: 4px; line-height: 1.8; text-align: justify; border-top: 15px solid var(--gold); box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
+        #leitura-container h3 { font-family: 'Playfair Display', serif; font-size: 2rem; margin-bottom: 25px; border-bottom: 2px solid #eee; padding-bottom: 10px; }
+        #leitura-container p { margin-bottom: 20px; font-size: 1.05rem; }
+        #leitura-container .nota-veredito { background: #f9f9f9; padding: 20px; border: 1px dashed #ccc; margin-top: 30px; font-weight: 700; text-transform: uppercase; font-size: 0.8rem; }
 
-        /* MÓDULO DEGUSTAÇÃO (Soberania de Gelo) */
-        .degustacao-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; max-width: 1100px; margin: 40px auto; }
-        .degustacao-card { background: var(--white); padding: 40px; border-radius: 4px; border-left: 8px solid #000; color: #000; transition: 0.3s; }
-        .degustacao-card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(255, 215, 0, 0.3); }
-        .degustacao-card h2 { font-family: 'Playfair Display', serif; margin-bottom: 15px; font-size: 1.6rem; color: #000; }
-        .degustacao-quote { font-style: italic; color: #444; margin-bottom: 25px; border-left: 3px solid var(--gold); padding-left: 15px; line-height: 1.6; font-size: 0.95rem; }
-        .btn-protocolo { background: #000; color: var(--gold); text-decoration: none; padding: 15px; display: block; text-align: center; font-weight: 700; text-transform: uppercase; font-size: 0.75rem; border: none; cursor: pointer; }
+        .btn-black { background: #000; color: var(--gold); border: none; padding: 15px; width: 100%; font-weight: 700; text-transform: uppercase; cursor: pointer; font-size: 0.75rem; transition: 0.3s; }
+        .btn-black:hover { letter-spacing: 2px; }
 
-        .final-footer { background: #000; color: #666; font-size: 0.65rem; text-align: center; padding: 30px 0; border-top: 1px solid #111; text-transform: uppercase; letter-spacing: 2px; width: 100%; z-index: 1000; }
+        .final-footer { background: #000; color: #444; font-size: 0.6rem; text-align: center; padding: 40px 0; border-top: 1px solid #111; text-transform: uppercase; letter-spacing: 3px; position: relative; z-index: 10; }
     </style>
 </head>
-<body>
-    <div id="bg"></div>
+<body oncontextmenu="return false;"> <div id="bg"></div>
     <header>
-        <div class="logo"><img src="selo.png"><span>Portal Pleno O Código</span></div>
+        <div class="logo"><span>Portal Pleno O Código</span></div>
         <nav>
-            <ul id="main-nav">
-                <li><a id="nav-home" class="active" onclick="irHome()">Início</a></li>
-                <li><a id="nav-ebook" onclick="irTitulos()">Ebook</a></li>
-                <li><a id="nav-sinopse" onclick="abrirSinopseDefault()">Sinopse</a></li>
-                <li><a id="nav-avaliacoes" onclick="abrirInfo('avaliacoes')">Avaliações</a></li>
-                <li><a id="nav-degustacao" onclick="abrirInfo('degustacao')">Degustação</a></li>
-                <li><a id="nav-sobre" onclick="abrirInfo('sobre')">Sobre</a></li>
-                <li><div id="btn-voltar" onclick="voltarFluxo()">Voltar</div></li>
+            <ul>
+                <li><a id="nav-home" onclick="irHome()" class="active">Início</a></li>
+                <li><a id="nav-ebook" onclick="irTitulos()">Ebooks</a></li>
+                <li><a id="nav-degustacao" onclick="abrirDegustacao()">Degustação</a></li>
+                <li><div id="btn-voltar" onclick="voltar()">Voltar</div></li>
             </ul>
         </nav>
     </header>
 
     <main>
-        <div id="view-home" class="view-home">
-            <div class="column-box">
-                <p style="color:var(--gold); font-weight:700; letter-spacing:5px;">EBOOKS</p>
-                <div class="display-box" onclick="irTitulos()"><img id="loop-e" src="ebook01.png"></div>
+        <section id="view-home" class="view-section" style="display:flex;">
+            <div style="width:250px; text-align:center;">
+                <p style="color:var(--gold); font-weight:700; letter-spacing:3px; font-size:0.7rem;">HARDWARE</p>
+                <img src="ebook01.png" style="width:100%; margin-top:20px; cursor:pointer;" onclick="irTitulos()">
             </div>
             <div class="hero-center">
                 <h1>O CONFORTO É UMA PRISÃO</h1>
                 <div class="line-hero"></div>
                 <h1>O CÓDIGO É A CHAVE</h1>
             </div>
-            <div class="column-box">
-                <p style="color:var(--gold); font-weight:700; letter-spacing:5px;">AUDIOBOOKS</p>
-                <div class="display-box" onclick="irTitulos()"><img id="loop-a" src="audio01.png"></div>
-            </div>
-        </div>
-
-        <section id="view-galeria" class="view-galeria">
-            <div class="grid-produtos" id="render-grid"></div>
-        </section>
-
-        <section id="view-sinopse" class="view-sinopse">
-            <div class="container-trindade">
-                <div class="col-mockup"><img id="target-img" src=""></div>
-                <div class="col-texto">
-                    <h1 id="target-title">TÍTULO</h1>
-                    <p style="color:var(--gold); font-weight:700;">POR JÚLIO BHRÓSZ</p>
-                    <p id="target-desc" style="margin-top:20px; line-height:1.7;">Carregando análise técnica...</p>
-                </div>
-                <div class="col-compra">
-                    <div class="buy-card">
-                        <p id="target-price" style="font-size:2rem; font-weight:700; margin-bottom:20px;">R$ 0,00</p>
-                        <button class="btn-gold" onclick="checkout()">Compre Agora</button>
-                    </div>
-                </div>
+            <div style="width:250px; text-align:center;">
+                <p style="color:var(--gold); font-weight:700; letter-spacing:3px; font-size:0.7rem;">SOFTWARE</p>
+                <img src="audio01.png" style="width:100%; margin-top:20px; cursor:pointer;" onclick="irTitulos()">
             </div>
         </section>
 
-        <section id="view-info-extra" style="display:none; padding:40px 5%;">
-            <div id="content-info"></div>
+        <section id="view-titulos" class="view-section">
+            <h2 style="text-align:center; color:var(--gold); margin-bottom:40px; letter-spacing:5px;">ARSENAL DISPONÍVEL</h2>
+            <div class="grid-produtos" id="grid-main"></div>
+        </section>
+
+        <section id="view-degustacao" class="view-section">
+            <h2 style="text-align:center; color:var(--gold); margin-bottom:10px; font-family:'Playfair Display'; font-size:2.5rem;">DEGUSTAÇÃO TÉCNICA</h2>
+            <p style="text-align:center; color:#666; letter-spacing:3px; font-size:0.7rem; margin-bottom:50px;">PROVAS DE SOBERANIA INTELECTUAL</p>
+            
+            <div class="degustacao-grid">
+                <div class="degustacao-card">
+                    <h2>The Supremacy Code</h2>
+                    <p class="degustacao-quote">"No one completes anyone. You are already complete on your own."</p>
+                    <button class="btn-black" onclick="carregarTexto('supremacy')">Access the Code</button>
+                </div>
+                <div class="degustacao-card">
+                    <h2>Engenharia da Colisão</h2>
+                    <p class="degustacao-quote">"O atrito é o subproduto inevitável de duas existências soberanas tentando ocupar o mesmo espaço."</p>
+                    <button class="btn-black" onclick="carregarTexto('engenharia')">Abrir Protocolo</button>
+                </div>
+                <div class="degustacao-card">
+                    <h2>Autópsia da Personalidade</h2>
+                    <p class="degustacao-quote">"O conflito não gerido é como um incêndio que queima os alicerces do carinho."</p>
+                    <button class="btn-black" onclick="carregarTexto('autopsia')">Dissecar Conflito</button>
+                </div>
+            </div>
+
+            <div id="leitura-container">
+                <div id="texto-alvo"></div>
+                <button class="btn-black" style="margin-top:40px; width:150px;" onclick="fecharLeitura()">Fechar</button>
+            </div>
         </section>
     </main>
 
-    <div class="final-footer">© 2026 Portal Pleno | O Código</div>
+    <footer class="final-footer">© 2026 Professor Júlio Bhrósz | Portal Pleno O Código</footer>
 
     <script>
-        const hardware = {
-            e: [{img: 'ebook01.png', title: 'Know Yourself First', price: '$ 11.00', link: 'https://pay.kiwify.com/8S4FCE0'}, {img: 'ebook04.png', title: 'Descubra Você', price: 'R$ 29,50', link: 'https://pay.kiwify.com.br/P8UTO6L'}],
-            a: [{img: 'audio01.png', title: 'Know Yourself First', price: '$ 13.95', link: 'https://pay.kiwify.com/ilgU4Kg'}]
+        // BLOQUEIO DE COMANDOS DE TECLADO (SOFTWARE PROTECTED)
+        document.onkeydown = function(e) {
+            if (e.ctrlKey && (e.keyCode === 67 || e.keyCode === 86 || e.keyCode === 85 || e.keyCode === 83 || e.keyCode === 73 || e.keyCode === 88)) {
+                return false;
+            }
+            if (e.keyCode == 123) { return false; } // F12
         };
 
-        const staticReviews = [
-            {author: "Maria Silva", text: "Mudou minha perspectiva.", rating: 5, book: "Descubra Você"},
-            {author: "João Santos", text: "Transformação real.", rating: 5, book: "Autópsia"}
-        ];
-
-        let iE = 0, iA = 0, linkAtual = '', historico = 'home';
-
-        function irHome() { resetTelas(); document.getElementById('view-home').style.display = 'flex'; ativarMenu('home'); historico = 'home'; }
-        
-        function irTitulos() {
-            resetTelas();
-            const grid = document.getElementById('render-grid');
-            grid.innerHTML = [...hardware.e, ...hardware.a].map(item => `
-                <div class="card-flutuante" onclick="abrirSinopse('${item.img}', '${item.title}', '${item.price}', '${item.link}')">
-                    <img src="${item.img}"><div style="color:var(--gold);">★★★★★</div>
-                </div>`).join('');
-            document.getElementById('view-galeria').style.display = 'block';
-            document.getElementById('btn-voltar').style.display = 'block';
-            ativarMenu('ebook');
-            historico = 'titulos';
-        }
-
-        function abrirInfo(tipo) {
-            resetTelas();
-            const container = document.getElementById('content-info');
-            document.getElementById('view-info-extra').style.display = 'block';
-            document.getElementById('btn-voltar').style.display = 'block';
-            ativarMenu(tipo);
-
-            if(tipo === 'degustacao') {
-                container.innerHTML = `
-                    <h1 style="text-align:center; font-family:'Playfair Display'; color:var(--gold); font-size:2.5rem; margin-bottom:40px;">DEGUSTAÇÃO TÉCNICA</h1>
-                    <div class="degustacao-grid">
-                        <div class="degustacao-card">
-                            <h2>Engenharia da Colisão</h2>
-                            <p class="degustacao-quote">"O impacto não é o fim, é o ponto de ignição para uma nova estrutura de soberania."</p>
-                            <button class="btn-protocolo" onclick="alert('Processando Protocolo...')">Ler Protocolo Completo</button>
-                        </div>
-                        <div class="degustacao-card">
-                            <h2>The Supremacy Code</h2>
-                            <p class="degustacao-quote">"Assumir o código é parar de ser processado pelo sistema e passar a ser o próprio processador."</p>
-                            <button class="btn-protocolo" onclick="alert('Accessing Code...')">Access the Code</button>
-                        </div>
-                    </div>`;
-            } else if(tipo === 'avaliacoes') {
-                container.innerHTML = `
-                    <div class="layout-avaliacoes">
-                        <div class="col-depoimentos">${staticReviews.map(r => `<div class="card-review"><strong>${r.author}</strong><br><em>"${r.text}"</em></div>`).join('')}</div>
-                        <div class="form-review-container"><h3>CONTE SUA EXPERIENCIA</h3><input style="width:100%; margin:10px 0; padding:10px;" placeholder="Nome"><textarea style="width:100%; padding:10px;" placeholder="Sua análise"></textarea><button class="btn-protocolo" style="width:100%; margin-top:10px;">ENVIAR</button></div>
-                        <div class="col-depoimentos">${staticReviews.map(r => `<div class="card-review"><strong>${r.author}</strong><br><em>"${r.text}"</em></div>`).join('')}</div>
-                    </div>`;
+        const db = {
+            ebooks: [
+                {t: 'Know Yourself First', p: '$ 11.00', img: 'ebook01.png', link: 'https://pay.kiwify.com/8S4FCE0'},
+                {t: 'Descubra Você', p: 'R$ 29,50', img: 'ebook04.png', link: 'https://pay.kiwify.com.br/P8UTO6L'}
+            ],
+            textos: {
+                supremacy: `<h3>MAPPING THE IDEAL RELATIONSHIP</h3><p>What are you looking for in a relationship? Often, we have a vague idea influenced by movies... But to build a truly meaningful connection, you need to go beyond the superficial.</p><p><strong>7.2 Realistic Expectations:</strong> No one completes anyone. You are already complete on your own. A partner complements, adds to, and enriches your life.</p><p><strong>Love is a verb:</strong> it is a daily choice to love, care for, and nurture.</p>`,
+                engenharia: `<h3>A FÍSICA DO ATRITO E O CALOR DA PROXIMIDADE</h3><p>No relacionamento, o atrito é o subproduto inevitável de duas existências soberanas tentando ocupar o mesmo espaço e tempo. O erro fatal é o pavor do conflito.</p><p><strong>2.2 Inércia Térmica:</strong> O sexo não é um bônus, é o Aditivo de Viscosidade. Sem o calor da intimidade bruta, as engrenagens começam a trabalhar "a seco". Um motor que roda frio acumula borra.</p><div class="nota-veredito">Veredito: Se você permite que o motor esfrie por orgulho, você não tem um projeto de vida, tem uma sucata.</div>`,
+                autopsia: `<h3>O CONFLITO COMO DIAGNÓSTICO</h3><p>O conflito é uma ferramenta de diagnóstico essencial: revela onde as estruturas estão cansadas. A maioria luta para proteger um ego ferido — uma reação primitiva que sequestra a razão.</p><p><strong>5.1 O Intervalo de Resposta:</strong> É o espaço entre o insulto que você ouve e a resposta que você dá. Alguém soberano não reage por impulso; ele escolhe como responder.</p>`
             }
-            historico = 'info';
-        }
+        };
 
-        function abrirSinopse(img, title, price, link) {
-            resetTelas(); linkAtual = link;
-            document.getElementById('target-img').src = img;
-            document.getElementById('target-title').innerText = title;
-            document.getElementById('target-price').innerText = price;
-            document.getElementById('view-sinopse').style.display = 'block';
+        function reset() {
+            document.querySelectorAll('.view-section').forEach(s => s.style.display = 'none');
             document.getElementById('btn-voltar').style.display = 'block';
-            ativarMenu('sinopse'); historico = 'sinopse';
+            document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+            fecharLeitura();
         }
 
-        function resetTelas() { ['view-home', 'view-galeria', 'view-sinopse', 'view-info-extra', 'btn-voltar'].forEach(id => { const el = document.getElementById(id); if(el) el.style.display = 'none'; }); }
-        function ativarMenu(id) { document.querySelectorAll('nav a').forEach(a => a.classList.remove('active')); const alvo = document.getElementById('nav-' + id); if(alvo) alvo.classList.add('active'); }
-        function abrirSinopseDefault() { const d = hardware.e[0]; abrirSinopse(d.img, d.title, d.price, d.link); }
-        function checkout() { if(linkAtual) window.open(linkAtual, '_blank'); }
-        function voltarFluxo() { if (historico === 'sinopse' || historico === 'info') irTitulos(); else irHome(); }
+        function irHome() {
+            reset();
+            document.getElementById('view-home').style.display = 'flex';
+            document.getElementById('btn-voltar').style.display = 'none';
+            document.getElementById('nav-home').classList.add('active');
+        }
+
+        function irTitulos() {
+            reset();
+            const grid = document.getElementById('grid-main');
+            grid.innerHTML = db.ebooks.map(e => `
+                <div class="card-flutuante" onclick="window.open('${e.link}', '_blank')">
+                    <img src="${e.img}">
+                    <p style="color:var(--gold); font-weight:700; margin-top:10px;">${e.t}</p>
+                    <p style="font-size:1.2rem; font-weight:700;">${e.p}</p>
+                </div>
+            `).join('');
+            document.getElementById('view-titulos').style.display = 'block';
+            document.getElementById('nav-ebook').classList.add('active');
+        }
+
+        function abrirDegustacao() {
+            reset();
+            document.getElementById('view-degustacao').style.display = 'block';
+            document.getElementById('nav-degustacao').classList.add('active');
+        }
+
+        function carregarTexto(id) {
+            const container = document.getElementById('leitura-container');
+            document.getElementById('texto-alvo').innerHTML = db.textos[id];
+            container.style.display = 'block';
+            container.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function fecharLeitura() {
+            document.getElementById('leitura-container').style.display = 'none';
+        }
+
+        function voltar() { irHome(); }
     </script>
 </body>
 </html>

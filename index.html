@@ -58,17 +58,45 @@
         .item-espec span { display: block; font-size: 0.65rem; text-transform: uppercase; color: #888; font-weight: 700; margin-bottom: 5px; }
         .item-espec p { font-size: 0.9rem; font-weight: 600; color: #222; }
 
-        .final-footer { background: #000; color: #666; font-size: 0.65rem; text-align: center; padding: 30px 0; border-top: 1px solid #111; text-transform: uppercase; letter-spacing: 2px; width: 100%; z-index: 1000; }
+        /* VIEW AVALIAÇÕES (FUNDIDA) */
+        .layout-avaliacoes { 
+            display: grid; 
+            grid-template-columns: 1fr 360px 1fr; 
+            gap: 20px; 
+            align-items: start; 
+            margin-top: 15px; /* Redução de 80% do respiro */
+        }
+        .col-depoimentos { display: flex; flex-direction: column; gap: 20px; }
+        
+        .card-review { 
+            background: rgba(255,255,255,0.05); 
+            padding: 20px; 
+            border-left: 3px solid var(--gold); 
+            border-radius: 4px;
+            font-size: 0.85rem;
+        }
+        .card-review .stars { color: var(--gold); margin-bottom: 10px; }
+        .card-review .text { font-style: italic; margin-bottom: 10px; color: #ccc; }
+        .card-review .author-info { border-top: 1px solid #333; padding-top: 10px; font-size: 0.75rem; }
 
-        /* ESTILOS DE SUPORTE PARA OS CARDS (ISOLADOS) */
-        .eval-container { max-width: 1200px; margin: 0 auto; padding: 20px; }
-        .eval-grid { display: grid; grid-template-columns: 1fr 380px 1fr; gap: 20px; align-items: start; }
-        .eval-card-white { background: #fff; color: #000; padding: 20px; border-radius: 4px; border-left: 5px solid var(--gold); margin-bottom: 20px; font-size: 0.9rem; }
-        .eval-card-white b { display: block; margin-top: 10px; font-size: 0.7rem; text-transform: uppercase; color: #555; }
-        .eval-form-white { background: #fff; color: #000; padding: 25px; border: 2px solid var(--gold); border-radius: 4px; }
-        .eval-form-white h2 { font-family: 'Playfair Display', serif; margin-bottom: 20px; text-align: center; }
-        .eval-form-white input, .eval-form-white textarea { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ddd; font-family: 'Inter', sans-serif; }
-        .eval-form-white button { width: 100%; background: var(--gold); border: none; padding: 15px; font-weight: 700; cursor: pointer; text-transform: uppercase; }
+        .form-review-container { 
+            background: #fff; 
+            padding: 25px; 
+            border-radius: 4px; 
+            color: #000;
+        }
+        .form-review-container h3 { font-family: 'Playfair Display', serif; margin-bottom: 15px; text-align: center; font-size: 1.2rem; }
+        .input-group { margin-bottom: 10px; }
+        .input-group label { display: block; font-size: 0.7rem; font-weight: 700; margin-bottom: 4px; }
+        .input-group input, .input-group textarea, .input-group select { 
+            width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; font-size: 0.8rem;
+        }
+        .btn-enviar { 
+            width: 100%; background: var(--gold); color: #000; border: none; padding: 12px; 
+            font-weight: 700; cursor: pointer; text-transform: uppercase; font-size: 0.75rem;
+        }
+
+        .final-footer { background: #000; color: #666; font-size: 0.65rem; text-align: center; padding: 30px 0; border-top: 1px solid #111; text-transform: uppercase; letter-spacing: 2px; width: 100%; z-index: 1000; }
     </style>
 </head>
 <body>
@@ -143,12 +171,14 @@
             </div>
         </section>
 
-        <section id="view-info-extra" class="view-info-extra" style="display:none; color:#fff; padding:60px 5%;">
+        <section id="view-info-extra" class="view-info-extra" style="display:none; color:#fff; padding:20px 5%;">
             <div id="content-info"></div>
         </section>
     </main>
 
-    <div class="final-footer">© 2026 Portal Pleno | O Código</div>
+    <div class="final-footer">
+        © 2026 Portal Pleno | O Código
+    </div>
 
     <script>
         const hardware = {
@@ -170,50 +200,29 @@
             ]
         };
 
+        const staticReviews = [
+            {id: 1, text: "Descubra Você mudou completamente minha perspectiva.", author: "Maria Silva", email: "maria.silva@ficticio.com", book: "Descubra Você", rating: 5},
+            {id: 2, text: "A Autópsia da Personalidade foi transformadora.", author: "João Santos", email: "joao.santos@ficticio.com", book: "Autópsia", rating: 5},
+            {id: 3, text: "Engenharia da Colisão trouxe ferramentas práticas.", author: "Ana Costa", email: "ana.costa@ficticio.com", book: "Engenharia", rating: 5},
+            {id: 4, text: "Júlio Bhrósz entrega profundidade incomparável.", author: "Carlos Oliveira", email: "carlos.o@ficticio.com", book: "O Código", rating: 5},
+            {id: 5, text: "Excelente combinação de teoria e prática.", author: "Fernanda Lima", email: "fernanda.l@ficticio.com", book: "Descubra Você", rating: 5},
+            {id: 6, text: "Qualidade técnica absurda. Recomendo.", author: "Roberto Martins", email: "roberto.m@ficticio.com", book: "Engenharia", rating: 5}
+        ];
+
         let iE = 0, iA = 0, linkAtual = '', historico = 'home';
-        setInterval(() => { 
-            iE = (iE + 1) % hardware.e.length; 
-            const imgE = document.getElementById('loop-e');
-            if(imgE) imgE.src = hardware.e[iE].img;
-        }, 3000);
-        setInterval(() => { 
-            iA = (iA + 1) % hardware.a.length; 
-            const imgA = document.getElementById('loop-a');
-            if(imgA) imgA.src = hardware.a[iA].img;
-        }, 3000);
-
-        function ativarMenu(id) {
-            document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
-            const alvo = document.getElementById('nav-' + id);
-            if(alvo) alvo.classList.add('active');
-        }
-
-        function irHome() { resetTelas(); document.getElementById('view-home').style.display = 'flex'; ativarMenu('home'); historico = 'home'; }
         
-        function irTitulos() {
-            resetTelas();
-            const grid = document.getElementById('render-grid');
-            grid.innerHTML = [...hardware.e, ...hardware.a].map(item => `
-                <div class="card-flutuante" onclick="abrirSinopse('${item.img}', '${item.title}', '${item.price}', '${item.link}')">
-                    <img src="${item.img}"><div style="color:var(--gold); margin-top:10px;">★★★★★</div>
-                </div>`).join('');
-            document.getElementById('view-galeria').style.display = 'block';
-            document.getElementById('btn-voltar').style.display = 'block';
-            ativarMenu('ebook');
-            historico = 'titulos';
-        }
+        setInterval(() => { iE = (iE + 1) % hardware.e.length; if(document.getElementById('loop-e')) document.getElementById('loop-e').src = hardware.e[iE].img; }, 3000);
+        setInterval(() => { iA = (iA + 1) % hardware.a.length; if(document.getElementById('loop-a')) document.getElementById('loop-a').src = hardware.a[iA].img; }, 3000);
 
-        function abrirSinopse(img, title, price, link) {
-            resetTelas();
-            linkAtual = link;
-            document.getElementById('target-img').src = img;
-            document.getElementById('target-title').innerText = title;
-            document.getElementById('target-price').innerText = price;
-            document.getElementById('view-sinopse').style.display = 'block';
-            document.getElementById('btn-voltar').style.display = 'block';
-            ativarMenu('sinopse');
-            historico = 'sinopse';
-        }
+        function resetTelas() { ['view-home', 'view-galeria', 'view-sinopse', 'view-info-extra', 'btn-voltar'].forEach(id => { const el = document.getElementById(id); if(el) el.style.display = 'none'; }); window.scrollTo(0,0); }
+        function ativarMenu(id) { document.querySelectorAll('nav a').forEach(a => a.classList.remove('active')); const alvo = document.getElementById('nav-' + id); if(alvo) alvo.classList.add('active'); }
+        function irHome() { resetTelas(); document.getElementById('view-home').style.display = 'flex'; ativarMenu('home'); historico = 'home'; }
+        function irTitulos() { resetTelas(); const grid = document.getElementById('render-grid'); grid.innerHTML = [...hardware.e, ...hardware.a].map(item => `<div class="card-flutuante" onclick="abrirSinopse('${item.img}', '${item.title}', '${item.price}', '${item.link}')"><img src="${item.img}"><div style="color:var(--gold); margin-top:10px;">★★★★★</div></div>`).join(''); document.getElementById('view-galeria').style.display = 'block'; document.getElementById('btn-voltar').style.display = 'block'; ativarMenu('ebook'); historico = 'titulos'; }
+        
+        function abrirSinopse(img, title, price, link) { resetTelas(); linkAtual = link; document.getElementById('target-img').src = img; document.getElementById('target-title').innerText = title; document.getElementById('target-price').innerText = price; document.getElementById('view-sinopse').style.display = 'block'; document.getElementById('btn-voltar').style.display = 'block'; ativarMenu('sinopse'); historico = 'sinopse'; }
+        function abrirSinopseDefault() { const d = hardware.e[0]; abrirSinopse(d.img, d.title, d.price, d.link); }
+        function checkout() { if(linkAtual) window.open(linkAtual, '_blank'); }
+        function voltarFluxo() { if (historico === 'sinopse' || historico === 'info') irTitulos(); else irHome(); }
 
         function abrirInfo(tipo) {
             resetTelas();
@@ -223,41 +232,40 @@
             ativarMenu(tipo);
 
             if(tipo === 'avaliacoes') {
+                const colEsq = staticReviews.slice(0,3).map(r => renderReview(r)).join('');
+                const colDir = staticReviews.slice(3,6).map(r => renderReview(r)).join('');
+                
                 container.innerHTML = `
-                <div class="eval-container">
-                    <h1 style="text-align:center; font-family:'Playfair Display'; margin-bottom:40px; font-size:2.5rem;">Compartilhe Experiência</h1>
-                    <div class="eval-grid">
-                        <div class="eval-col">
-                            <div class="eval-card-white">"Engineering of Collision is a technical masterpiece. Pure logic."<b>JOHN DOE | NYC</b></div>
-                            <div class="eval-card-white">"Soberania mental em cada linha. O Veredicto é certeiro."<b>M. SILVA | BR</b></div>
+                    <div class="layout-avaliacoes">
+                        <div class="col-depoimentos">${colEsq}</div>
+                        <div class="form-review-container">
+                            <h3>CONTE SUA EXPERIENCIA</h3>
+                            <div class="input-group"><label>Nome</label><input type="text" placeholder="Seu nome"></div>
+                            <div class="input-group"><label>E-mail</label><input type="email" placeholder="seu@email.com"></div>
+                            <div class="input-group"><label>Texto (Máx 100 char)</label><textarea maxlength="100" rows="3"></textarea></div>
+                            <div class="input-group"><label>Estrelas</label><select><option>★★★★★</option><option>★★★★</option></select></div>
+                            <button class="btn-enviar" onclick="this.innerText='ENVIADO'">Enviar Avaliação</button>
                         </div>
-                        <div class="eval-form-white">
-                            <h2>Sua Análise</h2>
-                            <input type="text" placeholder="Identificação">
-                            <textarea placeholder="Máximo 100 caracteres"></textarea>
-                            <button onclick="alert('Dados processados.')">ENVIAR DADOS</button>
-                        </div>
-                        <div class="eval-col">
-                            <div class="eval-card-white">"Une analyse anatomique de la personnalité. Impressionnant."<b>PIERRE L. | PARIS</b></div>
-                            <div class="eval-card-white">"Veredicto Final: 10/10"<b>R. OLIVEIRA | BR</b></div>
-                        </div>
+                        <div class="col-depoimentos">${colDir}</div>
                     </div>
-                </div>`;
-            } else if(tipo === 'degustacao') container.innerHTML = `<h2>Degustação</h2><p>Amostras técnicas em breve.</p>`;
-            else if(tipo === 'sobre') container.innerHTML = `<h2>Sobre</h2><p>Portal Pleno: O Código.</p>`;
+                `;
+            } else {
+                container.innerHTML = `<h2 style="font-family:'Playfair Display'; text-align:center; font-size:2rem; color:var(--gold);">${tipo.toUpperCase()}</h2><p style="text-align:center; margin-top:20px;">Processamento técnico em breve...</p>`;
+            }
             historico = 'info';
         }
 
-        function abrirSinopseDefault() { const d = hardware.e[0]; abrirSinopse(d.img, d.title, d.price, d.link); }
-        function checkout() { if(linkAtual) window.open(linkAtual, '_blank'); }
-        function voltarFluxo() { if (historico === 'sinopse' || historico === 'info') irTitulos(); else irHome(); }
-        
-        function resetTelas() { 
-            ['view-home', 'view-galeria', 'view-sinopse', 'view-info-extra', 'btn-voltar'].forEach(id => {
-                const el = document.getElementById(id);
-                if(el) el.style.display = 'none';
-            });
-            window.scrollTo(0,0); 
+        function renderReview(r) {
+            return `
+                <div class="card-review">
+                    <div class="stars">${'★'.repeat(r.rating)}</div>
+                    <div class="text">"${r.text}"</div>
+                    <div class="author-info">
+                        <strong>${r.author}</strong><br>
+                        ${r.email} | ${r.book}
+                    </div>
+                </div>
+            `;
         }
     </script>
 </body>

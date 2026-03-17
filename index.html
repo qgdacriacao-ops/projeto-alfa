@@ -6,12 +6,43 @@
     <title>Portal Pleno | O Código</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <style>
-        :root { --gold: #FFD700; --bg-black: #000; --white: #fff; --bg-light: #f9f9f9; --red-btn: #d30000; --glow: rgba(255, 215, 0, 0.8); }
+        /* ============================================================
+           VARIÁVEIS GLOBAIS
+        ============================================================ */
+        :root {
+            --gold: #FFD700;
+            --bg-black: #000;
+            --white: #fff;
+            --bg-light: #f9f9f9;
+            --red-btn: #d30000;
+            --glow: rgba(255, 215, 0, 0.6);
+            /* Variáveis do HTML 02 (Arsenal/Sinopse) */
+            --red: #CC0000;
+            --ice-gray: #E8EAEB;
+            --chumbo: #2C2C2C;
+            --text-dark: #1A1A1A;
+            --border: #D1D1D1;
+        }
+
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body, html { min-height: 100%; background-color: var(--bg-black); font-family: 'Inter', sans-serif; overflow-x: hidden; display: flex; flex-direction: column; }
 
-        /* HEADER */
-        header { background: #000; padding: 0 5%; display: flex; justify-content: space-between; align-items: center; position: fixed; top: 0; width: 100%; z-index: 2000; height: 85px; border-bottom: 2px solid var(--gold); }
+        /* ============================================================
+           HEADER
+        ============================================================ */
+        header {
+            background: #000;
+            padding: 0 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 2000;
+            height: 85px;
+            border-bottom: 2px solid var(--gold);
+        }
         .logo { display: flex; align-items: center; gap: 15px; color: #fff; font-weight: 700; text-transform: uppercase; font-size: 0.9rem; }
         .logo img { height: 60px; }
         nav ul { list-style: none; display: flex; gap: 20px; align-items: center; }
@@ -19,23 +50,27 @@
         nav a:hover, nav a.active { color: var(--gold); border-bottom: 2px solid var(--gold); }
         #btn-voltar { display: none; color: var(--gold); border: 1px solid var(--gold); padding: 5px 12px; font-size: 0.6rem; font-weight: 700; text-transform: uppercase; cursor: pointer; }
 
-        /* FUNDO DINÂMICO */
-        #bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: url('capa.png') no-repeat center center; background-size: cover; z-index: 1; filter: brightness(0.4); transition: opacity 0.5s ease; }
+        /* ============================================================
+           FUNDO
+        ============================================================ */
+        #bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: url('capa.png') no-repeat center center; background-size: cover; z-index: 1; filter: brightness(0.4); }
         main { flex: 1; position: relative; z-index: 10; padding-top: 85px; }
 
-        /* VIEW HOME */
+        /* ============================================================
+           VIEW HOME
+        ============================================================ */
         .view-home { min-height: calc(100vh - 85px); display: flex; justify-content: space-between; align-items: center; padding: 0 5%; }
-        .column-box { width: 280px; text-align: center; }
+        .column-box { width: 280px; text-align: center; transition: 0.4s; }
+        .column-box:hover { transform: scale(1.02); filter: drop-shadow(0 0 15px var(--glow)); }
         .column-box p { color: var(--gold); letter-spacing: 5px; font-size: 0.7rem; margin-bottom: 0; padding-bottom: 5px; font-weight: 700; }
-        .display-box { width: 100%; height: 420px; cursor: pointer; transition: 0.5s; }
-        .display-box img { width: 100%; height: 100%; object-fit: contain; transition: 0.4s; }
-        /* Efeito Aceso no Hover das Colunas */
-        .display-box:hover img { filter: drop-shadow(0 0 25px var(--glow)) brightness(1.2); transform: scale(1.02); }
-        
+        .display-box { width: 100%; height: 420px; cursor: pointer; }
+        .display-box img { width: 100%; height: 100%; object-fit: contain; }
         .hero-center h1 { color: #fff; font-size: 2.2rem; text-transform: uppercase; line-height: 1.2; text-align: center; }
         .line-hero { width: 85%; height: 5px; background: var(--gold); margin: 15px auto; box-shadow: 0 0 20px var(--gold); }
 
-        /* VIEW GALERIA */
+        /* ============================================================
+           VIEW GALERIA
+        ============================================================ */
         .view-galeria { display: none; background: #000; min-height: 100vh; padding: 60px 5% 100px; }
         .grid-produtos { display: grid; grid-template-columns: repeat(4, 1fr); gap: 60px; max-width: 1400px; margin: 0 auto; }
         .card-flutuante { text-align: center; cursor: pointer; transition: transform 0.4s ease; animation: flutuar 4s ease-in-out infinite; }
@@ -43,29 +78,230 @@
         .card-flutuante:hover img { transform: scale(1.05); filter: drop-shadow(0 0 20px var(--glow)); }
         @keyframes flutuar { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
 
-        /* VIEW SINOPSE */
-        .view-sinopse { display: none; background: #fff; min-height: 100vh; padding: 60px 0 80px; color: #000; }
-        .container-trindade { max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: 280px 1fr 280px; gap: 40px; padding: 0 40px; }
-        .col-mockup img { width: 100%; filter: drop-shadow(0 15px 30px rgba(0,0,0,0.2)); }
-        .col-texto h1 { font-family: 'Playfair Display', serif; font-size: 3rem; color: #000; line-height: 1.1; margin-bottom: 10px; }
-        .author { color: var(--gold); font-weight: 700; text-transform: uppercase; margin-bottom: 30px; font-size: 0.9rem; letter-spacing: 2px; }
-        .section-title { font-weight: 700; text-transform: uppercase; font-size: 0.8rem; margin: 40px 0 20px; color: #000; border-bottom: 3px solid var(--gold); display: inline-block; padding-bottom: 5px; }
-        .description p { margin-bottom: 20px; font-size: 1.05rem; line-height: 1.7; color: #333; text-align: justify; }
-        .buy-card { background: #1a1a1a; border-radius: 8px; padding: 30px 20px; color: #fff; text-align: center; }
-        .price-label { font-size: 0.6rem; text-transform: uppercase; color: var(--gold); letter-spacing: 2px; margin-bottom: 10px; }
-        .price-value { font-size: 2.2rem; font-weight: 700; margin-bottom: 30px; }
-        .btn-gold { background: var(--gold); color: #000; width: 100%; border: none; padding: 15px; font-weight: 900; cursor: pointer; margin-bottom: 15px; text-transform: uppercase; font-size: 0.7rem; }
-        .btn-red { background: var(--red-btn); color: #fff; width: 100%; border: none; padding: 12px; font-weight: 700; cursor: pointer; margin-bottom: 10px; text-transform: uppercase; font-size: 0.65rem; }
-        .grid-tecnico-espec { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; border-top: 1px solid #eee; padding-top: 20px; }
-        .item-espec span { display: block; font-size: 0.65rem; text-transform: uppercase; color: #888; font-weight: 700; margin-bottom: 5px; }
-        .item-espec p { font-size: 0.9rem; font-weight: 600; color: #222; }
+        /* ============================================================
+           VIEW SINOPSE — ESTÉTICA INTEGRAL DO HTML 02 (ARSENAL)
+           Mockups com fundo transparente (object-fit: contain + sem box-shadow colorido)
+        ============================================================ */
+        .view-sinopse {
+            display: none;
+            background-color: var(--ice-gray);
+            min-height: 100vh;
+            padding: 0 0 80px;
+            color: var(--text-dark);
+        }
 
-        /* VIEW COMPARTILHADO */
-        .view-info-extra { display:none; color:#fff; padding:20px 5%; background: #000; min-height: 100vh; }
+        /* Grid principal 3 colunas — idêntico ao HTML 02 */
+        .container-trindade {
+            max-width: 1350px;
+            margin: 60px auto 20px;
+            display: grid;
+            grid-template-columns: 340px 1fr 210px;
+            gap: 45px;
+            padding: 0 5%;
+        }
+
+        /* Coluna da capa/mockup — fundo transparente */
+        .col-mockup {
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+        }
+        .col-mockup img {
+            width: 100%;
+            object-fit: contain;
+            /* fundo transparente: sem background, sem box-shadow sólido */
+            filter: drop-shadow(0 8px 20px rgba(0,0,0,0.18));
+            border-radius: 2px;
+            background: transparent;
+        }
+
+        /* Coluna de conteúdo/texto */
+        .col-texto h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            margin-bottom: 5px;
+            color: #000;
+            line-height: 1.1;
+        }
+        .author {
+            font-size: 1.1rem;
+            color: #8B6B00;
+            margin-bottom: 40px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .description {
+            line-height: 2.1;
+            font-size: 1.15rem;
+            color: #333;
+            text-align: justify;
+        }
+        .description p { margin-bottom: 25px; }
+        .section-title {
+            font-size: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #666;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 10px;
+            margin: 40px 0 15px;
+            display: block;
+        }
+
+        /* Coluna de compra — card escuro idêntico ao HTML 02 */
+        .col-compra {
+            position: sticky;
+            top: 105px;
+            height: fit-content;
+        }
+        .buy-card {
+            background: var(--chumbo);
+            padding: 25px 15px;
+            border-radius: 4px;
+            color: var(--white);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        .price-label {
+            font-size: 0.65rem;
+            color: var(--gold);
+            text-transform: uppercase;
+            margin-bottom: 5px;
+            display: block;
+            text-align: center;
+            font-weight: 700;
+        }
+        .price-value {
+            font-size: 1.9rem;
+            font-weight: 700;
+            margin-bottom: 25px;
+            text-align: center;
+            color: var(--white);
+        }
+        .btn-group { display: flex; flex-direction: column; gap: 10px; }
+        .btn-gold {
+            display: block;
+            background: var(--gold);
+            color: #000;
+            text-align: center;
+            padding: 14px 5px;
+            font-weight: 800;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            border-radius: 4px;
+            transition: 0.3s;
+            border: 1px solid var(--gold);
+            width: 100%;
+            cursor: pointer;
+        }
+        .btn-gold:hover { opacity: 0.88; }
+        .btn-red {
+            display: block;
+            background: var(--red);
+            color: var(--white);
+            text-align: center;
+            padding: 12px 5px;
+            font-weight: 700;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            border-radius: 4px;
+            transition: 0.3s;
+            border: none;
+            width: 100%;
+            cursor: pointer;
+        }
+        .btn-red:hover { opacity: 0.88; }
+
+        /* Seção de detalhes do produto — idêntica ao HTML 02 */
+        .product-details {
+            max-width: 1350px;
+            margin: 0 auto 80px;
+            padding: 40px 5% 0;
+            border-top: 1px solid var(--border);
+            display: grid;
+            grid-template-columns: 340px 1fr;
+            gap: 45px;
+        }
+        .details-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: #000;
+        }
+        .details-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+        .detail-item { border-bottom: 1px solid #D1D1D1; padding-bottom: 15px; }
+        .detail-label { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: #666; display: block; margin-bottom: 5px; }
+        .detail-value { font-size: 1rem; color: #000; font-weight: 400; }
+
+        /* ============================================================
+           VIEW SOBRE — ESTÉTICA LIMPA COM TEXTO CONFIGURADO
+        ============================================================ */
+        .sobre-clean {
+            position: relative;
+            min-height: 100vh;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 80px 5%;
+            color: #fff;
+            text-align: center;
+        }
+        .sobre-fundo {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: url('banner.png') no-repeat center center;
+            background-size: cover;
+            filter: brightness(0.4) blur(5px);
+            z-index: -1;
+        }
+        .sobre-content { max-width: 900px; z-index: 10; }
+        .sobre-content h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            color: var(--gold);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            line-height: 1.15;
+        }
+        .sobre-content .quote {
+            font-size: 1.4rem;
+            font-style: italic;
+            margin-bottom: 50px;
+            font-weight: 700;
+            line-height: 1.4;
+            border-left: 4px solid var(--gold);
+            padding-left: 20px;
+            text-align: left;
+        }
+        .sobre-content p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            margin-bottom: 30px;
+            text-align: justify;
+            color: #efefef;
+        }
+        .sobre-content h2 {
+            margin-top: 60px;
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            letter-spacing: 3px;
+            color: var(--gold);
+        }
+
+        /* ============================================================
+           VIEW COMPARTILHADO
+        ============================================================ */
         .layout-avaliacoes { display: grid; grid-template-columns: 1fr 360px 1fr; gap: 20px; align-items: start; margin-top: 15px; }
         .col-depoimentos { display: flex; flex-direction: column; gap: 20px; }
         .card-review { background: rgba(255,255,255,0.05); padding: 20px; border-left: 3px solid var(--gold); border-radius: 4px; font-size: 0.85rem; }
-        .card-review .rating-text { color: var(--gold); font-weight: 700; text-transform: uppercase; font-size: 0.7rem; margin-bottom: 10px; }
+        .card-review .stars { color: var(--gold); margin-bottom: 10px; font-weight: 700; text-transform: uppercase; font-size: 0.7rem; }
         .card-review .text { font-style: italic; margin-bottom: 10px; color: #ccc; }
         .card-review .author-info { border-top: 1px solid #333; padding-top: 10px; font-size: 0.75rem; }
 
@@ -76,7 +312,21 @@
         .input-group input, .input-group textarea, .input-group select { width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; font-size: 0.8rem; }
         .btn-enviar { width: 100%; background: var(--gold); color: #000; border: none; padding: 12px; font-weight: 700; cursor: pointer; text-transform: uppercase; font-size: 0.75rem; }
 
-        .final-footer { background: #000; color: #666; font-size: 0.65rem; text-align: center; padding: 30px 0; border-top: 1px solid #111; text-transform: uppercase; letter-spacing: 2px; width: 100%; z-index: 1000; }
+        /* ============================================================
+           FOOTER
+        ============================================================ */
+        .final-footer {
+            background: #000;
+            color: #666;
+            font-size: 0.65rem;
+            text-align: center;
+            padding: 30px 0;
+            border-top: 1px solid #111;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            width: 100%;
+            z-index: 1000;
+        }
     </style>
 </head>
 <body>
@@ -89,7 +339,6 @@
                 <li><a id="nav-ebook" onclick="irTitulos()">Ebook</a></li>
                 <li><a id="nav-sinopse" onclick="abrirSinopseDefault()">Sinopse</a></li>
                 <li><a id="nav-compartilhado" onclick="abrirInfo('compartilhado')">Compartilhado</a></li>
-                <li><a id="nav-degustacao" onclick="abrirInfo('degustacao')">Degustação</a></li>
                 <li><a id="nav-sobre" onclick="abrirInfo('sobre')">Sobre</a></li>
                 <li><div id="btn-voltar" onclick="voltarFluxo()">Voltar</div></li>
             </ul>
@@ -97,6 +346,7 @@
     </header>
 
     <main>
+        <!-- VIEW HOME -->
         <div id="view-home" class="view-home">
             <div class="column-box">
                 <p>EBOOKS</p>
@@ -113,50 +363,87 @@
             </div>
         </div>
 
+        <!-- VIEW GALERIA -->
         <section id="view-galeria" class="view-galeria">
             <div class="grid-produtos" id="render-grid"></div>
         </section>
 
+        <!-- VIEW SINOPSE — ESTÉTICA DO HTML 02 (ARSENAL) -->
         <section id="view-sinopse" class="view-sinopse">
             <div class="container-trindade">
-                <div class="col-mockup"><img id="target-img" src=""></div>
+                <!-- Mockup com fundo transparente -->
+                <div class="col-mockup">
+                    <img id="target-img" src="">
+                </div>
+
+                <!-- Conteúdo textual -->
                 <div class="col-texto">
                     <h1 id="target-title">TÍTULO DO ATIVO</h1>
-                    <p class="author">POR JÚLIO BHRÓSZ</p>
+                    <p class="author">Por Júlio Bhrósz</p>
                     <div class="description">
                         <p>Análise técnica da soberania intelectual e engenharia de comportamento humano aplicada ao alto desempenho mental.</p>
-                        <h3 class="section-title">SINOPSE</h3>
+                        <span class="section-title">Sinopse</span>
                         <p id="target-desc">O Código não é apenas um manual, é a autópsia da personalidade necessária para a quebra de padrões limitantes.</p>
                     </div>
                 </div>
+
+                <!-- Card de conversão -->
                 <div class="col-compra">
                     <div class="buy-card">
-                        <p class="price-label">POR APENAS</p>
-                        <p class="price-value" id="target-price">R$ 0,00</p>
-                        <button class="btn-gold" onclick="checkout()">Adicionar ao Carrinho</button>
-                        <button class="btn-red" onclick="checkout()">Compre Agora</button>
-                        <button class="btn-red" onclick="checkout()">Combo Ebooks</button>
-                        <button class="btn-red">Combo Audiobook</button>
-                        <button class="btn-red">Combo Completo</button>
+                        <span class="price-label">Por Apenas</span>
+                        <div class="price-value" id="target-price">R$ 0,00</div>
+                        <div class="btn-group">
+                            <button class="btn-gold" onclick="checkout()">Adicionar ao Carrinho</button>
+                            <button class="btn-red" onclick="checkout()">Compre Agora</button>
+                            <button class="btn-red" onclick="checkout()">Combo Ebooks</button>
+                            <button class="btn-red">Combo Audiobook</button>
+                            <button class="btn-red">Combo Completo</button>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div style="max-width: 1300px; margin: 60px auto 0; padding: 0 40px;">
-                <h3 class="section-title">Detalhes do Ativo</h3>
-                <div class="grid-tecnico-espec">
-                    <div class="item-espec"><span>Editora</span><p>Portal Pleno O Código</p></div>
-                    <div class="item-espec"><span>Data de Lançamento</span><p>Março de 2026</p></div>
-                    <div class="item-espec"><span>Idioma</span><p>Português / Inglês</p></div>
+
+            <!-- Detalhes do produto — modelo Kobo do HTML 02 -->
+            <div class="product-details">
+                <div class="details-title">Detalhes do eBook</div>
+                <div class="details-grid">
+                    <div class="detail-item">
+                        <span class="detail-label">Editora</span>
+                        <span class="detail-value">Portal Pleno O Código</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Data de Lançamento</span>
+                        <span class="detail-value">Março de 2026</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">ISBN</span>
+                        <span class="detail-value">978-X-XXXX-XXXX-X</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Idioma</span>
+                        <span class="detail-value">Português</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Opções de Download</span>
+                        <span class="detail-value">EPUB 3 (Fluxo Adaptável)</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Hardware Compatível</span>
+                        <span class="detail-value">iOS, Android, e-Readers, Desktop</span>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section id="view-info-extra" class="view-info-extra">
+        <!-- VIEW INFO EXTRA (Compartilhado / Sobre) -->
+        <section id="view-info-extra" class="view-info-extra" style="display:none;">
             <div id="content-info"></div>
         </section>
     </main>
 
-    <div class="final-footer">© 2026 Portal Pleno | O Código</div>
+    <div class="final-footer">
+        © 2003 Portal Pleno | O Código
+    </div>
 
     <script>
         const hardware = {
@@ -179,59 +466,66 @@
         };
 
         const staticReviews = [
-            {id: 1, text: "La méthode est très efficace pour comprendre soi-même.", author: "Jean Pierre", email: "j.pierre@fictif.fr", book: "Descubra Você", rating: "BOM"},
-            {id: 2, text: "The architectural depth of this work is mind-blowing.", author: "Sarah Connor", email: "s.connor@fictional.com", book: "THE SUPREMACY CODE", rating: "EXCELENTE"},
-            {id: 3, text: "A literal autopsy of human limitations. Essential.", author: "Mark Spector", email: "m.spector@fictional.com", book: "THE SUPREMACY CODE", rating: "EXCELENTE"},
+            {id: 1, text: "La découverte de soi a complètement changé ma perspective.", author: "Maria Silva", email: "maria.s@ficticio.com", book: "Descubra Você", rating: "BOM"},
+            {id: 2, text: "The architectural depth of this code is supreme.", author: "John Wick", email: "j.wick@status.com", book: "THE SUPREMACY CODE", rating: "EXCELENTE"},
+            {id: 3, text: "Unmatched technical sovereignty.", author: "Sarah Connor", email: "s.connor@sky.com", book: "THE SUPREMACY CODE", rating: "EXCELENTE"},
             {id: 4, text: "Júlio Bhrósz entrega profundidade incomparável.", author: "Carlos Oliveira", email: "carlos.o@ficticio.com", book: "O Código", rating: "ÓTIMO"},
-            {id: 5, text: "Excelente combinação de teoria e prática.", author: "Fernanda Lima", email: "fernanda.l@ficticio.com", book: "Descubra Você", rating: "ÓTIMO"},
-            {id: 6, text: "Qualidade técnica absurda. Recomendo.", author: "Roberto Martins", email: "roberto.m@ficticio.com", book: "Engenharia", rating: "ÓTIMO"}
+            {id: 5, text: "Excelente combinação de teoria e prática.", author: "Fernanda Lima", email: "fernanda.l@ficticio.com", book: "Engenharia", rating: "ÓTIMO"},
+            {id: 6, text: "Qualidade técnica absoluta.", author: "Roberto Martins", email: "roberto.m@ficticio.com", book: "Autópsia", rating: "ÓTIMO"}
         ];
 
         let iE = 0, iA = 0, linkAtual = '', historico = 'home';
-        
+
         setInterval(() => { iE = (iE + 1) % hardware.e.length; if(document.getElementById('loop-e')) document.getElementById('loop-e').src = hardware.e[iE].img; }, 3000);
         setInterval(() => { iA = (iA + 1) % hardware.a.length; if(document.getElementById('loop-a')) document.getElementById('loop-a').src = hardware.a[iA].img; }, 3000);
 
-        function resetTelas() { 
-            ['view-home', 'view-galeria', 'view-sinopse', 'view-info-extra', 'btn-voltar'].forEach(id => { 
-                const el = document.getElementById(id); if(el) el.style.display = 'none'; 
-            }); 
-            window.scrollTo(0,0); 
+        function resetTelas() {
+            ['view-home', 'view-galeria', 'view-sinopse', 'view-info-extra', 'btn-voltar'].forEach(id => {
+                const el = document.getElementById(id);
+                if(el) el.style.display = 'none';
+            });
+            document.getElementById('bg').style.display = 'none';
+            window.scrollTo(0,0);
         }
 
-        function toggleBackground(show) {
-            document.getElementById('bg').style.opacity = show ? "1" : "0";
+        function ativarMenu(id) {
+            document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+            const alvo = document.getElementById('nav-' + id);
+            if(alvo) alvo.classList.add('active');
         }
 
-        function ativarMenu(id) { 
-            document.querySelectorAll('nav a').forEach(a => a.classList.remove('active')); 
-            const alvo = document.getElementById('nav-' + id); if(alvo) alvo.classList.add('active'); 
+        function irHome() {
+            resetTelas();
+            document.getElementById('view-home').style.display = 'flex';
+            document.getElementById('bg').style.display = 'block';
+            ativarMenu('home');
+            historico = 'home';
         }
 
-        function irHome() { resetTelas(); toggleBackground(true); document.getElementById('view-home').style.display = 'flex'; ativarMenu('home'); historico = 'home'; }
-        
-        function irTitulos() { 
-            resetTelas(); 
-            toggleBackground(false);
-            const grid = document.getElementById('render-grid'); 
-            grid.innerHTML = [...hardware.e, ...hardware.a].map(item => `<div class="card-flutuante" onclick="abrirSinopse('${item.img}', '${item.title}', '${item.price}', '${item.link}')"><img src="${item.img}"><div style="color:var(--gold); margin-top:10px;">EXCELENTE</div></div>`).join(''); 
-            document.getElementById('view-galeria').style.display = 'block'; 
-            document.getElementById('btn-voltar').style.display = 'block'; 
-            ativarMenu('ebook'); 
-            historico = 'titulos'; 
+        function irTitulos() {
+            resetTelas();
+            const grid = document.getElementById('render-grid');
+            grid.innerHTML = [...hardware.e, ...hardware.a].map(item => `
+                <div class="card-flutuante" onclick="abrirSinopse('${item.img}', '${item.title}', '${item.price}', '${item.link}')">
+                    <img src="${item.img}">
+                    <div style="color:var(--gold); margin-top:10px;">★★★★★</div>
+                </div>`).join('');
+            document.getElementById('view-galeria').style.display = 'block';
+            document.getElementById('btn-voltar').style.display = 'block';
+            ativarMenu('ebook');
+            historico = 'titulos';
         }
-        
-        function abrirSinopse(img, title, price, link) { 
-            resetTelas(); 
-            toggleBackground(false);
-            linkAtual = link; 
-            document.getElementById('target-img').src = img; 
-            document.getElementById('target-title').innerText = title; 
-            document.getElementById('target-price').innerText = price; 
-            document.getElementById('view-sinopse').style.display = 'block'; 
-            document.getElementById('btn-voltar').style.display = 'block'; 
-            ativarMenu('sinopse'); 
-            historico = 'sinopse'; 
+
+        function abrirSinopse(img, title, price, link) {
+            resetTelas();
+            linkAtual = link;
+            document.getElementById('target-img').src = img;
+            document.getElementById('target-title').innerText = title;
+            document.getElementById('target-price').innerText = price;
+            document.getElementById('view-sinopse').style.display = 'block';
+            document.getElementById('btn-voltar').style.display = 'block';
+            ativarMenu('sinopse');
+            historico = 'sinopse';
         }
 
         function abrirSinopseDefault() { const d = hardware.e[0]; abrirSinopse(d.img, d.title, d.price, d.link); }
@@ -240,7 +534,6 @@
 
         function abrirInfo(tipo) {
             resetTelas();
-            toggleBackground(false);
             const container = document.getElementById('content-info');
             document.getElementById('view-info-extra').style.display = 'block';
             document.getElementById('btn-voltar').style.display = 'block';
@@ -249,47 +542,34 @@
             if(tipo === 'compartilhado') {
                 const colEsq = staticReviews.slice(0,3).map(r => renderReview(r)).join('');
                 const colDir = staticReviews.slice(3,6).map(r => renderReview(r)).join('');
-                
+                container.innerHTML = `<div style="color:#fff; padding:20px 5%;"><div class="layout-avaliacoes"><div class="col-depoimentos">${colEsq}</div><div class="form-review-container"><h3>CONTE-NOS SUA EXPERIENCIA</h3><div class="input-group"><label>Nome</label><input type="text" placeholder="Seu nome"></div><div class="input-group"><label>E-mail</label><input type="email" placeholder="seu@email.com"></div><div class="input-group"><label>Texto (Máx 100 char)</label><textarea maxlength="100" rows="3"></textarea></div><div class="input-group"><label>Nota</label><select><option>EXCELENTE</option><option>ÓTIMO</option><option>MUITO BOM</option><option>BOM</option><option>REGULAR</option></select></div><button class="btn-enviar" onclick="this.innerText='ENVIADO'">Enviar</button></div><div class="col-depoimentos">${colDir}</div></div></div>`;
+
+            } else if(tipo === 'sobre') {
                 container.innerHTML = `
-                    <div class="layout-avaliacoes">
-                        <div class="col-depoimentos">${colEsq}</div>
-                        <div class="form-review-container">
-                            <h3>CONTE-NOS SUA EXPERIÊNCIA</h3>
-                            <div class="input-group"><label>Nome</label><input type="text" placeholder="Seu nome"></div>
-                            <div class="input-group"><label>E-mail</label><input type="email" placeholder="seu@email.com"></div>
-                            <div class="input-group"><label>Texto (Máx 100 char)</label><textarea maxlength="100" rows="3"></textarea></div>
-                            <div class="input-group"><label>Nota</label>
-                                <select>
-                                    <option>REGULAR</option>
-                                    <option>BOM</option>
-                                    <option>MUITO BOM</option>
-                                    <option>ÓTIMO</option>
-                                    <option selected>EXCELENTE</option>
-                                </select>
-                            </div>
-                            <button class="btn-enviar" onclick="this.innerText='ENVIADO'">Enviar Compartilhamento</button>
+                    <div class="sobre-clean">
+                        <div class="sobre-fundo"></div>
+                        <div class="sobre-content">
+                            <h1>A Ciência por trás da Engenharia da Colisão</h1>
+                            <div class="quote">"Relações não fracassam por falta de amor, mas por falha de hardware. Onde não há soberania individual, o sistema colapsa."</div>
+                            <p>Muitos buscam respostas no misticismo quando o assunto é o campo afetivo. No entanto, a obra de <strong>Júlio Bhrósz</strong> nasce de uma premissa diferente: o empirismo. Não se trata de teorias abstratas, mas de uma análise técnica das relações humanas, baseada em anos de observação dos padrões de escolha e comportamento individual.</p>
+                            <p>Se você já sentiu a dor de uma conexão interrompida, entenda que o sofrimento é o sintoma de um sistema descalibrado. O Portal Pleno oferece o código necessário para realizar sua própria autópsia e identificar falhas de processamento emocional.</p>
+                            <p>Nossa filosofia é humanitária: acreditamos que a verdadeira dignidade só é alcançada quando o indivíduo deixa de ser passageiro de suas emoções para se tornar o <strong>Operador</strong> de sua própria realidade.</p>
+                            <h2>Júlio Bhrósz</h2>
                         </div>
-                        <div class="col-depoimentos">${colDir}</div>
-                    </div>
-                `;
+                    </div>`;
+
             } else {
-                container.innerHTML = `<h2 style="font-family:'Playfair Display'; text-align:center; font-size:2rem; color:var(--gold);">${tipo.toUpperCase()}</h2><p style="text-align:center; margin-top:20px;">Processamento técnico em breve...</p>`;
+                container.innerHTML = `<div style="color:#fff; padding:20px 5%;"><h2 style="font-family:'Playfair Display'; text-align:center; font-size:2rem; color:var(--gold);">${tipo.toUpperCase()}</h2><p style="text-align:center; margin-top:20px;">Processamento técnico em breve...</p></div>`;
             }
             historico = 'info';
         }
 
         function renderReview(r) {
-            return `
-                <div class="card-review">
-                    <div class="rating-text">${r.rating}</div>
-                    <div class="text">"${r.text}"</div>
-                    <div class="author-info">
-                        <strong>${r.author}</strong><br>
-                        ${r.email} | ${r.book}
-                    </div>
-                </div>
-            `;
+            return `<div class="card-review"><div class="stars">${r.rating}</div><div class="text">"${r.text}"</div><div class="author-info"><strong>${r.author}</strong><br>${r.email} | ${r.book}</div></div>`;
         }
+
+        // Inicializa na home
+        irHome();
     </script>
 </body>
 </html>

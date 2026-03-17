@@ -331,14 +331,25 @@
             z-index: -1;
         }
         .contato-content {
-            max-width: 900px;
+            max-width: 1000px;
             z-index: 10;
-            text-align: center;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             flex: 1;
+        }
+        .contato-content h1 {
+            width: 100%;
+            text-align: center;
+        }
+        .contato-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            width: 100%;
+            max-width: 900px;
+            align-items: start;
         }
         .contato-content h1 {
             font-family: 'Inter', sans-serif;
@@ -427,6 +438,56 @@
             background: #e6c200;
             transform: translateY(-2px);
             box-shadow: 0 10px 25px rgba(255, 215, 0, 0.3);
+        }
+        .email-accounts {
+            background: rgba(255, 215, 0, 0.05);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 12px;
+            padding: 30px 40px;
+            margin-bottom: 40px;
+            width: 100%;
+            max-width: 600px;
+        }
+        .email-accounts h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            color: var(--gold);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-align: center;
+        }
+        .email-item {
+            background: var(--chumbo);
+            padding: 12px 15px;
+            border-radius: 6px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-left: 3px solid var(--gold);
+        }
+        .email-item:hover {
+            background: rgba(44, 44, 44, 0.8);
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.2);
+        }
+        .email-item:last-child {
+            margin-bottom: 0;
+        }
+        .email-label {
+            display: block;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--gold);
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+        .email-address {
+            display: block;
+            font-size: 0.9rem;
+            color: #e0e0e0;
+            font-family: 'Courier New', monospace;
         }
         .redes-sociais-footer {
             display: flex;
@@ -703,7 +764,7 @@
                 {img: 'ebook03.png', title: 'The Supremacy Code', price: '$ 11,99', link: 'https://pay.kiwify.com/NcdLsaN', desc: 'O código supremo da excelência pessoal. Este manual técnico desvenda os padrões de comportamento dos indivíduos de alto desempenho e oferece o blueprint para sua própria transformação.'},
                 {img: 'ebook04.png', title: 'Descubra Você', price: 'R$ 29,50', link: 'https://pay.kiwify.com.br/P8UTO6L', desc: 'O Amor Extraordinário Começa Onde Você Menos Espera: Dentro de Você. Muitas vezes, passamos a vida como caçadores do parceiro ideal, acreditando que a felicidade é um destino externo que depende de outra pessoa. Mas e se a peça que falta para relacionamentos verdadeiramente plenos estivesse guardada na sua própria essência?'},
                 {img: 'ebook05.png', title: 'Engenharia da Colisão', price: 'R$ 39,00', link: 'https://pay.kiwify.com.br/oRZAlbz', desc: 'Relações não fracassam por falta de amor, mas por falha de hardware. Este ebook oferece uma análise técnica das relações humanas, baseada em anos de observação dos padrões de escolha e comportamento individual.'},
-                {img: 'ebook06.png', title: 'Autópsia da Personalidade', price: 'R$ 59,90', link: 'https://pay.kiwify.com.br/sD4nqRO', desc: 'O Código não é apenas um manual, é a autópsia da personalidade necessária para a quebra de padrões limitantes. Descubra como realizar sua própria autópsia e identificar falhas de processamento emocional.'}
+                {img: 'ebook06.png', title: 'Autópsia da Personalidade', price: 'R$ 59,90', link: 'https://pay.kiwify.com.br/sD4nqRO', desc: 'O que resta quando as camadas de condicionamento social, traumas herdados e migalhas emocionais são removidas com precisão cirúrgica? Autópsia da Personalidade não é apenas uma leitura; é um protocolo de engenharia reversa sobre quem você acredita ser. Nesta obra, o Autor, Júlio Bhrósz utiliza o bisturi da neurociência aplicada e da Engenharia de Colisão para expor a anatomia das suas falhas invisíveis. É o fim da era do conforto que aprisiona. Aqui, o Hardware (seu cérebro) e o Software (suas crenças) são analisados sob uma luz técnica e visceral, eliminando de vez as migalhas da psique para que a sua verdadeira Supremacia Mental seja restaurada. Você está pronto para encarar o que está por baixo da pele? Identifique os parasitas emocionais que drenam sua energia. Desintegre as narrativas de autossabotagem. Instale um novo sistema de Soberania e controle total sobre seus sentimentos.'}
             ],
             a: [
                 {img: 'audio01.png', title: 'Know Yourself First', price: '$ 13.95', link: 'https://pay.kiwify.com/ilgU4Kg', desc: 'Descubra os fundamentos da autossuperação através de uma análise técnica da personalidade. Este audiobook oferece ferramentas práticas para identificar seus padrões limitantes e iniciar a jornada rumo à soberania intelectual.'},
@@ -711,7 +772,7 @@
                 {img: 'audio03.png', title: 'The Supremacy Code', price: '$ 15.95', link: 'https://pay.kiwify.com/TGmTjRA', desc: 'O código supremo da excelência pessoal. Este manual técnico desvenda os padrões de comportamento dos indivíduos de alto desempenho e oferece o blueprint para sua própria transformação.'},
                 {img: 'audio04.png', title: 'Descubra Você', price: 'R$ 37,50', link: 'https://pay.kiwify.com.br/lDiv2Do', desc: 'O Amor Extraordinário Começa Onde Você Menos Espera: Dentro de Você. Muitas vezes, passamos a vida como caçadores do parceiro ideal, acreditando que a felicidade é um destino externo que depende de outra pessoa. Mas e se a peça que falta para relacionamentos verdadeiramente plenos estivesse guardada na sua própria essência?'},
                 {img: 'audio05.png', title: 'Engenharia da Colisão', price: 'R$ 39,50', link: 'https://pay.kiwify.com.br/PmaKDGV', desc: 'Relações não fracassam por falta de amor, mas por falha de hardware. Este audiobook oferece uma análise técnica das relações humanas, baseada em anos de observação dos padrões de escolha e comportamento individual.'},
-                {img: 'audio06.png', title: 'Autópsia da Personalidade', price: 'R$ 57,50', link: 'https://pay.kiwify.com.br/nJO91Ia', desc: 'O Código não é apenas um manual, é a autópsia da personalidade necessária para a quebra de padrões limitantes. Descubra como realizar sua própria autópsia e identificar falhas de processamento emocional.'}
+                {img: 'audio06.png', title: 'Autópsia da Personalidade', price: 'R$ 57,50', link: 'https://pay.kiwify.com.br/nJO91Ia', desc: 'O que resta quando as camadas de condicionamento social, traumas herdados e migalhas emocionais são removidas com precisão cirúrgica? Autópsia da Personalidade não é apenas uma leitura; é um protocolo de engenharia reversa sobre quem você acredita ser. Nesta obra, o Autor, Júlio Bhrósz utiliza o bisturi da neurociência aplicada e da Engenharia de Colisão para expor a anatomia das suas falhas invisíveis. É o fim da era do conforto que aprisiona. Aqui, o Hardware (seu cérebro) e o Software (suas crenças) são analisados sob uma luz técnica e visceral, eliminando de vez as migalhas da psique para que a sua verdadeira Supremacia Mental seja restaurada. Você está pronto para encarar o que está por baixo da pele? Identifique os parasitas emocionais que drenam sua energia. Desintegre as narrativas de autossabotagem. Instale um novo sistema de Soberania e controle total sobre seus sentimentos.'}
             ]
         };
 
@@ -815,21 +876,46 @@
                         <div class="contato-fundo"></div>
                         <div class="contato-content">
                             <h1>Entre em Contato</h1>
-                            <div class="feedback-form">
-                                <h2>Envie seu Feedback</h2>
-                                <div class="form-group">
-                                    <label>Nome</label>
-                                    <input type="text" placeholder="Seu nome completo">
+                            <div class="contato-wrapper">
+                                <div class="feedback-form">
+                                    <h2>Envie seu Feedback</h2>
+                                    <div class="form-group">
+                                        <label>Nome</label>
+                                        <input type="text" placeholder="Seu nome completo">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>E-mail</label>
+                                        <input type="email" placeholder="seu@email.com">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Mensagem</label>
+                                        <textarea placeholder="Sua mensagem aqui..."></textarea>
+                                    </div>
+                                    <button class="btn-feedback" onclick="this.innerText='ENVIADO COM SUCESSO'">Enviar Feedback</button>
                                 </div>
-                                <div class="form-group">
-                                    <label>E-mail</label>
-                                    <input type="email" placeholder="seu@email.com">
+                                <div class="email-accounts">
+                                    <h3>Contas Oficiais</h3>
+                                    <div class="email-item" onclick="copiarEmail('diretoria@portalpleno.com.br')">
+                                        <span class="email-label">Diretoria</span>
+                                        <span class="email-address">diretoria@portalpleno.com.br</span>
+                                    </div>
+                                    <div class="email-item" onclick="copiarEmail('comercial@portalpleno.com.br')">
+                                        <span class="email-label">Comercial</span>
+                                        <span class="email-address">comercial@portalpleno.com.br</span>
+                                    </div>
+                                    <div class="email-item" onclick="copiarEmail('contato@portalpleno.com.br')">
+                                        <span class="email-label">Contato</span>
+                                        <span class="email-address">contato@portalpleno.com.br</span>
+                                    </div>
+                                    <div class="email-item" onclick="copiarEmail('suportebook@portalpleno.com.br')">
+                                        <span class="email-label">Suporte</span>
+                                        <span class="email-address">suportebook@portalpleno.com.br</span>
+                                    </div>
+                                    <div class="email-item" onclick="copiarEmail('ppsite@portalpleno.com.br')">
+                                        <span class="email-label">Website</span>
+                                        <span class="email-address">ppsite@portalpleno.com.br</span>
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <label>Mensagem</label>
-                                    <textarea placeholder="Sua mensagem aqui..."></textarea>
-                                </div>
-                                <button class="btn-feedback" onclick="this.innerText='ENVIADO COM SUCESSO'">Enviar Feedback</button>
                             </div>
                             <div class="redes-sociais-footer">
                                 <a href="https://www.facebook.com/profile.php?id=61586564312195" target="_blank"><img src="facebook.png" alt="Facebook" class="social-icon-img" title="Facebook"></a>
@@ -848,7 +934,7 @@
                             <h1>Suporte</h1>
                             <div class="suporte-card">
                                 <div class="suporte-label">E-mail</div>
-                                <div class="suporte-email"><a href="mailto:suportebookbh@gmail.com">suportebookbh@gmail.com</a></div>
+                                <div class="suporte-email"><a href="javascript:void(0)" onclick="copiarEmail('suportebook@portalpleno.com.br')">suportebook@portalpleno.com.br</a></div>
                             </div>
                             <div class="suporte-desc">
                                 <p>Estamos aqui para ajudar!</p>
@@ -864,6 +950,14 @@
 
         function renderReview(r) {
             return `<div class="card-review"><div class="stars">${r.rating}</div><div class="text">"${r.text}"</div><div class="author-info"><strong>${r.author}</strong><br>${r.email} | ${r.book}</div></div>`;
+        }
+
+        function copiarEmail(email) {
+            navigator.clipboard.writeText(email).then(() => {
+                alert('E-mail copiado para a area de transferencia: ' + email + '\n\nVoce pode colar em qualquer cliente de e-mail (Gmail, Outlook, etc.)');
+            }).catch(() => {
+                alert('E-mail: ' + email + '\n\nCopie este endereco e envie um e-mail para nos!');
+            });
         }
 
         // Inicializa na home

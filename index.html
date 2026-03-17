@@ -24,7 +24,8 @@
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body, html { min-height: 100%; background-color: var(--bg-black); font-family: 'Inter', sans-serif; overflow-x: hidden; display: flex; flex-direction: column; }
+        body, html { min-height: 100%; background-color: var(--bg-black); font-family: 'Inter', sans-serif; overflow-x: hidden !important; display: flex; flex-direction: column; width: 100%; }
+        main { width: 100%; overflow-x: hidden !important; }
 
         /* ============================================================
            HEADER
@@ -58,7 +59,7 @@
         /* ============================================================
            VIEW HOME
         ============================================================ */
-        .view-home { min-height: calc(100vh - 85px); display: flex; justify-content: space-between; align-items: center; padding: 0 5%; }
+        .view-home { min-height: calc(100vh - 85px); display: flex; justify-content: space-between; align-items: center; padding: 0 5%; width: 100%; overflow-x: hidden; }
         .column-box { width: 280px; text-align: center; transition: 0.4s; }
         .column-box:hover { transform: scale(1.02); filter: drop-shadow(0 0 15px var(--glow)); }
         .column-box p { color: var(--gold); letter-spacing: 5px; font-size: 0.7rem; margin-bottom: 0; padding-bottom: 5px; font-weight: 700; }
@@ -70,7 +71,7 @@
         /* ============================================================
            VIEW GALERIA
         ============================================================ */
-        .view-galeria { display: none; background: #000; min-height: 100vh; padding: 60px 5% 100px; }
+        .view-galeria { display: none; background: #000; min-height: 100vh; padding: 60px 5% 100px; width: 100%; overflow-x: hidden; }
         .grid-produtos { display: grid; grid-template-columns: repeat(4, 1fr); gap: 60px; max-width: 1400px; margin: 0 auto; }
         .card-flutuante { text-align: center; cursor: pointer; transition: transform 0.4s ease; animation: flutuar 4s ease-in-out infinite; }
         .card-flutuante img { width: 100%; height: 350px; object-fit: contain; transition: 0.4s; }
@@ -95,6 +96,8 @@
             grid-template-columns: 340px 1fr 210px;
             gap: 45px;
             padding: 0 5%;
+            width: 100%;
+            overflow-x: hidden;
         }
 
         .col-mockup {
@@ -488,6 +491,8 @@
             font-size: 0.9rem;
             color: #e0e0e0;
             font-family: 'Courier New', monospace;
+            word-break: break-word;
+            overflow-wrap: break-word;
         }
         .redes-sociais-footer {
             display: flex;

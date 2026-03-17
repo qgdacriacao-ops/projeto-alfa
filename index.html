@@ -16,7 +16,6 @@
             --bg-light: #f9f9f9;
             --red-btn: #d30000;
             --glow: rgba(255, 215, 0, 0.6);
-            /* Variáveis do HTML 02 (Arsenal/Sinopse) */
             --red: #CC0000;
             --ice-gray: #E8EAEB;
             --chumbo: #2C2C2C;
@@ -45,7 +44,7 @@
         }
         .logo { display: flex; align-items: center; gap: 15px; color: #fff; font-weight: 700; text-transform: uppercase; font-size: 0.9rem; }
         .logo img { height: 60px; }
-        nav ul { list-style: none; display: flex; gap: 20px; align-items: center; }
+        nav ul { list-style: none; display: flex; gap: 20px; align-items: center; flex-wrap: wrap; }
         nav a { text-decoration: none; color: #fff; font-size: 0.65rem; font-weight: 700; text-transform: uppercase; cursor: pointer; transition: 0.3s; border-bottom: 2px solid transparent; padding-bottom: 5px; }
         nav a:hover, nav a.active { color: var(--gold); border-bottom: 2px solid var(--gold); }
         #btn-voltar { display: none; color: var(--gold); border: 1px solid var(--gold); padding: 5px 12px; font-size: 0.6rem; font-weight: 700; text-transform: uppercase; cursor: pointer; }
@@ -80,7 +79,6 @@
 
         /* ============================================================
            VIEW SINOPSE — ESTÉTICA INTEGRAL DO HTML 02 (ARSENAL)
-           Mockups com fundo transparente (object-fit: contain + sem box-shadow colorido)
         ============================================================ */
         .view-sinopse {
             display: none;
@@ -90,7 +88,6 @@
             color: var(--text-dark);
         }
 
-        /* Grid principal 3 colunas — idêntico ao HTML 02 */
         .container-trindade {
             max-width: 1350px;
             margin: 60px auto 20px;
@@ -100,7 +97,6 @@
             padding: 0 5%;
         }
 
-        /* Coluna da capa/mockup — fundo transparente */
         .col-mockup {
             display: flex;
             align-items: flex-start;
@@ -109,13 +105,11 @@
         .col-mockup img {
             width: 100%;
             object-fit: contain;
-            /* fundo transparente: sem background, sem box-shadow sólido */
             filter: drop-shadow(0 8px 20px rgba(0,0,0,0.18));
             border-radius: 2px;
             background: transparent;
         }
 
-        /* Coluna de conteúdo/texto */
         .col-texto h1 {
             font-family: 'Playfair Display', serif;
             font-size: 3rem;
@@ -150,7 +144,6 @@
             display: block;
         }
 
-        /* Coluna de compra — card escuro idêntico ao HTML 02 */
         .col-compra {
             position: sticky;
             top: 105px;
@@ -213,7 +206,6 @@
         }
         .btn-red:hover { opacity: 0.88; }
 
-        /* Seção de detalhes do produto — idêntica ao HTML 02 */
         .product-details {
             max-width: 1350px;
             margin: 0 auto 80px;
@@ -239,7 +231,7 @@
         .detail-value { font-size: 1rem; color: #000; font-weight: 400; }
 
         /* ============================================================
-           VIEW SOBRE — ESTÉTICA LIMPA COM TEXTO CONFIGURADO
+           VIEW SOBRE — ESTÉTICA APRIMORADA COM FUNDO VISUAL
         ============================================================ */
         .sobre-clean {
             position: relative;
@@ -248,7 +240,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: flex-start;
+            justify-content: center;
             padding: 80px 5%;
             color: #fff;
             text-align: center;
@@ -258,52 +250,295 @@
             top: 0; left: 0; width: 100%; height: 100%;
             background: url('banner.png') no-repeat center center;
             background-size: cover;
-            filter: brightness(0.4) blur(5px);
+            filter: brightness(0.35) blur(8px);
             z-index: -1;
         }
-        .sobre-content { max-width: 900px; z-index: 10; }
+        .sobre-content {
+            max-width: 900px;
+            z-index: 10;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            padding: 60px 50px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+        }
         .sobre-content h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 3.5rem;
-            color: var(--gold);
-            margin-bottom: 20px;
+            font-family: 'Inter', sans-serif;
+            font-size: 1.8rem;
+            color: #ffffff;
+            margin-bottom: 30px;
             text-transform: uppercase;
             line-height: 1.15;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+            letter-spacing: 1px;
+            font-weight: 700;
         }
         .sobre-content .quote {
             font-size: 1.4rem;
             font-style: italic;
             margin-bottom: 50px;
             font-weight: 700;
-            line-height: 1.4;
+            line-height: 1.5;
             border-left: 4px solid var(--gold);
-            padding-left: 20px;
+            padding-left: 25px;
             text-align: left;
+            color: #ffd700;
+            background: rgba(255, 215, 0, 0.05);
+            padding: 25px;
+            border-radius: 8px;
         }
         .sobre-content p {
-            font-size: 1.2rem;
-            line-height: 1.8;
-            margin-bottom: 30px;
+            font-size: 1.1rem;
+            line-height: 1.9;
+            margin-bottom: 25px;
             text-align: justify;
-            color: #efefef;
+            color: #e0e0e0;
+        }
+        .sobre-content p strong {
+            color: var(--gold);
+            font-weight: 700;
         }
         .sobre-content h2 {
-            margin-top: 60px;
+            margin-top: 50px;
             font-family: 'Playfair Display', serif;
             font-size: 2.5rem;
             letter-spacing: 3px;
             color: var(--gold);
+            text-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+        }
+
+        /* ============================================================
+           VIEW CONTATO — REDES SOCIAIS COM ÍCONES
+        ============================================================ */
+        .contato-clean {
+            position: relative;
+            min-height: 100vh;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 80px 5% 100px;
+            color: #fff;
+        }
+        .contato-fundo {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: url('banner.png') no-repeat center center;
+            background-size: cover;
+            filter: brightness(0.5);
+            z-index: -1;
+        }
+        .contato-content {
+            max-width: 900px;
+            z-index: 10;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            flex: 1;
+        }
+        .contato-content h1 {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.8rem;
+            color: #ffffff;
+            margin-bottom: 50px;
+            text-transform: uppercase;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+            letter-spacing: 1px;
+            font-weight: 700;
+        }
+        .feedback-form {
+            background: var(--chumbo);
+            backdrop-filter: blur(10px);
+            padding: 40px 50px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            max-width: 600px;
+            margin-bottom: 60px;
+            width: 100%;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+        .feedback-form h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--gold);
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        .form-group label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+        }
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.05);
+            color: #fff;
+            font-size: 0.9rem;
+            font-family: 'Inter', sans-serif;
+            transition: 0.3s;
+        }
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: #666;
+        }
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--gold);
+            background: rgba(255, 215, 0, 0.08);
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+        }
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        .btn-feedback {
+            width: 100%;
+            padding: 14px;
+            background: var(--gold);
+            color: #000;
+            border: none;
+            border-radius: 6px;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: 0.3s;
+            letter-spacing: 1px;
+        }
+        .btn-feedback:hover {
+            background: #e6c200;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(255, 215, 0, 0.3);
+        }
+        .redes-sociais-footer {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: auto;
+            padding-top: 40px;
+            border-top: 1px solid rgba(255, 215, 0, 0.2);
+        }
+        .social-icon-small {
+            font-size: 1.8rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            opacity: 0.7;
+        }
+        .social-icon-small:hover {
+            opacity: 1;
+            transform: scale(1.2);
+            filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.5));
+        }
+
+        /* ============================================================
+           VIEW SUPORTE — INFORMAÇÕES DE CONTATO
+        ============================================================ */
+        .suporte-clean {
+            position: relative;
+            min-height: 100vh;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 80px 5%;
+            color: #fff;
+        }
+        .suporte-fundo {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: url('banner.png') no-repeat center center;
+            background-size: cover;
+            filter: brightness(0.5);
+            z-index: -1;
+        }
+        .suporte-content {
+            max-width: 280px;
+            z-index: 10;
+            background: var(--chumbo);
+            backdrop-filter: blur(10px);
+            padding: 24px 20px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            text-align: center;
+        }
+        .suporte-content h1 {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.8rem;
+            color: #ffffff;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+            letter-spacing: 1px;
+            font-weight: 700;
+        }
+        .suporte-card {
+            background: rgba(255, 215, 0, 0.05);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 8px;
+            padding: 16px 12px;
+            margin-bottom: 12px;
+        }
+        .suporte-label {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--gold);
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+        .suporte-email {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #fff;
+            word-break: break-all;
+            font-family: 'Courier New', monospace;
+        }
+        .suporte-email a {
+            color: var(--gold);
+            text-decoration: none;
+            transition: 0.3s;
+        }
+        .suporte-email a:hover {
+            text-decoration: underline;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+        .suporte-desc {
+            font-size: 0.75rem;
+            line-height: 1.5;
+            color: #e0e0e0;
+            margin-top: 12px;
         }
 
         /* ============================================================
            VIEW COMPARTILHADO
         ============================================================ */
-        .layout-avaliacoes { display: grid; grid-template-columns: 1fr 360px 1fr; gap: 20px; align-items: start; margin-top: 15px; }
+        .layout-avaliacoes { display: grid; grid-template-columns: 1fr 324px 1fr; gap: 20px; align-items: start; margin-top: 15px; }
         .col-depoimentos { display: flex; flex-direction: column; gap: 20px; }
-        .card-review { background: rgba(255,255,255,0.05); padding: 20px; border-left: 3px solid var(--gold); border-radius: 4px; font-size: 0.85rem; }
+        .card-review { background: var(--chumbo); padding: 20px; border-left: 3px solid var(--gold); border-radius: 4px; font-size: 0.85rem; }
         .card-review .stars { color: var(--gold); margin-bottom: 10px; font-weight: 700; text-transform: uppercase; font-size: 0.7rem; }
-        .card-review .text { font-style: italic; margin-bottom: 10px; color: #ccc; }
-        .card-review .author-info { border-top: 1px solid #333; padding-top: 10px; font-size: 0.75rem; }
+        .card-review .text { font-style: italic; margin-bottom: 10px; color: #e0e0e0; }
+        .card-review .author-info { border-top: 1px solid #555; padding-top: 10px; font-size: 0.75rem; color: #aaa; }
 
         .form-review-container { background: #fff; padding: 25px; border-radius: 4px; color: #000; }
         .form-review-container h3 { font-family: 'Playfair Display', serif; margin-bottom: 15px; text-align: center; font-size: 1.2rem; }
@@ -340,6 +575,8 @@
                 <li><a id="nav-sinopse" onclick="abrirSinopseDefault()">Sinopse</a></li>
                 <li><a id="nav-compartilhado" onclick="abrirInfo('compartilhado')">Compartilhado</a></li>
                 <li><a id="nav-sobre" onclick="abrirInfo('sobre')">Sobre</a></li>
+                <li><a id="nav-contato" onclick="abrirInfo('contato')">Contato</a></li>
+                <li><a id="nav-suporte" onclick="abrirInfo('suporte')">Suporte</a></li>
                 <li><div id="btn-voltar" onclick="voltarFluxo()">Voltar</div></li>
             </ul>
         </nav>
@@ -435,7 +672,7 @@
             </div>
         </section>
 
-        <!-- VIEW INFO EXTRA (Compartilhado / Sobre) -->
+        <!-- VIEW INFO EXTRA (Compartilhado / Sobre / Contato / Suporte) -->
         <section id="view-info-extra" class="view-info-extra" style="display:none;">
             <div id="content-info"></div>
         </section>
@@ -448,20 +685,20 @@
     <script>
         const hardware = {
             e: [
-                {img: 'ebook01.png', title: 'Know Yourself First', price: '$ 11.00', link: 'https://pay.kiwify.com/8S4FCE0'},
-                {img: 'ebook02.png', title: 'The Engineering of Collision', price: '$ 11,50', link: 'https://pay.kiwify.com/ZjtlaGh'},
-                {img: 'ebook03.png', title: 'The Supremacy Code', price: '$ 11,99', link: 'https://pay.kiwify.com/NcdLsaN'},
-                {img: 'ebook04.png', title: 'Descubra Você', price: 'R$ 29,50', link: 'https://pay.kiwify.com.br/P8UTO6L'},
-                {img: 'ebook05.png', title: 'Engenharia da Colisão', price: 'R$ 39,00', link: 'https://pay.kiwify.com.br/oRZAlbz'},
-                {img: 'ebook06.png', title: 'Autópsia da Personalidade', price: 'R$ 59,90', link: 'https://pay.kiwify.com.br/sD4nqRO'}
+                {img: 'ebook01.png', title: 'Know Yourself First', price: '$ 11.00', link: 'https://pay.kiwify.com/8S4FCE0', desc: 'Descubra os fundamentos da autossuperação através de uma análise técnica da personalidade. Este ebook oferece ferramentas práticas para identificar seus padrões limitantes e iniciar a jornada rumo à soberania intelectual.'},
+                {img: 'ebook02.png', title: 'The Engineering of Collision', price: '$ 11,50', link: 'https://pay.kiwify.com/ZjtlaGh', desc: 'Uma análise profunda sobre os mecanismos que causam o colapso de relacionamentos. Compreenda as falhas de hardware emocional e aprenda a recalibrar seus sistemas para conexões duradouras.'},
+                {img: 'ebook03.png', title: 'The Supremacy Code', price: '$ 11,99', link: 'https://pay.kiwify.com/NcdLsaN', desc: 'O código supremo da excelência pessoal. Este manual técnico desvenda os padrões de comportamento dos indivíduos de alto desempenho e oferece o blueprint para sua própria transformação.'},
+                {img: 'ebook04.png', title: 'Descubra Você', price: 'R$ 29,50', link: 'https://pay.kiwify.com.br/P8UTO6L', desc: 'O Amor Extraordinário Começa Onde Você Menos Espera: Dentro de Você. Muitas vezes, passamos a vida como caçadores do parceiro ideal, acreditando que a felicidade é um destino externo que depende de outra pessoa. Mas e se a peça que falta para relacionamentos verdadeiramente plenos estivesse guardada na sua própria essência?'},
+                {img: 'ebook05.png', title: 'Engenharia da Colisão', price: 'R$ 39,00', link: 'https://pay.kiwify.com.br/oRZAlbz', desc: 'Relações não fracassam por falta de amor, mas por falha de hardware. Este ebook oferece uma análise técnica das relações humanas, baseada em anos de observação dos padrões de escolha e comportamento individual.'},
+                {img: 'ebook06.png', title: 'Autópsia da Personalidade', price: 'R$ 59,90', link: 'https://pay.kiwify.com.br/sD4nqRO', desc: 'O Código não é apenas um manual, é a autópsia da personalidade necessária para a quebra de padrões limitantes. Descubra como realizar sua própria autópsia e identificar falhas de processamento emocional.'}
             ],
             a: [
-                {img: 'audio01.png', title: 'Know Yourself First', price: '$ 13.95', link: 'https://pay.kiwify.com/ilgU4Kg'},
-                {img: 'audio02.png', title: 'The Engineering of Collision', price: '$ 14.95', link: 'https://pay.kiwify.com/2LTHnl0'},
-                {img: 'audio03.png', title: 'The Supremacy Code', price: '$ 15.95', link: 'https://pay.kiwify.com/TGmTjRA'},
-                {img: 'audio04.png', title: 'Descubra Você', price: 'R$ 37,50', link: 'https://pay.kiwify.com.br/lDiv2Do'},
-                {img: 'audio05.png', title: 'Engenharia da Colisão', price: 'R$ 39,50', link: 'https://pay.kiwify.com.br/PmaKDGV'},
-                {img: 'audio06.png', title: 'Autópsia da Personalidade', price: 'R$ 57,50', link: 'https://pay.kiwify.com.br/nJO91Ia'}
+                {img: 'audio01.png', title: 'Know Yourself First', price: '$ 13.95', link: 'https://pay.kiwify.com/ilgU4Kg', desc: 'Descubra os fundamentos da autossuperação através de uma análise técnica da personalidade. Este audiobook oferece ferramentas práticas para identificar seus padrões limitantes e iniciar a jornada rumo à soberania intelectual.'},
+                {img: 'audio02.png', title: 'The Engineering of Collision', price: '$ 14.95', link: 'https://pay.kiwify.com/2LTHnl0', desc: 'Uma análise profunda sobre os mecanismos que causam o colapso de relacionamentos. Compreenda as falhas de hardware emocional e aprenda a recalibrar seus sistemas para conexões duradouras.'},
+                {img: 'audio03.png', title: 'The Supremacy Code', price: '$ 15.95', link: 'https://pay.kiwify.com/TGmTjRA', desc: 'O código supremo da excelência pessoal. Este manual técnico desvenda os padrões de comportamento dos indivíduos de alto desempenho e oferece o blueprint para sua própria transformação.'},
+                {img: 'audio04.png', title: 'Descubra Você', price: 'R$ 37,50', link: 'https://pay.kiwify.com.br/lDiv2Do', desc: 'O Amor Extraordinário Começa Onde Você Menos Espera: Dentro de Você. Muitas vezes, passamos a vida como caçadores do parceiro ideal, acreditando que a felicidade é um destino externo que depende de outra pessoa. Mas e se a peça que falta para relacionamentos verdadeiramente plenos estivesse guardada na sua própria essência?'},
+                {img: 'audio05.png', title: 'Engenharia da Colisão', price: 'R$ 39,50', link: 'https://pay.kiwify.com.br/PmaKDGV', desc: 'Relações não fracassam por falta de amor, mas por falha de hardware. Este audiobook oferece uma análise técnica das relações humanas, baseada em anos de observação dos padrões de escolha e comportamento individual.'},
+                {img: 'audio06.png', title: 'Autópsia da Personalidade', price: 'R$ 57,50', link: 'https://pay.kiwify.com.br/nJO91Ia', desc: 'O Código não é apenas um manual, é a autópsia da personalidade necessária para a quebra de padrões limitantes. Descubra como realizar sua própria autópsia e identificar falhas de processamento emocional.'}
             ]
         };
 
@@ -506,7 +743,7 @@
             resetTelas();
             const grid = document.getElementById('render-grid');
             grid.innerHTML = [...hardware.e, ...hardware.a].map(item => `
-                <div class="card-flutuante" onclick="abrirSinopse('${item.img}', '${item.title}', '${item.price}', '${item.link}')">
+                <div class="card-flutuante" onclick="abrirSinopse('${item.img}', '${item.title}', '${item.price}', '${item.link}', '${item.desc}')">
                     <img src="${item.img}">
                     <div style="color:var(--gold); margin-top:10px;">★★★★★</div>
                 </div>`).join('');
@@ -516,19 +753,20 @@
             historico = 'titulos';
         }
 
-        function abrirSinopse(img, title, price, link) {
+        function abrirSinopse(img, title, price, link, desc) {
             resetTelas();
             linkAtual = link;
             document.getElementById('target-img').src = img;
             document.getElementById('target-title').innerText = title;
             document.getElementById('target-price').innerText = price;
+            document.getElementById('target-desc').innerText = desc;
             document.getElementById('view-sinopse').style.display = 'block';
             document.getElementById('btn-voltar').style.display = 'block';
             ativarMenu('sinopse');
             historico = 'sinopse';
         }
 
-        function abrirSinopseDefault() { const d = hardware.e[0]; abrirSinopse(d.img, d.title, d.price, d.link); }
+        function abrirSinopseDefault() { const d = hardware.e[0]; abrirSinopse(d.img, d.title, d.price, d.link, d.desc); }
         function checkout() { if(linkAtual) window.open(linkAtual, '_blank'); }
         function voltarFluxo() { if (historico === 'sinopse' || historico === 'info') irTitulos(); else irHome(); }
 
@@ -555,6 +793,55 @@
                             <p>Se você já sentiu a dor de uma conexão interrompida, entenda que o sofrimento é o sintoma de um sistema descalibrado. O Portal Pleno oferece o código necessário para realizar sua própria autópsia e identificar falhas de processamento emocional.</p>
                             <p>Nossa filosofia é humanitária: acreditamos que a verdadeira dignidade só é alcançada quando o indivíduo deixa de ser passageiro de suas emoções para se tornar o <strong>Operador</strong> de sua própria realidade.</p>
                             <h2>Júlio Bhrósz</h2>
+                        </div>
+                    </div>`;
+
+            } else if(tipo === 'contato') {
+                container.innerHTML = `
+                    <div class="contato-clean">
+                        <div class="contato-fundo"></div>
+                        <div class="contato-content">
+                            <h1>Entre em Contato</h1>
+                            <div class="feedback-form">
+                                <h2>Envie seu Feedback</h2>
+                                <div class="form-group">
+                                    <label>Nome</label>
+                                    <input type="text" placeholder="Seu nome completo">
+                                </div>
+                                <div class="form-group">
+                                    <label>E-mail</label>
+                                    <input type="email" placeholder="seu@email.com">
+                                </div>
+                                <div class="form-group">
+                                    <label>Mensagem</label>
+                                    <textarea placeholder="Sua mensagem aqui..."></textarea>
+                                </div>
+                                <button class="btn-feedback" onclick="this.innerText='ENVIADO COM SUCESSO'">Enviar Feedback</button>
+                            </div>
+                            <div class="redes-sociais-footer">
+                                <div class="social-icon-small" title="Facebook">📘</div>
+                                <div class="social-icon-small" title="Instagram">📷</div>
+                                <div class="social-icon-small" title="TikTok">🎵</div>
+                                <div class="social-icon-small" title="X">𝕏</div>
+                                <div class="social-icon-small" title="YouTube">▶️</div>
+                                <div class="social-icon-small" title="WhatsApp">💬</div>
+                            </div>
+                        </div>
+                    </div>`;
+
+            } else if(tipo === 'suporte') {
+                container.innerHTML = `
+                    <div class="suporte-clean">
+                        <div class="suporte-fundo"></div>
+                        <div class="suporte-content">
+                            <h1>Suporte</h1>
+                            <div class="suporte-card">
+                                <div class="suporte-label">E-mail</div>
+                                <div class="suporte-email"><a href="mailto:suportebookbh@gmail.com">suportebookbh@gmail.com</a></div>
+                            </div>
+                            <div class="suporte-desc">
+                                <p>Estamos aqui para ajudar!</p>
+                            </div>
                         </div>
                     </div>`;
 

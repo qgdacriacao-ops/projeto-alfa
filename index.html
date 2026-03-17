@@ -59,13 +59,14 @@
         /* ============================================================
            VIEW HOME
         ============================================================ */
-        .view-home { min-height: calc(100vh - 85px); display: flex; justify-content: space-between; align-items: center; padding: 0 5%; width: 100%; overflow-x: hidden; }
-        .column-box { width: 280px; text-align: center; transition: 0.4s; }
+        .view-home { min-height: calc(100vh - 85px); display: flex; justify-content: space-between; align-items: center; padding: 0 5%; width: 100%; overflow-x: hidden; gap: 20px; }
+        .column-box { width: 280px; flex-shrink: 0; text-align: center; transition: 0.4s; }
         .column-box:hover { transform: scale(1.02); filter: drop-shadow(0 0 15px var(--glow)); }
         .column-box p { color: var(--gold); letter-spacing: 5px; font-size: 0.7rem; margin-bottom: 0; padding-bottom: 5px; font-weight: 700; }
         .display-box { width: 100%; height: 420px; cursor: pointer; }
         .display-box img { width: 100%; height: 100%; object-fit: contain; }
-        .hero-center h1 { color: #fff; font-size: 2.2rem; text-transform: uppercase; line-height: 1.2; text-align: center; }
+        .hero-center { flex: 1; min-width: 0; text-align: center; padding: 0 10px; }
+        .hero-center h1 { color: #fff; font-size: clamp(1.05rem, 4.5vw, 2.2rem); text-transform: uppercase; line-height: 1.25; text-align: center; word-break: break-word; }
         .line-hero { width: 85%; height: 5px; background: var(--gold); margin: 15px auto; box-shadow: 0 0 20px var(--gold); }
 
         /* ============================================================
@@ -93,7 +94,7 @@
             max-width: 1350px;
             margin: 60px auto 20px;
             display: grid;
-            grid-template-columns: 340px 1fr 210px;
+            grid-template-columns: 300px 1fr 220px;
             gap: 45px;
             padding: 0 5%;
             width: 100%;
@@ -107,6 +108,8 @@
         }
         .col-mockup img {
             width: 100%;
+            max-width: 100%;
+            height: auto;
             object-fit: contain;
             filter: drop-shadow(0 8px 20px rgba(0,0,0,0.18));
             border-radius: 2px;
@@ -115,10 +118,11 @@
 
         .col-texto h1 {
             font-family: 'Playfair Display', serif;
-            font-size: 3rem;
+            font-size: clamp(1.4rem, 3.5vw, 3rem);
             margin-bottom: 5px;
             color: #000;
             line-height: 1.1;
+            word-break: break-word;
         }
         .author {
             font-size: 1.1rem;
@@ -212,11 +216,11 @@
         .product-details {
             max-width: 1350px;
             margin: 0 auto 80px;
-            padding: 40px 5% 0;
+            padding: 40px 5% 30px;
             border-top: 1px solid var(--border);
-            display: grid;
-            grid-template-columns: 340px 1fr;
-            gap: 45px;
+        }
+        .product-details .details-title {
+            margin-bottom: 25px;
         }
         .details-title {
             font-size: 1.2rem;
@@ -644,6 +648,7 @@
 
         @media (max-width: 1024px) {
             .container-trindade { grid-template-columns: 1fr 1fr; gap: 20px; }
+            .col-compra { grid-column: 1 / -1; max-width: 360px; margin: 0 auto; width: 100%; position: static; }
             .contato-wrapper { grid-template-columns: 1fr; gap: 30px; }
             .layout-avaliacoes { grid-template-columns: 1fr; gap: 20px; }
         }
@@ -655,25 +660,27 @@
             nav ul { gap: 10px; }
             nav a { font-size: 0.55rem; }
             main { margin-top: 70px; }
-            .view-home { flex-direction: column; gap: 30px; padding: 40px 5%; }
-            .column-box { width: 100%; }
-            .display-box { width: 100%; height: 250px; }
-            .hero-center h1 { font-size: 1.8rem; }
+            .view-home { flex-direction: column; gap: 25px; padding: 40px 5%; justify-content: center; }
+            .column-box { width: 100%; max-width: 320px; flex-shrink: 1; }
+            .display-box { width: 100%; height: 220px; }
+            .hero-center { width: 100%; order: -1; padding: 0 5%; }
+            .hero-center h1 { font-size: clamp(1.1rem, 5.5vw, 1.8rem); }
             .grid-produtos { grid-template-columns: repeat(2, 1fr); gap: 15px; padding: 20px 5%; }
             .product-card { padding: 12px; }
             .product-card img { height: 180px; }
             .product-card h3 { font-size: 0.9rem; }
             .product-card p { font-size: 0.75rem; }
             .container-trindade { grid-template-columns: 1fr; gap: 20px; padding: 20px 5%; }
-            .col-mockup { width: 100%; height: 300px; }
+            .col-mockup { width: 100%; height: auto; max-width: 280px; margin: 0 auto; }
+            .col-mockup img { width: 100%; height: auto; }
             .col-texto h1 { font-size: 1.5rem; }
             .col-texto .description p { font-size: 0.9rem; }
-            .col-compra { width: 100%; }
+            .col-compra { width: 100%; max-width: 100%; position: static; }
             .buy-card { padding: 20px; }
             .price-value { font-size: 1.8rem; }
             .btn-gold, .btn-red { font-size: 0.75rem; padding: 10px; }
             .product-details { padding: 20px 5%; }
-            .details-grid { grid-template-columns: 1fr; gap: 12px; }
+            .details-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
             .layout-avaliacoes { grid-template-columns: 1fr; gap: 15px; }
             .col-depoimentos { gap: 15px; }
             .card-review { padding: 15px; font-size: 0.8rem; }
@@ -715,11 +722,12 @@
             nav a { font-size: 0.5rem; padding-bottom: 3px; }
             #btn-voltar { padding: 4px 8px; font-size: 0.5rem; }
             main { margin-top: 60px; }
-            .view-home { padding: 30px 3%; gap: 20px; }
-            .column-box { width: 100%; }
+            .view-home { flex-direction: column; gap: 18px; padding: 25px 3%; justify-content: center; }
+            .column-box { width: 100%; max-width: 280px; flex-shrink: 1; }
             .column-box p { font-size: 0.7rem; }
-            .display-box { width: 100%; height: 180px; }
-            .hero-center h1 { font-size: 1.3rem; line-height: 1.4; }
+            .display-box { width: 100%; height: 160px; }
+            .hero-center { width: 100%; order: -1; padding: 0 3%; }
+            .hero-center h1 { font-size: clamp(0.95rem, 5vw, 1.3rem); line-height: 1.4; }
             .line-hero { width: 40px; height: 2px; }
             .grid-produtos { grid-template-columns: 1fr; gap: 12px; padding: 15px 3%; }
             .product-card { padding: 10px; }
@@ -727,12 +735,13 @@
             .product-card h3 { font-size: 0.8rem; }
             .product-card p { font-size: 0.7rem; }
             .container-trindade { grid-template-columns: 1fr; gap: 15px; padding: 15px 3%; }
-            .col-mockup { width: 100%; height: 250px; }
-            .col-texto h1 { font-size: 1.2rem; }
+            .col-mockup { width: 100%; height: auto; max-width: 220px; margin: 0 auto; }
+            .col-mockup img { width: 100%; height: auto; }
+            .col-texto h1 { font-size: clamp(1.1rem, 5vw, 1.4rem); }
             .col-texto .author { font-size: 0.8rem; }
-            .col-texto .description p { font-size: 0.8rem; }
+            .col-texto .description p { font-size: 0.85rem; }
             .section-title { font-size: 0.75rem; }
-            .col-compra { width: 100%; }
+            .col-compra { width: 100%; max-width: 100%; position: static; }
             .buy-card { padding: 15px; }
             .price-label { font-size: 0.7rem; }
             .price-value { font-size: 1.5rem; }
@@ -742,7 +751,7 @@
             .details-title { font-size: 0.9rem; }
             .details-grid { grid-template-columns: 1fr; gap: 10px; }
             .detail-label { font-size: 0.65rem; }
-            .detail-value { font-size: 0.75rem; }
+            .detail-value { font-size: 0.8rem; }
             .layout-avaliacoes { grid-template-columns: 1fr; gap: 12px; }
             .card-review { padding: 12px; font-size: 0.75rem; }
             .form-review-container { padding: 15px; }

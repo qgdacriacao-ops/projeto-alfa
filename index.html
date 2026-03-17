@@ -448,6 +448,19 @@
             transform: scale(1.2);
             filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.5));
         }
+        .social-icon-img {
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            opacity: 0.7;
+            object-fit: contain;
+        }
+        .social-icon-img:hover {
+            opacity: 1;
+            transform: scale(1.2);
+            filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.5));
+        }
 
         /* ============================================================
            VIEW SUPORTE — INFORMAÇÕES DE CONTATO
@@ -819,12 +832,10 @@
                                 <button class="btn-feedback" onclick="this.innerText='ENVIADO COM SUCESSO'">Enviar Feedback</button>
                             </div>
                             <div class="redes-sociais-footer">
-                                <div class="social-icon-small" title="Facebook">📘</div>
-                                <div class="social-icon-small" title="Instagram">📷</div>
-                                <div class="social-icon-small" title="TikTok">🎵</div>
-                                <div class="social-icon-small" title="X">𝕏</div>
-                                <div class="social-icon-small" title="YouTube">▶️</div>
-                                <div class="social-icon-small" title="WhatsApp">💬</div>
+                                <a href="https://www.facebook.com/profile.php?id=61586564312195" target="_blank"><img src="facebook.png" alt="Facebook" class="social-icon-img" title="Facebook"></a>
+                                <img src="instagram.png" alt="Instagram" class="social-icon-img" title="Instagram">
+                                <a href="https://www.tiktok.com/@portalocodigo" target="_blank"><img src="tiktok.png" alt="TikTok" class="social-icon-img" title="TikTok"></a>
+                                <img src="whattsapp.png" alt="WhatsApp" class="social-icon-img" title="WhatsApp">
                             </div>
                         </div>
                     </div>`;

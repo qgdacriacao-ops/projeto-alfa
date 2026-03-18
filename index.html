@@ -1,13 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<script type="text/javascript">
-    (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "vxqqwilkqh");
-</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portal Pleno | O Código</title>
@@ -30,57 +23,8 @@
             --border: #D1D1D1;
         }
 
-        /* --- ESTILOS DO PRELOADER (TELA PRETA) --- */
-        #preloader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: black;
-            z-index: 9999;
-            opacity: 1;
-            visibility: visible;
-            transition: opacity 1s ease, visibility 1s ease;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: var(--gold);
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            cursor: pointer;
-        }
-
-        #preloader.fade-out {
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
-        }
-
-        /* --- CANVAS DA ANIMAÇÃO (CIRÚRGICO) --- */
-        #particle-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 9998;
-            background-color: black;
-            display: block;
-            pointer-events: none;
-            opacity: 1;
-            transition: opacity 3s ease;
-        }
-
-        #particle-canvas.fade-out {
-            opacity: 0;
-            pointer-events: none;
-        }
-
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body, html { min-height: 100%; background-color: var(--bg-black); font-family: 'Inter', sans-serif; overflow-x: hidden !important; display: flex; flex-direction: column; width: 100%; }
-        main { width: 100%; overflow-x: hidden !important; }
+        body, html { min-height: 100%; background-color: var(--bg-black); font-family: 'Inter', sans-serif; overflow-x: hidden; display: flex; flex-direction: column; }
 
         /* ============================================================
            HEADER
@@ -114,20 +58,19 @@
         /* ============================================================
            VIEW HOME
         ============================================================ */
-        .view-home { min-height: calc(100vh - 85px); display: flex; justify-content: space-between; align-items: center; padding: 0 5%; width: 100%; overflow-x: hidden; gap: 20px; }
-        .column-box { width: 280px; flex-shrink: 0; text-align: center; transition: 0.4s; }
+        .view-home { min-height: calc(100vh - 85px); display: flex; justify-content: space-between; align-items: center; padding: 0 5%; }
+        .column-box { width: 280px; text-align: center; transition: 0.4s; }
         .column-box:hover { transform: scale(1.02); filter: drop-shadow(0 0 15px var(--glow)); }
         .column-box p { color: var(--gold); letter-spacing: 5px; font-size: 0.7rem; margin-bottom: 0; padding-bottom: 5px; font-weight: 700; }
         .display-box { width: 100%; height: 420px; cursor: pointer; }
         .display-box img { width: 100%; height: 100%; object-fit: contain; }
-        .hero-center { flex: 1; min-width: 0; text-align: center; padding: 0 10px; }
-        .hero-center h1 { color: #fff; font-size: clamp(1.05rem, 4.5vw, 2.2rem); text-transform: uppercase; line-height: 1.25; text-align: center; word-break: break-word; }
+        .hero-center h1 { color: #fff; font-size: 2.2rem; text-transform: uppercase; line-height: 1.2; text-align: center; }
         .line-hero { width: 85%; height: 5px; background: var(--gold); margin: 15px auto; box-shadow: 0 0 20px var(--gold); }
 
         /* ============================================================
            VIEW GALERIA
         ============================================================ */
-        .view-galeria { display: none; background: #000; min-height: 100vh; padding: 60px 5% 100px; width: 100%; overflow-x: hidden; }
+        .view-galeria { display: none; background: #000; min-height: 100vh; padding: 60px 5% 100px; }
         .grid-produtos { display: grid; grid-template-columns: repeat(4, 1fr); gap: 60px; max-width: 1400px; margin: 0 auto; }
         .card-flutuante { text-align: center; cursor: pointer; transition: transform 0.4s ease; animation: flutuar 4s ease-in-out infinite; }
         .card-flutuante img { width: 100%; height: 350px; object-fit: contain; transition: 0.4s; }
@@ -135,7 +78,7 @@
         @keyframes flutuar { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
 
         /* ============================================================
-           VIEW SINOPSE
+           VIEW SINOPSE — ESTÉTICA INTEGRAL DO HTML 02 (ARSENAL)
         ============================================================ */
         .view-sinopse {
             display: none;
@@ -149,11 +92,9 @@
             max-width: 1350px;
             margin: 60px auto 20px;
             display: grid;
-            grid-template-columns: 300px 1fr 220px;
+            grid-template-columns: 340px 1fr 210px;
             gap: 45px;
             padding: 0 5%;
-            width: 100%;
-            overflow-x: hidden;
         }
 
         .col-mockup {
@@ -163,8 +104,6 @@
         }
         .col-mockup img {
             width: 100%;
-            max-width: 100%;
-            height: auto;
             object-fit: contain;
             filter: drop-shadow(0 8px 20px rgba(0,0,0,0.18));
             border-radius: 2px;
@@ -173,11 +112,10 @@
 
         .col-texto h1 {
             font-family: 'Playfair Display', serif;
-            font-size: clamp(1.4rem, 3.5vw, 3rem);
+            font-size: 3rem;
             margin-bottom: 5px;
             color: #000;
             line-height: 1.1;
-            word-break: break-word;
         }
         .author {
             font-size: 1.1rem;
@@ -266,370 +204,442 @@
             width: 100%;
             cursor: pointer;
         }
-        .btn-red:hover { opacity: 0.8; }
+        .btn-red:hover { opacity: 0.88; }
 
         .product-details {
             max-width: 1350px;
-            margin: 60px auto;
-            padding: 0 5%;
-            width: 100%;
+            margin: 0 auto 80px;
+            padding: 40px 5% 0;
+            border-top: 1px solid var(--border);
+            display: grid;
+            grid-template-columns: 340px 1fr;
+            gap: 45px;
         }
         .details-title {
             font-size: 1.2rem;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 30px;
             color: #000;
         }
         .details-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 40px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
         }
-        .detail-item {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-        .detail-label {
-            font-size: 0.8rem;
-            color: #666;
-            text-transform: uppercase;
-            font-weight: 700;
-            letter-spacing: 1px;
-        }
-        .detail-value {
-            font-size: 1rem;
-            color: #000;
-            font-weight: 500;
-        }
+        .detail-item { border-bottom: 1px solid #D1D1D1; padding-bottom: 15px; }
+        .detail-label { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: #666; display: block; margin-bottom: 5px; }
+        .detail-value { font-size: 1rem; color: #000; font-weight: 400; }
 
         /* ============================================================
-           VIEW INFO EXTRA
+           VIEW SOBRE — ESTÉTICA APRIMORADA COM FUNDO VISUAL
         ============================================================ */
-        .view-info-extra {
-            display: none;
-            background: #000;
-            min-height: 100vh;
-            padding: 60px 5%;
-            width: 100%;
-            overflow-x: hidden;
-        }
-
-        .layout-avaliacoes {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 40px;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .col-depoimentos {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .card-review {
-            background: #1a1a1a;
-            padding: 20px;
-            border-radius: 4px;
-            border-left: 4px solid var(--gold);
-            color: #fff;
-        }
-
-        .card-review .stars {
-            color: var(--gold);
-            font-weight: 700;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            margin-bottom: 10px;
-        }
-
-        .card-review .text {
-            font-size: 0.95rem;
-            line-height: 1.6;
-            margin-bottom: 15px;
-            font-style: italic;
-        }
-
-        .card-review .author-info {
-            font-size: 0.75rem;
-            color: #aaa;
-        }
-
-        .form-review-container {
-            background: #1a1a1a;
-            padding: 30px;
-            border-radius: 4px;
-            border: 1px solid var(--gold);
-        }
-
-        .form-review-container h3 {
-            color: var(--gold);
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 20px;
-        }
-
-        .input-group {
-            margin-bottom: 15px;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .input-group label {
-            color: #fff;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            font-weight: 700;
-            margin-bottom: 5px;
-        }
-
-        .input-group input,
-        .input-group textarea,
-        .input-group select {
-            background: #000;
-            color: #fff;
-            border: 1px solid var(--gold);
-            padding: 10px;
-            border-radius: 2px;
-            font-family: 'Inter', sans-serif;
-        }
-
-        .btn-enviar {
-            background: var(--gold);
-            color: #000;
-            padding: 12px;
-            border: none;
-            border-radius: 2px;
-            font-weight: 700;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .btn-enviar:hover {
-            opacity: 0.88;
-        }
-
-        .sobre-clean,
-        .contato-clean,
-        .suporte-clean {
+        .sobre-clean {
             position: relative;
             min-height: 100vh;
+            width: 100%;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-        }
-
-        .sobre-fundo,
-        .contato-fundo,
-        .suporte-fundo {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(255,215,0,0.05) 0%, rgba(0,0,0,0.8) 100%);
-            z-index: 0;
-        }
-
-        .sobre-content,
-        .contato-content,
-        .suporte-content {
-            position: relative;
-            z-index: 1;
-            max-width: 800px;
+            padding: 80px 5%;
             color: #fff;
             text-align: center;
         }
-
-        .sobre-content h1,
-        .contato-content h1,
-        .suporte-content h1 {
-            font-size: 2.5rem;
+        .sobre-fundo {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: url('banner.png') no-repeat center center;
+            background-size: cover;
+            filter: brightness(0.35) blur(8px);
+            z-index: -1;
+        }
+        .sobre-content {
+            max-width: 900px;
+            z-index: 10;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            padding: 60px 50px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+        }
+        .sobre-content h1 {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.8rem;
+            color: #ffffff;
             margin-bottom: 30px;
-            color: var(--gold);
+            text-transform: uppercase;
+            line-height: 1.15;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+            letter-spacing: 1px;
+            font-weight: 700;
         }
-
-        .quote {
-            font-size: 1.3rem;
+        .sobre-content .quote {
+            font-size: 1.4rem;
             font-style: italic;
-            margin: 30px 0;
-            color: var(--gold);
+            margin-bottom: 50px;
+            font-weight: 700;
+            line-height: 1.5;
             border-left: 4px solid var(--gold);
-            padding-left: 20px;
+            padding-left: 25px;
+            text-align: left;
+            color: #ffd700;
+            background: rgba(255, 215, 0, 0.05);
+            padding: 25px;
+            border-radius: 8px;
         }
-
         .sobre-content p {
             font-size: 1.1rem;
-            line-height: 1.8;
-            margin-bottom: 20px;
+            line-height: 1.9;
+            margin-bottom: 25px;
+            text-align: justify;
+            color: #e0e0e0;
         }
-
-        .sobre-content h2 {
-            font-size: 1.8rem;
-            margin-top: 40px;
+        .sobre-content p strong {
             color: var(--gold);
+            font-weight: 700;
+        }
+        .sobre-content h2 {
+            margin-top: 50px;
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            letter-spacing: 3px;
+            color: var(--gold);
+            text-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
         }
 
+        /* ============================================================
+           VIEW CONTATO — REDES SOCIAIS COM ÍCONES
+        ============================================================ */
+        .contato-clean {
+            position: relative;
+            min-height: 100vh;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 80px 5% 100px;
+            color: #fff;
+        }
+        .contato-fundo {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: url('banner.png') no-repeat center center;
+            background-size: cover;
+            filter: brightness(0.5);
+            z-index: -1;
+        }
+        .contato-content {
+            max-width: 1000px;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            flex: 1;
+        }
+        .contato-content h1 {
+            width: 100%;
+            text-align: center;
+        }
         .contato-wrapper {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 40px;
+            width: 100%;
             max-width: 900px;
-            margin: 0 auto;
+            align-items: start;
         }
-
-        .feedback-form,
-        .email-accounts {
-            background: #1a1a1a;
-            padding: 30px;
-            border-radius: 4px;
-            border: 1px solid var(--gold);
-        }
-
-        .feedback-form h2,
-        .email-accounts h3 {
-            color: var(--gold);
-            font-size: 1.2rem;
+        .contato-content h1 {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.8rem;
+            color: #ffffff;
+            margin-bottom: 50px;
             text-transform: uppercase;
-            margin-bottom: 20px;
-        }
-
-        .form-group {
-            margin-bottom: 15px;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .form-group label {
-            color: #fff;
-            font-size: 0.8rem;
-            text-transform: uppercase;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+            letter-spacing: 1px;
             font-weight: 700;
-            margin-bottom: 5px;
         }
-
+        .feedback-form {
+            background: var(--chumbo);
+            backdrop-filter: blur(10px);
+            padding: 40px 50px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            max-width: 600px;
+            margin-bottom: 60px;
+            width: 100%;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+        .feedback-form h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--gold);
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        .form-group label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+        }
         .form-group input,
         .form-group textarea {
-            background: #000;
+            width: 100%;
+            padding: 12px;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.05);
             color: #fff;
-            border: 1px solid var(--gold);
-            padding: 10px;
-            border-radius: 2px;
+            font-size: 0.9rem;
             font-family: 'Inter', sans-serif;
+            transition: 0.3s;
         }
-
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: #666;
+        }
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--gold);
+            background: rgba(255, 215, 0, 0.08);
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+        }
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
         .btn-feedback {
+            width: 100%;
+            padding: 14px;
             background: var(--gold);
             color: #000;
-            padding: 12px;
             border: none;
-            border-radius: 2px;
+            border-radius: 6px;
             font-weight: 700;
             text-transform: uppercase;
+            font-size: 0.85rem;
             cursor: pointer;
             transition: 0.3s;
-            width: 100%;
+            letter-spacing: 1px;
         }
-
         .btn-feedback:hover {
-            opacity: 0.88;
+            background: #e6c200;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(255, 215, 0, 0.3);
         }
-
+        .email-accounts {
+            background: rgba(255, 215, 0, 0.05);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 12px;
+            padding: 30px 40px;
+            margin-bottom: 40px;
+            width: 100%;
+            max-width: 600px;
+        }
+        .email-accounts h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            color: var(--gold);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-align: center;
+        }
         .email-item {
-            background: #000;
-            padding: 15px;
-            border-radius: 2px;
-            border: 1px solid var(--gold);
-            cursor: pointer;
-            transition: 0.3s;
+            background: var(--chumbo);
+            padding: 12px 15px;
+            border-radius: 6px;
             margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-left: 3px solid var(--gold);
         }
-
         .email-item:hover {
-            background: rgba(255,215,0,0.1);
+            background: rgba(44, 44, 44, 0.8);
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.2);
         }
-
+        .email-item:last-child {
+            margin-bottom: 0;
+        }
         .email-label {
             display: block;
-            color: var(--gold);
-            font-size: 0.8rem;
-            text-transform: uppercase;
+            font-size: 0.7rem;
             font-weight: 700;
+            text-transform: uppercase;
+            color: var(--gold);
+            letter-spacing: 1px;
             margin-bottom: 5px;
         }
-
         .email-address {
             display: block;
-            color: #fff;
-            font-size: 1rem;
-        }
-
-        .suporte-card {
-            background: #1a1a1a;
-            padding: 40px;
-            border-radius: 4px;
-            border: 2px solid var(--gold);
-            max-width: 500px;
-            margin: 0 auto;
-        }
-
-        .suporte-label {
-            color: var(--gold);
             font-size: 0.9rem;
-            text-transform: uppercase;
-            font-weight: 700;
-            display: block;
-            margin-bottom: 10px;
+            color: #e0e0e0;
+            font-family: 'Courier New', monospace;
+        }
+        .redes-sociais-footer {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: auto;
+            padding-top: 40px;
+            border-top: 1px solid rgba(255, 215, 0, 0.2);
+        }
+        .social-icon-small {
+            font-size: 1.8rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            opacity: 0.7;
+        }
+        .social-icon-small:hover {
+            opacity: 1;
+            transform: scale(1.2);
+            filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.5));
+        }
+        .social-icon-img {
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            opacity: 0.7;
+            object-fit: contain;
+        }
+        .social-icon-img:hover {
+            opacity: 1;
+            transform: scale(1.2);
+            filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.5));
         }
 
-        .suporte-email {
+        /* ============================================================
+           VIEW SUPORTE — INFORMAÇÕES DE CONTATO
+        ============================================================ */
+        .suporte-clean {
+            position: relative;
+            min-height: 100vh;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 80px 5%;
             color: #fff;
-            font-size: 1.3rem;
-            font-weight: 500;
+        }
+        .suporte-fundo {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: url('banner.png') no-repeat center center;
+            background-size: cover;
+            filter: brightness(0.5);
+            z-index: -1;
+        }
+        .suporte-content {
+            max-width: 280px;
+            z-index: 10;
+            background: var(--chumbo);
+            backdrop-filter: blur(10px);
+            padding: 24px 20px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            text-align: center;
+        }
+        .suporte-content h1 {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.8rem;
+            color: #ffffff;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+            letter-spacing: 1px;
+            font-weight: 700;
+        }
+        .suporte-card {
+            background: rgba(255, 215, 0, 0.05);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 8px;
+            padding: 16px 12px;
+            margin-bottom: 12px;
+        }
+        .suporte-label {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--gold);
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+        .suporte-email {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #fff;
+            word-break: break-all;
+            font-family: 'Courier New', monospace;
+        }
+        .suporte-email a {
+            color: var(--gold);
+            text-decoration: none;
+            transition: 0.3s;
+        }
+        .suporte-email a:hover {
+            text-decoration: underline;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+        .suporte-desc {
+            font-size: 0.75rem;
+            line-height: 1.5;
+            color: #e0e0e0;
+            margin-top: 12px;
         }
 
+        /* ============================================================
+           VIEW COMPARTILHADO
+        ============================================================ */
+        .layout-avaliacoes { display: grid; grid-template-columns: 1fr 324px 1fr; gap: 20px; align-items: start; margin-top: 15px; }
+        .col-depoimentos { display: flex; flex-direction: column; gap: 20px; }
+        .card-review { background: var(--chumbo); padding: 20px; border-left: 3px solid var(--gold); border-radius: 4px; font-size: 0.85rem; }
+        .card-review .stars { color: var(--gold); margin-bottom: 10px; font-weight: 700; text-transform: uppercase; font-size: 0.7rem; }
+        .card-review .text { font-style: italic; margin-bottom: 10px; color: #e0e0e0; }
+        .card-review .author-info { border-top: 1px solid #555; padding-top: 10px; font-size: 0.75rem; color: #aaa; }
+
+        .form-review-container { background: #fff; padding: 25px; border-radius: 4px; color: #000; }
+        .form-review-container h3 { font-family: 'Playfair Display', serif; margin-bottom: 15px; text-align: center; font-size: 1.2rem; }
+        .input-group { margin-bottom: 10px; }
+        .input-group label { display: block; font-size: 0.7rem; font-weight: 700; margin-bottom: 4px; }
+        .input-group input, .input-group textarea, .input-group select { width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; font-size: 0.8rem; }
+        .btn-enviar { width: 100%; background: var(--gold); color: #000; border: none; padding: 12px; font-weight: 700; cursor: pointer; text-transform: uppercase; font-size: 0.75rem; }
+
+        /* ============================================================
+           FOOTER
+        ============================================================ */
         .final-footer {
             background: #000;
             color: #666;
+            font-size: 0.65rem;
             text-align: center;
-            padding: 30px;
-            font-size: 0.8rem;
-            border-top: 1px solid var(--gold);
-            z-index: 100;
-        }
-
-        @media (max-width: 1024px) {
-            .grid-produtos { grid-template-columns: repeat(2, 1fr); gap: 40px; }
-            .container-trindade { grid-template-columns: 1fr; gap: 30px; }
-            .col-compra { position: static; }
-            .details-grid { grid-template-columns: repeat(2, 1fr); }
-            .contato-wrapper { grid-template-columns: 1fr; }
-        }
-
-        @media (max-width: 768px) {
-            .view-home { flex-direction: column; padding: 20px 5%; }
-            .column-box { width: 100%; }
-            .grid-produtos { grid-template-columns: 1fr; gap: 30px; }
-            .details-grid { grid-template-columns: 1fr; }
-            .layout-avaliacoes { grid-template-columns: 1fr; }
+            padding: 30px 0;
+            border-top: 1px solid #111;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            width: 100%;
+            z-index: 1000;
         }
     </style>
 </head>
 <body>
-    <!-- PRELOADER (TELA PRETA DE CLIQUE) -->
-    <div id="preloader">CLIQUE PARA INICIAR A EXPERIÊNCIA</div>
-
-    <!-- CANVAS DA ANIMAÇÃO (MATERIALIZAÇÃO) -->
-    <canvas id="particle-canvas"></canvas>
-
     <div id="bg"></div>
-
     <header>
         <div class="logo"><img src="selo.png"><span>Portal Pleno O Código</span></div>
         <nav>
@@ -669,12 +679,15 @@
             <div class="grid-produtos" id="render-grid"></div>
         </section>
 
-        <!-- VIEW SINOPSE -->
+        <!-- VIEW SINOPSE — ESTÉTICA DO HTML 02 (ARSENAL) -->
         <section id="view-sinopse" class="view-sinopse">
             <div class="container-trindade">
+                <!-- Mockup com fundo transparente -->
                 <div class="col-mockup">
                     <img id="target-img" src="">
                 </div>
+
+                <!-- Conteúdo textual -->
                 <div class="col-texto">
                     <h1 id="target-title">TÍTULO DO ATIVO</h1>
                     <p class="author">Por Júlio Bhrósz</p>
@@ -684,6 +697,8 @@
                         <p id="target-desc">O Código não é apenas um manual, é a autópsia da personalidade necessária para a quebra de padrões limitantes.</p>
                     </div>
                 </div>
+
+                <!-- Card de conversão -->
                 <div class="col-compra">
                     <div class="buy-card">
                         <span class="price-label">Por Apenas</span>
@@ -699,6 +714,7 @@
                 </div>
             </div>
 
+            <!-- Detalhes do produto — modelo Kobo do HTML 02 -->
             <div class="product-details">
                 <div class="details-title">Detalhes do eBook</div>
                 <div class="details-grid">
@@ -730,8 +746,8 @@
             </div>
         </section>
 
-        <!-- VIEW INFO EXTRA -->
-        <section id="view-info-extra" class="view-info-extra">
+        <!-- VIEW INFO EXTRA (Compartilhado / Sobre / Contato / Suporte) -->
+        <section id="view-info-extra" class="view-info-extra" style="display:none;">
             <div id="content-info"></div>
         </section>
     </main>
@@ -740,164 +756,23 @@
         © 2003 Portal Pleno | O Código
     </div>
 
-    <!-- DEPENDÊNCIAS DA ANIMAÇÃO (THREE.JS E TWEEN.JS) -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/18.6.4/tween.umd.js"></script>
-
     <script>
-        /* ============================================================
-           LÓGICA DA ANIMAÇÃO DE MATERIALIZAÇÃO (CIRÚRGICO)
-           
-           PROTOCOLO DE TRANSPLANTE: ANIMAÇÃO DE MATERIALIZAÇÃO
-           Operador: Manus
-           Objetivo: Integração cirúrgica do sistema de animação de abertura
-           
-           Especificações Técnicas:
-           - Asset: background-site.webp
-           - Delay de Início: 4s (fase de latência)
-           - Tempo de Materialização: 4s (duração do encontro dos fragmentos)
-           - Estado Final: Opacidade 100%, Alinhamento Central/Cover
-           - Conceito: União de Fragmentos Espaciais
-        ============================================================ */
-        let scene, camera, renderer, particles, geometry;
-        let positions = [], colors = [];
-        let animationStarted = false;
-        let particlesReady = false;
-
-        function initAnimation() {
-            scene = new THREE.Scene();
-            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-            camera.position.z = 320;
-            renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('particle-canvas'), antialias: true, alpha: true });
-            renderer.setSize(window.innerWidth, window.innerHeight);
-            renderer.setClearColor(0x000000, 1);
-
-            const image = new Image();
-            image.src = 'background-site.webp';
-            image.onload = () => {
-                const tempCanvas = document.createElement('canvas');
-                const ctx = tempCanvas.getContext('2d');
-                tempCanvas.width = image.width;
-                tempCanvas.height = image.height;
-                ctx.drawImage(image, 0, 0);
-                const imgData = ctx.getImageData(0, 0, image.width, image.height).data;
-                const step = 2;
-                
-                // Calcula escala para manter proporção (cover mode)
-                const windowRatio = window.innerWidth / window.innerHeight;
-                const imageRatio = image.width / image.height;
-                let scale = 1;
-                if (windowRatio > imageRatio) {
-                    scale = window.innerWidth / image.width;
-                } else {
-                    scale = window.innerHeight / image.height;
-                }
-                
-                // Gera partículas com alinhamento correto para pixel-perfect alignment
-                for (let y = 0; y < image.height; y += step) {
-                    for (let x = 0; x < image.width; x += step) {
-                        const i = (y * image.width + x) * 4;
-                        if (imgData[i+3] > 128) {
-                            // Mapeia coordenadas para o espaço 3D com escala e centralização
-                            const posX = (x - image.width / 2) * scale;
-                            const posY = -(y - image.height / 2) * scale;
-                            positions.push(posX, posY, 0);
-                            colors.push(imgData[i]/255, imgData[i+1]/255, imgData[i+2]/255);
-                        }
-                    }
-                }
-                createParticlesMesh();
-            };
-            image.onerror = () => {
-                // Fallback se a imagem não existir: cria grid dourado
-                for (let y = -150; y < 150; y += 10) {
-                    for (let x = -250; x < 250; x += 10) {
-                        positions.push(x, y, 0);
-                        colors.push(1, 0.84, 0);
-                    }
-                }
-                createParticlesMesh();
-            };
-        }
-
-        function createParticlesMesh() {
-            geometry = new THREE.BufferGeometry();
-            const startPos = new Float32Array(positions.length);
-            for (let i = 0; i < positions.length; i++) startPos[i] = (Math.random() - 0.5) * 1000;
-            geometry.setAttribute('position', new THREE.BufferAttribute(startPos, 3));
-            geometry.setAttribute('color', new THREE.BufferAttribute(new Float32Array(colors), 3));
-            const material = new THREE.PointsMaterial({ size: 2.0, vertexColors: true, transparent: true, opacity: 0.9 });
-            particles = new THREE.Points(geometry, material);
-            scene.add(particles);
-            particlesReady = true;
-            animate();
-        }
-
-        function animate() {
-            requestAnimationFrame(animate);
-            TWEEN.update();
-            if(particles && !animationStarted) particles.rotation.y += 0.001;
-            renderer.render(scene, camera);
-        }
-
-        function startMaterialization() {
-            if (animationStarted || !particlesReady) return;
-            animationStarted = true;
-
-            const audioSaudacao = new Audio('saudacao.mp3'); 
-            audioSaudacao.volume = 0.8;
-            audioSaudacao.play().catch(e => console.log('Áudio bloqueado ou não encontrado'));
-
-            // Remove o preloader de clique imediatamente
-            document.getElementById('preloader').classList.add('fade-out');
-
-            // AGUARDA 4 SEGUNDOS ANTES DE INICIAR A MATERIALIZAÇÃO (FASE DE LATÊNCIA)
-            setTimeout(() => {
-                // Inicia a materialização (fusão dos fragmentos) com duração de 4 segundos
-                const posAttr = particles.geometry.attributes.position;
-                for (let i = 0; i < posAttr.array.length; i += 3) {
-                    new TWEEN.Tween({ x: posAttr.array[i], y: posAttr.array[i+1], z: posAttr.array[i+2] })
-                        .to({ x: positions[i], y: positions[i+1], z: positions[i+2] }, 4000)
-                        .easing(TWEEN.Easing.Cubic.InOut)
-                        .onUpdate((obj) => {
-                            posAttr.array[i] = obj.x;
-                            posAttr.array[i+1] = obj.y;
-                            posAttr.array[i+2] = obj.z;
-                            posAttr.needsUpdate = true;
-                        })
-                        .start();
-                }
-
-                // Após a animação de 4s, remove o canvas para mostrar o site real
-                setTimeout(() => {
-                    document.getElementById('particle-canvas').classList.add('fade-out');
-                    setTimeout(() => {
-                        document.getElementById('particle-canvas').style.display = 'none';
-                        document.getElementById('particle-canvas').style.pointerEvents = 'none';
-                    }, 800);
-                }, 4000);
-            }, 4000);
-        }
-
-        /* ============================================================
-           SEUS DADOS E FUNÇÕES ORIGINAIS (MANTIDOS INTEGRALMENTE)
-        ============================================================ */
         const hardware = {
             e: [
-                {img: 'ebook01.png', title: 'Know Yourself First', price: '$ 11.00', link: 'https://pay.kiwify.com/8S4FCE0', desc: 'Descubra os fundamentos da autossuperação através de uma análise técnica da personalidade.'},
-                {img: 'ebook02.png', title: 'The Engineering of Collision', price: '$ 11,50', link: 'https://pay.kiwify.com/ZjtlaGh', desc: 'Uma análise profunda sobre os mecanismos que causam o colapso de relacionamentos.'},
-                {img: 'ebook03.png', title: 'The Supremacy Code', price: '$ 11,99', link: 'https://pay.kiwify.com/NcdLsaN', desc: 'O código supremo da excelência pessoal.'},
-                {img: 'ebook04.png', title: 'Descubra Você', price: 'R$ 29,50', link: 'https://pay.kiwify.com.br/P8UTO6L', desc: 'O Amor Extraordinário Começa Onde Você Menos Espera.'},
-                {img: 'ebook05.png', title: 'Engenharia da Colisão', price: 'R$ 39,00', link: 'https://pay.kiwify.com.br/oRZAlbz', desc: 'Relações não fracassam por falta de amor, mas por falha de hardware.'},
-                {img: 'ebook06.png', title: 'Autópsia da Personalidade', price: 'R$ 59,90', link: 'https://pay.kiwify.com.br/sD4nqRO', desc: 'O que resta quando as camadas de condicionamento social são removidas.'}
+                {img: 'ebook01.png', title: 'Know Yourself First', price: '$ 11.00', link: 'https://pay.kiwify.com/8S4FCE0', desc: 'Descubra os fundamentos da autossuperação através de uma análise técnica da personalidade. Este ebook oferece ferramentas práticas para identificar seus padrões limitantes e iniciar a jornada rumo à soberania intelectual.'},
+                {img: 'ebook02.png', title: 'The Engineering of Collision', price: '$ 11,50', link: 'https://pay.kiwify.com/ZjtlaGh', desc: 'Uma análise profunda sobre os mecanismos que causam o colapso de relacionamentos. Compreenda as falhas de hardware emocional e aprenda a recalibrar seus sistemas para conexões duradouras.'},
+                {img: 'ebook03.png', title: 'The Supremacy Code', price: '$ 11,99', link: 'https://pay.kiwify.com/NcdLsaN', desc: 'O código supremo da excelência pessoal. Este manual técnico desvenda os padrões de comportamento dos indivíduos de alto desempenho e oferece o blueprint para sua própria transformação.'},
+                {img: 'ebook04.png', title: 'Descubra Você', price: 'R$ 29,50', link: 'https://pay.kiwify.com.br/P8UTO6L', desc: 'O Amor Extraordinário Começa Onde Você Menos Espera: Dentro de Você. Muitas vezes, passamos a vida como caçadores do parceiro ideal, acreditando que a felicidade é um destino externo que depende de outra pessoa. Mas e se a peça que falta para relacionamentos verdadeiramente plenos estivesse guardada na sua própria essência?'},
+                {img: 'ebook05.png', title: 'Engenharia da Colisão', price: 'R$ 39,00', link: 'https://pay.kiwify.com.br/oRZAlbz', desc: 'Relações não fracassam por falta de amor, mas por falha de hardware. Este ebook oferece uma análise técnica das relações humanas, baseada em anos de observação dos padrões de escolha e comportamento individual.'},
+                {img: 'ebook06.png', title: 'Autópsia da Personalidade', price: 'R$ 59,90', link: 'https://pay.kiwify.com.br/sD4nqRO', desc: 'O que resta quando as camadas de condicionamento social, traumas herdados e migalhas emocionais são removidas com precisão cirúrgica? Autópsia da Personalidade não é apenas uma leitura; é um protocolo de engenharia reversa sobre quem você acredita ser. Nesta obra, o Autor, Júlio Bhrósz utiliza o bisturi da neurociência aplicada e da Engenharia de Colisão para expor a anatomia das suas falhas invisíveis. É o fim da era do conforto que aprisiona. Aqui, o Hardware (seu cérebro) e o Software (suas crenças) são analisados sob uma luz técnica e visceral, eliminando de vez as migalhas da psique para que a sua verdadeira Supremacia Mental seja restaurada. Você está pronto para encarar o que está por baixo da pele? Identifique os parasitas emocionais que drenam sua energia. Desintegre as narrativas de autossabotagem. Instale um novo sistema de Soberania e controle total sobre seus sentimentos.'}
             ],
             a: [
-                {img: 'audio01.png', title: 'Know Yourself First', price: '$ 13.95', link: 'https://pay.kiwify.com/ilgU4Kg', desc: 'Descubra os fundamentos da autossuperação.'},
-                {img: 'audio02.png', title: 'The Engineering of Collision', price: '$ 14.95', link: 'https://pay.kiwify.com/2LTHnl0', desc: 'Uma análise profunda sobre os mecanismos.'},
-                {img: 'audio03.png', title: 'The Supremacy Code', price: '$ 15.95', link: 'https://pay.kiwify.com/TGmTjRA', desc: 'O código supremo da excelência pessoal.'},
-                {img: 'audio04.png', title: 'Descubra Você', price: 'R$ 37,50', link: 'https://pay.kiwify.com.br/lDiv2Do', desc: 'O Amor Extraordinário Começa Onde Você Menos Espera.'},
-                {img: 'audio05.png', title: 'Engenharia da Colisão', price: 'R$ 39,50', link: 'https://pay.kiwify.com.br/PmaKDGV', desc: 'Relações não fracassam por falta de amor.'},
-                {img: 'audio06.png', title: 'Autópsia da Personalidade', price: 'R$ 57,50', link: 'https://pay.kiwify.com.br/nJO91Ia', desc: 'O que resta quando as camadas são removidas.'}
+                {img: 'audio01.png', title: 'Know Yourself First', price: '$ 13.95', link: 'https://pay.kiwify.com/ilgU4Kg', desc: 'Descubra os fundamentos da autossuperação através de uma análise técnica da personalidade. Este audiobook oferece ferramentas práticas para identificar seus padrões limitantes e iniciar a jornada rumo à soberania intelectual.'},
+                {img: 'audio02.png', title: 'The Engineering of Collision', price: '$ 14.95', link: 'https://pay.kiwify.com/2LTHnl0', desc: 'Uma análise profunda sobre os mecanismos que causam o colapso de relacionamentos. Compreenda as falhas de hardware emocional e aprenda a recalibrar seus sistemas para conexões duradouras.'},
+                {img: 'audio03.png', title: 'The Supremacy Code', price: '$ 15.95', link: 'https://pay.kiwify.com/TGmTjRA', desc: 'O código supremo da excelência pessoal. Este manual técnico desvenda os padrões de comportamento dos indivíduos de alto desempenho e oferece o blueprint para sua própria transformação.'},
+                {img: 'audio04.png', title: 'Descubra Você', price: 'R$ 37,50', link: 'https://pay.kiwify.com.br/lDiv2Do', desc: 'O Amor Extraordinário Começa Onde Você Menos Espera: Dentro de Você. Muitas vezes, passamos a vida como caçadores do parceiro ideal, acreditando que a felicidade é um destino externo que depende de outra pessoa. Mas e se a peça que falta para relacionamentos verdadeiramente plenos estivesse guardada na sua própria essência?'},
+                {img: 'audio05.png', title: 'Engenharia da Colisão', price: 'R$ 39,50', link: 'https://pay.kiwify.com.br/PmaKDGV', desc: 'Relações não fracassam por falta de amor, mas por falha de hardware. Este audiobook oferece uma análise técnica das relações humanas, baseada em anos de observação dos padrões de escolha e comportamento individual.'},
+                {img: 'audio06.png', title: 'Autópsia da Personalidade', price: 'R$ 57,50', link: 'https://pay.kiwify.com.br/nJO91Ia', desc: 'O que resta quando as camadas de condicionamento social, traumas herdados e migalhas emocionais são removidas com precisão cirúrgica? Autópsia da Personalidade não é apenas uma leitura; é um protocolo de engenharia reversa sobre quem você acredita ser. Nesta obra, o Autor, Júlio Bhrósz utiliza o bisturi da neurociência aplicada e da Engenharia de Colisão para expor a anatomia das suas falhas invisíveis. É o fim da era do conforto que aprisiona. Aqui, o Hardware (seu cérebro) e o Software (suas crenças) são analisados sob uma luz técnica e visceral, eliminando de vez as migalhas da psique para que a sua verdadeira Supremacia Mental seja restaurada. Você está pronto para encarar o que está por baixo da pele? Identifique os parasitas emocionais que drenam sua energia. Desintegre as narrativas de autossabotagem. Instale um novo sistema de Soberania e controle total sobre seus sentimentos.'}
             ]
         };
 
@@ -980,35 +855,113 @@
                 const colEsq = staticReviews.slice(0,3).map(r => renderReview(r)).join('');
                 const colDir = staticReviews.slice(3,6).map(r => renderReview(r)).join('');
                 container.innerHTML = `<div style="color:#fff; padding:20px 5%;"><div class="layout-avaliacoes"><div class="col-depoimentos">${colEsq}</div><div class="form-review-container"><h3>CONTE-NOS SUA EXPERIENCIA</h3><div class="input-group"><label>Nome</label><input type="text" placeholder="Seu nome"></div><div class="input-group"><label>E-mail</label><input type="email" placeholder="seu@email.com"></div><div class="input-group"><label>Texto (Máx 100 char)</label><textarea maxlength="100" rows="3"></textarea></div><div class="input-group"><label>Nota</label><select><option>EXCELENTE</option><option>ÓTIMO</option><option>MUITO BOM</option><option>BOM</option><option>REGULAR</option></select></div><button class="btn-enviar" onclick="this.innerText='ENVIADO'">Enviar</button></div><div class="col-depoimentos">${colDir}</div></div></div>`;
+
             } else if(tipo === 'sobre') {
-                container.innerHTML = `<div class="sobre-clean"><div class="sobre-fundo"></div><div class="sobre-content"><h1>A Ciência por trás da Engenharia da Colisão</h1><div class="quote">"Relações não fracassam por falta de amor, mas por falha de hardware. Onde não há soberania individual, o sistema colapsa."</div><p>Muitos buscam respostas no misticismo quando o assunto é o campo afetivo. No entanto, a obra de <strong>Júlio Bhrósz</strong> nasce de uma premissa diferente: o empirismo.</p><p>Se você já sentiu a dor de uma conexão interrompida, entenda que o sofrimento é o sintoma de um sistema descalibrado.</p><h2>Júlio Bhrósz</h2></div></div>`;
+                container.innerHTML = `
+                    <div class="sobre-clean">
+                        <div class="sobre-fundo"></div>
+                        <div class="sobre-content">
+                            <h1>A Ciência por trás da Engenharia da Colisão</h1>
+                            <div class="quote">"Relações não fracassam por falta de amor, mas por falha de hardware. Onde não há soberania individual, o sistema colapsa."</div>
+                            <p>Muitos buscam respostas no misticismo quando o assunto é o campo afetivo. No entanto, a obra de <strong>Júlio Bhrósz</strong> nasce de uma premissa diferente: o empirismo. Não se trata de teorias abstratas, mas de uma análise técnica das relações humanas, baseada em anos de observação dos padrões de escolha e comportamento individual.</p>
+                            <p>Se você já sentiu a dor de uma conexão interrompida, entenda que o sofrimento é o sintoma de um sistema descalibrado. O Portal Pleno oferece o código necessário para realizar sua própria autópsia e identificar falhas de processamento emocional.</p>
+                            <p>Nossa filosofia é humanitária: acreditamos que a verdadeira dignidade só é alcançada quando o indivíduo deixa de ser passageiro de suas emoções para se tornar o <strong>Operador</strong> de sua própria realidade.</p>
+                            <h2>Júlio Bhrósz</h2>
+                        </div>
+                    </div>`;
+
             } else if(tipo === 'contato') {
-                container.innerHTML = `<div class="contato-clean"><div class="contato-fundo"></div><div class="contato-content"><h1>Entre em Contato</h1><div class="contato-wrapper"><div class="feedback-form"><h2>Envie seu Feedback</h2><div class="form-group"><label>Nome</label><input type="text"></div><div class="form-group"><label>E-mail</label><input type="email"></div><div class="form-group"><label>Mensagem</label><textarea></textarea></div><button class="btn-feedback" onclick="this.innerText='ENVIADO'">Enviar Feedback</button></div><div class="email-accounts"><h3>Contas Oficiais</h3><div class="email-item" onclick="copiarEmail('contato@portalpleno.com.br')"><span class="email-label">Contato</span><span class="email-address">contato@portalpleno.com.br</span></div></div></div></div></div>`;
+                container.innerHTML = `
+                    <div class="contato-clean">
+                        <div class="contato-fundo"></div>
+                        <div class="contato-content">
+                            <h1>Entre em Contato</h1>
+                            <div class="contato-wrapper">
+                                <div class="feedback-form">
+                                    <h2>Envie seu Feedback</h2>
+                                    <div class="form-group">
+                                        <label>Nome</label>
+                                        <input type="text" placeholder="Seu nome completo">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>E-mail</label>
+                                        <input type="email" placeholder="seu@email.com">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Mensagem</label>
+                                        <textarea placeholder="Sua mensagem aqui..."></textarea>
+                                    </div>
+                                    <button class="btn-feedback" onclick="this.innerText='ENVIADO COM SUCESSO'">Enviar Feedback</button>
+                                </div>
+                                <div class="email-accounts">
+                                    <h3>Contas Oficiais</h3>
+                                    <div class="email-item" onclick="copiarEmail('diretoria@portalpleno.com.br')">
+                                        <span class="email-label">Diretoria</span>
+                                        <span class="email-address">diretoria@portalpleno.com.br</span>
+                                    </div>
+                                    <div class="email-item" onclick="copiarEmail('comercial@portalpleno.com.br')">
+                                        <span class="email-label">Comercial</span>
+                                        <span class="email-address">comercial@portalpleno.com.br</span>
+                                    </div>
+                                    <div class="email-item" onclick="copiarEmail('contato@portalpleno.com.br')">
+                                        <span class="email-label">Contato</span>
+                                        <span class="email-address">contato@portalpleno.com.br</span>
+                                    </div>
+                                    <div class="email-item" onclick="copiarEmail('suportebook@portalpleno.com.br')">
+                                        <span class="email-label">Suporte</span>
+                                        <span class="email-address">suportebook@portalpleno.com.br</span>
+                                    </div>
+                                    <div class="email-item" onclick="copiarEmail('ppsite@portalpleno.com.br')">
+                                        <span class="email-label">Website</span>
+                                        <span class="email-address">ppsite@portalpleno.com.br</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="redes-sociais-footer">
+                                <a href="https://www.facebook.com/profile.php?id=61586564312195" target="_blank"><img src="facebook.png" alt="Facebook" class="social-icon-img" title="Facebook"></a>
+                                <img src="instagram.png" alt="Instagram" class="social-icon-img" title="Instagram">
+                                <a href="https://www.tiktok.com/@portalocodigo" target="_blank"><img src="tiktok.png" alt="TikTok" class="social-icon-img" title="TikTok"></a>
+                                <img src="whattsapp.png" alt="WhatsApp" class="social-icon-img" title="WhatsApp">
+                            </div>
+                        </div>
+                    </div>`;
+
             } else if(tipo === 'suporte') {
-                container.innerHTML = `<div class="suporte-clean"><div class="suporte-fundo"></div><div class="suporte-content"><h1>Suporte</h1><div class="suporte-card"><div class="suporte-label">E-mail</div><div class="suporte-email">suportebook@portalpleno.com.br</div></div></div></div>`;
+                container.innerHTML = `
+                    <div class="suporte-clean">
+                        <div class="suporte-fundo"></div>
+                        <div class="suporte-content">
+                            <h1>Suporte</h1>
+                            <div class="suporte-card">
+                                <div class="suporte-label">E-mail</div>
+                                <div class="suporte-email"><a href="javascript:void(0)" onclick="copiarEmail('suportebook@portalpleno.com.br')">suportebook@portalpleno.com.br</a></div>
+                            </div>
+                            <div class="suporte-desc">
+                                <p>Estamos aqui para ajudar!</p>
+                            </div>
+                        </div>
+                    </div>`;
+
+            } else {
+                container.innerHTML = `<div style="color:#fff; padding:20px 5%;"><h2 style="font-family:'Playfair Display'; text-align:center; font-size:2rem; color:var(--gold);">${tipo.toUpperCase()}</h2><p style="text-align:center; margin-top:20px;">Processamento técnico em breve...</p></div>`;
             }
             historico = 'info';
         }
 
-        function renderReview(r) { return `<div class="card-review"><div class="stars">${r.rating}</div><div class="text">"${r.text}"</div><div class="author-info"><strong>${r.author}</strong><br>${r.email} | ${r.book}</div></div>`; }
-        function copiarEmail(email) { navigator.clipboard.writeText(email).then(() => alert('E-mail copiado!')); }
+        function renderReview(r) {
+            return `<div class="card-review"><div class="stars">${r.rating}</div><div class="text">"${r.text}"</div><div class="author-info"><strong>${r.author}</strong><br>${r.email} | ${r.book}</div></div>`;
+        }
 
-        // Inicialização Final
-        window.onload = () => {
-            initAnimation();
-            irHome();
-        };
-        
-        // Ajusta canvas ao redimensionar a janela
-        window.addEventListener('resize', () => {
-            if (renderer) {
-                renderer.setSize(window.innerWidth, window.innerHeight);
-                camera.aspect = window.innerWidth / window.innerHeight;
-                camera.updateProjectionMatrix();
-            }
-        });
-        
-        document.addEventListener('click', startMaterialization);
+        function copiarEmail(email) {
+            navigator.clipboard.writeText(email).then(() => {
+                alert('E-mail copiado para a area de transferencia: ' + email + '\n\nVoce pode colar em qualquer cliente de e-mail (Gmail, Outlook, etc.)');
+            }).catch(() => {
+                alert('E-mail: ' + email + '\n\nCopie este endereco e envie um e-mail para nos!');
+            });
+        }
+
+        // Inicializa na home
+        irHome();
     </script>
 </body>
 </html>

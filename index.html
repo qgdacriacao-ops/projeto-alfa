@@ -69,6 +69,13 @@
             background-color: black;
             display: block;
             pointer-events: none;
+            opacity: 1;
+            transition: opacity 3s ease;
+        }
+
+        #particle-canvas.fade-out {
+            opacity: 0;
+            pointer-events: none;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -259,244 +266,358 @@
             width: 100%;
             cursor: pointer;
         }
-        .btn-red:hover { opacity: 0.88; }
+        .btn-red:hover { opacity: 0.8; }
 
         .product-details {
             max-width: 1350px;
-            margin: 0 auto 80px;
-            padding: 40px 5% 30px;
-            border-top: 1px solid var(--border);
-        }
-        .product-details .details-title {
-            margin-bottom: 25px;
+            margin: 60px auto;
+            padding: 0 5%;
+            width: 100%;
         }
         .details-title {
             font-size: 1.2rem;
-            color: #000;
-            text-transform: uppercase;
             font-weight: 700;
-            letter-spacing: 1px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 30px;
+            color: #000;
         }
         .details-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 25px;
+            gap: 40px;
         }
         .detail-item {
             display: flex;
             flex-direction: column;
-            gap: 5px;
+            gap: 8px;
         }
         .detail-label {
-            font-size: 0.75rem;
-            color: #777;
+            font-size: 0.8rem;
+            color: #666;
             text-transform: uppercase;
             font-weight: 700;
+            letter-spacing: 1px;
         }
         .detail-value {
-            font-size: 0.95rem;
-            color: #111;
+            font-size: 1rem;
+            color: #000;
             font-weight: 500;
         }
 
         /* ============================================================
-           VIEW INFO EXTRA (Compartilhado / Sobre / Contato / Suporte)
+           VIEW INFO EXTRA
         ============================================================ */
-        .view-info-extra { display: none; background: #000; min-height: 100vh; width: 100%; }
-        .layout-avaliacoes { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 30px; padding: 40px 5%; }
-        .col-depoimentos { display: flex; flex-direction: column; gap: 20px; }
-        .card-review { background: var(--chumbo); padding: 25px; border-radius: 8px; border: 1px solid rgba(255, 215, 0, 0.2); }
-        .card-review .stars { color: var(--gold); margin-bottom: 10px; font-weight: 700; }
-        .card-review .text { color: #eee; font-style: italic; margin-bottom: 15px; font-size: 0.9rem; }
-        .card-review .author-info { color: #aaa; font-size: 0.75rem; line-height: 1.4; }
-        .form-review-container { background: #111; padding: 30px; border-radius: 8px; border: 1px solid var(--gold); }
-        .form-review-container h3 { color: var(--gold); margin-bottom: 20px; font-size: 1.1rem; }
-        .input-group { margin-bottom: 15px; }
-        .input-group label { display: block; color: #ccc; font-size: 0.7rem; margin-bottom: 5px; text-transform: uppercase; }
-        .input-group input, .input-group textarea, .input-group select { width: 100%; background: #222; border: 1px solid #444; padding: 10px; color: #fff; border-radius: 4px; }
-        .btn-enviar { background: var(--gold); color: #000; border: none; padding: 12px; width: 100%; font-weight: 700; cursor: pointer; text-transform: uppercase; margin-top: 10px; }
+        .view-info-extra {
+            display: none;
+            background: #000;
+            min-height: 100vh;
+            padding: 60px 5%;
+            width: 100%;
+            overflow-x: hidden;
+        }
 
-        .sobre-clean { position: relative; min-height: 100vh; width: 100%; display: flex; align-items: center; justify-content: center; padding: 100px 5%; }
-        .sobre-fundo { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: url('banner.png') no-repeat center center; background-size: cover; filter: brightness(0.4); z-index: -1; }
-        .sobre-content { max-width: 900px; background: rgba(0,0,0,0.7); backdrop-filter: blur(10px); padding: 60px; border-radius: 15px; border: 1px solid rgba(255,215,0,0.3); color: #fff; }
-        .sobre-content h1 { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--gold); margin-bottom: 30px; text-transform: uppercase; text-align: center; }
-        .sobre-content .quote { font-style: italic; font-size: 1.2rem; color: #eee; text-align: center; margin-bottom: 40px; padding: 0 20px; border-left: 3px solid var(--gold); border-right: 3px solid var(--gold); }
-        .sobre-content p { font-size: 1.05rem; line-height: 1.9; margin-bottom: 25px; text-align: justify; color: #ddd; }
-        .sobre-content h2 { font-size: 1.5rem; color: var(--gold); text-align: right; margin-top: 40px; }
+        .layout-avaliacoes {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
 
-        .contato-clean { position: relative; min-height: 100vh; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 80px 5% 100px; color: #fff; }
-        .contato-fundo { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: url('banner.png') no-repeat center center; background-size: cover; filter: brightness(0.5); z-index: -1; }
-        .contato-content { max-width: 1000px; z-index: 10; display: flex; flex-direction: column; align-items: center; justify-content: center; flex: 1; }
-        .contato-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; width: 100%; max-width: 900px; align-items: start; }
-        .contato-content h1 { font-family: 'Inter', sans-serif; font-size: 1.8rem; color: #ffffff; margin-bottom: 50px; text-transform: uppercase; text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5); letter-spacing: 1px; font-weight: 700; }
-        .feedback-form { background: var(--chumbo); backdrop-filter: blur(10px); padding: 40px 50px; border-radius: 12px; border: 1px solid rgba(255, 215, 0, 0.3); max-width: 600px; margin-bottom: 60px; width: 100%; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4); }
-        .feedback-form h2 { font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--gold); margin-bottom: 30px; text-transform: uppercase; letter-spacing: 1px; text-align: center; }
-        .form-group { margin-bottom: 25px; text-align: left; }
-        .form-group label { display: block; font-size: 0.85rem; color: #bbb; margin-bottom: 10px; text-transform: uppercase; font-weight: 700; }
-        .form-group input, .form-group textarea { width: 100%; background: rgba(0, 0, 0, 0.3); border: 1px solid rgba(255, 215, 0, 0.2); padding: 12px 15px; color: #fff; border-radius: 6px; font-family: 'Inter', sans-serif; transition: 0.3s; }
-        .form-group input:focus, .form-group textarea:focus { border-color: var(--gold); outline: none; background: rgba(0, 0, 0, 0.5); }
-        .form-group textarea { height: 120px; resize: none; }
-        .btn-feedback { width: 100%; background: var(--gold); color: #000; border: none; padding: 15px; font-weight: 800; font-size: 0.9rem; text-transform: uppercase; border-radius: 6px; cursor: pointer; transition: 0.3s; box-shadow: 0 4px 15px rgba(255, 215, 0, 0.2); }
-        .btn-feedback:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(255, 215, 0, 0.4); }
-        .email-accounts { background: rgba(0, 0, 0, 0.6); padding: 40px; border-radius: 12px; border: 1px solid rgba(255, 215, 0, 0.2); width: 100%; }
-        .email-accounts h3 { font-size: 1.2rem; color: var(--gold); margin-bottom: 25px; text-transform: uppercase; text-align: center; }
-        .email-item { padding: 15px 20px; background: rgba(255, 215, 0, 0.05); border-radius: 8px; margin-bottom: 15px; cursor: pointer; transition: 0.3s; border: 1px solid transparent; }
-        .email-item:hover { background: rgba(255, 215, 0, 0.15); border-color: var(--gold); }
-        .email-label { display: block; font-size: 0.7rem; color: #888; text-transform: uppercase; margin-bottom: 5px; font-weight: 700; }
-        .email-address { font-size: 1rem; color: #fff; font-weight: 500; }
-        .redes-sociais-footer { display: flex; justify-content: center; gap: 25px; padding-top: 40px; border-top: 1px solid rgba(255, 255, 255, 0.1); width: 100%; max-width: 400px; }
-        .social-icon-img { width: 45px; height: 45px; transition: 0.3s; filter: drop-shadow(0 2px 5px rgba(0,0,0,0.5)); cursor: pointer; }
-        .social-icon-img:hover { transform: scale(1.15); filter: drop-shadow(0 0 10px var(--gold)); }
+        .col-depoimentos {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
 
-        .suporte-clean { position: relative; min-height: 100vh; width: 100%; display: flex; align-items: center; justify-content: center; padding: 100px 5%; }
-        .suporte-fundo { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: url('banner.png') no-repeat center center; background-size: cover; filter: brightness(0.4); z-index: -1; }
-        .suporte-content { max-width: 600px; width: 100%; background: rgba(0,0,0,0.8); backdrop-filter: blur(10px); padding: 50px; border-radius: 15px; border: 1px solid var(--gold); text-align: center; }
-        .suporte-content h1 { font-family: 'Playfair Display', serif; font-size: 2.2rem; color: var(--gold); margin-bottom: 30px; text-transform: uppercase; }
-        .suporte-card { background: rgba(255,215,0,0.1); padding: 30px; border-radius: 10px; margin-bottom: 30px; }
-        .suporte-label { font-size: 0.8rem; color: #aaa; text-transform: uppercase; margin-bottom: 10px; display: block; }
-        .suporte-email { font-size: 1.3rem; font-weight: 700; color: #fff; }
-        .suporte-email a { color: #fff; text-decoration: none; }
-        .suporte-desc p { font-size: 1rem; color: #ccc; line-height: 1.6; }
+        .card-review {
+            background: #1a1a1a;
+            padding: 20px;
+            border-radius: 4px;
+            border-left: 4px solid var(--gold);
+            color: #fff;
+        }
 
-        .final-footer { background: #000; color: #666; font-size: 0.65rem; text-align: center; padding: 30px 0; border-top: 1px solid #111; text-transform: uppercase; letter-spacing: 2px; width: 100%; z-index: 1000; }
+        .card-review .stars {
+            color: var(--gold);
+            font-weight: 700;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .card-review .text {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            font-style: italic;
+        }
+
+        .card-review .author-info {
+            font-size: 0.75rem;
+            color: #aaa;
+        }
+
+        .form-review-container {
+            background: #1a1a1a;
+            padding: 30px;
+            border-radius: 4px;
+            border: 1px solid var(--gold);
+        }
+
+        .form-review-container h3 {
+            color: var(--gold);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .input-group label {
+            color: #fff;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .input-group input,
+        .input-group textarea,
+        .input-group select {
+            background: #000;
+            color: #fff;
+            border: 1px solid var(--gold);
+            padding: 10px;
+            border-radius: 2px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .btn-enviar {
+            background: var(--gold);
+            color: #000;
+            padding: 12px;
+            border: none;
+            border-radius: 2px;
+            font-weight: 700;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn-enviar:hover {
+            opacity: 0.88;
+        }
+
+        .sobre-clean,
+        .contato-clean,
+        .suporte-clean {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .sobre-fundo,
+        .contato-fundo,
+        .suporte-fundo {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255,215,0,0.05) 0%, rgba(0,0,0,0.8) 100%);
+            z-index: 0;
+        }
+
+        .sobre-content,
+        .contato-content,
+        .suporte-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            color: #fff;
+            text-align: center;
+        }
+
+        .sobre-content h1,
+        .contato-content h1,
+        .suporte-content h1 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            color: var(--gold);
+        }
+
+        .quote {
+            font-size: 1.3rem;
+            font-style: italic;
+            margin: 30px 0;
+            color: var(--gold);
+            border-left: 4px solid var(--gold);
+            padding-left: 20px;
+        }
+
+        .sobre-content p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .sobre-content h2 {
+            font-size: 1.8rem;
+            margin-top: 40px;
+            color: var(--gold);
+        }
+
+        .contato-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .feedback-form,
+        .email-accounts {
+            background: #1a1a1a;
+            padding: 30px;
+            border-radius: 4px;
+            border: 1px solid var(--gold);
+        }
+
+        .feedback-form h2,
+        .email-accounts h3 {
+            color: var(--gold);
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            color: #fff;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            background: #000;
+            color: #fff;
+            border: 1px solid var(--gold);
+            padding: 10px;
+            border-radius: 2px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .btn-feedback {
+            background: var(--gold);
+            color: #000;
+            padding: 12px;
+            border: none;
+            border-radius: 2px;
+            font-weight: 700;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: 0.3s;
+            width: 100%;
+        }
+
+        .btn-feedback:hover {
+            opacity: 0.88;
+        }
+
+        .email-item {
+            background: #000;
+            padding: 15px;
+            border-radius: 2px;
+            border: 1px solid var(--gold);
+            cursor: pointer;
+            transition: 0.3s;
+            margin-bottom: 10px;
+        }
+
+        .email-item:hover {
+            background: rgba(255,215,0,0.1);
+        }
+
+        .email-label {
+            display: block;
+            color: var(--gold);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .email-address {
+            display: block;
+            color: #fff;
+            font-size: 1rem;
+        }
+
+        .suporte-card {
+            background: #1a1a1a;
+            padding: 40px;
+            border-radius: 4px;
+            border: 2px solid var(--gold);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .suporte-label {
+            color: var(--gold);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .suporte-email {
+            color: #fff;
+            font-size: 1.3rem;
+            font-weight: 500;
+        }
+
+        .final-footer {
+            background: #000;
+            color: #666;
+            text-align: center;
+            padding: 30px;
+            font-size: 0.8rem;
+            border-top: 1px solid var(--gold);
+            z-index: 100;
+        }
 
         @media (max-width: 1024px) {
-            .container-trindade { grid-template-columns: 1fr 1fr; gap: 20px; }
-            .col-compra { grid-column: 1 / -1; max-width: 360px; margin: 0 auto; width: 100%; position: static; }
-            .contato-wrapper { grid-template-columns: 1fr; gap: 30px; }
-            .layout-avaliacoes { grid-template-columns: 1fr; gap: 20px; }
+            .grid-produtos { grid-template-columns: repeat(2, 1fr); gap: 40px; }
+            .container-trindade { grid-template-columns: 1fr; gap: 30px; }
+            .col-compra { position: static; }
+            .details-grid { grid-template-columns: repeat(2, 1fr); }
+            .contato-wrapper { grid-template-columns: 1fr; }
         }
 
         @media (max-width: 768px) {
-            header { padding: 0 3%; height: 70px; }
-            .logo { font-size: 0.75rem; }
-            .logo img { height: 45px; }
-            nav ul { gap: 10px; }
-            nav a { font-size: 0.55rem; }
-            main { margin-top: 70px; }
-            .view-home { flex-direction: column; gap: 25px; padding: 40px 5%; justify-content: center; }
-            .column-box { width: 100%; max-width: 320px; flex-shrink: 1; }
-            .display-box { width: 100%; height: 220px; }
-            .hero-center { width: 100%; order: -1; padding: 0 5%; }
-            .hero-center h1 { font-size: clamp(1.1rem, 5.5vw, 1.8rem); }
-            .grid-produtos { grid-template-columns: repeat(2, 1fr); gap: 15px; padding: 20px 5%; }
-            .product-card { padding: 12px; }
-            .product-card img { height: 180px; }
-            .product-card h3 { font-size: 0.9rem; }
-            .product-card p { font-size: 0.75rem; }
-            .container-trindade { grid-template-columns: 1fr; gap: 20px; padding: 20px 5%; }
-            .col-mockup { width: 100%; height: auto; max-width: 280px; margin: 0 auto; }
-            .col-mockup img { width: 100%; height: auto; }
-            .col-texto h1 { font-size: 1.5rem; }
-            .col-texto .description p { font-size: 0.9rem; }
-            .col-compra { width: 100%; max-width: 100%; position: static; }
-            .buy-card { padding: 20px; }
-            .price-value { font-size: 1.8rem; }
-            .btn-gold, .btn-red { font-size: 0.75rem; padding: 10px; }
-            .product-details { padding: 20px 5%; }
-            .details-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
-            .layout-avaliacoes { grid-template-columns: 1fr; gap: 15px; }
-            .col-depoimentos { gap: 15px; }
-            .card-review { padding: 15px; font-size: 0.8rem; }
-            .form-review-container { padding: 20px; }
-            .form-review-container h3 { font-size: 1rem; }
-            .input-group input, .input-group textarea { font-size: 0.75rem; padding: 6px; }
-            .contato-wrapper { grid-template-columns: 1fr; gap: 20px; }
-            .feedback-form { padding: 20px 25px; }
-            .feedback-form h2 { font-size: 1.2rem; }
-            .form-group label { font-size: 0.75rem; }
-            .form-group input, .form-group textarea { font-size: 0.75rem; padding: 6px; }
-            .btn-feedback { font-size: 0.7rem; padding: 10px; }
-            .email-accounts { padding: 20px 25px; margin-bottom: 30px; }
-            .email-accounts h3 { font-size: 1rem; margin-bottom: 15px; }
-            .email-item { padding: 10px 12px; margin-bottom: 8px; }
-            .email-label { font-size: 0.65rem; margin-bottom: 3px; }
-            .email-address { font-size: 0.8rem; }
-            .redes-sociais-footer { padding-top: 20px; gap: 15px; }
-            .social-icon-img { width: 35px; height: 35px; }
-            .sobre-content { padding: 30px 20px; }
-            .sobre-content h1 { font-size: 1.5rem; margin-bottom: 20px; }
-            .sobre-content p { font-size: 0.9rem; line-height: 1.8; }
-            .suporte-content { max-width: 100%; padding: 20px 15px; }
-            .suporte-content h1 { font-size: 1.5rem; margin-bottom: 15px; }
-            .suporte-card { padding: 15px; }
-            .suporte-label { font-size: 0.65rem; }
-            .suporte-email { font-size: 0.85rem; }
-            .suporte-desc p { font-size: 0.85rem; }
-            .contato-content h1 { font-size: 1.5rem; margin-bottom: 30px; }
-            .contato-fundo { filter: brightness(0.3); }
-            .final-footer { font-size: 0.55rem; padding: 20px 0; }
-        }
-
-        @media (max-width: 480px) {
-            header { padding: 0 2%; height: 60px; }
-            .logo { font-size: 0.65rem; gap: 8px; }
-            .logo img { height: 35px; }
-            nav ul { gap: 5px; }
-            nav a { font-size: 0.5rem; padding-bottom: 3px; }
-            #btn-voltar { padding: 4px 8px; font-size: 0.5rem; }
-            main { margin-top: 60px; }
-            .view-home { flex-direction: column; gap: 18px; padding: 25px 3%; justify-content: center; }
-            .column-box { width: 100%; max-width: 280px; flex-shrink: 1; }
-            .column-box p { font-size: 0.7rem; }
-            .display-box { width: 100%; height: 160px; }
-            .hero-center { width: 100%; order: -1; padding: 0 3%; }
-            .hero-center h1 { font-size: clamp(0.95rem, 5vw, 1.3rem); line-height: 1.4; }
-            .line-hero { width: 40px; height: 2px; }
-            .grid-produtos { grid-template-columns: 1fr; gap: 12px; padding: 15px 3%; }
-            .product-card { padding: 10px; }
-            .product-card img { height: 150px; }
-            .product-card h3 { font-size: 0.8rem; }
-            .product-card p { font-size: 0.7rem; }
-            .container-trindade { grid-template-columns: 1fr; gap: 15px; padding: 15px 3%; }
-            .col-mockup { width: 100%; height: auto; max-width: 220px; margin: 0 auto; }
-            .col-mockup img { width: 100%; height: auto; }
-            .col-texto h1 { font-size: clamp(1.1rem, 5vw, 1.4rem); }
-            .col-texto .author { font-size: 0.8rem; }
-            .col-texto .description p { font-size: 0.85rem; }
-            .section-title { font-size: 0.75rem; }
-            .col-compra { width: 100%; max-width: 100%; position: static; }
-            .buy-card { padding: 15px; }
-            .price-label { font-size: 0.7rem; }
-            .price-value { font-size: 1.5rem; }
-            .btn-group { flex-direction: column; }
-            .btn-gold, .btn-red { font-size: 0.7rem; padding: 8px; width: 100%; }
-            .product-details { padding: 15px 3%; }
-            .details-title { font-size: 0.9rem; }
-            .details-grid { grid-template-columns: 1fr; gap: 10px; }
-            .detail-label { font-size: 0.65rem; }
-            .detail-value { font-size: 0.8rem; }
-            .layout-avaliacoes { grid-template-columns: 1fr; gap: 12px; }
-            .card-review { padding: 12px; font-size: 0.75rem; }
-            .form-review-container { padding: 15px; }
-            .form-review-container h3 { font-size: 0.9rem; }
-            .input-group { margin-bottom: 8px; }
-            .input-group label { font-size: 0.7rem; }
-            .input-group input, .input-group textarea { font-size: 0.7rem; padding: 5px; }
-            .contato-wrapper { grid-template-columns: 1fr; gap: 15px; }
-            .contato-content h1 { font-size: 1.2rem; margin-bottom: 20px; }
-            .feedback-form { padding: 15px 20px; }
-            .feedback-form h2 { font-size: 1rem; }
-            .form-group label { font-size: 0.7rem; }
-            .form-group input, .form-group textarea { font-size: 0.7rem; padding: 5px; }
-            .btn-feedback { font-size: 0.65rem; padding: 8px; }
-            .email-accounts { padding: 15px 20px; margin-bottom: 20px; }
-            .email-accounts h3 { font-size: 0.9rem; margin-bottom: 12px; }
-            .email-item { padding: 8px 10px; margin-bottom: 6px; }
-            .email-label { font-size: 0.65rem; margin-bottom: 2px; }
-            .email-address { font-size: 0.75rem; }
-            .redes-sociais-footer { padding-top: 15px; gap: 12px; }
-            .social-icon-img { width: 30px; height: 30px; }
-            .sobre-content { padding: 20px 15px; }
-            .sobre-content h1 { font-size: 1.2rem; margin-bottom: 15px; }
-            .sobre-content p { font-size: 0.8rem; line-height: 1.7; }
-            .suporte-content { max-width: 100%; padding: 15px 12px; }
-            .suporte-content h1 { font-size: 1.2rem; margin-bottom: 12px; }
-            .suporte-card { padding: 12px; }
-            .suporte-label { font-size: 0.6rem; }
-            .suporte-email { font-size: 0.8rem; }
-            .suporte-desc p { font-size: 0.8rem; }
-            .final-footer { font-size: 0.5rem; padding: 15px 0; }
+            .view-home { flex-direction: column; padding: 20px 5%; }
+            .column-box { width: 100%; }
+            .grid-produtos { grid-template-columns: 1fr; gap: 30px; }
+            .details-grid { grid-template-columns: 1fr; }
+            .layout-avaliacoes { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -626,32 +747,61 @@
     <script>
         /* ============================================================
            LÓGICA DA ANIMAÇÃO DE MATERIALIZAÇÃO (CIRÚRGICO)
+           
+           PROTOCOLO DE TRANSPLANTE: ANIMAÇÃO DE MATERIALIZAÇÃO
+           Operador: Manus
+           Objetivo: Integração cirúrgica do sistema de animação de abertura
+           
+           Especificações Técnicas:
+           - Asset: background-site.webp
+           - Delay de Início: 4s (fase de latência)
+           - Tempo de Materialização: 4s (duração do encontro dos fragmentos)
+           - Estado Final: Opacidade 100%, Alinhamento Central/Cover
+           - Conceito: União de Fragmentos Espaciais
         ============================================================ */
         let scene, camera, renderer, particles, geometry;
         let positions = [], colors = [];
         let animationStarted = false;
+        let particlesReady = false;
 
         function initAnimation() {
             scene = new THREE.Scene();
             camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
             camera.position.z = 320;
-            renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('particle-canvas'), antialias: true });
+            renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('particle-canvas'), antialias: true, alpha: true });
             renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setClearColor(0x000000, 1);
 
             const image = new Image();
-            image.src = 'background-site.webp'; // Imagem de referência solicitada
+            image.src = 'background-site.webp';
             image.onload = () => {
                 const tempCanvas = document.createElement('canvas');
                 const ctx = tempCanvas.getContext('2d');
-                tempCanvas.width = image.width; tempCanvas.height = image.height;
+                tempCanvas.width = image.width;
+                tempCanvas.height = image.height;
                 ctx.drawImage(image, 0, 0);
                 const imgData = ctx.getImageData(0, 0, image.width, image.height).data;
-                const step = 2; 
+                const step = 2;
+                
+                // Calcula escala para manter proporção (cover mode)
+                const windowRatio = window.innerWidth / window.innerHeight;
+                const imageRatio = image.width / image.height;
+                let scale = 1;
+                if (windowRatio > imageRatio) {
+                    scale = window.innerWidth / image.width;
+                } else {
+                    scale = window.innerHeight / image.height;
+                }
+                
+                // Gera partículas com alinhamento correto para pixel-perfect alignment
                 for (let y = 0; y < image.height; y += step) {
                     for (let x = 0; x < image.width; x += step) {
                         const i = (y * image.width + x) * 4;
                         if (imgData[i+3] > 128) {
-                            positions.push(x - image.width / 2, -y + image.height / 2, 0);
+                            // Mapeia coordenadas para o espaço 3D com escala e centralização
+                            const posX = (x - image.width / 2) * scale;
+                            const posY = -(y - image.height / 2) * scale;
+                            positions.push(posX, posY, 0);
                             colors.push(imgData[i]/255, imgData[i+1]/255, imgData[i+2]/255);
                         }
                     }
@@ -679,6 +829,7 @@
             const material = new THREE.PointsMaterial({ size: 2.0, vertexColors: true, transparent: true, opacity: 0.9 });
             particles = new THREE.Points(geometry, material);
             scene.add(particles);
+            particlesReady = true;
             animate();
         }
 
@@ -690,7 +841,7 @@
         }
 
         function startMaterialization() {
-            if (animationStarted) return;
+            if (animationStarted || !particlesReady) return;
             animationStarted = true;
 
             const audioSaudacao = new Audio('saudacao.mp3'); 
@@ -700,27 +851,32 @@
             // Remove o preloader de clique imediatamente
             document.getElementById('preloader').classList.add('fade-out');
 
-            // Inicia a materialização (fusão dos pedacinhos)
-            const posAttr = particles.geometry.attributes.position;
-            for (let i = 0; i < posAttr.array.length; i += 3) {
-                new TWEEN.Tween({ x: posAttr.array[i], y: posAttr.array[i+1], z: posAttr.array[i+2] })
-                    .to({ x: positions[i], y: positions[i+1], z: positions[i+2] }, 2800)
-                    .easing(TWEEN.Easing.Cubic.InOut)
-                    .onUpdate((obj) => {
-                        posAttr.array[i] = obj.x; posAttr.array[i+1] = obj.y; posAttr.array[i+2] = obj.z;
-                        posAttr.needsUpdate = true;
-                    })
-                    .start();
-            }
-
-            // Após a animação, remove o canvas para mostrar o site real
+            // AGUARDA 4 SEGUNDOS ANTES DE INICIAR A MATERIALIZAÇÃO (FASE DE LATÊNCIA)
             setTimeout(() => {
-                document.getElementById('particle-canvas').style.transition = 'opacity 1s ease';
-                document.getElementById('particle-canvas').style.opacity = '0';
+                // Inicia a materialização (fusão dos fragmentos) com duração de 4 segundos
+                const posAttr = particles.geometry.attributes.position;
+                for (let i = 0; i < posAttr.array.length; i += 3) {
+                    new TWEEN.Tween({ x: posAttr.array[i], y: posAttr.array[i+1], z: posAttr.array[i+2] })
+                        .to({ x: positions[i], y: positions[i+1], z: positions[i+2] }, 4000)
+                        .easing(TWEEN.Easing.Cubic.InOut)
+                        .onUpdate((obj) => {
+                            posAttr.array[i] = obj.x;
+                            posAttr.array[i+1] = obj.y;
+                            posAttr.array[i+2] = obj.z;
+                            posAttr.needsUpdate = true;
+                        })
+                        .start();
+                }
+
+                // Após a animação de 4s, remove o canvas para mostrar o site real
                 setTimeout(() => {
-                    document.getElementById('particle-canvas').style.display = 'none';
-                }, 1000);
-            }, 3000);
+                    document.getElementById('particle-canvas').classList.add('fade-out');
+                    setTimeout(() => {
+                        document.getElementById('particle-canvas').style.display = 'none';
+                        document.getElementById('particle-canvas').style.pointerEvents = 'none';
+                    }, 800);
+                }, 4000);
+            }, 4000);
         }
 
         /* ============================================================
@@ -757,7 +913,7 @@
         let iE = 0, iA = 0, linkAtual = '', historico = 'home';
 
         setInterval(() => { iE = (iE + 1) % hardware.e.length; if(document.getElementById('loop-e')) document.getElementById('loop-e').src = hardware.e[iE].img; }, 3000);
-        setInterval(() => { iA = (iA + 1) % hardware.a.length; if(document.getElementById('loop-a')) document.getElementById('loop-a').src = hardware.a[iA].length; }, 3000);
+        setInterval(() => { iA = (iA + 1) % hardware.a.length; if(document.getElementById('loop-a')) document.getElementById('loop-a').src = hardware.a[iA].img; }, 3000);
 
         function resetTelas() {
             ['view-home', 'view-galeria', 'view-sinopse', 'view-info-extra', 'btn-voltar'].forEach(id => {
@@ -842,6 +998,16 @@
             initAnimation();
             irHome();
         };
+        
+        // Ajusta canvas ao redimensionar a janela
+        window.addEventListener('resize', () => {
+            if (renderer) {
+                renderer.setSize(window.innerWidth, window.innerHeight);
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+            }
+        });
+        
         document.addEventListener('click', startMaterialization);
     </script>
 </body>

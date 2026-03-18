@@ -23,6 +23,33 @@
             --border: #D1D1D1;
         }
 
+        /* --- ESTILOS DO PRELOADER (TELA PRETA) --- */
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: black;
+            z-index: 9999;
+            opacity: 1;
+            visibility: visible;
+            transition: opacity 1s ease, visibility 1s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--gold);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            cursor: pointer;
+        }
+
+        #preloader.fade-out {
+            opacity: 0;
+            visibility: hidden;
+        }
+
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body, html { min-height: 100%; background-color: var(--bg-black); font-family: 'Inter', sans-serif; overflow-x: hidden !important; display: flex; flex-direction: column; width: 100%; }
         main { width: 100%; overflow-x: hidden !important; }
@@ -787,6 +814,7 @@
     </style>
 </head>
 <body>
+    <div id="preloader">CLIQUE PARA INICIAR A EXPERIÊNCIA</div>
     <div id="bg"></div>
     <header>
         <div class="logo"><img src="selo.png"><span>Portal Pleno O Código</span></div>
@@ -1107,6 +1135,21 @@
                 alert('E-mail: ' + email + '\n\nCopie este endereco e envie um e-mail para nos!');
             });
         }
+
+        // Função para iniciar a experiência após o clique
+        function iniciarExperiencia() {
+            document.removeEventListener('click', iniciarExperiencia);
+            const audioSaudacao = new Audio('saudacao.mp3'); 
+            audioSaudacao.volume = 0.8;
+            audioSaudacao.play().catch(e => console.log('Áudio bloqueado ou não encontrado'));
+
+            setTimeout(function() {
+                const preloader = document.getElementById('preloader');
+                if(preloader) preloader.classList.add('fade-out');
+            }, 2000);
+        }
+
+        document.addEventListener('click', iniciarExperiencia);
 
         // Inicializa na home
         irHome();

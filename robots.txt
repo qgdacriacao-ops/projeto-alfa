@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /private/
+Disallow: /config/
 
 Sitemap: https://portalpleno.com.br/sitemap.xml

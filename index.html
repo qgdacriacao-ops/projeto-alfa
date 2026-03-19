@@ -98,12 +98,13 @@
             height: 85px;
             border-bottom: 2px solid var(--gold);
         }
-        .logo { display: flex; align-items: center; gap: 15px; color: #fff; font-weight: 700; text-transform: uppercase; font-size: 0.9rem; }
+        .logo { display: flex; align-items: center; gap: 15px; color: #fff; font-weight: 700; text-transform: uppercase; font-size: 0.9rem; flex-shrink: 0; }
         .logo img { height: 60px; }
-        nav ul { list-style: none; display: flex; gap: 20px; align-items: center; flex-wrap: wrap; }
-        nav a { text-decoration: none; color: #fff; font-size: 0.65rem; font-weight: 700; text-transform: uppercase; cursor: pointer; transition: 0.3s; border-bottom: 2px solid transparent; padding-bottom: 5px; }
+        nav { overflow: hidden; flex: 1; display: flex; justify-content: flex-end; }
+        nav ul { list-style: none; display: flex; gap: 20px; align-items: center; }
+        nav a { text-decoration: none; color: #fff; font-size: 0.65rem; font-weight: 700; text-transform: uppercase; cursor: pointer; transition: 0.3s; border-bottom: 2px solid transparent; padding-bottom: 5px; white-space: nowrap; }
         nav a:hover, nav a.active { color: var(--gold); border-bottom: 2px solid var(--gold); }
-        #btn-voltar { display: none; color: var(--gold); border: 1px solid var(--gold); padding: 5px 12px; font-size: 0.6rem; font-weight: 700; text-transform: uppercase; cursor: pointer; }
+        #btn-voltar { display: none; color: var(--gold); border: 1px solid var(--gold); padding: 5px 12px; font-size: 0.6rem; font-weight: 700; text-transform: uppercase; cursor: pointer; white-space: nowrap; }
 
         /* ============================================================
            FUNDO
@@ -128,11 +129,14 @@
            VIEW GALERIA
         ============================================================ */
         .view-galeria { display: none; background: #000; min-height: 100vh; padding: 60px 5% 100px; width: 100%; overflow-x: hidden; }
-        .grid-produtos { display: grid; grid-template-columns: repeat(4, 1fr); gap: 60px; max-width: 1400px; margin: 0 auto; }
-        .card-flutuante { text-align: center; cursor: pointer; transition: transform 0.4s ease; animation: flutuar 4s ease-in-out infinite; }
-        .card-flutuante img { width: 100%; height: 350px; object-fit: contain; transition: 0.4s; }
+        .grid-produtos { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; max-width: 1400px; margin: 0 auto; width: 100%; }
+        .card-flutuante { text-align: center; cursor: pointer; transition: transform 0.4s ease; animation: flutuar 4s ease-in-out infinite; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        .card-flutuante img { width: 100%; max-width: 200px; height: 300px; object-fit: contain; transition: 0.4s; }
         .card-flutuante:hover img { transform: scale(1.05); filter: drop-shadow(0 0 20px var(--glow)); }
+        .card-flutuante .stars { color: var(--gold); margin-top: 10px; font-weight: 700; }
         @keyframes flutuar { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+        @media (max-width: 1024px) { .grid-produtos { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; } }
+        @media (max-width: 768px) { .grid-produtos { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px; } .card-flutuante img { max-width: 150px; height: 220px; } }
 
         /* ============================================================
            VIEW SINOPSE
@@ -613,6 +617,13 @@
         }
 
         @media (max-width: 768px) {
+            header { padding: 0 3%; }
+            .logo span { display: none; }
+            nav { justify-content: flex-start; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+            nav::-webkit-scrollbar { display: none; }
+            nav ul { gap: 15px; padding: 10px 0; }
+            nav a { font-size: 0.6rem; }
+            
             .view-home { flex-direction: column; padding: 20px 5%; }
             .column-box { width: 100%; }
             .grid-produtos { grid-template-columns: 1fr; gap: 30px; }
@@ -681,7 +692,7 @@
                     <div class="description">
                         <p>Análise técnica da soberania intelectual e engenharia de comportamento humano aplicada ao alto desempenho mental.</p>
                         <span class="section-title">Sinopse</span>
-                        <p id="target-desc">O Código não é apenas um manual, é a autópsia da personalidade necessária para a quebra de padrões limitantes.</p>
+                        <div id="target-desc"></div>
                     </div>
                 </div>
                 <div class="col-compra">
@@ -747,19 +758,6 @@
     <script>
         /* ============================================================
            LÓGICA DA ANIMAÇÃO DE MATERIALIZAÇÃO (CIRÚRGICO)
-           
-           PROTOCOLO DE TRANSPLANTE: ANIMAÇÃO DE MATERIALIZAÇÃO
-           Operador: Manus
-           Objetivo: Integração cirúrgica do sistema de animação de abertura
-           
-           Especificações Técnicas:
-           - Asset: background-site.webp
-           - Delay de Início: 4s (fase de latência)
-           - Tempo de Materialização: 4s (duração do encontro dos fragmentos)
-           - Perspectiva: Frontal (corte 2D, sem ângulo 3D)
-           - Movimento: Espiral convergente culminando na imagem real
-           - Estado Final: Opacidade 100%, Alinhamento Central/Cover
-           - Fade-out sincronizado: 3s após término do áudio
         ============================================================ */
         let scene, camera, renderer, particles, geometry;
         let positions = [], colors = [], startPositions = [];
@@ -821,7 +819,6 @@
         function createParticlesMesh() {
             geometry = new THREE.BufferGeometry();
             const startPos = new Float32Array(positions.length);
-            
             for (let i = 0; i < positions.length; i += 3) {
                 const index = i / 3;
                 const angle = (index * 0.15) % (Math.PI * 2);
@@ -829,10 +826,8 @@
                 startPos[i] = Math.cos(angle) * radius;
                 startPos[i+1] = Math.sin(angle) * radius;
                 startPos[i+2] = 0;
-                
                 startPositions.push(startPos[i], startPos[i+1], startPos[i+2]);
             }
-            
             geometry.setAttribute('position', new THREE.BufferAttribute(startPos, 3));
             geometry.setAttribute('color', new THREE.BufferAttribute(new Float32Array(colors), 3));
             const material = new THREE.PointsMaterial({ size: 2.5, vertexColors: true, transparent: true, opacity: 0.95 });
@@ -851,42 +846,23 @@
         function startMaterialization() {
             if (animationStarted || !particlesReady) return;
             animationStarted = true;
-
             const audioSaudacao = new Audio('saudacao.mp3'); 
             audioSaudacao.volume = 0.8;
             let audioEnded = false;
-            
             audioSaudacao.play().catch(e => console.log('Áudio bloqueado ou não encontrado'));
-            
-            audioSaudacao.addEventListener('ended', () => {
-                audioEnded = true;
-            }, { once: true });
-
+            audioSaudacao.addEventListener('ended', () => { audioEnded = true; }, { once: true });
             document.getElementById('preloader').classList.add('fade-out');
-
             setTimeout(() => {
                 const posAttr = particles.geometry.attributes.position;
                 for (let i = 0; i < posAttr.array.length; i += 3) {
-                    new TWEEN.Tween({ 
-                        x: posAttr.array[i], 
-                        y: posAttr.array[i+1], 
-                        z: posAttr.array[i+2] 
-                    })
-                        .to({ 
-                            x: positions[i], 
-                            y: positions[i+1], 
-                            z: positions[i+2] 
-                        }, 4000)
+                    new TWEEN.Tween({ x: posAttr.array[i], y: posAttr.array[i+1], z: posAttr.array[i+2] })
+                        .to({ x: positions[i], y: positions[i+1], z: positions[i+2] }, 4000)
                         .easing(TWEEN.Easing.Cubic.InOut)
                         .onUpdate((obj) => {
-                            posAttr.array[i] = obj.x;
-                            posAttr.array[i+1] = obj.y;
-                            posAttr.array[i+2] = obj.z;
+                            posAttr.array[i] = obj.x; posAttr.array[i+1] = obj.y; posAttr.array[i+2] = obj.z;
                             posAttr.needsUpdate = true;
-                        })
-                        .start();
+                        }).start();
                 }
-
                 function triggerFadeOut() {
                     document.getElementById('particle-canvas').classList.add('fade-out');
                     setTimeout(() => {
@@ -894,20 +870,10 @@
                         document.getElementById('particle-canvas').style.pointerEvents = 'none';
                     }, 800);
                 }
-
                 const audioCheckInterval = setInterval(() => {
-                    if (audioEnded) {
-                        clearInterval(audioCheckInterval);
-                        setTimeout(triggerFadeOut, 3000);
-                    }
+                    if (audioEnded) { clearInterval(audioCheckInterval); setTimeout(triggerFadeOut, 3000); }
                 }, 100);
-                
-                setTimeout(() => {
-                    clearInterval(audioCheckInterval);
-                    if (!audioEnded) {
-                        setTimeout(triggerFadeOut, 3000);
-                    }
-                }, 15000);
+                setTimeout(() => { clearInterval(audioCheckInterval); if (!audioEnded) setTimeout(triggerFadeOut, 3000); }, 15000);
             }, 4000);
         }
 
@@ -916,20 +882,20 @@
         ============================================================ */
         const hardware = {
             e: [
-                {img: 'ebook01.webp', title: 'Know Yourself First', price: '$ 11.00', link: 'https://pay.kiwify.com/8S4FCE0', desc: 'Descubra os fundamentos da autossuperação através de uma análise técnica da personalidade.'},
-                {img: 'ebook02.webp', title: 'The Engineering of Collision', price: '$ 11,50', link: 'https://pay.kiwify.com/ZjtlaGh', desc: 'Uma análise profunda sobre os mecanismos que causam o colapso de relacionamentos.'},
-                {img: 'ebook03.webp', title: 'The Supremacy Code', price: '$ 11,99', link: 'https://pay.kiwify.com/NcdLsaN', desc: 'O código supremo da excelência pessoal.'},
-                {img: 'ebook04.webp', title: 'Descubra Você', price: 'R$ 29,50', link: 'https://pay.kiwify.com.br/P8UTO6L', desc: 'O Amor Extraordinário Começa Onde Você Menos Espera.'},
-                {img: 'ebook05.webp', title: 'Engenharia da Colisão', price: 'R$ 39,00', link: 'https://pay.kiwify.com.br/oRZAlbz', desc: 'Relações não fracassam por falta de amor, mas por falha de hardware.'},
-                {img: 'ebook06.webp', title: 'Autópsia da Personalidade', price: 'R$ 59,90', link: 'https://pay.kiwify.com.br/sD4nqRO', desc: 'O que resta quando as camadas de condicionamento social são removidas.'}
+                {img: 'ebook04.webp', title: 'Descubra Você', price: 'R$ 29,50', link: 'https://pay.kiwify.com.br/P8UTO6L', desc: '<p>Você sente que está vivendo em um ciclo repetitivo de encontros frustrantes e desencontros emocionais?</p><p>Muitas vezes, depositamos no outro a responsabilidade pela nossa felicidade, apenas para encontrar desilusão. Mas a verdade é que a chave para conexões autênticas e duradouras nunca esteve no "parceiro ideal", mas sim escondida dentro da sua própria essência.</p><p>Em "Descubra Você", Júlio Bhrósz convida você para uma jornada profunda de autodescoberta. Este e-book não é apenas um guia de conselhos; é um mapa prático para quem deseja parar de sobreviver a relações vazias e começar a construir vínculos reais e significativos.</p><p><strong>O que você vai encontrar nesta jornada:</strong></p><p><strong>O Elo Perdido:</strong> Entenda por que a busca externa por validação é um caminho sem fim e aprenda como o autoconhecimento é o único pilar capaz de sustentar vínculos verdadeiros.</p><p><strong>Seu Mapa Relacional:</strong> Desvende como sua história familiar e os padrões invisíveis moldam suas escolhas atuais. Aprenda a romper com o passado para traçar novos caminhos de afeto.</p><p><strong>Identidade e Propósito:</strong> Vá além dos rótulos que o mundo te impôs. Descubra quem você é em sua essência, mapeie seus desejos e entenda como seu propósito de vida se entrelaça com o amor.</p><p><strong>Superando Barreiras Internas:</strong> Identifique os medos ocultos que geram autossabotagem e adquira a coragem necessária para viver relacionamentos plenos e transparentes.</p><p><strong>A Arte da Conexão:</strong> Domine a comunicação empática. Aprenda a estabelecer limites saudáveis e a cultivar o respeito mútuo, transformando conflitos em oportunidades de crescimento recíproco.</p><p>A jornada mais importante da sua vida começa agora. Não espere mais pelo amor ideal. Comece a cultivá-lo a partir do seu interior e mude para sempre a forma como você ama e é amado.</p>'},
+                {img: 'ebook05.webp', title: 'Engenharia da Colisão', price: 'R$ 39,00', link: 'https://pay.kiwify.com.br/oRZAlbz', desc: '<p>O seu relacionamento é uma estrutura de argila ou uma armadura de aço?</p><p>A maioria dos casais vive sob a fragilidade de acordos superficiais, esperando que o tempo resolva fissuras estruturais que, na verdade, exigem intervenção técnica. Em "Engenharia da Colisão", Júlio Bhrósz apresenta o método definitivo para casais que decidiram abandonar a instabilidade emocional e assumir o controle absoluto da sua dinâmica afetiva.</p><p>Este não é um livro de conselhos sentimentais; é um manual de Engenharia de Relacionamento de alto impacto. Aqui, o leitor assume o papel de arquiteto da própria união, aprendendo a lidar com as forças invisíveis que sustentam ou derrubam uma vida a dois.</p><p><strong>O que você irá processar nesta obra:</strong></p><p><strong>Estanqueidade Emocional:</strong> Aprenda a blindar o seu relacionamento contra infiltrações externas e desgastes invisíveis. Saiba como manter a estrutura selada e protegida contra a pressão do ambiente.</p><p><strong>O Princípio da Colisão:</strong> Entenda como transformar o impacto dos conflitos em energia de fusão. Pare de temer o choque e aprenda a utilizá-lo para forjar uma conexão inquebrável.</p><p><strong>Do Barro ao Aço:</strong> Identifique as zonas de fragilidade e substitua a "argila" das expectativas infantis pela soberania do aço. Construa uma base que não apenas resiste ao tempo, mas se fortalece sob tensão.</p><p><strong>Arquitetura da Soberania:</strong> Domine as leis que regem a estabilidade entre dois indivíduos autônomos. Aprenda a desenhar um projeto de vida comum onde a individualidade potencializa a força do conjunto.</p><p><strong>Sistemas de Alta Performance:</strong> Implemente protocolos de comunicação e resolução que funcionam com a precisão de engrenagens ajustadas, eliminando o atrito desnecessário e o desperdício de energia.</p><p>Pare de remendar o que deveria ser reconstruído. Assuma o comando da sua estrutura. Deixe para trás a vulnerabilidade do comum e eleve seu relacionamento ao nível de Soberania.</p>'},
+                {img: 'ebook06.webp', title: 'Autópsia da Personalidade', price: 'R$ 59,90', link: 'https://pay.kiwify.com.br/sD4nqRO', desc: '<p>O que resta de você quando as camadas de autodecepção são removidas?</p><p>A maioria das pessoas passa a vida tentando "consertar" o que nunca funcionou, alimentando-se de migalhas emocionais e aceitando a falência da própria identidade. Em "Autópsia da Personalidade", Júlio Bhrósz executa o procedimento definitivo: a abertura completa da estrutura psíquica para identificar a causa mortis da sua vontade e a origem da sua submissão.</p><p>Este não é um convite ao diálogo; é um Exame Cadavérico do Ego. Aqui, o leitor deixa de ser um espectador passivo para se tornar o agente que disseca as próprias falhas, eliminando parasitas emocionais e resgatando a Supremacia sobre sua existência.</p><p><strong>Os Protocolos de Exame deste Volume:</strong></p><p><strong>Dissecação dos Padrões:</strong> Identifique os tecidos necrosados da sua história que ainda ditam suas reações presentes. Corte o que está morto para que a vida real possa emergir.</p><p><strong>Extirpação de Migalhas:</strong> Aprenda o protocolo rigoroso para identificar e deletar dependências afetivas e necessidades de validação que drenam sua energia vital.</p><p><strong>Identificação do Parasitismo:</strong> Saiba quem são os agentes externos que se alimentam da sua falta de limites e aprenda a neutralizar a influência deles através da soberania individual.</p><p><strong>O Resgate da Supremacia:</strong> Reestabeleça o comando central da sua mente. Saiba como a biologia e a mentalidade operam em conjunto para criar um estado de domínio sobre as próprias decisões.</p><p><strong>Anatomia da Vontade:</strong> Entenda como a estrutura da personalidade é formada e como você pode reconfigurar o seu núcleo operacional para nunca mais aceitar menos do que o topo.</p>'},
+                {img: 'ebook01.webp', title: 'Know Yourself First', price: '$ 11.00', link: 'https://pay.kiwify.com/8S4FCE0', desc: '<p>Are you exhausted from chasing a ghost?</p><p>Many people spend their lives trapped in a loop of disappointing encounters, believing that the "right person" is the missing piece to their happiness. But looking outward for what can only be found within is a road that leads to nowhere.</p><p>In "Know Yourself First", Júlio Bhrósz presents a radical shift in perspective. This is not a collection of vague advice; it is a strategic blueprint for those ready to stop settling for illusions and start building a life of profound, authentic connection.</p><p><strong>The Milestones of Your Transformation:</strong></p><p><strong>The Missing Link:</strong> Break the cycle of external validation. Discover why your inner foundation is the only thing capable of supporting a bond that doesn\'t crumble under pressure.</p><p><strong>Your Relational Blueprint:</strong> Decode the invisible forces of your past. Understand how family history and the neuroscience of attraction have been pulling the strings—and learn how to cut them to forge a new destiny.</p><p><strong>Authentic Identity & Purpose:</strong> Strip away the labels the world gave you. Define who you are at your core and align your life\'s purpose with the way you choose to love.</p><p><strong>Dismantling Inner Barriers:</strong> Shine a light on the hidden fears and self-sabotage that keep you playing small. Gain the tools to replace hesitation with the courage to be truly seen.</p><p><strong>The Mastery of Connection:</strong> Move beyond surface-level talk. Master the art of empathetic communication and set the boundaries that command respect and foster mutual growth.</p><p>The most important relationship you will ever have is the one you cultivate with yourself. Stop waiting for a miracle to walk through the door. The architecture of a fulfilling life begins in your own heart.</p>'},
+                {img: 'ebook02.webp', title: 'The Engineering of Collision', price: '$ 11,50', link: 'https://pay.kiwify.com/ZjtlaGh', desc: '<p>Is your relationship built to withstand the pressure, or is it merely waiting for the next crack to appear?</p><p>Most couples operate on a foundation of "clay"—a fragile mix of unspoken expectations and emotional vulnerability that crumbles under the first sign of stress. In "Collision Engineering," Júlio Bhrósz delivers the definitive manual for those who refuse to settle for a collapsing structure.</p><p>This is not a book about "getting along"; it is a technical intervention for the Reader who chooses to architect a bond with the precision and unyielding strength of Steel.</p><p><strong>The Technical Protocols of this Volume:</strong></p><p><strong>Emotional Watertightness:</strong> Learn the art of sealing your union against external leaks and invisible erosion. Ensure your core structure remains impenetrable to outside pressure.</p><p><strong>The Physics of Collision:</strong> Stop fearing the impact. Master the principles of turning relational "collisions" into the very energy required for structural fusion.</p><p><strong>Replacing Clay with Sovereignty:</strong> Identify the zones of fragility within your dynamic. Systematic instructions on how to reinforce your foundation until it achieves the Sovereignty of Steel.</p><p><strong>The Architecture of Autonomy:</strong> High-performance relationships require two sovereign individuals. Learn to design a common project where individual strength amplifies the power of the whole.</p><p><strong>Zero-Friction Systems:</strong> Implement communication protocols that function like perfectly calibrated gears—eliminating the heat of unnecessary friction and the waste of emotional energy.</p><p>Stop patching up a failing design. Take command of your structural destiny. Abandon the vulnerability of the masses and forge a relationship defined by power, stability, and Absolute Sovereignty.</p>'},
+                {img: 'ebook03.webp', title: 'THE SUPREMACY CODE', price: '$ 11,99', link: 'https://pay.kiwify.com/NcdLsaN', desc: '<p>What remains of you when the layers of self-deception are stripped away?</p><p>Most people spend their existence trying to "fix" a broken identity, feeding on emotional crumbs and accepting the slow decay of their own will. In "The Supremacy Code," Júlio Bhrósz performs the ultimate procedure: a total opening of the psychic structure to identify the causa mortis of your drive and the root of your submission.</p><p>This is not a self-help book; it is a Post-Mortem Examination of the Ego. Here, the Reader transitions from a passive observer to the lead specialist, dissecting their own failures, extracting emotional parasites, and reclaiming Supremacy over their existence.</p><p><strong>The Examination Protocols of this Volume:</strong></p><p><strong>Dissecting the Patterns:</strong> Identify the necrotic tissues of your history that still dictate your current reactions. Cut away what is dead so that real life can emerge.</p><p><strong>Extraction of Emotional Crumbs:</strong> Learn the rigorous protocol to identify and delete affective dependencies and the desperate need for validation that drains your vital energy.</p><p><strong>Identifying Parasitism:</strong> Recognize the external agents feeding on your lack of boundaries and learn to neutralize their influence through individual sovereignty.</p><p><strong>The Restoration of Supremacy:</strong> Re-establish the central command of your mind. Understand how biology and mindset operate together to create a state of total dominance over your decisions.</p><p><strong>Anatomy of the Will:</strong> Understand how the personality structure is formed and how to reconfigure your core operating system to never again accept anything less than the top.</p>'}
             ],
             a: [
-                {img: 'audio01.webp', title: 'Know Yourself First', price: '$ 13.95', link: 'https://pay.kiwify.com/ilgU4Kg', desc: 'Descubra os fundamentos da autossuperação.'},
-                {img: 'audio02.webp', title: 'The Engineering of Collision', price: '$ 14.95', link: 'https://pay.kiwify.com/2LTHnl0', desc: 'Uma análise profunda sobre os mecanismos.'},
-                {img: 'audio03.webp', title: 'The Supremacy Code', price: '$ 15.95', link: 'https://pay.kiwify.com/TGmTjRA', desc: 'O código supremo da excelência pessoal.'},
-                {img: 'audio04.webp', title: 'Descubra Você', price: 'R$ 37,50', link: 'https://pay.kiwify.com.br/lDiv2Do', desc: 'O Amor Extraordinário Começa Onde Você Menos Espera.'},
-                {img: 'audio05.webp', title: 'Engenharia da Colisão', price: 'R$ 39,50', link: 'https://pay.kiwify.com.br/PmaKDGV', desc: 'Relações não fracassam por falta de amor.'},
-                {img: 'audio06.webp', title: 'Autópsia da Personalidade', price: 'R$ 57,50', link: 'https://pay.kiwify.com.br/nJO91Ia', desc: 'O que resta quando as camadas são removidas.'}
+                {img: 'audio04.webp', title: 'Descubra Você', price: 'R$ 37,50', link: 'https://pay.kiwify.com.br/lDiv2Do', desc: '<p><strong>Descubra Você: Desvende Sua Essência, Transforme Seus Relacionamentos (Audiobook)</strong></p><p>Você sente que está vivendo em um ciclo repetitivo de encontros frustrantes e desencontros emocionais?</p><p>Muitas vezes, depositamos no outro a responsabilidade pela nossa felicidade, apenas para encontrar desilusão. Mas a verdade é que a chave para conexões autênticas e duradouras nunca esteve no "parceiro ideal", mas sim escondida dentro da sua própria essência.</p><p>Em "Descubra Você", Júlio Bhrósz convida você para uma jornada profunda de autodescoberta. Este audiobook não é apenas um guia de conselhos; é um mapa prático para quem deseja parar de sobreviver a relações vazias e começar a construir vínculos reais e significativos, narrado com a profundidade que o conteúdo merece.</p>'},
+                {img: 'audio05.webp', title: 'Engenharia da Colisão', price: 'R$ 39,50', link: 'https://pay.kiwify.com.br/PmaKDGV', desc: '<p><strong>Engenharia da Colisão: A Soberania do Aço nos Relacionamentos (Audiobook)</strong></p><p>O seu relacionamento é uma estrutura de argila ou uma armadura de aço?</p><p>A maioria dos casais vive sob a fragilidade de acordos superficiais, esperando que o tempo resolva fissuras estruturais que, na verdade, exigem intervenção técnica. Em "Engenharia da Colisão", Júlio Bhrósz apresenta o método definitivo para casais que decidiram abandonar a instabilidade emocional e assumir o controle absoluto da sua dinâmica afetiva.</p><p>Este não é um audiobook de conselhos sentimentais; é um manual de Engenharia de Relacionamento de alto impacto, narrado com a intensidade que o conteúdo técnico e transformador merece.</p>'},
+                {img: 'audio06.webp', title: 'Autópsia da Personalidade', price: 'R$ 57,50', link: 'https://pay.kiwify.com.br/nJO91Ia', desc: '<p><strong>Autópsia da Personalidade: O Fim das Migalhas Emocionais (Audiobook)</strong></p><p>O que resta de você quando as camadas de autodecepção são removidas?</p><p>A maioria das pessoas passa a vida tentando "consertar" o que nunca funcionou, alimentando-se de migalhas emocionais e aceitando a falência da própria identidade. Em "Autópsia da Personalidade", Júlio Bhrósz executa o procedimento definitivo: a abertura completa da estrutura psíquica para identificar a causa mortis da sua vontade e a origem da sua submissão.</p><p>Este audiobook não é um convite ao diálogo; é um Exame Cadavérico do Ego, narrado com a visceral que transforma o ouvinte em agente de sua própria supremacia.</p>'},
+                {img: 'audio01.webp', title: 'Know Yourself First', price: '$ 13.95', link: 'https://pay.kiwify.com/ilgU4Kg', desc: '<p><strong>Know Yourself First: Unravel Your Essence, Transform Your Relationships (Audiobook)</strong></p><p>Are you exhausted from chasing a ghost?</p><p>Many people spend their lives trapped in a loop of disappointing encounters, believing that the "right person" is the missing piece to their happiness. But looking outward for what can only be found within is a road that leads to nowhere.</p><p>In "Know Yourself First", Júlio Bhrósz presents a radical shift in perspective. This is not a collection of vague advice; it is a strategic blueprint for those ready to stop settling for illusions and start building a life of profound, authentic connection, now available in immersive audio format.</p>'},
+                {img: 'audio02.webp', title: 'The Engineering of Collision', price: '$ 14.95', link: 'https://pay.kiwify.com/2LTHnl0', desc: '<p><strong>The Engineering of Collision: From Fragile Clay to the Sovereignty of Steel (Audiobook)</strong></p><p>Is your relationship built to withstand the pressure, or is it merely waiting for the next crack to appear?</p><p>Most couples operate on a foundation of "clay"—a fragile mix of unspoken expectations and emotional vulnerability that crumbles under the first sign of stress. In "Collision Engineering," Júlio Bhrósz delivers the definitive manual for those who refuse to settle for a collapsing structure, narrated with the technical precision this masterwork demands.</p>'},
+                {img: 'audio03.webp', title: 'THE SUPREMACY CODE', price: '$ 15.95', link: 'https://pay.kiwify.com/TGmTjRA', desc: '<p><strong>THE SUPREMACY CODE: Delete Emotional Crumbs, Reclaim Your Sovereignty (Audiobook)</strong></p><p>What remains of you when the layers of self-deception are stripped away?</p><p>Most people spend their existence trying to "fix" a broken identity, feeding on emotional crumbs and accepting the slow decay of their own will. In "The Supremacy Code," Júlio Bhrósz performs the ultimate procedure: a total opening of the psychic structure to identify the causa mortis of your drive and the root of your submission.</p><p>This audio experience is not a self-help book; it is a Post-Mortem Examination of the Ego, delivered with the visceral intensity that transforms listeners into architects of their own sovereignty.</p>'}
             ]
         };
 
@@ -943,58 +909,53 @@
         ];
 
         let iE = 0, iA = 0, linkAtual = '', historico = 'home';
-
         setInterval(() => { iE = (iE + 1) % hardware.e.length; if(document.getElementById('loop-e')) document.getElementById('loop-e').src = hardware.e[iE].img; }, 3000);
         setInterval(() => { iA = (iA + 1) % hardware.a.length; if(document.getElementById('loop-a')) document.getElementById('loop-a').src = hardware.a[iA].img; }, 3000);
 
         function resetTelas() {
             ['view-home', 'view-galeria', 'view-sinopse', 'view-info-extra', 'btn-voltar'].forEach(id => {
-                const el = document.getElementById(id);
-                if(el) el.style.display = 'none';
+                const el = document.getElementById(id); if(el) el.style.display = 'none';
             });
-            document.getElementById('bg').style.display = 'none';
-            window.scrollTo(0,0);
+            document.getElementById('bg').style.display = 'none'; window.scrollTo(0,0);
         }
 
         function ativarMenu(id) {
             document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
-            const alvo = document.getElementById('nav-' + id);
-            if(alvo) alvo.classList.add('active');
+            const alvo = document.getElementById('nav-' + id); if(alvo) alvo.classList.add('active');
         }
 
         function irHome() {
-            resetTelas();
-            document.getElementById('view-home').style.display = 'flex';
-            document.getElementById('bg').style.display = 'block';
-            ativarMenu('home');
-            historico = 'home';
+            resetTelas(); document.getElementById('view-home').style.display = 'flex';
+            document.getElementById('bg').style.display = 'block'; ativarMenu('home'); historico = 'home';
         }
 
         function irTitulos() {
-            resetTelas();
-            const grid = document.getElementById('render-grid');
-            grid.innerHTML = [...hardware.e, ...hardware.a].map(item => `
-                <div class="card-flutuante" onclick="abrirSinopse('${item.img}', '${item.title}', '${item.price}', '${item.link}', '${item.desc}')">
-                    <img src="${item.img}">
-                    <div style="color:var(--gold); margin-top:10px;">★★★★★</div>
+            resetTelas(); const grid = document.getElementById('render-grid');
+            const allItems = [...hardware.e, ...hardware.a];
+            grid.innerHTML = allItems.map((item, idx) => `
+                <div class="card-flutuante" data-index="${idx}">
+                    <img src="${item.img}" alt="${item.title}">
+                    <div class="stars">★★★★★</div>
                 </div>`).join('');
+            document.querySelectorAll('.card-flutuante').forEach((card) => {
+                card.addEventListener('click', function() {
+                    const idx = parseInt(this.getAttribute('data-index'));
+                    const item = allItems[idx];
+                    abrirSinopse(item.img, item.title, item.price, item.link, item.desc);
+                });
+            });
             document.getElementById('view-galeria').style.display = 'block';
-            document.getElementById('btn-voltar').style.display = 'block';
-            ativarMenu('ebook');
-            historico = 'titulos';
+            document.getElementById('btn-voltar').style.display = 'block'; ativarMenu('ebook'); historico = 'titulos';
         }
 
         function abrirSinopse(img, title, price, link, desc) {
-            resetTelas();
-            linkAtual = link;
+            resetTelas(); linkAtual = link;
             document.getElementById('target-img').src = img;
             document.getElementById('target-title').innerText = title;
             document.getElementById('target-price').innerText = price;
-            document.getElementById('target-desc').innerText = desc;
+            document.getElementById('target-desc').innerHTML = desc;
             document.getElementById('view-sinopse').style.display = 'block';
-            document.getElementById('btn-voltar').style.display = 'block';
-            ativarMenu('sinopse');
-            historico = 'sinopse';
+            document.getElementById('btn-voltar').style.display = 'block'; ativarMenu('sinopse'); historico = 'sinopse';
         }
 
         function abrirSinopseDefault() { const d = hardware.e[0]; abrirSinopse(d.img, d.title, d.price, d.link, d.desc); }
@@ -1002,12 +963,9 @@
         function voltarFluxo() { if (historico === 'sinopse' || historico === 'info') irTitulos(); else irHome(); }
 
         function abrirInfo(tipo) {
-            resetTelas();
-            const container = document.getElementById('content-info');
+            resetTelas(); const container = document.getElementById('content-info');
             document.getElementById('view-info-extra').style.display = 'block';
-            document.getElementById('btn-voltar').style.display = 'block';
-            ativarMenu(tipo);
-
+            document.getElementById('btn-voltar').style.display = 'block'; ativarMenu(tipo);
             if(tipo === 'compartilhado') {
                 const colEsq = staticReviews.slice(0,3).map(r => renderReview(r)).join('');
                 const colDir = staticReviews.slice(3,6).map(r => renderReview(r)).join('');
@@ -1025,19 +983,13 @@
         function renderReview(r) { return `<div class="card-review"><div class="stars">${r.rating}</div><div class="text">"${r.text}"</div><div class="author-info"><strong>${r.author}</strong><br>${r.email} | ${r.book}</div></div>`; }
         function copiarEmail(email) { navigator.clipboard.writeText(email).then(() => alert('E-mail copiado!')); }
 
-        window.onload = () => {
-            initAnimation();
-            irHome();
-        };
-        
+        window.onload = () => { initAnimation(); irHome(); };
         window.addEventListener('resize', () => {
             if (renderer) {
                 renderer.setSize(window.innerWidth, window.innerHeight);
-                camera.aspect = window.innerWidth / window.innerHeight;
-                camera.updateProjectionMatrix();
+                camera.aspect = window.innerWidth / window.innerHeight; camera.updateProjectionMatrix();
             }
         });
-        
         document.addEventListener('click', startMaterialization);
     </script>
 </body>

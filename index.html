@@ -108,7 +108,7 @@
         /* ============================================================
            FUNDO
         ============================================================ */
-        #bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: url('capa.png') no-repeat center center; background-size: cover; z-index: 1; filter: brightness(0.4); }
+        #bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: url('capa.webp') no-repeat center center; background-size: cover; z-index: 1; filter: brightness(0.4); }
         main { flex: 1; position: relative; z-index: 10; padding-top: 85px; }
 
         /* ============================================================
@@ -631,7 +631,7 @@
     <div id="bg"></div>
 
     <header>
-        <div class="logo"><img src="selo.png"><span>Portal Pleno O Código</span></div>
+        <div class="logo"><img src="selo.webp"><span>Portal Pleno O Código</span></div>
         <nav>
             <ul id="main-nav">
                 <li><a id="nav-home" class="active" onclick="irHome()">Início</a></li>
@@ -651,7 +651,7 @@
         <div id="view-home" class="view-home">
             <div class="column-box">
                 <p>EBOOKS</p>
-                <div class="display-box" onclick="irTitulos()"><img id="loop-e" src="ebook01.png"></div>
+                <div class="display-box" onclick="irTitulos()"><img id="loop-e" src="ebook01.webp"></div>
             </div>
             <div class="hero-center">
                 <h1>O CONFORTO É UMA PRISÃO</h1>
@@ -660,7 +660,7 @@
             </div>
             <div class="column-box">
                 <p>AUDIOBOOKS</p>
-                <div class="display-box" onclick="irTitulos()"><img id="loop-a" src="audio01.png"></div>
+                <div class="display-box" onclick="irTitulos()"><img id="loop-a" src="audio01.webp"></div>
             </div>
         </div>
 
@@ -905,20 +905,20 @@
         ============================================================ */
         const hardware = {
             e: [
-                {img: 'ebook01.png', title: 'Know Yourself First', price: '$ 11.00', link: 'https://pay.kiwify.com/8S4FCE0', desc: 'Descubra os fundamentos da autossuperação através de uma análise técnica da personalidade.'},
-                {img: 'ebook02.png', title: 'The Engineering of Collision', price: '$ 11,50', link: 'https://pay.kiwify.com/ZjtlaGh', desc: 'Uma análise profunda sobre os mecanismos que causam o colapso de relacionamentos.'},
-                {img: 'ebook03.png', title: 'The Supremacy Code', price: '$ 11,99', link: 'https://pay.kiwify.com/NcdLsaN', desc: 'O código supremo da excelência pessoal.'},
-                {img: 'ebook04.png', title: 'Descubra Você', price: 'R$ 29,50', link: 'https://pay.kiwify.com.br/P8UTO6L', desc: 'O Amor Extraordinário Começa Onde Você Menos Espera.'},
-                {img: 'ebook05.png', title: 'Engenharia da Colisão', price: 'R$ 39,00', link: 'https://pay.kiwify.com.br/oRZAlbz', desc: 'Relações não fracassam por falta de amor, mas por falha de hardware.'},
-                {img: 'ebook06.png', title: 'Autópsia da Personalidade', price: 'R$ 59,90', link: 'https://pay.kiwify.com.br/sD4nqRO', desc: 'O que resta quando as camadas de condicionamento social são removidas.'}
+                {img: 'ebook01.webp', title: 'Know Yourself First', price: '$ 11.00', link: 'https://pay.kiwify.com/8S4FCE0', desc: 'Descubra os fundamentos da autossuperação através de uma análise técnica da personalidade.'},
+                {img: 'ebook02.webp', title: 'The Engineering of Collision', price: '$ 11,50', link: 'https://pay.kiwify.com/ZjtlaGh', desc: 'Uma análise profunda sobre os mecanismos que causam o colapso de relacionamentos.'},
+                {img: 'ebook03.webp', title: 'The Supremacy Code', price: '$ 11,99', link: 'https://pay.kiwify.com/NcdLsaN', desc: 'O código supremo da excelência pessoal.'},
+                {img: 'ebook04.webp', title: 'Descubra Você', price: 'R$ 29,50', link: 'https://pay.kiwify.com.br/P8UTO6L', desc: 'O Amor Extraordinário Começa Onde Você Menos Espera.'},
+                {img: 'ebook05.webp', title: 'Engenharia da Colisão', price: 'R$ 39,00', link: 'https://pay.kiwify.com.br/oRZAlbz', desc: 'Relações não fracassam por falta de amor, mas por falha de hardware.'},
+                {img: 'ebook06.webp', title: 'Autópsia da Personalidade', price: 'R$ 59,90', link: 'https://pay.kiwify.com.br/sD4nqRO', desc: 'O que resta quando as camadas de condicionamento social são removidas.'}
             ],
             a: [
-                {img: 'audio01.png', title: 'Know Yourself First', price: '$ 13.95', link: 'https://pay.kiwify.com/ilgU4Kg', desc: 'Descubra os fundamentos da autossuperação.'},
-                {img: 'audio02.png', title: 'The Engineering of Collision', price: '$ 14.95', link: 'https://pay.kiwify.com/2LTHnl0', desc: 'Uma análise profunda sobre os mecanismos.'},
-                {img: 'audio03.png', title: 'The Supremacy Code', price: '$ 15.95', link: 'https://pay.kiwify.com/TGmTjRA', desc: 'O código supremo da excelência pessoal.'},
-                {img: 'audio04.png', title: 'Descubra Você', price: 'R$ 37,50', link: 'https://pay.kiwify.com.br/lDiv2Do', desc: 'O Amor Extraordinário Começa Onde Você Menos Espera.'},
-                {img: 'audio05.png', title: 'Engenharia da Colisão', price: 'R$ 39,50', link: 'https://pay.kiwify.com.br/PmaKDGV', desc: 'Relações não fracassam por falta de amor.'},
-                {img: 'audio06.png', title: 'Autópsia da Personalidade', price: 'R$ 57,50', link: 'https://pay.kiwify.com.br/nJO91Ia', desc: 'O que resta quando as camadas são removidas.'}
+                {img: 'audio01.webp', title: 'Know Yourself First', price: '$ 13.95', link: 'https://pay.kiwify.com/ilgU4Kg', desc: 'Descubra os fundamentos da autossuperação.'},
+                {img: 'audio02.webp', title: 'The Engineering of Collision', price: '$ 14.95', link: 'https://pay.kiwify.com/2LTHnl0', desc: 'Uma análise profunda sobre os mecanismos.'},
+                {img: 'audio03.webp', title: 'The Supremacy Code', price: '$ 15.95', link: 'https://pay.kiwify.com/TGmTjRA', desc: 'O código supremo da excelência pessoal.'},
+                {img: 'audio04.webp', title: 'Descubra Você', price: 'R$ 37,50', link: 'https://pay.kiwify.com.br/lDiv2Do', desc: 'O Amor Extraordinário Começa Onde Você Menos Espera.'},
+                {img: 'audio05.webp', title: 'Engenharia da Colisão', price: 'R$ 39,50', link: 'https://pay.kiwify.com.br/PmaKDGV', desc: 'Relações não fracassam por falta de amor.'},
+                {img: 'audio06.webp', title: 'Autópsia da Personalidade', price: 'R$ 57,50', link: 'https://pay.kiwify.com.br/nJO91Ia', desc: 'O que resta quando as camadas são removidas.'}
             ]
         };
 

@@ -454,9 +454,11 @@
         .sobre-content h1,
         .contato-content h1,
         .suporte-content h1 {
-            font-size: 2.5rem;
+            font-size: 2rem;
             margin-bottom: 30px;
-            color: var(--gold);
+            color: #fff;
+            white-space: nowrap;
+            font-weight: 700;
         }
 
         .quote {
@@ -490,7 +492,7 @@
 
         .feedback-form,
         .email-accounts {
-            background: #1a1a1a;
+            background: var(--chumbo);
             padding: 30px;
             border-radius: 4px;
             border: 1px solid var(--gold);
@@ -498,7 +500,7 @@
 
         .feedback-form h2,
         .email-accounts h3 {
-            color: var(--gold);
+            color: #fff;
             font-size: 1.2rem;
             text-transform: uppercase;
             margin-bottom: 20px;
@@ -575,16 +577,16 @@
         }
 
         .suporte-card {
-            background: #1a1a1a;
+            background: transparent;
             padding: 40px;
             border-radius: 4px;
-            border: 2px solid var(--gold);
+            border: none;
             max-width: 500px;
             margin: 0 auto;
         }
 
         .suporte-label {
-            color: var(--gold);
+            color: #fff;
             font-size: 0.9rem;
             text-transform: uppercase;
             font-weight: 700;
@@ -973,7 +975,7 @@
             } else if(tipo === 'sobre') {
                 container.innerHTML = `<div class="sobre-clean"><div class="sobre-fundo" style="background: url('banner.webp') no-repeat center center; background-size: cover; filter: brightness(0.3);"></div><div class="sobre-content"><h1>A Ciência por trás da Engenharia da Colisão</h1><div class="quote">"Relações não fracassam por falta de amor, mas por falha de hardware. Onde não há soberania individual, o sistema colapsa."</div><p style="text-align: justify;">Muitos buscam respostas no misticismo quando o assunto é o campo afetivo. No entanto, a obra de <strong>Júlio Bhrósz</strong> nasce de uma premissa diferente: o empirismo.</p><p style="text-align: justify;">Se você já sentiu a dor de uma conexão interrompida, entenda que o sofrimento é o sintoma de um sistema descalibrado.</p><p style="text-align: justify;">Nossa filosofia é humanitária: acreditamos que a verdadeira dignidade só é alcançada quando o indivíduo deixa de ser passageiro de suas emoções para se tornar o Operador de sua própria realidade.</p><h2>Júlio Bhrósz</h2></div></div>`;
             } else if(tipo === 'contato') {
-                container.innerHTML = `<div class="contato-clean"><div class="contato-fundo" style="background: url('banner.webp') no-repeat center center; background-size: cover; filter: brightness(0.3);"></div><div class="contato-content"><h1>Entre em Contato</h1><div class="contato-wrapper"><div class="feedback-form"><h2>Envie seu Feedback</h2><div class="form-group"><label>Nome</label><input type="text"></div><div class="form-group"><label>E-mail</label><input type="email"></div><div class="form-group"><label>Mensagem</label><textarea></textarea></div><button class="btn-feedback" onclick="this.innerText='ENVIADO'">Enviar Feedback</button></div><div class="email-accounts"><h3>Contas Oficiais</h3><div class="email-item" onclick="copiarEmail('contato@portalpleno.com.br')"><span class="email-label">Contato</span><span class="email-address">contato@portalpleno.com.br</span></div><div class="email-item" onclick="copiarEmail('comercial@portalpleno.com.br')"><span class="email-label">Comercial</span><span class="email-address">comercial@portalpleno.com.br</span></div><div class="email-item" onclick="copiarEmail('diretorial@portalpleno.com.br')"><span class="email-label">Diretoria</span><span class="email-address">diretorial@portalpleno.com.br</span></div><div class="email-item" onclick="copiarEmail('ppsite@portalpleno.com.br')"><span class="email-label">Site</span><span class="email-address">ppsite@portalpleno.com.br</span></div></div></div></div></div>`;
+                container.innerHTML = `<div class="contato-clean"><div class="contato-fundo" style="background: url('banner.webp') no-repeat center center; background-size: cover; filter: brightness(0.3);"></div><div class="contato-content"><h1>Entre em Contato</h1><div class="contato-wrapper"><div class="feedback-form"><h2>Envie seu Feedback</h2><div class="form-group"><label>Nome</label><input type="text"></div><div class="form-group"><label>E-mail</label><input type="email"></div><div class="form-group"><label>Mensagem</label><textarea></textarea></div><button class="btn-feedback" onclick="this.innerText='ENVIADO'">Enviar Feedback</button></div><div class="email-accounts"><h3>Contas Oficiais</h3><div class="email-item" onclick="copiarEmail('contato@portalpleno.com.br')"><span class="email-label">Contato</span><span class="email-address">contato@portalpleno.com.br</span></div><div class="email-item" onclick="copiarEmail('comercial@portalpleno.com.br')"><span class="email-label">Comercial</span><span class="email-address">comercial@portalpleno.com.br</span></div><div class="email-item" onclick="copiarEmail('diretorial@portalpleno.com.br')"><span class="email-label">Diretoria</span><span class="email-address">diretorial@portalpleno.com.br</span></div><div class="email-item" onclick="copiarEmail('ppsite@portalpleno.com.br')"><span class="email-label">Site</span><span class="email-address">ppsite@portalpleno.com.br</span></div><div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid var(--gold);"><h3 style="color: #fff; margin-bottom: 15px;">Redes Sociais</h3><div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;"><a href="https://instagram.com" target="_blank" style="color: var(--gold); text-decoration: none; font-size: 1.2rem;">📱 Instagram</a><a href="https://facebook.com" target="_blank" style="color: var(--gold); text-decoration: none; font-size: 1.2rem;">👥 Facebook</a><a href="https://youtube.com" target="_blank" style="color: var(--gold); text-decoration: none; font-size: 1.2rem;">▶️ YouTube</a><a href="https://linkedin.com" target="_blank" style="color: var(--gold); text-decoration: none; font-size: 1.2rem;">💼 LinkedIn</a></div></div></div></div></div></div>`;
             } else if(tipo === 'suporte') {
                 container.innerHTML = `<div class="suporte-clean"><div class="suporte-fundo" style="background: url('banner.webp') no-repeat center center; background-size: cover; filter: brightness(0.3);"></div><div class="suporte-content"><h1>Suporte</h1><div class="suporte-card"><div class="suporte-label">E-mail</div><div class="suporte-email">suportebook@portalpleno.com.br</div></div></div></div>`;
             }

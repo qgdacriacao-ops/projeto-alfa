@@ -631,7 +631,7 @@
     <div id="bg"></div>
 
     <header>
-        <div class="logo"><img src="selo.webp"><span>Portal Pleno O Código</span></div>
+        <div class="logo"><img src="selo.png"><span>Portal Pleno O Código</span></div>
         <nav>
             <ul id="main-nav">
                 <li><a id="nav-home" class="active" onclick="irHome()">Início</a></li>
@@ -737,7 +737,7 @@
     </main>
 
     <div class="final-footer">
-        © 2006 Portal Pleno | O Código
+        © 2003 Portal Pleno | O Código
     </div>
 
     <!-- DEPENDÊNCIAS DA ANIMAÇÃO (THREE.JS E TWEEN.JS) -->
@@ -754,11 +754,12 @@
            
            Especificações Técnicas:
            - Asset: background-site.webp
-           - Delay de Início: 3s (fase de latência)
+           - Delay de Início: 4s (fase de latência)
            - Tempo de Materialização: 4s (duração do encontro dos fragmentos)
            - Perspectiva: Frontal (corte 2D, sem ângulo 3D)
            - Movimento: Espiral convergente culminando na imagem real
            - Estado Final: Opacidade 100%, Alinhamento Central/Cover
+           - Fade-out sincronizado: 3s após término do áudio
         ============================================================ */
         let scene, camera, renderer, particles, geometry;
         let positions = [], colors = [], startPositions = [];
@@ -784,7 +785,6 @@
                 const imgData = ctx.getImageData(0, 0, image.width, image.height).data;
                 const step = 3;
                 
-                // Calcula escala para manter proporção (cover mode)
                 const windowRatio = window.innerWidth / window.innerHeight;
                 const imageRatio = image.width / image.height;
                 let scale = 1;
@@ -794,12 +794,10 @@
                     scale = window.innerHeight / image.height;
                 }
                 
-                // Gera partículas com alinhamento correto para pixel-perfect alignment
                 for (let y = 0; y < image.height; y += step) {
                     for (let x = 0; x < image.width; x += step) {
                         const i = (y * image.width + x) * 4;
                         if (imgData[i+3] > 128) {
-                            // Posição final (alinhada ao centro, frontal)
                             const posX = (x - image.width / 2) * scale;
                             const posY = -(y - image.height / 2) * scale;
                             positions.push(posX, posY, 0);
@@ -810,7 +808,6 @@
                 createParticlesMesh();
             };
             image.onerror = () => {
-                // Fallback se a imagem não existir: cria grid dourado
                 for (let y = -150; y < 150; y += 10) {
                     for (let x = -250; x < 250; x += 10) {
                         positions.push(x, y, 0);
@@ -825,7 +822,6 @@
             geometry = new THREE.BufferGeometry();
             const startPos = new Float32Array(positions.length);
             
-            // Gera posições iniciais em espiral
             for (let i = 0; i < positions.length; i += 3) {
                 const index = i / 3;
                 const angle = (index * 0.15) % (Math.PI * 2);
@@ -834,7 +830,6 @@
                 startPos[i+1] = Math.sin(angle) * radius;
                 startPos[i+2] = 0;
                 
-                // Armazena as posições iniciais para referência
                 startPositions.push(startPos[i], startPos[i+1], startPos[i+2]);
             }
             
@@ -859,14 +854,17 @@
 
             const audioSaudacao = new Audio('saudacao.mp3'); 
             audioSaudacao.volume = 0.8;
+            let audioEnded = false;
+            
             audioSaudacao.play().catch(e => console.log('Áudio bloqueado ou não encontrado'));
+            
+            audioSaudacao.addEventListener('ended', () => {
+                audioEnded = true;
+            }, { once: true });
 
-            // Remove o preloader de clique imediatamente
             document.getElementById('preloader').classList.add('fade-out');
 
-            // AGUARDA 3 SEGUNDOS ANTES DE INICIAR A MATERIALIZAÇÃO (FASE DE LATÊNCIA)
             setTimeout(() => {
-                // Inicia a materialização (fusão dos fragmentos em espiral) com duração de 4 segundos
                 const posAttr = particles.geometry.attributes.position;
                 for (let i = 0; i < posAttr.array.length; i += 3) {
                     new TWEEN.Tween({ 
@@ -889,14 +887,27 @@
                         .start();
                 }
 
-                // Após a animação de 4s, remove o canvas para mostrar o site real
-                setTimeout(() => {
+                function triggerFadeOut() {
                     document.getElementById('particle-canvas').classList.add('fade-out');
                     setTimeout(() => {
                         document.getElementById('particle-canvas').style.display = 'none';
                         document.getElementById('particle-canvas').style.pointerEvents = 'none';
                     }, 800);
-                }, 4000);
+                }
+
+                const audioCheckInterval = setInterval(() => {
+                    if (audioEnded) {
+                        clearInterval(audioCheckInterval);
+                        setTimeout(triggerFadeOut, 3000);
+                    }
+                }, 100);
+                
+                setTimeout(() => {
+                    clearInterval(audioCheckInterval);
+                    if (!audioEnded) {
+                        setTimeout(triggerFadeOut, 3000);
+                    }
+                }, 15000);
             }, 4000);
         }
 
@@ -1002,13 +1013,11 @@
                 const colDir = staticReviews.slice(3,6).map(r => renderReview(r)).join('');
                 container.innerHTML = `<div style="color:#fff; padding:20px 5%;"><div class="layout-avaliacoes"><div class="col-depoimentos">${colEsq}</div><div class="form-review-container"><h3>CONTE-NOS SUA EXPERIENCIA</h3><div class="input-group"><label>Nome</label><input type="text" placeholder="Seu nome"></div><div class="input-group"><label>E-mail</label><input type="email" placeholder="seu@email.com"></div><div class="input-group"><label>Texto (Máx 100 char)</label><textarea maxlength="100" rows="3"></textarea></div><div class="input-group"><label>Nota</label><select><option>EXCELENTE</option><option>ÓTIMO</option><option>MUITO BOM</option><option>BOM</option><option>REGULAR</option></select></div><button class="btn-enviar" onclick="this.innerText='ENVIADO'">Enviar</button></div><div class="col-depoimentos">${colDir}</div></div></div>`;
             } else if(tipo === 'sobre') {
-                container.innerHTML = `<div class="sobre-clean"><div class="sobre-fundo"></div><div class="sobre-content"><h1>A Ciência por trás da Engenharia da Colisão</h1><div class="quote">"Relações não fracassam por falta de amor, mas por falha de hardware. Onde não há soberania individual, o sistema colapsa."</div><p>Muitos buscam respostas no misticismo quando o assunto é o campo afetivo. No entanto, a obra de <strong>Júlio Bhrósz</strong> nasce de uma premissa diferente: o empirismo.</p><p>Se você já sentiu a dor de uma conexão interrompida, entenda que o sofrimento é o sintoma de um sistema descalibrado. O Portal Pleno oferece o código necessário para realizar sua própria autópsia e identificar falhas de processamento emocional.
-
-Nossa filosofia é humanitária: acreditamos que a verdadeira dignidade só é alcançada quando o indivíduo deixa de ser passageiro de suas emoções para se tornar o Operador de sua própria realidade.</p><h2>Júlio Bhrósz</h2></div></div>`;
+                container.innerHTML = `<div class="sobre-clean"><div class="sobre-fundo" style="background: url('banner.webp') no-repeat center center; background-size: cover; filter: brightness(0.3);"></div><div class="sobre-content"><h1>A Ciência por trás da Engenharia da Colisão</h1><div class="quote">"Relações não fracassam por falta de amor, mas por falha de hardware. Onde não há soberania individual, o sistema colapsa."</div><p style="text-align: justify;">Muitos buscam respostas no misticismo quando o assunto é o campo afetivo. No entanto, a obra de <strong>Júlio Bhrósz</strong> nasce de uma premissa diferente: o empirismo.</p><p style="text-align: justify;">Se você já sentiu a dor de uma conexão interrompida, entenda que o sofrimento é o sintoma de um sistema descalibrado.</p><p style="text-align: justify;">Nossa filosofia é humanitária: acreditamos que a verdadeira dignidade só é alcançada quando o indivíduo deixa de ser passageiro de suas emoções para se tornar o Operador de sua própria realidade.</p><h2>Júlio Bhrósz</h2></div></div>`;
             } else if(tipo === 'contato') {
-                container.innerHTML = `<div class="contato-clean"><div class="contato-fundo"></div><div class="contato-content"><h1>Entre em Contato</h1><div class="contato-wrapper"><div class="feedback-form"><h2>Envie seu Feedback</h2><div class="form-group"><label>Nome</label><input type="text"></div><div class="form-group"><label>E-mail</label><input type="email"></div><div class="form-group"><label>Mensagem</label><textarea></textarea></div><button class="btn-feedback" onclick="this.innerText='ENVIADO'">Enviar Feedback</button></div><div class="email-accounts"><h3>Contas Oficiais</h3><div class="email-item" onclick="copiarEmail('contato@portalpleno.com.br')"><span class="email-label">Contato</span><span class="email-address">contato@portalpleno.com.br</span></div></div></div></div></div>`;
+                container.innerHTML = `<div class="contato-clean"><div class="contato-fundo" style="background: url('banner.webp') no-repeat center center; background-size: cover; filter: brightness(0.3);"></div><div class="contato-content"><h1>Entre em Contato</h1><div class="contato-wrapper"><div class="feedback-form"><h2>Envie seu Feedback</h2><div class="form-group"><label>Nome</label><input type="text"></div><div class="form-group"><label>E-mail</label><input type="email"></div><div class="form-group"><label>Mensagem</label><textarea></textarea></div><button class="btn-feedback" onclick="this.innerText='ENVIADO'">Enviar Feedback</button></div><div class="email-accounts"><h3>Contas Oficiais</h3><div class="email-item" onclick="copiarEmail('contato@portalpleno.com.br')"><span class="email-label">Contato</span><span class="email-address">contato@portalpleno.com.br</span></div><div class="email-item" onclick="copiarEmail('comercial@portalpleno.com.br')"><span class="email-label">Comercial</span><span class="email-address">comercial@portalpleno.com.br</span></div><div class="email-item" onclick="copiarEmail('diretorial@portalpleno.com.br')"><span class="email-label">Diretoria</span><span class="email-address">diretorial@portalpleno.com.br</span></div><div class="email-item" onclick="copiarEmail('ppsite@portalpleno.com.br')"><span class="email-label">Site</span><span class="email-address">ppsite@portalpleno.com.br</span></div></div></div></div></div>`;
             } else if(tipo === 'suporte') {
-                container.innerHTML = `<div class="suporte-clean"><div class="suporte-fundo"></div><div class="suporte-content"><h1>Suporte</h1><div class="suporte-card"><div class="suporte-label">E-mail</div><div class="suporte-email">suportebook@portalpleno.com.br</div></div></div></div>`;
+                container.innerHTML = `<div class="suporte-clean"><div class="suporte-fundo" style="background: url('banner.webp') no-repeat center center; background-size: cover; filter: brightness(0.3);"></div><div class="suporte-content"><h1>Suporte</h1><div class="suporte-card"><div class="suporte-label">E-mail</div><div class="suporte-email">suportebook@portalpleno.com.br</div></div></div></div>`;
             }
             historico = 'info';
         }
@@ -1016,13 +1025,11 @@ Nossa filosofia é humanitária: acreditamos que a verdadeira dignidade só é a
         function renderReview(r) { return `<div class="card-review"><div class="stars">${r.rating}</div><div class="text">"${r.text}"</div><div class="author-info"><strong>${r.author}</strong><br>${r.email} | ${r.book}</div></div>`; }
         function copiarEmail(email) { navigator.clipboard.writeText(email).then(() => alert('E-mail copiado!')); }
 
-        // Inicialização Final
         window.onload = () => {
             initAnimation();
             irHome();
         };
         
-        // Ajusta canvas ao redimensionar a janela
         window.addEventListener('resize', () => {
             if (renderer) {
                 renderer.setSize(window.innerWidth, window.innerHeight);

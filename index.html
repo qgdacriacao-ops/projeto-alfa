@@ -794,12 +794,17 @@
                     scale = window.innerHeight / image.height;
                 }
                 
+                const scaledWidth = image.width * scale;
+                const scaledHeight = image.height * scale;
+                const offsetX = (window.innerWidth - scaledWidth) / 2;
+                const offsetY = (window.innerHeight - scaledHeight) / 2;
+                
                 for (let y = 0; y < image.height; y += step) {
                     for (let x = 0; x < image.width; x += step) {
                         const i = (y * image.width + x) * 4;
                         if (imgData[i+3] > 128) {
-                            const posX = (x - image.width / 2) * scale;
-                            const posY = -(y - image.height / 2) * scale;
+                            const posX = (x * scale) + offsetX - window.innerWidth / 2;
+                            const posY = -(y * scale) - offsetY + window.innerHeight / 2;
                             positions.push(posX, posY, 0);
                             colors.push(imgData[i]/255, imgData[i+1]/255, imgData[i+2]/255);
                         }

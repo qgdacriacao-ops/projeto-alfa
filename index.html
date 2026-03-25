@@ -768,10 +768,12 @@
 
         function initAnimation() {
             scene = new THREE.Scene();
-            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-            camera.position.z = 100;
+            const w = window.innerWidth;
+            const h = window.innerHeight;
+            camera = new THREE.OrthographicCamera(-w/2, w/2, h/2, -h/2, 0.1, 1000);
+            camera.position.z = 1;
             renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('particle-canvas'), antialias: true, alpha: true });
-            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setSize(w, h);
             renderer.setClearColor(0x000000, 1);
 
             const image = new Image();
@@ -785,26 +787,21 @@
                 const imgData = ctx.getImageData(0, 0, image.width, image.height).data;
                 const step = 3;
                 
-                const windowRatio = window.innerWidth / window.innerHeight;
+                const windowRatio = w / h;
                 const imageRatio = image.width / image.height;
                 let scale = 1;
                 if (windowRatio > imageRatio) {
-                    scale = window.innerWidth / image.width;
+                    scale = w / image.width;
                 } else {
-                    scale = window.innerHeight / image.height;
+                    scale = h / image.height;
                 }
-                
-                const scaledWidth = image.width * scale;
-                const scaledHeight = image.height * scale;
-                const offsetX = (window.innerWidth - scaledWidth) / 2;
-                const offsetY = (window.innerHeight - scaledHeight) / 2;
                 
                 for (let y = 0; y < image.height; y += step) {
                     for (let x = 0; x < image.width; x += step) {
                         const i = (y * image.width + x) * 4;
                         if (imgData[i+3] > 128) {
-                            const posX = (x * scale) + offsetX - window.innerWidth / 2;
-                            const posY = -(y * scale) - offsetY + window.innerHeight / 2;
+                            const posX = (x - image.width / 2) * scale;
+                            const posY = -(y - image.height / 2) * scale;
                             positions.push(posX, posY, 0);
                             colors.push(imgData[i]/255, imgData[i+1]/255, imgData[i+2]/255);
                         }

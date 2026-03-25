@@ -850,10 +850,9 @@
             animationStarted = true;
             const audioSaudacao = new Audio('saudacao.mp3'); 
             audioSaudacao.volume = 0.8;
-            let audioEnded = false;
             audioSaudacao.play().catch(e => console.log('Áudio bloqueado ou não encontrado'));
-            audioSaudacao.addEventListener('ended', () => { audioEnded = true; }, { once: true });
             document.getElementById('preloader').classList.add('fade-out');
+            
             setTimeout(() => {
                 const posAttr = particles.geometry.attributes.position;
                 for (let i = 0; i < posAttr.array.length; i += 3) {
@@ -865,18 +864,32 @@
                             posAttr.needsUpdate = true;
                         }).start();
                 }
-                function triggerFadeOut() {
-                    document.getElementById('particle-canvas').classList.add('fade-out');
-                    setTimeout(() => {
-                        document.getElementById('particle-canvas').style.display = 'none';
-                        document.getElementById('particle-canvas').style.pointerEvents = 'none';
-                    }, 800);
+                
+                function completeTransition() {
+                    const canvas = document.getElementById('particle-canvas');
+                    canvas.classList.add('fade-out');
+                    canvas.style.opacity = '0';
+                    canvas.style.display = 'none';
+                    canvas.style.zIndex = '-1';
+                    canvas.style.pointerEvents = 'none';
                 }
-                const audioCheckInterval = setInterval(() => {
-                    if (audioEnded) { clearInterval(audioCheckInterval); setTimeout(triggerFadeOut, 3000); }
-                }, 100);
-                setTimeout(() => { clearInterval(audioCheckInterval); if (!audioEnded) setTimeout(triggerFadeOut, 3000); }, 15000);
-            }, 4000);
+                
+                let transitionTriggered = false;
+                
+                audioSaudacao.addEventListener('ended', () => {
+                    if (!transitionTriggered) {
+                        transitionTriggered = true;
+                        setTimeout(completeTransition, 2000);
+                    }
+                }, { once: true });
+                
+                setTimeout(() => {
+                    if (!transitionTriggered) {
+                        transitionTriggered = true;
+                        setTimeout(completeTransition, 2000);
+                    }
+                }, 7000);
+            }, 1000);
         }
 
         /* ============================================================

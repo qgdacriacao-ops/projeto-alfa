@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<script type="text/javascript">
-    (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "vxqqwilkqh");
-</script>
+    <script type="text/javascript">
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "vxqqwilkqh");
+    </script>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Portal Pleno | O Código</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <style>
@@ -30,56 +30,27 @@
             --border: #D1D1D1;
         }
 
-        /* --- ESTILOS DO PRELOADER (TELA PRETA) --- */
+        /* --- ESTILOS DO PRELOADER (REMOVIDO / SIMPLIFICADO) --- */
         #preloader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: black;
-            z-index: 9999;
-            opacity: 1;
-            visibility: visible;
-            transition: opacity 1s ease, visibility 1s ease;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: var(--gold);
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            cursor: pointer;
+            display: none;
         }
 
-        #preloader.fade-out {
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
-        }
-
-        /* --- CANVAS DA ANIMAÇÃO (CIRÚRGICO) --- */
+        /* --- CANVAS DA ANIMAÇÃO (REMOVIDO PARA PERFORMANCE) --- */
         #particle-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 9998;
-            background-color: black;
-            display: block;
-            pointer-events: none;
-            opacity: 1;
-            transition: opacity 0.8s ease;
-        }
-
-        #particle-canvas.fade-out {
-            opacity: 0;
-            pointer-events: none;
+            display: none;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body, html { min-height: 100%; background-color: var(--bg-black); font-family: 'Inter', sans-serif; overflow-x: hidden !important; display: flex; flex-direction: column; width: 100%; }
+        body, html { 
+            min-height: 100%; 
+            background-color: var(--bg-black); 
+            font-family: 'Inter', sans-serif; 
+            overflow-x: hidden !important; 
+            display: flex; 
+            flex-direction: column; 
+            width: 100%; 
+            -webkit-font-smoothing: antialiased;
+        }
         main { width: 100%; overflow-x: hidden !important; }
 
         /* ============================================================
@@ -130,13 +101,16 @@
         ============================================================ */
         .view-galeria { display: none; background: #000; min-height: 100vh; padding: 60px 5% 100px; width: 100%; overflow-x: hidden; }
         .grid-produtos { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; max-width: 1400px; margin: 0 auto; width: 100%; }
-        .card-flutuante { text-align: center; cursor: pointer; transition: transform 0.4s ease; animation: flutuar 4s ease-in-out infinite; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        .card-flutuante { text-align: center; cursor: pointer; transition: transform 0.4s ease; display: flex; flex-direction: column; align-items: center; justify-content: center; }
         .card-flutuante img { width: 100%; max-width: 200px; height: 300px; object-fit: contain; transition: 0.4s; }
         .card-flutuante:hover img { transform: scale(1.05); filter: drop-shadow(0 0 20px var(--glow)); }
         .card-flutuante .stars { color: var(--gold); margin-top: 10px; font-weight: 700; }
-        @keyframes flutuar { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
-        @media (max-width: 1024px) { .grid-produtos { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; } }
-        @media (max-width: 768px) { .grid-produtos { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px; } .card-flutuante img { max-width: 150px; height: 220px; } }
+        
+        /* Animação simplificada para mobile */
+        @keyframes flutuar { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+        @media (min-width: 769px) {
+            .card-flutuante { animation: flutuar 4s ease-in-out infinite; }
+        }
 
         /* ============================================================
            VIEW SINOPSE
@@ -192,8 +166,8 @@
             letter-spacing: 1px;
         }
         .description {
-            line-height: 2.1;
-            font-size: 1.15rem;
+            line-height: 1.8;
+            font-size: 1.1rem;
             color: #333;
             text-align: justify;
         }
@@ -246,259 +220,140 @@
             text-align: center;
             padding: 14px 5px;
             font-weight: 800;
-            font-size: 0.7rem;
             text-transform: uppercase;
-            border-radius: 4px;
-            transition: 0.3s;
-            border: 1px solid var(--gold);
-            width: 100%;
+            text-decoration: none;
+            border: none;
             cursor: pointer;
+            transition: 0.3s;
         }
-        .btn-gold:hover { opacity: 0.88; }
         .btn-red {
             display: block;
             background: var(--red);
-            color: var(--white);
+            color: #fff;
             text-align: center;
-            padding: 12px 5px;
-            font-weight: 700;
-            font-size: 0.65rem;
+            padding: 14px 5px;
+            font-weight: 800;
             text-transform: uppercase;
-            border-radius: 4px;
-            transition: 0.3s;
+            text-decoration: none;
             border: none;
-            width: 100%;
             cursor: pointer;
+            transition: 0.3s;
         }
-        .btn-red:hover { opacity: 0.8; }
 
         .product-details {
             max-width: 1350px;
-            margin: 60px auto;
+            margin: 40px auto;
             padding: 0 5%;
-            width: 100%;
         }
         .details-title {
             font-size: 1.2rem;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 30px;
-            color: #000;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #000;
+            padding-bottom: 10px;
         }
         .details-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 40px;
+            gap: 30px;
         }
         .detail-item {
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 5px;
         }
         .detail-label {
-            font-size: 0.8rem;
-            color: #666;
+            font-size: 0.75rem;
             text-transform: uppercase;
+            color: #888;
             font-weight: 700;
-            letter-spacing: 1px;
         }
         .detail-value {
-            font-size: 1rem;
+            font-size: 0.95rem;
+            font-weight: 700;
             color: #000;
-            font-weight: 500;
         }
 
         /* ============================================================
-           VIEW INFO EXTRA
+           VIEW INFO EXTRA (CONTATO, SOBRE, ETC)
         ============================================================ */
-        .view-info-extra {
-            display: none;
-            background: #000;
-            min-height: 100vh;
-            padding: 60px 5%;
-            width: 100%;
-            overflow-x: hidden;
-        }
-
+        .view-info-extra { display: none; min-height: 100vh; padding: 60px 0 100px; width: 100%; position: relative; z-index: 20; }
+        
         .layout-avaliacoes {
             display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 40px;
-            max-width: 1400px;
-            margin: 0 auto;
+            grid-template-columns: 1fr 400px 1fr;
+            gap: 30px;
+            align-items: start;
         }
-
-        .col-depoimentos {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
         .card-review {
-            background: #1a1a1a;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,215,0,0.2);
             padding: 20px;
-            border-radius: 4px;
-            border-left: 4px solid var(--gold);
-            color: #fff;
-        }
-
-        .card-review .stars {
-            color: var(--gold);
-            font-weight: 700;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            margin-bottom: 10px;
-        }
-
-        .card-review .text {
-            font-size: 0.95rem;
-            line-height: 1.6;
-            margin-bottom: 15px;
-            font-style: italic;
-        }
-
-        .card-review .author-info {
-            font-size: 0.75rem;
-            color: #aaa;
-        }
-
-        .form-review-container {
-            background: #1a1a1a;
-            padding: 30px;
-            border-radius: 4px;
-            border: 1px solid var(--gold);
-        }
-
-        .form-review-container h3 {
-            color: var(--gold);
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
             margin-bottom: 20px;
+            border-radius: 4px;
         }
-
-        .input-group {
-            margin-bottom: 15px;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .input-group label {
-            color: #fff;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            font-weight: 700;
-            margin-bottom: 5px;
-        }
-
-        .input-group input,
-        .input-group textarea,
-        .input-group select {
-            background: #000;
-            color: #fff;
+        .card-review .stars { color: var(--gold); margin-bottom: 10px; }
+        .card-review .text { color: #fff; font-style: italic; margin-bottom: 15px; font-size: 0.9rem; }
+        .card-review .author-info { color: #888; font-size: 0.8rem; }
+        
+        .form-review-container {
+            background: #111;
+            padding: 30px;
             border: 1px solid var(--gold);
-            padding: 10px;
-            border-radius: 2px;
-            font-family: 'Inter', sans-serif;
+            border-radius: 4px;
         }
-
+        .form-review-container h3 { color: var(--gold); margin-bottom: 20px; text-transform: uppercase; text-align: center; }
+        .input-group { margin-bottom: 15px; }
+        .input-group label { display: block; color: #fff; font-size: 0.7rem; text-transform: uppercase; margin-bottom: 5px; }
+        .input-group input, .input-group textarea, .input-group select {
+            width: 100%;
+            background: #000;
+            border: 1px solid #333;
+            padding: 10px;
+            color: #fff;
+            font-family: inherit;
+        }
         .btn-enviar {
+            width: 100%;
             background: var(--gold);
             color: #000;
-            padding: 12px;
             border: none;
-            border-radius: 2px;
-            font-weight: 700;
+            padding: 15px;
+            font-weight: 800;
             text-transform: uppercase;
             cursor: pointer;
-            transition: 0.3s;
         }
 
-        .btn-enviar:hover {
-            opacity: 0.88;
-        }
-
-        .sobre-clean,
-        .contato-clean,
-        .suporte-clean {
+        .sobre-clean, .contato-clean, .suporte-clean {
             position: relative;
-            min-height: 100vh;
+            min-height: 80vh;
             display: flex;
             align-items: center;
             justify-content: center;
+            padding: 40px 5%;
         }
-
-        .sobre-fundo,
-        .contato-fundo,
-        .suporte-fundo {
+        .sobre-fundo, .contato-fundo, .suporte-fundo {
             position: absolute;
-            top: 0;
-            left: 0;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+        }
+        .sobre-content, .contato-content, .suporte-content {
+            background: rgba(0,0,0,0.85);
+            border: 1px solid var(--gold);
+            padding: 40px;
+            max-width: 900px;
             width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(255,215,0,0.05) 0%, rgba(0,0,0,0.8) 100%);
-            z-index: 0;
-        }
-
-        .sobre-content,
-        .contato-content,
-        .suporte-content {
-            position: relative;
-            z-index: 1;
-            max-width: 800px;
             color: #fff;
-            text-align: center;
         }
-
-        .sobre-content h1,
-        .contato-content h1,
-        .suporte-content h1 {
-            font-size: 2rem;
-            margin-bottom: 30px;
-            color: #fff;
-            white-space: nowrap;
-            font-weight: 700;
-        }
-
-        .quote {
-            font-size: 1.3rem;
-            font-style: italic;
-            margin: 30px 0;
-            color: var(--gold);
-            border-left: 4px solid var(--gold);
-            padding-left: 20px;
-        }
-
-        .sobre-content p {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            margin-bottom: 20px;
-        }
-
-        .sobre-content h2 {
-            font-size: 1.8rem;
-            margin-top: 40px;
-            color: var(--gold);
-        }
+        .sobre-content h1, .contato-content h1 { color: var(--gold); margin-bottom: 30px; text-transform: uppercase; }
+        .quote { font-style: italic; font-size: 1.3rem; border-left: 4px solid var(--gold); padding-left: 20px; margin: 30px 0; color: #eee; }
 
         .contato-wrapper {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 40px;
-            max-width: 900px;
-            margin: 0 auto;
         }
-
-        .feedback-form,
-        .email-accounts {
-            background: var(--chumbo);
-            padding: 30px;
-            border-radius: 4px;
-            border: 1px solid var(--gold);
-        }
-
-        .feedback-form h2,
         .email-accounts h3 {
             color: #fff;
             font-size: 1.2rem;
@@ -610,6 +465,9 @@
             z-index: 100;
         }
 
+        /* ============================================================
+           RESPONSIVIDADE E CORREÇÕES MOBILE
+        ============================================================ */
         @media (max-width: 1024px) {
             .grid-produtos { grid-template-columns: repeat(2, 1fr); gap: 40px; }
             .container-trindade { grid-template-columns: 1fr; gap: 30px; }
@@ -619,28 +477,38 @@
         }
 
         @media (max-width: 768px) {
-            header { padding: 0 3%; }
+            header { padding: 0 3%; height: 70px; }
+            .logo img { height: 45px; }
             .logo span { display: none; }
             nav { justify-content: flex-start; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
             nav::-webkit-scrollbar { display: none; }
             nav ul { gap: 15px; padding: 10px 0; }
             nav a { font-size: 0.6rem; }
             
-            .view-home { flex-direction: column; padding: 20px 5%; }
-            .column-box { width: 100%; }
-            .grid-produtos { grid-template-columns: 1fr; gap: 30px; }
-            .details-grid { grid-template-columns: 1fr; }
+            main { padding-top: 70px; }
+            .view-home { flex-direction: column; padding: 40px 5%; justify-content: center; gap: 40px; min-height: calc(100vh - 70px); }
+            .column-box { width: 100%; max-width: 300px; margin: 0 auto; }
+            .display-box { height: 300px; }
+            .hero-center { order: -1; margin-bottom: 20px; }
+            .hero-center h1 { font-size: 1.5rem; }
+
+            .grid-produtos { grid-template-columns: 1fr; gap: 30px; padding: 20px 0; }
+            .card-flutuante img { max-width: 180px; height: 260px; }
+            
+            .container-trindade { margin-top: 20px; }
+            .col-texto h1 { font-size: 1.8rem; text-align: center; }
+            .author { text-align: center; margin-bottom: 20px; }
+            .description { font-size: 1rem; }
+            
+            .details-grid { grid-template-columns: 1fr; gap: 15px; }
             .layout-avaliacoes { grid-template-columns: 1fr; }
+            
+            .sobre-content, .contato-content, .suporte-content { padding: 20px; }
+            .contato-wrapper { gap: 20px; }
         }
     </style>
 </head>
 <body>
-    <!-- PRELOADER (TELA PRETA DE CLIQUE) -->
-    <div id="preloader">CLIQUE PARA INICIAR A EXPERIÊNCIA</div>
-
-    <!-- CANVAS DA ANIMAÇÃO (MATERIALIZAÇÃO) -->
-    <canvas id="particle-canvas"></canvas>
-
     <div id="bg"></div>
 
     <header>
@@ -750,239 +618,117 @@
     </main>
 
     <div class="final-footer">
-        © 2006 Portal Pleno | O Código
+        © 2003 Portal Pleno | O Código
     </div>
-
-    <!-- DEPENDÊNCIAS DA ANIMAÇÃO (THREE.JS E TWEEN.JS) -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/18.6.4/tween.umd.js"></script>
 
     <script>
         /* ============================================================
-           LÓGICA DA ANIMAÇÃO DE MATERIALIZAÇÃO (CIRÚRGICO)
-        ============================================================ */
-        let scene, camera, renderer, particles, geometry;
-        let positions = [], colors = [], startPositions = [];
-        let animationStarted = false;
-        let particlesReady = false;
-
-        function initAnimation() {
-            scene = new THREE.Scene();
-            const w = window.innerWidth;
-            const h = window.innerHeight;
-            camera = new THREE.OrthographicCamera(-w/2, w/2, h/2, -h/2, 0.1, 1000);
-            camera.position.z = 1;
-            renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('particle-canvas'), antialias: true, alpha: true });
-            renderer.setSize(w, h);
-            renderer.setClearColor(0x000000, 1);
-
-            const image = new Image();
-            image.src = 'background-site.webp';
-            image.onload = () => {
-                const tempCanvas = document.createElement('canvas');
-                const ctx = tempCanvas.getContext('2d');
-                tempCanvas.width = image.width;
-                tempCanvas.height = image.height;
-                ctx.drawImage(image, 0, 0);
-                const imgData = ctx.getImageData(0, 0, image.width, image.height).data;
-                const step = 3;
-                
-                const windowRatio = w / h;
-                const imageRatio = image.width / image.height;
-                let scale = 1;
-                if (windowRatio > imageRatio) {
-                    scale = w / image.width;
-                } else {
-                    scale = h / image.height;
-                }
-                
-                for (let y = 0; y < image.height; y += step) {
-                    for (let x = 0; x < image.width; x += step) {
-                        const i = (y * image.width + x) * 4;
-                        if (imgData[i+3] > 128) {
-                            const posX = (x - image.width / 2) * scale;
-                            const posY = -(y - image.height / 2) * scale;
-                            positions.push(posX, posY, 0);
-                            colors.push(imgData[i]/255, imgData[i+1]/255, imgData[i+2]/255);
-                        }
-                    }
-                }
-                createParticlesMesh();
-            };
-            image.onerror = () => {
-                for (let y = -150; y < 150; y += 10) {
-                    for (let x = -250; x < 250; x += 10) {
-                        positions.push(x, y, 0);
-                        colors.push(1, 0.84, 0);
-                    }
-                }
-                createParticlesMesh();
-            };
-        }
-
-        function createParticlesMesh() {
-            geometry = new THREE.BufferGeometry();
-            const startPos = new Float32Array(positions.length);
-            for (let i = 0; i < positions.length; i += 3) {
-                const index = i / 3;
-                const angle = (index * 0.15) % (Math.PI * 2);
-                const radius = 300 + (index % 100) * 2;
-                startPos[i] = Math.cos(angle) * radius;
-                startPos[i+1] = Math.sin(angle) * radius;
-                startPos[i+2] = 0;
-                startPositions.push(startPos[i], startPos[i+1], startPos[i+2]);
-            }
-            geometry.setAttribute('position', new THREE.BufferAttribute(startPos, 3));
-            geometry.setAttribute('color', new THREE.BufferAttribute(new Float32Array(colors), 3));
-            const material = new THREE.PointsMaterial({ size: 2.5, vertexColors: true, transparent: true, opacity: 0.95 });
-            particles = new THREE.Points(geometry, material);
-            scene.add(particles);
-            particlesReady = true;
-            animate();
-        }
-
-        function animate() {
-            requestAnimationFrame(animate);
-            TWEEN.update();
-            renderer.render(scene, camera);
-        }
-
-        function startMaterialization() {
-            if (animationStarted || !particlesReady) return;
-            animationStarted = true;
-            const audioSaudacao = new Audio('saudacao.mp3'); 
-            audioSaudacao.volume = 0.8;
-            audioSaudacao.play().catch(e => console.log('Áudio bloqueado ou não encontrado'));
-            document.getElementById('preloader').classList.add('fade-out');
-            
-            setTimeout(() => {
-                const posAttr = particles.geometry.attributes.position;
-                for (let i = 0; i < posAttr.array.length; i += 3) {
-                    new TWEEN.Tween({ x: posAttr.array[i], y: posAttr.array[i+1], z: posAttr.array[i+2] })
-                        .to({ x: positions[i], y: positions[i+1], z: positions[i+2] }, 4000)
-                        .easing(TWEEN.Easing.Cubic.InOut)
-                        .onUpdate((obj) => {
-                            posAttr.array[i] = obj.x; posAttr.array[i+1] = obj.y; posAttr.array[i+2] = obj.z;
-                            posAttr.needsUpdate = true;
-                        }).start();
-                }
-                
-                function completeTransition() {
-                    const canvas = document.getElementById('particle-canvas');
-                    canvas.classList.add('fade-out');
-                    canvas.style.opacity = '0';
-                    canvas.style.display = 'none';
-                    canvas.style.zIndex = '-1';
-                    canvas.style.pointerEvents = 'none';
-                }
-                
-                let transitionTriggered = false;
-                
-                audioSaudacao.addEventListener('ended', () => {
-                    if (!transitionTriggered) {
-                        transitionTriggered = true;
-                        setTimeout(completeTransition, 2000);
-                    }
-                }, { once: true });
-                
-                setTimeout(() => {
-                    if (!transitionTriggered) {
-                        transitionTriggered = true;
-                        setTimeout(completeTransition, 2000);
-                    }
-                }, 7000);
-            }, 1000);
-        }
-
-        /* ============================================================
-           SEUS DADOS E FUNÇÕES ORIGINAIS (MANTIDOS INTEGRALMENTE)
+           DADOS E FUNÇÕES DE NAVEGAÇÃO
         ============================================================ */
         const hardware = {
             e: [
-                {img: 'ebook04.webp', title: 'Descubra Você', price: 'R$ 29,50', link: 'https://pay.kiwify.com.br/P8UTO6L', desc: '<p>Você sente que está vivendo em um ciclo repetitivo de encontros frustrantes e desencontros emocionais?</p><p>Muitas vezes, depositamos no outro a responsabilidade pela nossa felicidade, apenas para encontrar desilusão. Mas a verdade é que a chave para conexões autênticas e duradouras nunca esteve no "parceiro ideal", mas sim escondida dentro da sua própria essência.</p><p>Em "Descubra Você", Júlio Bhrósz convida você para uma jornada profunda de autodescoberta. Este e-book não é apenas um guia de conselhos; é um mapa prático para quem deseja parar de sobreviver a relações vazias e começar a construir vínculos reais e significativos.</p><p><strong>O que você vai encontrar nesta jornada:</strong></p><p><strong>O Elo Perdido:</strong> Entenda por que a busca externa por validação é um caminho sem fim e aprenda como o autoconhecimento é o único pilar capaz de sustentar vínculos verdadeiros.</p><p><strong>Seu Mapa Relacional:</strong> Desvende como sua história familiar e os padrões invisíveis moldam suas escolhas atuais. Aprenda a romper com o passado para traçar novos caminhos de afeto.</p><p><strong>Identidade e Propósito:</strong> Vá além dos rótulos que o mundo te impôs. Descubra quem você é em sua essência, mapeie seus desejos e entenda como seu propósito de vida se entrelaça com o amor.</p><p><strong>Superando Barreiras Internas:</strong> Identifique os medos ocultos que geram autossabotagem e adquira a coragem necessária para viver relacionamentos plenos e transparentes.</p><p><strong>A Arte da Conexão:</strong> Domine a comunicação empática. Aprenda a estabelecer limites saudáveis e a cultivar o respeito mútuo, transformando conflitos em oportunidades de crescimento recíproco.</p><p>A jornada mais importante da sua vida começa agora. Não espere mais pelo amor ideal. Comece a cultivá-lo a partir do seu interior e mude para sempre a forma como você ama e é amado.</p>'},
-                {img: 'ebook05.webp', title: 'Engenharia da Colisão', price: 'R$ 39,00', link: 'https://pay.kiwify.com.br/oRZAlbz', desc: '<p>O seu relacionamento é uma estrutura de argila ou uma armadura de aço?</p><p>A maioria dos casais vive sob a fragilidade de acordos superficiais, esperando que o tempo resolva fissuras estruturais que, na verdade, exigem intervenção técnica. Em "Engenharia da Colisão", Júlio Bhrósz apresenta o método definitivo para casais que decidiram abandonar a instabilidade emocional e assumir o controle absoluto da sua dinâmica afetiva.</p><p>Este não é um livro de conselhos sentimentais; é um manual de Engenharia de Relacionamento de alto impacto. Aqui, o leitor assume o papel de arquiteto da própria união, aprendendo a lidar com as forças invisíveis que sustentam ou derrubam uma vida a dois.</p><p><strong>O que você irá processar nesta obra:</strong></p><p><strong>Estanqueidade Emocional:</strong> Aprenda a blindar o seu relacionamento contra infiltrações externas e desgastes invisíveis. Saiba como manter a estrutura selada e protegida contra a pressão do ambiente.</p><p><strong>O Princípio da Colisão:</strong> Entenda como transformar o impacto dos conflitos em energia de fusão. Pare de temer o choque e aprenda a utilizá-lo para forjar uma conexão inquebrável.</p><p><strong>Do Barro ao Aço:</strong> Identifique as zonas de fragilidade e substitua a "argila" das expectativas infantis pela soberania do aço. Construa uma base que não apenas resiste ao tempo, mas se fortalece sob tensão.</p><p><strong>Arquitetura da Soberania:</strong> Domine as leis que regem a estabilidade entre dois indivíduos autônomos. Aprenda a desenhar um projeto de vida comum onde a individualidade potencializa a força do conjunto.</p><p><strong>Sistemas de Alta Performance:</strong> Implemente protocolos de comunicação e resolução que funcionam com a precisão de engrenagens ajustadas, eliminando o atrito desnecessário e o desperdício de energia.</p><p>Pare de remendar o que deveria ser reconstruído. Assuma o comando da sua estrutura. Deixe para trás a vulnerabilidade do comum e eleve seu relacionamento ao nível de Soberania.</p>'},
-                {img: 'ebook06.webp', title: 'Autópsia da Personalidade', price: 'R$ 59,90', link: 'https://pay.kiwify.com.br/sD4nqRO', desc: '<p>O que resta de você quando as camadas de autodecepção são removidas?</p><p>A maioria das pessoas passa a vida tentando "consertar" o que nunca funcionou, alimentando-se de migalhas emocionais e aceitando a falência da própria identidade. Em "Autópsia da Personalidade", Júlio Bhrósz executa o procedimento definitivo: a abertura completa da estrutura psíquica para identificar a causa mortis da sua vontade e a origem da sua submissão.</p><p>Este não é um convite ao diálogo; é um Exame Cadavérico do Ego. Aqui, o leitor deixa de ser um espectador passivo para se tornar o agente que disseca as próprias falhas, eliminando parasitas emocionais e resgatando a Supremacia sobre sua existência.</p><p><strong>Os Protocolos de Exame deste Volume:</strong></p><p><strong>Dissecação dos Padrões:</strong> Identifique os tecidos necrosados da sua história que ainda ditam suas reações presentes. Corte o que está morto para que a vida real possa emergir.</p><p><strong>Extirpação de Migalhas:</strong> Aprenda o protocolo rigoroso para identificar e deletar dependências afetivas e necessidades de validação que drenam sua energia vital.</p><p><strong>Identificação do Parasitismo:</strong> Saiba quem são os agentes externos que se alimentam da sua falta de limites e aprenda a neutralizar a influência deles através da soberania individual.</p><p><strong>O Resgate da Supremacia:</strong> Reestabeleça o comando central da sua mente. Saiba como a biologia e a mentalidade operam em conjunto para criar um estado de domínio sobre as próprias decisões.</p><p><strong>Anatomia da Vontade:</strong> Entenda como a estrutura da personalidade é formada e como você pode reconfigurar o seu núcleo operacional para nunca mais aceitar menos do que o topo.</p>'},
-                {img: 'ebook01.webp', title: 'Know Yourself First', price: '$ 11.00', link: 'https://pay.kiwify.com/8S4FCE0', desc: '<p>Are you exhausted from chasing a ghost?</p><p>Many people spend their lives trapped in a loop of disappointing encounters, believing that the "right person" is the missing piece to their happiness. But looking outward for what can only be found within is a road that leads to nowhere.</p><p>In "Know Yourself First", Júlio Bhrósz presents a radical shift in perspective. This is not a collection of vague advice; it is a strategic blueprint for those ready to stop settling for illusions and start building a life of profound, authentic connection.</p><p><strong>The Milestones of Your Transformation:</strong></p><p><strong>The Missing Link:</strong> Break the cycle of external validation. Discover why your inner foundation is the only thing capable of supporting a bond that doesn\'t crumble under pressure.</p><p><strong>Your Relational Blueprint:</strong> Decode the invisible forces of your past. Understand how family history and the neuroscience of attraction have been pulling the strings—and learn how to cut them to forge a new destiny.</p><p><strong>Authentic Identity & Purpose:</strong> Strip away the labels the world gave you. Define who you are at your core and align your life\'s purpose with the way you choose to love.</p><p><strong>Dismantling Inner Barriers:</strong> Shine a light on the hidden fears and self-sabotage that keep you playing small. Gain the tools to replace hesitation with the courage to be truly seen.</p><p><strong>The Mastery of Connection:</strong> Move beyond surface-level talk. Master the art of empathetic communication and set the boundaries that command respect and foster mutual growth.</p><p>The most important relationship you will ever have is the one you cultivate with yourself. Stop waiting for a miracle to walk through the door. The architecture of a fulfilling life begins in your own heart.</p>'},
-                {img: 'ebook02.webp', title: 'The Engineering of Collision', price: '$ 11,50', link: 'https://pay.kiwify.com/ZjtlaGh', desc: '<p>Is your relationship built to withstand the pressure, or is it merely waiting for the next crack to appear?</p><p>Most couples operate on a foundation of "clay"—a fragile mix of unspoken expectations and emotional vulnerability that crumbles under the first sign of stress. In "Collision Engineering," Júlio Bhrósz delivers the definitive manual for those who refuse to settle for a collapsing structure.</p><p>This is not a book about "getting along"; it is a technical intervention for the Reader who chooses to architect a bond with the precision and unyielding strength of Steel.</p><p><strong>The Technical Protocols of this Volume:</strong></p><p><strong>Emotional Watertightness:</strong> Learn the art of sealing your union against external leaks and invisible erosion. Ensure your core structure remains impenetrable to outside pressure.</p><p><strong>The Physics of Collision:</strong> Stop fearing the impact. Master the principles of turning relational "collisions" into the very energy required for structural fusion.</p><p><strong>Replacing Clay with Sovereignty:</strong> Identify the zones of fragility within your dynamic. Systematic instructions on how to reinforce your foundation until it achieves the Sovereignty of Steel.</p><p><strong>The Architecture of Autonomy:</strong> High-performance relationships require two sovereign individuals. Learn to design a common project where individual strength amplifies the power of the whole.</p><p><strong>Zero-Friction Systems:</strong> Implement communication protocols that function like perfectly calibrated gears—eliminating the heat of unnecessary friction and the waste of emotional energy.</p><p>Stop patching up a failing design. Take command of your structural destiny. Abandon the vulnerability of the masses and forge a relationship defined by power, stability, and Absolute Sovereignty.</p>'},
-                {img: 'ebook03.webp', title: 'THE SUPREMACY CODE', price: '$ 11,99', link: 'https://pay.kiwify.com/NcdLsaN', desc: '<p>What remains of you when the layers of self-deception are stripped away?</p><p>Most people spend their existence trying to "fix" a broken identity, feeding on emotional crumbs and accepting the slow decay of their own will. In "The Supremacy Code," Júlio Bhrósz performs the ultimate procedure: a total opening of the psychic structure to identify the causa mortis of your drive and the root of your submission.</p><p>This is not a self-help book; it is a Post-Mortem Examination of the Ego. Here, the Reader transitions from a passive observer to the lead specialist, dissecting their own failures, extracting emotional parasites, and reclaiming Supremacy over their existence.</p><p><strong>The Examination Protocols of this Volume:</strong></p><p><strong>Dissecting the Patterns:</strong> Identify the necrotic tissues of your history that still dictate your current reactions. Cut away what is dead so that real life can emerge.</p><p><strong>Extraction of Emotional Crumbs:</strong> Learn the rigorous protocol to identify and delete affective dependencies and the desperate need for validation that drains your vital energy.</p><p><strong>Identifying Parasitism:</strong> Recognize the external agents feeding on your lack of boundaries and learn to neutralize their influence through individual sovereignty.</p><p><strong>The Restoration of Supremacy:</strong> Re-establish the central command of your mind. Understand how biology and mindset operate together to create a state of total dominance over your decisions.</p><p><strong>Anatomy of the Will:</strong> Understand how the personality structure is formed and how to reconfigure your core operating system to never again accept anything less than the top.</p>'}
+                {img: 'ebook04.webp', title: 'Descubra Você', price: 'R$ 29,50', link: 'https://pay.kiwify.com.br/P8UTO6L', desc: '<p>Você sente que está vivendo em um ciclo repetitivo de encontros frustrantes e desencontros emocionais?</p><p>Muitas vezes, depositamos no outro a responsabilidade pela nossa felicidade, apenas para encontrar desilusão. Mas a verdade é que a chave para conexões autênticas e duradouras nunca esteve no "parceiro ideal", mas sim escondida dentro da sua própria essência.</p><p>Em "Descubra Você", Júlio Bhrósz convida você para uma jornada profunda de autodescoberta. Este e-book não é apenas um guia de conselhos; é um mapa prático para quem deseja parar de sobreviver a relações vazias e começar a construir vínculos reais e significativos.</p>'},
+                {img: 'ebook05.webp', title: 'Engenharia da Colisão', price: 'R$ 39,00', link: 'https://pay.kiwify.com.br/oRZAlbz', desc: '<p>O seu relacionamento é uma estrutura de argila ou uma armadura de aço?</p><p>A maioria dos casais vive sob a fragilidade de acordos superficiais, esperando que o tempo resolva fissuras estruturais que, na verdade, exigem intervenção técnica. Em "Engenharia da Colisão", Júlio Bhrósz apresenta o método definitivo para casais que decidiram abandonar a instabilidade emocional e assumir o controle absoluto da sua dinâmica afetiva.</p>'},
+                {img: 'ebook06.webp', title: 'Autópsia da Personalidade', price: 'R$ 59,90', link: 'https://pay.kiwify.com.br/sD4nqRO', desc: '<p>O que resta de você quando as camadas de autodecepção são removidas?</p><p>A maioria das pessoas passa a vida tentando "consertar" o que nunca funcionou, alimentando-se de migalhas emocionais e aceitando a falência da própria identidade. Em "Autópsia da Personalidade", Júlio Bhrósz executa o procedimento definitivo: a abertura completa da estrutura psíquica para identificar a causa mortis da sua vontade e a origem da sua submissão.</p>'},
+                {img: 'ebook01.webp', title: 'Know Yourself First', price: '$ 11.00', link: 'https://pay.kiwify.com/8S4FCE0', desc: '<p>Are you exhausted from chasing a ghost?</p><p>Many people spend their lives trapped in a loop of disappointing encounters, believing that the "right person" is the missing piece to their happiness. But looking outward for what can only be found within is a road that leads to nowhere.</p>'},
+                {img: 'ebook02.webp', title: 'The Engineering of Collision', price: '$ 11,50', link: 'https://pay.kiwify.com/ZjtlaGh', desc: '<p>Is your relationship built to withstand the pressure, or is it merely waiting for the next crack to appear?</p>'},
+                {img: 'ebook03.webp', title: 'Personality Autopsy', price: '$ 12.00', link: 'https://pay.kiwify.com/R0UjN6s', desc: '<p>What is left of you when the layers of self-deception are stripped away?</p>'}
             ],
             a: [
-                {img: 'audio04.webp', title: 'Descubra Você', price: 'R$ 37,50', link: 'https://pay.kiwify.com.br/lDiv2Do', desc: '<p><strong>Descubra Você: Desvende Sua Essência, Transforme Seus Relacionamentos (Audiobook)</strong></p><p>Você sente que está vivendo em um ciclo repetitivo de encontros frustrantes e desencontros emocionais?</p><p>Muitas vezes, depositamos no outro a responsabilidade pela nossa felicidade, apenas para encontrar desilusão. Mas a verdade é que a chave para conexões autênticas e duradouras nunca esteve no "parceiro ideal", mas sim escondida dentro da sua própria essência.</p><p>Em "Descubra Você", Júlio Bhrósz convida você para uma jornada profunda de autodescoberta. Este audiobook não é apenas um guia de conselhos; é um mapa prático para quem deseja parar de sobreviver a relações vazias e começar a construir vínculos reais e significativos, narrado com a profundidade que o conteúdo merece.</p>'},
-                {img: 'audio05.webp', title: 'Engenharia da Colisão', price: 'R$ 39,50', link: 'https://pay.kiwify.com.br/PmaKDGV', desc: '<p><strong>Engenharia da Colisão: A Soberania do Aço nos Relacionamentos (Audiobook)</strong></p><p>O seu relacionamento é uma estrutura de argila ou uma armadura de aço?</p><p>A maioria dos casais vive sob a fragilidade de acordos superficiais, esperando que o tempo resolva fissuras estruturais que, na verdade, exigem intervenção técnica. Em "Engenharia da Colisão", Júlio Bhrósz apresenta o método definitivo para casais que decidiram abandonar a instabilidade emocional e assumir o controle absoluto da sua dinâmica afetiva.</p><p>Este não é um audiobook de conselhos sentimentais; é um manual de Engenharia de Relacionamento de alto impacto, narrado com a intensidade que o conteúdo técnico e transformador merece.</p>'},
-                {img: 'audio06.webp', title: 'Autópsia da Personalidade', price: 'R$ 57,50', link: 'https://pay.kiwify.com.br/nJO91Ia', desc: '<p><strong>Autópsia da Personalidade: O Fim das Migalhas Emocionais (Audiobook)</strong></p><p>O que resta de você quando as camadas de autodecepção são removidas?</p><p>A maioria das pessoas passa a vida tentando "consertar" o que nunca funcionou, alimentando-se de migalhas emocionais e aceitando a falência da própria identidade. Em "Autópsia da Personalidade", Júlio Bhrósz executa o procedimento definitivo: a abertura completa da estrutura psíquica para identificar a causa mortis da sua vontade e a origem da sua submissão.</p><p>Este audiobook não é um convite ao diálogo; é um Exame Cadavérico do Ego, narrado com a visceral que transforma o ouvinte em agente de sua própria supremacia.</p>'},
-                {img: 'audio01.webp', title: 'Know Yourself First', price: '$ 13.95', link: 'https://pay.kiwify.com/ilgU4Kg', desc: '<p><strong>Know Yourself First: Unravel Your Essence, Transform Your Relationships (Audiobook)</strong></p><p>Are you exhausted from chasing a ghost?</p><p>Many people spend their lives trapped in a loop of disappointing encounters, believing that the "right person" is the missing piece to their happiness. But looking outward for what can only be found within is a road that leads to nowhere.</p><p>In "Know Yourself First", Júlio Bhrósz presents a radical shift in perspective. This is not a collection of vague advice; it is a strategic blueprint for those ready to stop settling for illusions and start building a life of profound, authentic connection, now available in immersive audio format.</p>'},
-                {img: 'audio02.webp', title: 'The Engineering of Collision', price: '$ 14.95', link: 'https://pay.kiwify.com/2LTHnl0', desc: '<p><strong>The Engineering of Collision: From Fragile Clay to the Sovereignty of Steel (Audiobook)</strong></p><p>Is your relationship built to withstand the pressure, or is it merely waiting for the next crack to appear?</p><p>Most couples operate on a foundation of "clay"—a fragile mix of unspoken expectations and emotional vulnerability that crumbles under the first sign of stress. In "Collision Engineering," Júlio Bhrósz delivers the definitive manual for those who refuse to settle for a collapsing structure, narrated with the technical precision this masterwork demands.</p>'},
-                {img: 'audio03.webp', title: 'THE SUPREMACY CODE', price: '$ 15.95', link: 'https://pay.kiwify.com/TGmTjRA', desc: '<p><strong>THE SUPREMACY CODE: Delete Emotional Crumbs, Reclaim Your Sovereignty (Audiobook)</strong></p><p>What remains of you when the layers of self-deception are stripped away?</p><p>Most people spend their existence trying to "fix" a broken identity, feeding on emotional crumbs and accepting the slow decay of their own will. In "The Supremacy Code," Júlio Bhrósz performs the ultimate procedure: a total opening of the psychic structure to identify the causa mortis of your drive and the root of your submission.</p><p>This audio experience is not a self-help book; it is a Post-Mortem Examination of the Ego, delivered with the visceral intensity that transforms listeners into architects of their own sovereignty.</p>'}
+                {img: 'audio01.webp', title: 'Audiobook: O Código', price: 'R$ 47,00', link: '#', desc: 'Versão em áudio completa do best-seller O Código.'},
+                {img: 'audio02.webp', title: 'Audiobook: Soberania', price: 'R$ 47,00', link: '#', desc: 'Aprenda a dominar sua mente através deste guia em áudio.'}
             ]
         };
 
         const staticReviews = [
-            {id: 1, text: "La découverte de soi a complètement changé ma perspective.", author: "Maria Silva", email: "maria.s@ficticio.com", book: "Descubra Você", rating: "BOM"},
-            {id: 2, text: "The architectural depth of this code is supreme.", author: "John Wick", email: "j.wick@status.com", book: "THE SUPREMACY CODE", rating: "EXCELENTE"},
-            {id: 3, text: "Unmatched technical sovereignty.", author: "Sarah Connor", email: "s.connor@sky.com", book: "THE SUPREMACY CODE", rating: "EXCELENTE"},
-            {id: 4, text: "Júlio Bhrósz entrega profundidade incomparável.", author: "Carlos Oliveira", email: "carlos.o@ficticio.com", book: "Verdade em Vida", rating: "ÓTIMO"},
-            {id: 5, text: "Excelente combinação de teoria e prática.", author: "Fernanda Lima", email: "fernanda.l@ficticio.com", book: "Engenharia", rating: "ÓTIMO"},
-            {id: 6, text: "Qualidade técnica absoluta.", author: "Roberto Martins", email: "roberto.m@ficticio.com", book: "Autópsia", rating: "ÓTIMO"}
+            {rating:'★★★★★', text:'Mudou minha forma de ver o mundo.', author:'Carlos M.', email:'carlos@email.com', book:'O Código'},
+            {rating:'★★★★★', text:'Conteúdo técnico e direto ao ponto.', author:'Ana P.', email:'ana@email.com', book:'Engenharia da Colisão'},
+            {rating:'★★★★★', text:'A melhor decisão que tomei este ano.', author:'Roberto S.', email:'roberto@email.com', book:'Autópsia da Personalidade'},
+            {rating:'★★★★★', text:'Impactante e transformador.', author:'Julia L.', email:'julia@email.com', book:'Descubra Você'},
+            {rating:'★★★★★', text:'Finalmente algo que funciona.', author:'Marcos V.', email:'marcos@email.com', book:'O Código'},
+            {rating:'★★★★★', text:'Excelente material de apoio.', author:'Fernanda R.', email:'fernanda@email.com', book:'Engenharia da Colisão'}
         ];
 
-        let iE = 0, iA = 0, linkAtual = '', historico = 'home';
-        setInterval(() => { iE = (iE + 1) % hardware.e.length; if(document.getElementById('loop-e')) document.getElementById('loop-e').src = hardware.e[iE].img; }, 3000);
-        setInterval(() => { iA = (iA + 1) % hardware.a.length; if(document.getElementById('loop-a')) document.getElementById('loop-a').src = hardware.a[iA].img; }, 3000);
+        let linkAtual = '';
+        let historico = 'home';
 
         function resetTelas() {
-            ['view-home', 'view-galeria', 'view-sinopse', 'view-info-extra', 'btn-voltar'].forEach(id => {
-                const el = document.getElementById(id); if(el) el.style.display = 'none';
-            });
-            document.getElementById('bg').style.display = 'none'; window.scrollTo(0,0);
+            document.getElementById('view-home').style.display = 'none';
+            document.getElementById('view-galeria').style.display = 'none';
+            document.getElementById('view-sinopse').style.display = 'none';
+            document.getElementById('view-info-extra').style.display = 'none';
+            document.getElementById('btn-voltar').style.display = 'none';
+            const navLinks = document.querySelectorAll('nav a');
+            navLinks.forEach(a => a.classList.remove('active'));
         }
 
         function ativarMenu(id) {
-            document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
-            const alvo = document.getElementById('nav-' + id); if(alvo) alvo.classList.add('active');
+            const el = document.getElementById('nav-' + id);
+            if(el) el.classList.add('active');
         }
 
         function irHome() {
-            resetTelas(); document.getElementById('view-home').style.display = 'flex';
-            document.getElementById('bg').style.display = 'block'; ativarMenu('home'); historico = 'home';
+            resetTelas();
+            document.getElementById('view-home').style.display = 'flex';
+            ativarMenu('home');
+            historico = 'home';
         }
 
         function irTitulos() {
-            resetTelas(); const grid = document.getElementById('render-grid');
-            const allItems = [...hardware.e, ...hardware.a];
-            grid.innerHTML = allItems.map((item, idx) => `
-                <div class="card-flutuante" data-index="${idx}">
-                    <img src="${item.img}" alt="${item.title}">
-                    <div class="stars">★★★★★</div>
-                </div>`).join('');
-            document.querySelectorAll('.card-flutuante').forEach((card) => {
-                card.addEventListener('click', function() {
-                    const idx = parseInt(this.getAttribute('data-index'));
-                    const item = allItems[idx];
-                    abrirSinopse(item.img, item.title, item.price, item.link, item.desc);
-                });
+            resetTelas();
+            const grid = document.getElementById('render-grid');
+            grid.innerHTML = '';
+            
+            hardware.e.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'card-flutuante';
+                card.onclick = () => abrirSinopse(item.img, item.title, item.price, item.link, item.desc);
+                card.innerHTML = `<img src="${item.img}"><div class="stars">★★★★★</div><div style="color:#fff; margin-top:10px; font-weight:700; font-size:0.8rem; text-transform:uppercase;">${item.title}</div>`;
+                grid.appendChild(card);
             });
+
             document.getElementById('view-galeria').style.display = 'block';
-            document.getElementById('btn-voltar').style.display = 'block'; ativarMenu('ebook'); historico = 'titulos';
+            document.getElementById('btn-voltar').style.display = 'block';
+            ativarMenu('ebook');
+            historico = 'galeria';
+            window.scrollTo(0,0);
         }
 
         function abrirSinopse(img, title, price, link, desc) {
-            resetTelas(); linkAtual = link;
+            resetTelas();
+            linkAtual = link;
             document.getElementById('target-img').src = img;
             document.getElementById('target-title').innerText = title;
             document.getElementById('target-price').innerText = price;
             document.getElementById('target-desc').innerHTML = desc;
             document.getElementById('view-sinopse').style.display = 'block';
-            document.getElementById('btn-voltar').style.display = 'block'; ativarMenu('sinopse'); historico = 'sinopse';
+            document.getElementById('btn-voltar').style.display = 'block';
+            ativarMenu('sinopse');
+            historico = 'sinopse';
+            window.scrollTo(0,0);
         }
 
-        function abrirSinopseDefault() { const d = hardware.e[0]; abrirSinopse(d.img, d.title, d.price, d.link, d.desc); }
-        function checkout() { if(linkAtual) window.open(linkAtual, '_blank'); }
-        function voltarFluxo() { if (historico === 'sinopse' || historico === 'info') irTitulos(); else irHome(); }
+        function abrirSinopseDefault() {
+            const d = hardware.e[0];
+            abrirSinopse(d.img, d.title, d.price, d.link, d.desc);
+        }
+
+        function checkout() {
+            if(linkAtual && linkAtual !== '#') window.open(linkAtual, '_blank');
+        }
+
+        function voltarFluxo() {
+            if (historico === 'sinopse' || historico === 'info') irTitulos();
+            else irHome();
+        }
 
         function abrirInfo(tipo) {
-            resetTelas(); const container = document.getElementById('content-info');
+            resetTelas();
+            const container = document.getElementById('content-info');
             document.getElementById('view-info-extra').style.display = 'block';
-            document.getElementById('btn-voltar').style.display = 'block'; ativarMenu(tipo);
+            document.getElementById('btn-voltar').style.display = 'block';
+            ativarMenu(tipo);
+            
             if(tipo === 'compartilhado') {
                 const colEsq = staticReviews.slice(0,3).map(r => renderReview(r)).join('');
                 const colDir = staticReviews.slice(3,6).map(r => renderReview(r)).join('');
@@ -995,19 +741,20 @@
                 container.innerHTML = `<div class="suporte-clean"><div class="suporte-fundo" style="background: url('banner.webp') no-repeat center center; background-size: cover; filter: brightness(0.3);"></div><div class="suporte-content"><h1>Suporte</h1><div class="suporte-card"><div class="suporte-label">E-mail</div><div class="suporte-email">suportebook@portalpleno.com.br</div></div></div></div>`;
             }
             historico = 'info';
+            window.scrollTo(0,0);
         }
 
-        function renderReview(r) { return `<div class="card-review"><div class="stars">${r.rating}</div><div class="text">"${r.text}"</div><div class="author-info"><strong>${r.author}</strong><br>${r.email} | ${r.book}</div></div>`; }
-        function copiarEmail(email) { navigator.clipboard.writeText(email).then(() => alert('E-mail copiado!')); }
+        function renderReview(r) {
+            return `<div class="card-review"><div class="stars">${r.rating}</div><div class="text">"${r.text}"</div><div class="author-info"><strong>${r.author}</strong><br>${r.email} | ${r.book}</div></div>`;
+        }
 
-        window.onload = () => { initAnimation(); irHome(); };
-        window.addEventListener('resize', () => {
-            if (renderer) {
-                renderer.setSize(window.innerWidth, window.innerHeight);
-                camera.aspect = window.innerWidth / window.innerHeight; camera.updateProjectionMatrix();
-            }
-        });
-        document.addEventListener('click', startMaterialization);
+        function copiarEmail(email) {
+            navigator.clipboard.writeText(email).then(() => alert('E-mail copiado!'));
+        }
+
+        window.onload = () => {
+            irHome();
+        };
     </script>
 </body>
 </html>

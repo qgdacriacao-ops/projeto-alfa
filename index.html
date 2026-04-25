@@ -9,19 +9,14 @@
         })(window, document, "clarity", "script", "vxqqwilkqh");
     </script>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Portal Pleno | O Código</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <style>
-        /* ============================================================
-           VARIÁVEIS GLOBAIS
-        ============================================================ */
         :root {
             --gold: #FFD700;
             --bg-black: #000;
             --white: #fff;
-            --bg-light: #f9f9f9;
-            --red-btn: #d30000;
             --glow: rgba(255, 215, 0, 0.6);
             --red: #CC0000;
             --ice-gray: #E8EAEB;
@@ -30,16 +25,12 @@
             --border: #D1D1D1;
         }
 
-        /* REMOÇÃO DE ELEMENTOS QUE TRAVAM */
         #preloader, #particle-canvas { display: none !important; }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body, html { min-height: 100%; background-color: var(--bg-black); font-family: 'Inter', sans-serif; overflow-x: hidden !important; display: flex; flex-direction: column; width: 100%; }
-        main { width: 100%; overflow-x: hidden !important; }
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        body, html { min-height: 100%; background-color: var(--bg-black); font-family: 'Inter', sans-serif; overflow-x: hidden !important; display: flex; flex-direction: column; width: 100%; touch-action: pan-y; }
+        main { width: 100%; overflow-x: hidden !important; flex: 1; position: relative; z-index: 10; padding-top: 85px; }
 
-        /* ============================================================
-           HEADER
-        ============================================================ */
         header {
             background: #000;
             padding: 0 5%;
@@ -61,43 +52,31 @@
         nav a:hover, nav a.active { color: var(--gold); border-bottom: 2px solid var(--gold); }
         #btn-voltar { display: none; color: var(--gold); border: 1px solid var(--gold); padding: 5px 12px; font-size: 0.6rem; font-weight: 700; text-transform: uppercase; cursor: pointer; white-space: nowrap; }
 
-        /* ============================================================
-           FUNDO
-        ============================================================ */
         #bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: url('capa.webp') no-repeat center center; background-size: cover; z-index: 1; filter: brightness(0.4); }
-        main { flex: 1; position: relative; z-index: 10; padding-top: 85px; }
 
-        /* ============================================================
-           VIEW HOME
-        ============================================================ */
-        .view-home { min-height: calc(100vh - 85px); display: flex; justify-content: space-between; align-items: center; padding: 0 5%; width: 100%; overflow-x: hidden; gap: 20px; }
-        .column-box { width: 280px; flex-shrink: 0; text-align: center; transition: 0.4s; }
+        .view-home { min-height: calc(100vh - 85px); display: flex; justify-content: space-between; align-items: center; padding: 0 5%; width: 100%; gap: 20px; }
+        .column-box { width: 300px; flex-shrink: 0; text-align: center; transition: 0.4s; }
         .column-box:hover { transform: scale(1.02); filter: drop-shadow(0 0 15px var(--glow)); }
-        .column-box p { color: var(--gold); letter-spacing: 5px; font-size: 0.7rem; margin-bottom: 0; padding-bottom: 5px; font-weight: 700; }
-        .display-box { width: 100%; height: 420px; cursor: pointer; }
-        .display-box img { width: 100%; height: 100%; object-fit: contain; }
+        .column-box p { color: var(--gold); letter-spacing: 5px; font-size: 0.7rem; margin-bottom: 10px; font-weight: 700; }
+        .display-box { width: 100%; height: 420px; cursor: pointer; position: relative; }
+        .display-box img { width: 100%; height: 100%; object-fit: contain; transition: opacity 0.5s ease; }
         .hero-center { flex: 1; min-width: 0; text-align: center; padding: 0 10px; }
-        .hero-center h1 { color: #fff; font-size: clamp(1.05rem, 4.5vw, 2.2rem); text-transform: uppercase; line-height: 1.25; text-align: center; word-break: break-word; }
+        .hero-center h1 { color: #fff; font-size: clamp(1.1rem, 4.5vw, 2.2rem); text-transform: uppercase; line-height: 1.25; }
         .line-hero { width: 85%; height: 5px; background: var(--gold); margin: 15px auto; box-shadow: 0 0 20px var(--gold); }
 
-        /* ============================================================
-           VIEW GALERIA
-        ============================================================ */
-        .view-galeria { display: none; background: #000; min-height: 100vh; padding: 60px 5% 100px; width: 100%; overflow-x: hidden; }
+        .view-galeria { display: none; background: #000; min-height: 100vh; padding: 60px 5% 100px; width: 100%; }
         .grid-produtos { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; max-width: 1400px; margin: 0 auto; width: 100%; }
-        .card-flutuante { text-align: center; cursor: pointer; transition: transform 0.4s ease; animation: flutuar 4s ease-in-out infinite; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        .card-flutuante { text-align: center; cursor: pointer; transition: transform 0.4s ease; animation: flutuar 4s ease-in-out infinite; display: flex; flex-direction: column; align-items: center; }
         .card-flutuante img { width: 100%; max-width: 200px; height: 300px; object-fit: contain; transition: 0.4s; }
         .card-flutuante:hover img { transform: scale(1.05); filter: drop-shadow(0 0 20px var(--glow)); }
         .card-flutuante .stars { color: var(--gold); margin-top: 10px; font-weight: 700; }
+        .card-title { color: #fff; margin-top: 10px; font-weight: 700; font-size: 0.8rem; text-transform: uppercase; }
         @keyframes flutuar { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
 
-        /* ============================================================
-           VIEW SINOPSE
-        ============================================================ */
         .view-sinopse { display: none; background-color: var(--ice-gray); min-height: 100vh; padding: 0 0 80px; color: var(--text-dark); }
-        .container-trindade { max-width: 1350px; margin: 60px auto 20px; display: grid; grid-template-columns: 300px 1fr 220px; gap: 45px; padding: 0 5%; width: 100%; overflow-x: hidden; }
+        .container-trindade { max-width: 1350px; margin: 60px auto 20px; display: grid; grid-template-columns: 300px 1fr 220px; gap: 45px; padding: 0 5%; width: 100%; }
         .col-mockup { display: flex; align-items: flex-start; justify-content: center; }
-        .col-mockup img { width: 100%; max-width: 100%; height: auto; object-fit: contain; filter: drop-shadow(0 8px 20px rgba(0,0,0,0.18)); border-radius: 2px; }
+        .col-mockup img { width: 100%; max-width: 100%; height: auto; object-fit: contain; filter: drop-shadow(0 8px 20px rgba(0,0,0,0.18)); }
         .col-texto h1 { font-family: 'Playfair Display', serif; font-size: clamp(1.4rem, 3.5vw, 3rem); margin-bottom: 5px; color: #000; line-height: 1.1; }
         .author { font-size: 1.1rem; color: #8B6B00; margin-bottom: 40px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
         .description { line-height: 2.1; font-size: 1.15rem; color: #333; text-align: justify; }
@@ -108,12 +87,10 @@
         .price-label { font-size: 0.65rem; color: var(--gold); text-transform: uppercase; margin-bottom: 5px; display: block; text-align: center; font-weight: 700; }
         .price-value { font-size: 1.9rem; font-weight: 700; margin-bottom: 25px; text-align: center; color: var(--white); }
         .btn-group { display: flex; flex-direction: column; gap: 10px; }
-        .btn-gold { display: block; background: var(--gold); color: #000; text-align: center; padding: 14px 5px; font-weight: 800; text-transform: uppercase; cursor: pointer; border: none; width: 100%; }
-        .btn-red { display: block; background: var(--red); color: #fff; text-align: center; padding: 14px 5px; font-weight: 800; text-transform: uppercase; cursor: pointer; border: none; width: 100%; }
+        .btn-gold, .btn-red { display: block; text-align: center; padding: 14px 5px; font-weight: 800; text-transform: uppercase; cursor: pointer; border: none; width: 100%; transition: 0.3s; }
+        .btn-gold { background: var(--gold); color: #000; }
+        .btn-red { background: var(--red); color: #fff; }
 
-        /* ============================================================
-           DETALHES DO PRODUTO
-        ============================================================ */
         .product-details { max-width: 1350px; margin: 40px auto; padding: 0 5%; color: #000; }
         .details-title { font-size: 1.2rem; font-weight: 700; text-transform: uppercase; margin-bottom: 20px; border-bottom: 2px solid #000; padding-bottom: 10px; }
         .details-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
@@ -121,9 +98,6 @@
         .detail-label { font-size: 0.75rem; text-transform: uppercase; color: #888; font-weight: 700; }
         .detail-value { font-size: 0.95rem; font-weight: 700; color: #000; }
 
-        /* ============================================================
-           VIEW INFO EXTRA
-        ============================================================ */
         .view-info-extra { display: none; min-height: 100vh; padding: 60px 0 100px; width: 100%; position: relative; z-index: 20; }
         .layout-avaliacoes { display: grid; grid-template-columns: 1fr 400px 1fr; gap: 30px; align-items: start; }
         .card-review { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,215,0,0.2); padding: 20px; margin-bottom: 20px; border-radius: 4px; }
@@ -137,7 +111,6 @@
         .input-group input, .input-group textarea, .input-group select { width: 100%; background: #000; border: 1px solid #333; padding: 10px; color: #fff; font-family: inherit; }
         .btn-enviar { width: 100%; background: var(--gold); color: #000; border: none; padding: 15px; font-weight: 800; text-transform: uppercase; cursor: pointer; }
 
-        /* SOBRE / CONTATO / SUPORTE */
         .sobre-clean, .contato-clean, .suporte-clean { position: relative; min-height: 80vh; display: flex; align-items: center; justify-content: center; padding: 40px 5%; }
         .sobre-fundo, .contato-fundo, .suporte-fundo { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
         .sobre-content, .contato-content, .suporte-content { background: rgba(0,0,0,0.85); border: 1px solid var(--gold); padding: 40px; max-width: 900px; width: 100%; color: #fff; }
@@ -155,7 +128,6 @@
 
         .final-footer { background: #000; color: #666; text-align: center; padding: 30px; font-size: 0.8rem; border-top: 1px solid var(--gold); z-index: 100; }
 
-        /* RESPONSIVIDADE MOBILE */
         @media (max-width: 1024px) {
             .grid-produtos { grid-template-columns: repeat(2, 1fr); gap: 40px; }
             .container-trindade { grid-template-columns: 1fr; gap: 30px; }
@@ -170,12 +142,13 @@
             nav::-webkit-scrollbar { display: none; }
             nav ul { gap: 15px; padding: 10px 0; }
             nav a { font-size: 0.6rem; }
-            .view-home { flex-direction: column; padding: 20px 5%; }
-            .column-box { width: 100%; }
+            .view-home { flex-direction: column; padding: 40px 5%; min-height: auto; gap: 40px; }
+            .column-box { width: 100%; max-width: 320px; }
+            .display-box { height: 380px; }
             .grid-produtos { grid-template-columns: 1fr; gap: 30px; }
             .details-grid { grid-template-columns: 1fr; }
             .layout-avaliacoes { grid-template-columns: 1fr; }
-            .suporte-email { font-size: 1rem !important; word-break: break-all; }
+            .suporte-email { font-size: 1.1rem !important; word-break: break-all; }
         }
     </style>
 </head>
@@ -198,12 +171,11 @@
         </nav>
     </header>
 
-    <main>
-        <!-- VIEW HOME -->
+    <main id="main-content">
         <div id="view-home" class="view-home">
             <div class="column-box">
                 <p>EBOOKS</p>
-                <div class="display-box" onclick="irTitulos()"><img id="loop-e" src="ebook04.webp"></div>
+                <div class="display-box" onclick="irSinopseHome('e')"><img id="loop-e" src="ebook04.webp"></div>
             </div>
             <div class="hero-center">
                 <h1>O CONFORTO É UMA PRISÃO</h1>
@@ -212,16 +184,14 @@
             </div>
             <div class="column-box">
                 <p>AUDIOBOOKS</p>
-                <div class="display-box" onclick="irTitulos()"><img id="loop-a" src="audio04.webp"></div>
+                <div class="display-box" onclick="irSinopseHome('a')"><img id="loop-a" src="audio04.webp"></div>
             </div>
         </div>
 
-        <!-- VIEW GALERIA -->
         <section id="view-galeria" class="view-galeria">
             <div class="grid-produtos" id="render-grid"></div>
         </section>
 
-        <!-- VIEW SINOPSE -->
         <section id="view-sinopse" class="view-sinopse">
             <div class="container-trindade">
                 <div class="col-mockup"><img id="target-img" src=""></div>
@@ -261,7 +231,6 @@
             </div>
         </section>
 
-        <!-- VIEW INFO EXTRA -->
         <section id="view-info-extra" class="view-info-extra">
             <div id="content-info"></div>
         </section>
@@ -272,18 +241,18 @@
     <script>
         const hardware = {
             e: [
-                {img: 'ebook04.webp', title: 'Descubra Você', price: 'R$ 29,50', link: 'https://pay.kiwify.com.br/P8UTO6L', desc: '<p>Muitas vezes, depositamos no outro a responsabilidade pela nossa felicidade, apenas para encontrar desilusão. Mas a verdade é que a chave para conexões autênticas e duradouras nunca esteve no "parceiro ideal", mas sim escondida dentro da sua própria essência.</p>'},
-                {img: 'ebook05.webp', title: 'Engenharia da Colisão', price: 'R$ 39,00', link: 'https://pay.kiwify.com.br/oRZAlbz', desc: '<p>O seu relacionamento é uma estrutura de argila ou uma armadura de aço? Em "Engenharia da Colisão", Júlio Bhrósz apresenta o método definitivo para casais que decidiram abandonar a instabilidade emocional.</p>'},
-                {img: 'ebook06.webp', title: 'Autópsia da Personalidade', price: 'R$ 59,90', link: 'https://pay.kiwify.com.br/sD4nqRO', desc: '<p>O que resta de você quando as camadas de autodecepção são removidas? Júlio Bhrósz executa o procedimento definitivo: a abertura completa da estrutura psíquica.</p>'},
-                {img: 'ebook01.webp', title: 'Know Yourself First', price: '$ 11.00', link: 'https://pay.kiwify.com/8S4FCE0', desc: '<p>Are you exhausted from chasing a ghost? This is a strategic blueprint for those ready to stop settling for illusions and start building a life of profound, authentic connection.</p>'},
+                {img: 'ebook04.webp', title: 'Descubra Você', price: 'R$ 29,50', link: 'https://pay.kiwify.com.br/P8UTO6L', desc: '<p>A chave para conexões autênticas e duradouras nunca esteve no "parceiro ideal", mas sim escondida dentro da sua própria essência.</p>'},
+                {img: 'ebook05.webp', title: 'Engenharia da Colisão', price: 'R$ 39,00', link: 'https://pay.kiwify.com.br/oRZAlbz', desc: '<p>Este não é um livro de conselhos sentimentais; é um manual de Engenharia de Relacionamento de alto impacto.</p>'},
+                {img: 'ebook06.webp', title: 'Autópsia da Personalidade', price: 'R$ 59,90', link: 'https://pay.kiwify.com.br/sD4nqRO', desc: '<p>O que resta de você quando as camadas de autodecepção são removidas? Um Exame Cadavérico do Ego.</p>'},
+                {img: 'ebook01.webp', title: 'Know Yourself First', price: '$ 11.00', link: 'https://pay.kiwify.com/8S4FCE0', desc: '<p>Are you exhausted from chasing a ghost? Architecture of a fulfilling life begins in your own heart.</p>'},
                 {img: 'ebook02.webp', title: 'The Engineering of Collision', price: '$ 11,50', link: 'https://pay.kiwify.com/ZjtlaGh', desc: '<p>Is your relationship built to withstand the pressure, or is it merely waiting for the next crack to appear?</p>'},
-                {img: 'ebook03.webp', title: 'THE SUPREMACY CODE', price: '$ 11,99', link: 'https://pay.kiwify.com/NcdLsaN', desc: '<p>What remains of you when the layers of self-deception are stripped away? Reclaim Supremacy over your existence.</p>'}
+                {img: 'ebook03.webp', title: 'THE SUPREMACY CODE', price: '$ 11,99', link: 'https://pay.kiwify.com/NcdLsaN', desc: '<p>What remains of you when the layers are stripped away? Reclaim Supremacy over your existence.</p>'}
             ],
             a: [
-                {img: 'audio04.webp', title: 'Descubra Você (Audio)', price: 'R$ 37,50', link: 'https://pay.kiwify.com.br/lDiv2Do', desc: '<p>Desvende Sua Essência, Transforme Seus Relacionamentos narrado com a profundidade que o conteúdo merece.</p>'},
-                {img: 'audio05.webp', title: 'Engenharia da Colisão (Audio)', price: 'R$ 39,50', link: 'https://pay.kiwify.com.br/PmaKDGV', desc: '<p>A Soberania do Aço nos Relacionamentos narrado com a intensidade que o conteúdo técnico merece.</p>'},
-                {img: 'audio06.webp', title: 'Autópsia da Personalidade (Audio)', price: 'R$ 57,50', link: 'https://pay.kiwify.com.br/nJO91Ia', desc: '<p>O Fim das Migalhas Emocionais narrado com a visceral que transforma o ouvinte em agente de sua própria supremacia.</p>'},
-                {img: 'audio01.webp', title: 'Know Yourself First (Audio)', price: '$ 13.95', link: 'https://pay.kiwify.com/ilgU4Kg', desc: '<p>Are you exhausted from chasing a ghost? Experience the journey in audio.</p>'},
+                {img: 'audio04.webp', title: 'Descubra Você (Audio)', price: 'R$ 37,50', link: 'https://pay.kiwify.com.br/lDiv2Do', desc: '<p>Descubra Você narrado com a profundidade que o conteúdo merece.</p>'},
+                {img: 'audio05.webp', title: 'Engenharia da Colisão (Audio)', price: 'R$ 39,50', link: 'https://pay.kiwify.com.br/PmaKDGV', desc: '<p>A Soberania do Aço nos Relacionamentos em uma experiência sonora intensa.</p>'},
+                {img: 'audio06.webp', title: 'Autópsia da Personalidade (Audio)', price: 'R$ 57,50', link: 'https://pay.kiwify.com.br/nJO91Ia', desc: '<p>O Fim das Migalhas Emocionais narrado com a visceralidade necessária.</p>'},
+                {img: 'audio01.webp', title: 'Know Yourself First (Audio)', price: '$ 13.95', link: 'https://pay.kiwify.com/ilgU4Kg', desc: '<p>Unravel Your Essence, Transform Your Relationships in audio format.</p>'},
                 {img: 'audio03.webp', title: 'THE SUPREMACY CODE (Audio)', price: '$ 15.95', link: 'https://pay.kiwify.com/TGmTjRA', desc: '<p>Delete Emotional Crumbs, Reclaim Your Sovereignty in this intense audio experience.</p>'}
             ]
         };
@@ -298,25 +267,11 @@
         ];
 
         let iE = 0, iA = 0, linkAtual = '', historico = 'home';
-        
-        // LOOP CARROSSEL HOME
-        setInterval(() => { 
-            iE = (iE + 1) % hardware.e.length; 
-            const el = document.getElementById('loop-e');
-            if(el) {
-                el.style.opacity = 0;
-                setTimeout(() => { el.src = hardware.e[iE].img; el.style.opacity = 1; }, 300);
-            }
-        }, 3000);
+        const menus = ['home', 'ebook', 'sinopse', 'compartilhado', 'sobre', 'contato', 'suporte'];
 
-        setInterval(() => { 
-            iA = (iA + 1) % hardware.a.length; 
-            const el = document.getElementById('loop-a');
-            if(el) {
-                el.style.opacity = 0;
-                setTimeout(() => { el.src = hardware.a[iA].img; el.style.opacity = 1; }, 300);
-            }
-        }, 3000);
+        // INTERVALOS CARROSSEL
+        setInterval(() => { iE = (iE + 1) % hardware.e.length; const el = document.getElementById('loop-e'); if(el) el.src = hardware.e[iE].img; }, 3000);
+        setInterval(() => { iA = (iA + 1) % hardware.a.length; const el = document.getElementById('loop-a'); if(el) el.src = hardware.a[iA].img; }, 3000);
 
         function resetTelas() {
             ['view-home', 'view-galeria', 'view-sinopse', 'view-info-extra', 'btn-voltar'].forEach(id => {
@@ -338,11 +293,11 @@
         function irTitulos() {
             resetTelas(); const grid = document.getElementById('render-grid');
             const allItems = [...hardware.e, ...hardware.a];
-            grid.innerHTML = allItems.map((item, idx) => `
+            grid.innerHTML = allItems.map(item => `
                 <div class="card-flutuante" onclick="abrirSinopse('${item.img}', '${item.title}', '${item.price}', '${item.link}', '${item.desc.replace(/'/g, "\\'")}')">
                     <img src="${item.img}" alt="${item.title}">
                     <div class="stars">★★★★★</div>
-                    <div style="color:#fff; margin-top:10px; font-weight:700; font-size:0.8rem; text-transform:uppercase;">${item.title}</div>
+                    <div class="card-title">${item.title}</div>
                 </div>`).join('');
             document.getElementById('view-galeria').style.display = 'block';
             document.getElementById('btn-voltar').style.display = 'block'; ativarMenu('ebook'); historico = 'titulos';
@@ -356,6 +311,11 @@
             document.getElementById('target-desc').innerHTML = desc;
             document.getElementById('view-sinopse').style.display = 'block';
             document.getElementById('btn-voltar').style.display = 'block'; ativarMenu('sinopse'); historico = 'sinopse';
+        }
+
+        function irSinopseHome(tipo) {
+            const item = tipo === 'e' ? hardware.e[iE] : hardware.a[iA];
+            abrirSinopse(item.img, item.title, item.price, item.link, item.desc);
         }
 
         function abrirSinopseDefault() { const d = hardware.e[0]; abrirSinopse(d.img, d.title, d.price, d.link, d.desc); }
@@ -375,13 +335,42 @@
             } else if(tipo === 'contato') {
                 container.innerHTML = `<div class="contato-clean"><div class="contato-fundo" style="background: url('banner.webp') no-repeat center center; background-size: cover; filter: brightness(0.3);"></div><div class="contato-content"><h1>Entre em Contato</h1><div class="contato-wrapper"><div class="feedback-form"><h2>Envie seu Feedback</h2><div class="form-group"><label>Nome</label><input type="text"></div><div class="form-group"><label>E-mail</label><input type="email"></div><div class="form-group"><label>Mensagem</label><textarea></textarea></div><button class="btn-feedback" onclick="this.innerText='ENVIADO'">Enviar Feedback</button></div><div class="email-accounts"><h3>Contas Oficiais</h3><div class="email-item" onclick="copiarEmail('contato@portalpleno.com.br')"><span class="email-label">Contato</span><span class="email-address">contato@portalpleno.com.br</span></div></div></div></div></div>`;
             } else if(tipo === 'suporte') {
-                container.innerHTML = `<div class="suporte-clean"><div class="suporte-fundo" style="background: url('banner.webp') no-repeat center center; background-size: cover; filter: brightness(0.3);"></div><div class="suporte-content"><h1>Suporte</h1><div class="suporte-card"><div class="suporte-label">E-mail</div><div class="suporte-email" style="font-size: 1.3rem; font-weight: 500; word-break: break-all;">suportebook@portalpleno.com.br</div></div></div></div>`;
+                container.innerHTML = `<div class="suporte-clean"><div class="suporte-fundo" style="background: url('banner.webp') no-repeat center center; background-size: cover; filter: brightness(0.3);"></div><div class="suporte-content"><h1>Suporte</h1><div class="suporte-card"><div class="suporte-label">E-mail</div><div class="suporte-email" style="font-size: 1.3rem; font-weight: 700; word-break: break-all;">suportebook@portalpleno.com.br</div></div></div></div>`;
             }
             historico = 'info';
         }
 
         function renderReview(r) { return `<div class="card-review"><div class="stars">${r.rating}</div><div class="text">"${r.text}"</div><div class="author-info"><strong>${r.author}</strong><br>${r.email} | ${r.book}</div></div>`; }
         function copiarEmail(email) { navigator.clipboard.writeText(email).then(() => alert('E-mail copiado!')); }
+
+        // LÓGICA DE SWIPE (ARRASTO)
+        let touchstartX = 0;
+        let touchendX = 0;
+
+        function handleGesture() {
+            const diff = touchstartX - touchendX;
+            const currentMenuIdx = menus.indexOf(document.querySelector('nav a.active').id.replace('nav-', ''));
+            
+            if (Math.abs(diff) > 100) { // Sensibilidade do arrasto
+                if (diff > 0) { // Swipe Left -> Próximo Menu
+                    const nextIdx = (currentMenuIdx + 1) % menus.length;
+                    navigateByMenu(menus[nextIdx]);
+                } else { // Swipe Right -> Menu Anterior
+                    const prevIdx = (currentMenuIdx - 1 + menus.length) % menus.length;
+                    navigateByMenu(menus[prevIdx]);
+                }
+            }
+        }
+
+        function navigateByMenu(tipo) {
+            if (tipo === 'home') irHome();
+            else if (tipo === 'ebook') irTitulos();
+            else if (tipo === 'sinopse') abrirSinopseDefault();
+            else abrirInfo(tipo);
+        }
+
+        document.addEventListener('touchstart', e => { touchstartX = e.changedTouches[0].screenX; }, false);
+        document.addEventListener('touchend', e => { touchendX = e.changedTouches[0].screenX; handleGesture(); }, false);
 
         window.onload = () => { irHome(); };
     </script>

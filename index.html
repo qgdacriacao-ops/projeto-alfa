@@ -272,9 +272,55 @@
             position: relative;
         }
 
+        .suporte-fundo {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
         .suporte-content {
             z-index: 2;
             text-align: center;
+        }
+
+        .suporte-content h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 5rem;
+            color: var(--gold);
+            margin-bottom: 50px;
+            letter-spacing: 5px;
+        }
+
+        .suporte-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            padding: 60px;
+            border: 1px solid rgba(255, 215, 0, 0.1);
+            border-radius: 2px;
+            display: inline-block;
+        }
+
+        .suporte-label {
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.8rem;
+            margin-bottom: 15px;
+        }
+
+        .suporte-email {
+            font-size: 1.5rem;
+            color: var(--gold);
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .suporte-email:hover {
+            letter-spacing: 3px;
         }
 
         /* --- ANIMAÇÕES --- */
@@ -389,13 +435,13 @@
         function irSobre() {
             const container = document.getElementById('content-area');
             container.innerHTML = `
-                <div class="sobre-container">
-                    <div class="sobre-img"></div>
-                    <div class="sobre-text">
+                <div class=\"sobre-container\">
+                    <div class=\"sobre-img\"></div>
+                    <div class=\"sobre-text\">
                         <h2>Soberania Intelectual</h2>
                         <p>O Portal Pleno não é apenas um curso. É um centro de treinamento para a mente. Nossa metodologia foca na reestruturação dos processos cognitivos através da engenharia comportamental aplicada.</p>
                         <p>Aprenda a blindar sua atenção, gerenciar seu foco e retomar o controle da sua biologia contra os algoritmos modernos.</p>
-                        <a href="javascript:void(0)" onclick="abrirInfo('contato')" class="btn-portal" style="animation: none; opacity: 1;">Acessar Treinamento</a>
+                        <a href=\"javascript:void(0)\" onclick=\"abrirInfo('contato')\" class=\"btn-portal\" style=\"animation: none; opacity: 1;\">Acessar Treinamento</a>
                     </div>
                 </div>
             `;
@@ -407,22 +453,25 @@
             const container = document.getElementById('content-area');
             if(tipo === 'contato') {
                 container.innerHTML = `
-                    <div class="contato-wrapper">
-                        <div class="contato-card">
+                    <div class=\"contato-wrapper\">
+                        <div class=\"contato-card\">
                             <h2>Fale com o QG</h2>
                             <p>Dúvidas sobre o portal, mentorias ou parcerias estratégicas.</p>
-                            <div class="contato-links">
-                                <a href="https://wa.me/5500000000000" target="_blank" style="color: var(--gold); text-decoration: none; font-size: 1.2rem;">🟢 WhatsApp</a>
-                                <a href="https://youtube.com" target="_blank" style="color: var(--gold); text-decoration: none; font-size: 1.2rem;">🔴 YouTube</a>
-                                <a href="https://linkedin.com" target="_blank" style="color: var(--gold); text-decoration: none; font-size: 1.2rem;">💼 LinkedIn</a>
+                            <div class=\"contato-links\">
+                                <a href=\"https://wa.me/5500000000000\" target=\"_blank\" style=\"color: var(--gold); text-decoration: none; font-size: 1.2rem;\">🟢 WhatsApp</a>
+                                <a href=\"https://youtube.com\" target=\"_blank\" style=\"color: var(--gold); text-decoration: none; font-size: 1.2rem;\">🔴 YouTube</a>
+                                <a href=\"https://linkedin.com\" target=\"_blank\" style=\"color: var(--gold); text-decoration: none; font-size: 1.2rem;\">💼 LinkedIn</a>
                             </div>
                         </div>
                     </div>`;
             } else if(tipo === 'suporte') {
-                container.innerHTML = `<div class="suporte-clean"><div class="suporte-content"><h1>Suporte</h1><div class="suporte-card"><div class="suporte-label">E-mail</div><div class="suporte-email">suportebook@portalpleno.com.br</div></div></div></div>`;
+                container.innerHTML = `<div class=\"suporte-clean\"><div class=\"suporte-fundo\" style=\"background: url('banner.webp') no-repeat center center; background-size: cover; filter: brightness(0.3);\"></div><div class=\"suporte-content\"><h1>Suporte</h1><div class=\"suporte-card\"><div class=\"suporte-label\">E-mail</div><div class=\"suporte-email\">suportebook@portalpleno.com.br</div></div></div></div>`;
             }
             historico = 'info';
         }
+
+        function renderReview(r) { return `<div class="card-review"><div class="stars">${r.rating}</div><div class="text">"${r.text}"</div><div class="author-info"><strong>${r.author}</strong><br>${r.email} | ${r.book}</div></div>`; }
+        function copiarEmail(email) { navigator.clipboard.writeText(email).then(() => alert('E-mail copiado!')); }
 
         window.onload = () => {
             initAnimation();
@@ -433,9 +482,10 @@
         };
 
         window.addEventListener('resize', () => {
-            renderer.setSize(window.innerWidth, window.innerHeight);
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
+            if (renderer) {
+                renderer.setSize(window.innerWidth, window.innerHeight);
+                camera.aspect = window.innerWidth / window.innerHeight; camera.updateProjectionMatrix();
+            }
         });
     </script>
 </body>

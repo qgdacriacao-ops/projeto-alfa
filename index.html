@@ -144,8 +144,6 @@
             nav a { font-size: 0.6rem; }
             .view-home { flex-direction: column; padding: 40px 5%; min-height: auto; gap: 40px; }
             .column-box { width: 100%; max-width: 320px; }
-            .display-box { height: 380px; }
-            .grid-produtos { grid-template-columns: 1fr; gap: 30px; }
             .details-grid { grid-template-columns: 1fr; }
             .layout-avaliacoes { grid-template-columns: 1fr; }
             .suporte-email { font-size: 1.1rem !important; word-break: break-all; }
@@ -178,9 +176,8 @@
                 <div class="display-box" onclick="irSinopseHome('e')"><img id="loop-e" src="ebook04.webp"></div>
             </div>
             <div class="hero-center">
-                <h1>O CONFORTO É UMA PRISÃO</h1>
+                <h1>Desvende os Segredos da Mente Humana e Transforme Sua Vida com Nossos Ebooks e Audiobooks Exclusivos.</h1>
                 <div class="line-hero"></div>
-                <h1>O CÓDIGO É A CHAVE</h1>
             </div>
             <div class="column-box">
                 <p>AUDIOBOOKS</p>
@@ -209,11 +206,13 @@
                         <span class="price-label">Por Apenas</span>
                         <div class="price-value" id="target-price">R$ 0,00</div>
                         <div class="btn-group">
+                            <p style="font-size: 0.65rem; color: var(--gold); text-align: center; margin-bottom: 5px; font-weight: 700; text-transform: uppercase;">Pagamento seguro via Kiwify: Pix, Cartão de Crédito e mais.</p>
                             <button class="btn-gold" onclick="checkout()">Adicionar ao Carrinho</button>
                             <button class="btn-red" onclick="checkout()">Compre Agora</button>
-                            <button class="btn-red" onclick="checkout()">Combo Ebooks</button>
-                            <button class="btn-red">Combo Audiobook</button>
-                            <button class="btn-red">Combo Completo</button>
+                            <button class="btn-red" onclick="checkout()">COMBO EBOOKS (Economize 20%)</button>
+                            <button class="btn-red" onclick="checkout()">COMBO AUDIOBOOK (Oferta Especial)</button>
+                            <button class="btn-red" onclick="checkout()">COMBO COMPLETO (Melhor Oferta)</button>
+                            <p style="font-size: 0.7rem; color: #666; text-align: center; margin-top: 10px; font-weight: 700;">Leve o combo e acelere sua transformação por um preço exclusivo.</p>
                         </div>
                     </div>
                 </div>
@@ -258,12 +257,12 @@
         };
 
         const staticReviews = [
-            {text: "La découverte de soi a complètement changé ma perspective.", author: "Maria Silva", email: "maria@email.com", book: "Descubra Você", rating: "★★★★★"},
-            {text: "The architectural depth is supreme.", author: "John Wick", email: "j.wick@status.com", book: "THE SUPREMACY CODE", rating: "★★★★★"},
-            {text: "Unmatched technical sovereignty.", author: "Sarah Connor", email: "s.connor@sky.com", book: "THE SUPREMACY CODE", rating: "★★★★★"},
-            {text: "Profundidade incomparável.", author: "Carlos Oliveira", email: "carlos@email.com", book: "Verdade em Vida", rating: "★★★★★"},
-            {text: "Excelente combinação de teoria e prática.", author: "Fernanda Lima", email: "fernanda@email.com", book: "Engenharia", rating: "★★★★★"},
-            {text: "Qualidade técnica absoluta.", author: "Roberto Martins", email: "roberto@email.com", book: "Autópsia", rating: "★★★★★"}
+            {text: "La découverte de soi a complètement changé ma perspective.", author: "Maria S.", email: "Verificado", book: "Descubra Você", rating: "★★★★★"},
+            {text: "The architectural depth is supreme.", author: "John W.", email: "Verificado", book: "THE SUPREMACY CODE", rating: "★★★★★"},
+            {text: "Unmatched technical sovereignty.", author: "Sarah C.", email: "Verificado", book: "THE SUPREMACY CODE", rating: "★★★★★"},
+            {text: "Profundidade incomparável.", author: "Carlos O.", email: "Verificado", book: "Verdade em Vida", rating: "★★★★★"},
+            {text: "Excelente combinação de teoria e prática.", author: "Fernanda L.", email: "Verificado", book: "Engenharia", rating: "★★★★★"},
+            {text: "Qualidade técnica absoluta.", author: "Roberto M.", email: "Verificado", book: "Autópsia", rating: "★★★★★"}
         ];
 
         let iE = 0, iA = 0, linkAtual = '', historico = 'home';
@@ -329,9 +328,9 @@
             if(tipo === 'compartilhado') {
                 const colEsq = staticReviews.slice(0,3).map(r => renderReview(r)).join('');
                 const colDir = staticReviews.slice(3,6).map(r => renderReview(r)).join('');
-                container.innerHTML = `<div style="color:#fff; padding:20px 5%;"><div class="layout-avaliacoes"><div class="col-depoimentos">${colEsq}</div><div class="form-review-container"><h3>CONTE-NOS SUA EXPERIENCIA</h3><div class="input-group"><label>Nome</label><input type="text" placeholder="Seu nome"></div><div class="input-group"><label>E-mail</label><input type="email" placeholder="seu@email.com"></div><div class="input-group"><label>Texto (Máx 100 char)</label><textarea maxlength="100" rows="3"></textarea></div><div class="input-group"><label>Nota</label><select><option>EXCELENTE</option><option>ÓTIMO</option><option>MUITO BOM</option><option>BOM</option><option>REGULAR</option></select></div><button class="btn-enviar" onclick="this.innerText='ENVIADO'">Enviar</button></div><div class="col-depoimentos">${colDir}</div></div></div>`;
+                container.innerHTML = `<div style="color:#fff; padding:20px 5%;"><div class="layout-avaliacoes"><div class="col-depoimentos">${colEsq}</div><div class="form-review-container"><h3>CONTE SUA EXPERIÊNCIA E APAREÇA AQUI!</h3><div class="input-group"><label>Nome</label><input type="text" placeholder="Seu nome"></div><div class="input-group"><label>E-mail</label><input type="email" placeholder="seu@email.com"></div><div class="input-group"><label>Texto (Máx 100 char)</label><textarea maxlength="100" rows="3"></textarea></div><div class="input-group"><label>Nota</label><select><option>EXCELENTE</option><option>ÓTIMO</option><option>MUITO BOM</option><option>BOM</option><option>REGULAR</option></select></div><button class="btn-enviar" onclick="this.innerText='ENVIADO'">Enviar</button></div><div class="col-depoimentos">${colDir}</div></div></div>`;
             } else if(tipo === 'sobre') {
-                container.innerHTML = `<div class="sobre-clean"><div class="sobre-fundo" style="background: url('banner.webp') no-repeat center center; background-size: cover; filter: brightness(0.3);"></div><div class="sobre-content"><h1>A Ciência por trás da Engenharia da Colisão</h1><div class="quote">"Relações não fracassam por falta de amor, mas por falha de hardware."</div><p>A obra de <strong>Júlio Bhrósz</strong> nasce do empirismo.</p><h2>Júlio Bhrósz</h2></div></div>`;
+                container.innerHTML = `<div class="sobre-clean"><div class="sobre-fundo" style="background: url('banner.webp') no-repeat center center; background-size: cover; filter: brightness(0.3);"></div><div class="sobre-content"><h1>Sobre Júlio Bhrósz</h1><p>Júlio Bhrósz é um renomado especialista em comportamento humano e engenharia mental, com mais de 15 anos de experiência transformando vidas através da soberania intelectual. Sua metodologia inovadora tem ajudado milhares de pessoas a desvendarem os códigos da mente e alcançarem o alto desempenho mental e emocional.</p><div class="quote">"O Código não é apenas um livro, é a chave para a liberdade mental."</div></div></div>`;
             } else if(tipo === 'contato') {
                 container.innerHTML = `<div class="contato-clean"><div class="contato-fundo" style="background: url('banner.webp') no-repeat center center; background-size: cover; filter: brightness(0.3);"></div><div class="contato-content"><h1>Entre em Contato</h1><div class="contato-wrapper"><div class="feedback-form"><h2>Envie seu Feedback</h2><div class="form-group"><label>Nome</label><input type="text"></div><div class="form-group"><label>E-mail</label><input type="email"></div><div class="form-group"><label>Mensagem</label><textarea></textarea></div><button class="btn-feedback" onclick="this.innerText='ENVIADO'">Enviar Feedback</button></div><div class="email-accounts"><h3>Contas Oficiais</h3><div class="email-item" onclick="copiarEmail('contato@portalpleno.com.br')"><span class="email-label">Contato</span><span class="email-address">contato@portalpleno.com.br</span></div></div></div></div></div>`;
             } else if(tipo === 'suporte') {
@@ -340,7 +339,19 @@
             historico = 'info';
         }
 
-        function renderReview(r) { return `<div class="card-review"><div class="stars">${r.rating}</div><div class="text">"${r.text}"</div><div class="author-info"><strong>${r.author}</strong><br>${r.email} | ${r.book}</div></div>`; }
+        function renderReview(r) { 
+            return `<div class="card-review">
+                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+                    <div style="width: 40px; height: 40px; background: #333; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--gold); font-size: 1.2rem; border: 1px solid var(--gold);">👤</div>
+                    <div>
+                        <div class="stars" style="margin-bottom: 0;">${r.rating}</div>
+                        <div class="author-info" style="color: #fff; font-weight: 700;">${r.author}</div>
+                    </div>
+                </div>
+                <div class="text">"${r.text}"</div>
+                <div class="author-info" style="font-size: 0.7rem; color: var(--gold);">${r.email} | ${r.book}</div>
+            </div>`; 
+        }
         function copiarEmail(email) { navigator.clipboard.writeText(email).then(() => alert('E-mail copiado!')); }
 
         // LÓGICA DE SWIPE (ARRASTO)

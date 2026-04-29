@@ -160,7 +160,7 @@
                 <li><a id="nav-home" class="active" onclick="irHome()">Início</a></li>
                 <li><a id="nav-ebook" onclick="irTitulos()">Ebook</a></li>
                 <li><a id="nav-sinopse" onclick="abrirSinopseDefault()">Sinopse</a></li>
-                <li><a id="nav-compartilhado" onclick="abrirInfo('compartilhado')">Compartilhado</a></li>
+                <li><a id="nav-depoimento" onclick="abrirInfo('depoimento')">Depoimento</a></li>
                 <li><a id="nav-sobre" onclick="abrirInfo('sobre')">Sobre</a></li>
                 <li><a id="nav-contato" onclick="abrirInfo('contato')">Contato</a></li>
                 <li><a id="nav-suporte" onclick="abrirInfo('suporte')">Suporte</a></li>
@@ -266,7 +266,7 @@
         ];
 
         let iE = 0, iA = 0, linkAtual = '', historico = 'home';
-        const menus = ['home', 'ebook', 'sinopse', 'compartilhado', 'sobre', 'contato', 'suporte'];
+        const menus = ['home', 'ebook', 'sinopse', 'depoimento', 'sobre', 'contato', 'suporte'];
 
         // INTERVALOS CARROSSEL
         setInterval(() => { iE = (iE + 1) % hardware.e.length; const el = document.getElementById('loop-e'); if(el) el.src = hardware.e[iE].img; }, 3000);
@@ -325,7 +325,7 @@
             resetTelas(); const container = document.getElementById('content-info');
             document.getElementById('view-info-extra').style.display = 'block';
             document.getElementById('btn-voltar').style.display = 'block'; ativarMenu(tipo);
-            if(tipo === 'compartilhado') {
+            if(tipo === 'depoimento') {
                 const colEsq = staticReviews.slice(0,3).map(r => renderReview(r)).join('');
                 const colDir = staticReviews.slice(3,6).map(r => renderReview(r)).join('');
                 container.innerHTML = `<div style="color:#fff; padding:20px 5%;"><div class="layout-avaliacoes"><div class="col-depoimentos">${colEsq}</div><div class="form-review-container"><h3>CONTE SUA EXPERIÊNCIA E APAREÇA AQUI!</h3><div class="input-group"><label>Nome</label><input type="text" placeholder="Seu nome"></div><div class="input-group"><label>E-mail</label><input type="email" placeholder="seu@email.com"></div><div class="input-group"><label>Texto (Máx 100 char)</label><textarea maxlength="100" rows="3"></textarea></div><div class="input-group"><label>Nota</label><select><option>EXCELENTE</option><option>ÓTIMO</option><option>MUITO BOM</option><option>BOM</option><option>REGULAR</option></select></div><button class="btn-enviar" onclick="this.innerText='ENVIADO'">Enviar</button></div><div class="col-depoimentos">${colDir}</div></div></div>`;

@@ -305,7 +305,7 @@
                 <li><a id="nav-home" class="active" onclick="irHome()">Início</a></li>
                 <li><a id="nav-ebook" onclick="irTitulos()">Ebook</a></li>
                 <li><a id="nav-sinopse" onclick="abrirSinopseDefault()">Sinopse</a></li>
-                <li><a id="nav-compartilhado" onclick="abrirInfo('compartilhado')">compartilhado</a></li>
+                <li><a id="nav-depoimentos" onclick="abrirInfo('depoimentos')">depoimentos</a></li>
                 <li><a id="nav-sobre" onclick="abrirInfo('sobre')">Sobre</a></li>
                 <li><a id="nav-contato" onclick="abrirInfo('contato')">Contato</a></li>
                 <li><a id="nav-suporte" onclick="abrirInfo('suporte')">Suporte</a></li>
@@ -397,6 +397,7 @@
                 {img: 'audio05.webp', title: 'Engenharia da Colisão (Audio)', price: 'R$ 39,50', link: 'https://pay.kiwify.com.br/PmaKDGV', desc: '<p>A Soberania do Aço nos Relacionamentos em uma experiência sonora intensa.</p>'},
                 {img: 'audio06.webp', title: 'Autópsia da Personalidade (Audio)', price: 'R$ 57,50', link: 'https://pay.kiwify.com.br/nJO91Ia', desc: '<p>O Fim das Migalhas Emocionais narrado com a visceralidade necessária.</p>'},
                 {img: 'audio01.webp', title: 'Know Yourself First (Audio)', price: '$ 13.95', link: 'https://pay.kiwify.com/ilgU4Kg', desc: '<p>Unravel Your Essence, Transform Your Relationships in audio format.</p>'},
+                {img: 'audio02.webp', title: 'The Engineering of Collision', price: '$ 14.95', link: 'https://pay.kiwify.com/2LTHnl0', desc: 'Uma análise profunda sobre os mecanismos.'},
                 {img: 'audio03.webp', title: 'THE SUPREMACY CODE (Audio)', price: '$ 15.95', link: 'https://pay.kiwify.com/TGmTjRA', desc: '<p>Delete Emotional Crumbs, Reclaim Your Sovereignty in this intense audio experience.</p>'}
             ]
         };
@@ -411,7 +412,7 @@
         ];
 
         let iE = 0, iA = 0, linkAtual = '', historico = 'home';
-        const menus = ['home', 'ebook', 'sinopse', 'Compartilhado', 'sobre', 'contato', 'suporte'];
+        const menus = ['home', 'ebook', 'sinopse', 'depoimentos', 'sobre', 'contato', 'suporte'];
 
         // INTERVALOS CARROSSEL
         setInterval(() => { iE = (iE + 1) % hardware.e.length; const el = document.getElementById('loop-e'); if(el) el.src = hardware.e[iE].img; }, 3000);
@@ -470,7 +471,7 @@
             resetTelas(); const container = document.getElementById('content-info');
             document.getElementById('view-info-extra').style.display = 'block';
             document.getElementById('btn-voltar').style.display = 'block'; ativarMenu(tipo);
-            if(tipo === 'compartilhado') {
+            if(tipo === 'depoimentos') {
                 const colEsq = staticReviews.slice(0,3).map(r => renderReview(r)).join('');
                 const colDir = staticReviews.slice(3,6).map(r => renderReview(r)).join('');
                 container.innerHTML = `<div style="color:#fff; padding:20px 5%;"><div class="layout-avaliacoes"><div class="col-depoimentos">${colEsq}</div><div class="form-review-container"><h3>CONTE SUA EXPERIÊNCIA E APAREÇA AQUI!</h3><div class="input-group"><label>Nome</label><input type="text" placeholder="Seu nome"></div><div class="input-group"><label>E-mail</label><input type="email" placeholder="seu@email.com"></div><div class="input-group"><label>Texto (Máx 100 char)</label><textarea maxlength="100" rows="3"></textarea></div><div class="input-group"><label>Nota</label><select><option>EXCELENTE</option><option>ÓTIMO</option><option>MUITO BOM</option><option>BOM</option><option>REGULAR</option></select></div><button class="btn-enviar" onclick="this.innerText='ENVIADO'">Enviar</button></div><div class="col-depoimentos">${colDir}</div></div></div>`;

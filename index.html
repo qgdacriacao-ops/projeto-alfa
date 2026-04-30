@@ -11,33 +11,43 @@
             --gold-hover: #FFC400;
             --bg-black: #000;
             --white: #fff;
-            --glow: rgba(255, 215, 0, 0.6);
             --ice-gray: #E8EAEB;
-            --header-height: 80px;
+            --header-height: 70px;
         }
 
-        /* RESET DE RIGOR */
+        /* RESET ESTRUTURAL RIGOROSO */
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         html, body { width: 100%; overflow-x: hidden; background-color: var(--bg-black); font-family: 'Inter', sans-serif; -webkit-text-size-adjust: 100%; }
+        
         #bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: url('capa.webp') no-repeat center center; background-size: cover; z-index: 1; filter: brightness(0.3); }
 
-        /* HEADER - FIDELIDADE TOTAL À REFERÊNCIA (7 ITENS) */
-        header { 
-            background: rgba(0,0,0,0.95); 
-            backdrop-filter: blur(10px); 
-            padding: 0 5%; 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            position: fixed; 
-            top: 0; 
-            width: 100%; 
-            z-index: 2000; 
-            height: var(--header-height); 
-            border-bottom: 2px solid var(--gold); 
+        /* HEADER - FIDELIDADE AO VIVO (7 ITENS + LOGO) */
+        header {
+            background: rgba(0,0,0,0.95);
+            backdrop-filter: blur(10px);
+            padding: 0 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 2000;
+            height: var(--header-height);
+            border-bottom: 2px solid var(--gold);
         }
-        .logo { display: flex; align-items: center; gap: 10px; color: #fff; font-weight: 800; text-transform: uppercase; font-size: 0.85rem; text-decoration: none; }
-        .logo img { height: 50px; }
+
+        .logo { 
+            display: flex; 
+            align-items: center; 
+            gap: 10px; 
+            color: #fff; 
+            font-weight: 800; 
+            text-transform: uppercase; 
+            font-size: 0.85rem; 
+            text-decoration: none;
+        }
+        .logo img { height: 45px; }
 
         nav { flex: 1; display: flex; justify-content: flex-end; align-items: center; }
         nav ul { list-style: none; display: flex; gap: 15px; align-items: center; }
@@ -48,21 +58,32 @@
             font-weight: 700; 
             text-transform: uppercase; 
             cursor: pointer; 
-            transition: 0.3s; 
-            border-bottom: 2px solid transparent; 
+            transition: 0.3s;
+            border-bottom: 2px solid transparent;
             padding-bottom: 3px;
-            letter-spacing: 0.5px;
         }
         nav a:hover, nav a.active { color: var(--gold); border-bottom: 2px solid var(--gold); }
-        #btn-voltar { display: none; color: var(--gold); border: 1px solid var(--gold); padding: 5px 12px; font-size: 0.6rem; font-weight: 800; text-transform: uppercase; cursor: pointer; margin-left: 15px; }
+
+        #btn-voltar { 
+            display: none; 
+            color: #000; 
+            background: var(--gold);
+            padding: 5px 15px; 
+            font-size: 0.65rem; 
+            font-weight: 800; 
+            text-transform: uppercase; 
+            cursor: pointer; 
+            margin-left: 15px;
+            border-radius: 3px;
+        }
 
         main { width: 100%; position: relative; z-index: 10; padding-top: var(--header-height); }
 
-        /* HOME - TEXTO RESTAURADO DIRETAMENTE NO HTML */
+        /* HOME - TEXTO CENTRAL EXATO DO SITE */
         .view-home { 
             min-height: calc(100vh - var(--header-height)); 
             display: flex; 
-            flex-direction: row; 
+            flex-direction: row;
             justify-content: space-between; 
             align-items: center; 
             padding: 20px 5%; 
@@ -71,13 +92,14 @@
         }
         .column-box { width: 30%; max-width: 300px; text-align: center; }
         .column-box p { color: var(--gold); letter-spacing: 2px; font-size: 0.75rem; margin-bottom: 15px; font-weight: 800; }
-        .display-box { width: 100%; height: auto; cursor: pointer; }
+        .display-box { width: 100%; height: auto; cursor: pointer; transition: 0.3s; }
+        .display-box:hover { transform: scale(1.05); }
         .display-box img { width: 100%; height: auto; max-height: 450px; object-fit: contain; }
         
-        .hero-center { flex: 1; text-align: center; padding: 0 20px; }
+        .hero-center { flex: 1; text-align: center; }
         .hero-center h1 { 
             color: #fff; 
-            font-size: clamp(1.2rem, 4vw, 2.5rem); 
+            font-size: clamp(1.2rem, 4vw, 2.4rem); 
             text-transform: uppercase; 
             line-height: 1.2; 
             font-weight: 900; 
@@ -86,56 +108,56 @@
         .line-hero { width: 100px; height: 6px; background: var(--gold); margin: 25px auto; box-shadow: 0 0 20px var(--gold); }
 
         /* GALERIA */
-        .view-galeria { display: none; background: #000; min-height: 100vh; padding: 60px 5% 100px; width: 100%; }
+        .view-galeria { display: none; background: #000; min-height: 100vh; padding: 40px 5% 100px; width: 100%; }
         .grid-produtos { 
             display: grid; 
             grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); 
-            gap: 30px; 
+            gap: 25px; 
             max-width: 1200px; 
             margin: 0 auto; 
         }
         .card-flutuante { 
-            background: rgba(255,255,255,0.05); 
-            padding: 20px; 
-            border-radius: 10px; 
-            text-align: center; 
-            cursor: pointer; 
-            border: 1px solid rgba(255,215,0,0.1); 
-            transition: 0.4s; 
+            background: rgba(255,255,255,0.05);
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            border: 1px solid rgba(255,215,0,0.1);
+            transition: 0.3s;
         }
-        .card-flutuante:hover { border-color: var(--gold); transform: translateY(-8px); background: rgba(255,215,0,0.05); }
-        .card-flutuante img { width: 100%; height: 250px; object-fit: contain; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5)); }
+        .card-flutuante:hover { border-color: var(--gold); transform: translateY(-5px); background: rgba(255,215,0,0.05); }
+        .card-flutuante img { width: 100%; height: 250px; object-fit: contain; }
         .card-flutuante .stars { color: var(--gold); margin-top: 15px; font-size: 0.9rem; }
-        .card-title { color: #fff; margin-top: 10px; font-weight: 800; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; }
+        .card-title { color: #fff; margin-top: 10px; font-weight: 800; font-size: 0.8rem; text-transform: uppercase; }
 
-        /* SINOPSE PERSUASIVA */
+        /* SINOPSE - ESTRUTURA TRINDADE */
         .view-sinopse { display: none; background-color: var(--ice-gray); min-height: 100vh; padding: 60px 0 100px; color: #000; }
         .container-trindade { 
-            max-width: 1250px; 
+            max-width: 1200px; 
             margin: 0 auto; 
             display: grid; 
             grid-template-columns: 350px 1fr 320px; 
             gap: 50px; 
             padding: 0 5%; 
         }
-        .col-mockup img { width: 100%; height: auto; border-radius: 4px; box-shadow: 0 20px 40px rgba(0,0,0,0.25); }
+        .col-mockup img { width: 100%; height: auto; border-radius: 4px; box-shadow: 0 15px 40px rgba(0,0,0,0.2); }
         .col-texto { overflow-wrap: break-word; word-wrap: break-word; word-break: break-word; }
-        .col-texto h1 { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 5vw, 3.5rem); margin-bottom: 15px; color: #000; line-height: 1.1; font-weight: 900; }
-        .author { font-size: 1.1rem; color: #8B6B00; margin-bottom: 40px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; }
+        .col-texto h1 { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 5vw, 3.2rem); margin-bottom: 10px; color: #000; line-height: 1.1; font-weight: 900; }
+        .author { font-size: 1.1rem; color: #8B6B00; margin-bottom: 35px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; }
         
-        .description { line-height: 1.8; font-size: 1.1rem; color: #222; text-align: justify; }
+        .description { line-height: 1.7; font-size: 1.1rem; color: #333; text-align: justify; }
         .description p { margin-bottom: 25px; }
         .description strong { color: #000; font-weight: 800; }
-        .section-title { font-size: 1rem; font-weight: 800; text-transform: uppercase; letter-spacing: 3px; color: #555; border-bottom: 2px solid #ccc; padding-bottom: 12px; margin: 40px 0 25px; display: block; }
+        .section-title { font-size: 1rem; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; color: #666; border-bottom: 2px solid #ccc; padding-bottom: 12px; margin: 40px 0 25px; display: block; }
         
-        .col-compra { position: sticky; top: 110px; height: fit-content; }
-        .buy-card { background: #111; padding: 35px 25px; border-radius: 12px; color: var(--white); text-align: center; border: 1px solid var(--gold); box-shadow: 0 15px 30px rgba(0,0,0,0.4); }
-        .price-label { font-size: 0.75rem; color: var(--gold); text-transform: uppercase; margin-bottom: 8px; display: block; font-weight: 800; letter-spacing: 2px; }
-        .price-value { font-size: 2.5rem; font-weight: 900; margin-bottom: 25px; }
+        .col-compra { position: sticky; top: 100px; height: fit-content; }
+        .buy-card { background: #111; padding: 30px 25px; border-radius: 12px; color: var(--white); text-align: center; border: 1px solid var(--gold); box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+        .price-label { font-size: 0.75rem; color: var(--gold); text-transform: uppercase; margin-bottom: 8px; display: block; font-weight: 800; }
+        .price-value { font-size: 2.6rem; font-weight: 900; margin-bottom: 25px; }
         
         @keyframes pulse-gold {
             0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.7); }
-            70% { transform: scale(1.04); box-shadow: 0 0 0 15px rgba(255, 215, 0, 0); }
+            70% { transform: scale(1.03); box-shadow: 0 0 0 12px rgba(255, 215, 0, 0); }
             100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 215, 0, 0); }
         }
 
@@ -148,14 +170,13 @@
             border: none; 
             background: var(--gold); 
             color: #000;
-            font-size: 1.05rem;
-            border-radius: 6px;
+            font-size: 1.1rem;
+            border-radius: 5px;
             animation: pulse-gold 2s infinite;
             margin-bottom: 15px;
-            letter-spacing: 1px;
         }
 
-        /* FOOTER - FIDELIDADE TOTAL À REFERÊNCIA */
+        /* FOOTER - FIDELIDADE TOTAL AO VIVO */
         footer { 
             background: #000; 
             color: #888; 
@@ -164,23 +185,22 @@
             font-size: 0.85rem; 
             border-top: 1px solid var(--gold); 
             font-weight: 600; 
-            letter-spacing: 0.5px;
         }
 
-        /* RESPONSIVIDADE MOBILE FIX */
+        /* RESPONSIVIDADE MOBILE FIX DEFINITIVO */
         @media (max-width: 1100px) {
             .container-trindade { grid-template-columns: 1fr; }
-            .col-mockup { max-width: 300px; margin: 0 auto; }
+            .col-mockup { max-width: 280px; margin: 0 auto; }
             .col-compra { position: static; margin-top: 40px; }
         }
 
         @media (max-width: 768px) {
             header { padding: 0 3%; }
             .logo span { display: none; }
-            nav ul { gap: 10px; }
+            nav ul { gap: 8px; }
             nav a { font-size: 0.55rem; }
             .view-home { flex-direction: column; padding: 40px 5%; justify-content: center; }
-            .column-box { width: 85%; max-width: 280px; }
+            .column-box { width: 85%; max-width: 260px; }
             .hero-center { margin: 30px 0; }
             .hero-center h1 { font-size: 1.5rem; }
             .grid-produtos { grid-template-columns: repeat(2, 1fr); gap: 15px; }
@@ -207,12 +227,12 @@
                 <li><a id="nav-suporte" onclick="abrirInfo('suporte')">SUPORTE</a></li>
                 <li><a id="nav-contato" onclick="abrirInfo('contato')">CONTATO</a></li>
             </ul>
-            <div id="btn-voltar" onclick="voltarFluxo()">Voltar</div>
+            <div id="btn-voltar" onclick="voltarFluxo()">VOLTAR</div>
         </nav>
     </header>
 
     <main id="main-content">
-        <!-- HOME - TEXTO INSERIDO DIRETAMENTE NO HTML -->
+        <!-- HOME - TEXTO CENTRAL EXATO -->
         <section id="view-home" class="view-home">
             <div class="column-box">
                 <p>EBOOKS</p>
@@ -249,7 +269,7 @@
                     <div class="buy-card">
                         <span class="price-label">Oferta Exclusiva</span>
                         <div class="price-value" id="target-price">R$ 0,00</div>
-                        <button class="btn-intermitente" onclick="checkout()">Acessar Agora</button>
+                        <button class="btn-intermitente" onclick="checkout()">ACESSAR AGORA</button>
                     </div>
                 </div>
             </div>
@@ -263,7 +283,6 @@
     <footer>© 2006 - 2026 Portal Pleno | O Código. Todos os direitos reservados.</footer>
 
     <script>
-        /* BASE DE DADOS IMUTÁVEL - RIGOR BINÁRIO */
         const PORTAL_CONFIG = {
             HARDWARE: {
                 e: [
@@ -365,10 +384,10 @@
             document.getElementById('view-info-extra').style.display = 'block';
             document.getElementById('btn-voltar').style.display = 'block';
             ativarMenu(tipo);
-            if(tipo === 'suporte') container.innerHTML = `<h1 style="color:var(--gold); margin-bottom:30px; font-weight:900;">SUPORTE</h1><p style="color:#fff; font-size:1.3rem;">Para suporte técnico ou dúvidas sobre acesso, entre em contato com nosso time oficial.</p>`;
-            else if(tipo === 'contato') container.innerHTML = `<h1 style="color:var(--gold); margin-bottom:30px; font-weight:900;">CONTATO</h1><p style="color:#fff; font-size:1.3rem;">E-mail: contato@portalpleno.com.br</p>`;
-            else if(tipo === 'depoimento') container.innerHTML = `<h1 style="color:var(--gold); margin-bottom:30px; font-weight:900;">DEPOIMENTOS</h1><p style="color:#fff; font-size:1.3rem;">Confira o que nossos membros dizem sobre a metodologia O Código.</p>`;
-            else container.innerHTML = `<h1 style="color:var(--gold); margin-bottom:30px; font-weight:900;">${tipo.toUpperCase()}</h1><p style="color:#fff; font-size:1.3rem;">Portal Pleno | O Código.</p>`;
+            container.innerHTML = `<div style="max-width:800px; margin:0 auto; padding:40px; color:#fff; text-align:center;">
+                <h1 style="color:var(--gold); margin-bottom:30px; font-weight:900; text-transform:uppercase;">${tipo}</h1>
+                <p style="font-size:1.4rem; line-height:1.8;">Portal Pleno | O Código - Soberania Mental.<br>Conteúdo oficial em desenvolvimento.</p>
+            </div>`;
             viewHistory = 'info';
         }
 

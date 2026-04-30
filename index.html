@@ -467,66 +467,53 @@
         function checkout() { if(linkAtual && linkAtual !== '#') window.open(linkAtual, '_blank'); }
         function voltarFluxo() { if (historico === 'sinopse' || historico === 'info') irTitulos(); else irHome(); }
 
-        } else if(tipo === 'sobre') {
-                container.innerHTML = `
-                <div class="sobre-clean">
-                    <div class="sobre-fundo" style="background: url('banner.webp') no-repeat center center; background-size: cover; filter: brightness(0.3);"></div>
-                    <div class="sobre-content">
-                        <div class="sobre-container-flex">
-                            <div class="sobre-foto-wrapper">
-                                <img src="foto_autor.webp" alt="Júlio Bhrósz" class="foto-autor-img">
-                            </div>
-                            <div class="sobre-texto-wrapper">
-                                <h1>A Mente por trás d'O Código</h1>
-                                <p>Por trás de cada técnica e estratégia apresentada, está a experiência de <strong>Júlio Bhrósz</strong>. Com mais de 15 anos dedicados ao estudo profundo do comportamento humano e da engenharia mental, Júlio desenvolveu uma metodologia desenhada para um único fim: a <strong>soberania intelectual</strong>.</p>
-                                <p>Sua jornada é pautada na desconstrução de padrões limitantes, ajudando milhares de pessoas a assumirem o controle de seus próprios processos mentais. Para Júlio, o conhecimento não deve apenas ser acumulado, mas decodificado em ferramentas de poder e liberdade.</p>
-                                <div class="quote">"O Código não é apenas um livro, é a chave para a liberdade mental."</div>
-                            </div>
-                        </div>
+       function abrirInfo(tipo) {
+    resetTelas();
+    const container = document.getElementById('content-info');
+    document.getElementById('view-info-extra').style.display = 'block';
+    document.getElementById('btn-voltar').style.display = 'block';
+    ativarMenu(tipo);
+
+    if (tipo === 'depoimentos') {
+        const colEsq = staticReviews.slice(0, 3).map(r => renderReview(r)).join('');
+        const colDir = staticReviews.slice(3, 6).map(r => renderReview(r)).join('');
+        container.innerHTML = `<div style="color:#fff; padding:20px 5%;"><div class="layout-avaliacoes"><div class="col-depoimentos">${colEsq}</div><div class="form-review-container"><h3>CONTE SUA EXPERIÊNCIA E APAREÇA AQUI!</h3><div class="input-group"><label>Nome</label><input type="text" placeholder="Seu nome"></div><div class="input-group"><label>E-mail</label><input type="email" placeholder="seu@email.com"></div><div class="input-group"><label>Texto (Máx 100 char)</label><textarea maxlength="100" rows="3"></textarea></div><div class="input-group"><label>Nota</label><select><option>EXCELENTE</option><option>ÓTIMO</option><option>MUITO BOM</option><option>BOM</option><option>REGULAR</option></select></div><button class="btn-enviar" onclick="this.innerText='ENVIADO'">Enviar</button></div><div class="col-depoimentos">${colDir}</div></div></div>`;
+    } 
+    else if (tipo === 'sobre') {
+        container.innerHTML = `
+        <div class="sobre-clean">
+            <div class="sobre-fundo" style="background: url('banner.webp') no-repeat center center; background-size: cover; filter: brightness(0.3); position: absolute; top:0; left:0; width:100%; height:100%; z-index:-1;"></div>
+            <div class="sobre-content" style="position: relative; z-index: 1; padding: 40px 5%;">
+                <div class="sobre-container-flex">
+                    <div class="sobre-foto-wrapper">
+                        <img src="foto_autor.webp" alt="Júlio Bhrósz" class="foto-autor-img">
+                    </div>
+                    <div class="sobre-texto-wrapper">
+                        <h1 style="color: var(--gold, #d4af37); margin-bottom: 20px;">A Mente por trás d'O Código</h1>
+                        <p style="line-height: 1.6; margin-bottom: 15px;">Por trás de cada técnica e estratégia apresentada, está a experiência de <strong>Júlio Bhrósz</strong>. Com mais de 15 anos dedicados ao estudo profundo do comportamento humano e da engenharia mental, Júlio desenvolveu uma metodologia desenhada para um único fim: a <strong>soberania intelectual</strong>.</p>
+                        <p style="line-height: 1.6; margin-bottom: 15px;">Sua jornada é pautada na desconstrução de padrões limitantes, ajudando milhares de pessoas a assumirem o controle de seus próprios processos mentais. Para Júlio, o conhecimento não deve apenas ser acumulado, mas decodificado em ferramentas de poder e liberdade.</p>
+                        <div class="quote" style="font-style: italic; border-left: 4px solid var(--gold); padding-left: 15px; margin-top: 20px;">"O Código não é apenas um livro, é a chave para a liberdade mental."</div>
                     </div>
                 </div>
-                <style>
-                    .sobre-container-flex {
-                        display: flex;
-                        align-items: center;
-                        gap: 40px;
-                        max-width: 1000px;
-                        margin: 0 auto;
-                        text-align: left;
-                    }
-                    .foto-autor-img {
-                        width: 300px;
-                        height: auto;
-                        border-radius: 10px;
-                        border: 2px solid var(--gold, #d4af37);
-                        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-                    }
-                    .sobre-texto-wrapper h1 {
-                        color: var(--gold, #d4af37);
-                        margin-bottom: 20px;
-                        font-size: 2rem;
-                    }
-                    .sobre-texto-wrapper p {
-                        line-height: 1.6;
-                        margin-bottom: 15px;
-                        font-size: 1.1rem;
-                    }
-                    /* AJUSTE PARA CELULAR (MOBILE) */
-                    @media (max-width: 768px) {
-                        .sobre-container-flex {
-                            flex-direction: column;
-                            text-align: center;
-                            gap: 20px;
-                        }
-                        .foto-autor-img {
-                            width: 200px; /* Menor no celular */
-                        }
-                        .sobre-texto-wrapper h1 {
-                            font-size: 1.6rem;
-                        }
-                    }
-                </style>`;
-                <div class="author-info" style="font-size: 0.7rem; color: var(--gold);">${r.email} | ${r.book}</div>
+            </div>
+        </div>
+        <style>
+            .sobre-container-flex { display: flex; align-items: center; gap: 40px; max-width: 1000px; margin: 0 auto; text-align: left; }
+            .foto-autor-img { width: 300px; height: auto; border-radius: 10px; border: 2px solid var(--gold, #d4af37); }
+            @media (max-width: 768px) {
+                .sobre-container-flex { flex-direction: column; text-align: center; }
+                .foto-autor-img { width: 200px; }
+            }
+        </style>`;
+    } 
+    else if (tipo === 'contato') {
+        container.innerHTML = `<div class="contato-clean"><div class="contato-fundo" style="background: url('banner.webp') no-repeat center center; background-size: cover; filter: brightness(0.3);"></div><div class="contato-content"><h1>Entre em Contato</h1><div class="contato-wrapper"><div class="feedback-form"><h2>Envie seu Feedback</h2><div class="form-group"><label>Nome</label><input type="text"></div><div class="form-group"><label>E-mail</label><input type="email"></div><div class="form-group"><label>Mensagem</label><textarea></textarea></div><button class="btn-feedback" onclick="this.innerText='ENVIADO'">Enviar Feedback</button></div><div class="email-accounts"><h3>Contas Oficiais</h3><div class="email-item" onclick="copiarEmail('contato@portalpleno.com.br')"><span class="email-label">Contato</span><span class="email-address">contato@portalpleno.com.br</span></div></div></div></div></div>`;
+    } 
+    else if (tipo === 'suporte') {
+        container.innerHTML = `<div class="suporte-clean"><div class="suporte-fundo" style="background: url('banner.webp') no-repeat center center; background-size: cover; filter: brightness(0.3);"></div><div class="suporte-content"><h1>Suporte</h1><div class="suporte-card"><div class="suporte-label">E-mail</div><div class="suporte-email" style="font-size: 1.3rem; font-weight: 700; word-break: break-all;">suportebook@portalpleno.com.br</div></div></div></div>`;
+    }
+    historico = 'info';
+}                <div class="author-info" style="font-size: 0.7rem; color: var(--gold);">${r.email} | ${r.book}</div>
             </div>`; 
         }
         function copiarEmail(email) { navigator.clipboard.writeText(email).then(() => alert('E-mail copiado!')); }

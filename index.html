@@ -305,7 +305,7 @@
                 <li><a id="nav-home" class="active" onclick="irHome()">Início</a></li>
                 <li><a id="nav-ebook" onclick="irTitulos()">Ebook</a></li>
                 <li><a id="nav-sinopse" onclick="abrirSinopseDefault()">Sinopse</a></li>
-                <li><a id="nav-compartilhado" onclick="abrirInfo('compartilhado')">Compartilhado</a></li>
+                <li><a id="nav-depoimentos" onclick="abrirInfo('depoimentos')">depoimentos</a></li>
                 <li><a id="nav-sobre" onclick="abrirInfo('sobre')">Sobre</a></li>
                 <li><a id="nav-contato" onclick="abrirInfo('contato')">Contato</a></li>
                 <li><a id="nav-suporte" onclick="abrirInfo('suporte')">Suporte</a></li>
@@ -403,15 +403,15 @@
 
         const staticReviews = [
             {text: "La découverte de soi a complètement changé ma perspective.", author: "Maria S.", email: "Verificado", book: "Descubra Você", rating: "★★★★★"},
-            {text: "The architectural depth is supreme.", author: "John W.", email: "Verificado", book: "THE SUPREMACY CODE", rating: "★★★★★"},
-            {text: "Unmatched technical sovereignty.", author: "Sarah C.", email: "Verificado", book: "THE SUPREMACY CODE", rating: "★★★★★"},
+            {text: "The architectural depth is supreme.", author: "John W.", email: "Verificado", book: "The Supremacy Code", rating: "★★★★★"},
+            {text: "Unmatched technical sovereignty.", author: "Sarah C.", email: "Verificado", book: "The Supremacy Code", rating: "★★★★★"},
             {text: "Profundidade incomparável.", author: "Carlos O.", email: "Verificado", book: "Verdade em Vida", rating: "★★★★★"},
-            {text: "Excelente combinação de teoria e prática.", author: "Fernanda L.", email: "Verificado", book: "Engenharia", rating: "★★★★★"},
-            {text: "Qualidade técnica absoluta.", author: "Roberto M.", email: "Verificado", book: "Autópsia", rating: "★★★★★"}
+            {text: "Excelente combinação de teoria e prática.", author: "Fernanda L.", email: "Verificado", book: "Engenharia da Colisão", rating: "★★★★★"},
+            {text: "Qualidade técnica absoluta.", author: "Roberto M.", email: "Verificado", book: "Autópsia da Personalidade", rating: "★★★★★"}
         ];
 
         let iE = 0, iA = 0, linkAtual = '', historico = 'home';
-        const menus = ['home', 'ebook', 'sinopse', 'compartilhado', 'sobre', 'contato', 'suporte'];
+        const menus = ['home', 'ebook', 'sinopse', 'depoimentos', 'sobre', 'contato', 'suporte'];
 
         // INTERVALOS CARROSSEL
         setInterval(() => { iE = (iE + 1) % hardware.e.length; const el = document.getElementById('loop-e'); if(el) el.src = hardware.e[iE].img; }, 3000);

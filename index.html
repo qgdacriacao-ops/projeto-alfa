@@ -207,10 +207,34 @@
         .description { line-height: 2.1; font-size: 1.15rem; color: #333; text-align: justify; }
         .description p { margin-bottom: 25px; }
         .section-title { font-size: 1rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: #666; border-bottom: 1px solid var(--border); padding-bottom: 10px; margin: 40px 0 15px; display: block; }
-        .col-compra { position: sticky; top: 105px; height: fit-content; }
-        .buy-card { background: var(--chumbo); padding: 25px 15px; border-radius: 4px; color: var(--white); box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
-        .price-label { font-size: 0.65rem; color: var(--gold); text-transform: uppercase; margin-bottom: 5px; display: block; text-align: center; font-weight: 700; }
-        .price-value { font-size: 1.9rem; font-weight: 700; margin-bottom: 25px; text-align: center; color: var(--white); }
+        .col-compra {
+            position: sticky;
+            top: 105px;
+            height: fit-content;
+        }
+        .buy-card {
+            background: var(--chumbo);
+            padding: 25px 15px;
+            border-radius: 4px;
+            color: var(--white);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        .price-label {
+            font-size: 0.65rem;
+            color: var(--gold);
+            text-transform: uppercase;
+            margin-bottom: 5px;
+            display: block;
+            text-align: center;
+            font-weight: 700;
+        }
+        .price-value {
+            font-size: 1.9rem;
+            font-weight: 700;
+            margin-bottom: 25px;
+            text-align: center;
+            color: var(--white);
+        }
         .btn-group { display: flex; flex-direction: column; gap: 10px; }
         .btn-gold {
             display: block;
@@ -227,10 +251,10 @@
             width: 100%;
             cursor: pointer;
         }
-        .btn-gold:hover { background: #e6c200; transform: translateY(-2px); }
+        .btn-gold:hover { opacity: 0.88; }
         .btn-red {
             display: block;
-            background: var(--red);
+            background: #ff0000;
             color: var(--white);
             text-align: center;
             padding: 12px 5px;
@@ -243,28 +267,58 @@
             width: 100%;
             cursor: pointer;
         }
-        .btn-red:hover { background: #b30000; }
-        .product-details { max-width: 1350px; margin: 0 auto 80px; padding: 40px 5% 30px; border-top: 1px solid var(--border); }
-        .details-title { font-size: 1.2rem; color: #000; text-transform: uppercase; font-weight: 700; letter-spacing: 1px; margin-bottom: 25px; }
-        .details-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; }
-        .detail-item { display: flex; flex-direction: column; gap: 5px; }
-        .detail-label { font-size: 0.75rem; color: #777; text-transform: uppercase; font-weight: 700; }
-        .detail-value { font-size: 0.95rem; color: #111; font-weight: 500; }
+        .btn-red:hover { opacity: 0.88; }
 
-        /* VIEW 4: INFO EXTRA (Depoimentos, Sobre, etc) */
+        .product-details {
+            max-width: 1350px;
+            margin: 0 auto 60px;
+            padding: 0 5%;
+            width: 100%;
+        }
+        .product-details .details-title {
+            margin-bottom: 25px;
+        }
+        .details-title {
+            font-size: 1.2rem;
+            color: #000;
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        .details-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+        .detail-item {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        .detail-label {
+            font-size: 0.75rem;
+            color: #777;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+        .detail-value {
+            font-size: 0.95rem;
+            color: #111;
+            font-weight: 500;
+        }
+
         .view-info-extra { display: none; min-height: 100vh; padding: 60px 0 100px; width: 100%; position: relative; z-index: 20; }
         .layout-avaliacoes { display: grid; grid-template-columns: 1fr 400px 1fr; gap: 30px; align-items: start; }
-        .col-depoimentos { display: flex; flex-direction: column; gap: 20px; }
-        .card-review { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,215,0,0.2); padding: 20px; border-radius: 4px; }
+        .card-review { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,215,0,0.2); padding: 20px; margin-bottom: 20px; border-radius: 4px; }
         .card-review .stars { color: var(--gold); margin-bottom: 10px; }
         .card-review .text { color: #fff; font-style: italic; margin-bottom: 15px; font-size: 0.9rem; }
         .card-review .author-info { color: #888; font-size: 0.8rem; }
-        .form-review-container { background: #111; padding: 30px; border: 1px solid var(--gold); border-radius: 4px; position: sticky; top: 105px; }
-        .form-review-container h3 { color: var(--gold); margin-bottom: 20px; text-transform: uppercase; text-align: center; font-size: 1rem; }
+        .form-review-container { background: #111; padding: 30px; border: 1px solid var(--gold); border-radius: 4px; }
+        .form-review-container h3 { color: var(--gold); margin-bottom: 20px; text-transform: uppercase; text-align: center; }
         .input-group { margin-bottom: 15px; }
         .input-group label { display: block; color: #fff; font-size: 0.7rem; text-transform: uppercase; margin-bottom: 5px; }
         .input-group input, .input-group textarea, .input-group select { width: 100%; background: #000; border: 1px solid #333; padding: 10px; color: #fff; font-family: inherit; }
-        .btn-enviar { width: 100%; background: var(--gold); color: #000; border: none; padding: 15px; font-weight: 800; text-transform: uppercase; cursor: pointer; transition: 0.3s; }
+        .btn-enviar { width: 100%; background: var(--gold); color: #000; border: none; padding: 15px; font-weight: 800; text-transform: uppercase; cursor: pointer; }
 
         /* ESTILOS ESPECÍFICOS PARA SOBRE, CONTATO, SUPORTE */
         .sobre-clean, .contato-clean, .suporte-clean { position: relative; min-height: 80vh; display: flex; align-items: center; justify-content: center; padding: 40px 5%; }
@@ -280,7 +334,7 @@
         .email-address { display: block; color: #fff; font-size: 1rem; word-break: break-all; }
         .form-group { margin-bottom: 15px; display: flex; flex-direction: column; }
         .form-group label { color: #fff; font-size: 0.8rem; text-transform: uppercase; font-weight: 700; margin-bottom: 5px; }
-        .form-group input, .form-group textarea { background: #000; color: #fff; border: 1px solid var(--gold); padding: 10px; border-radius: 2px; font-family: 'Inter', sans-serif; }
+        .form-group input, .form-group textarea { background: #000; color: #fff; border: none; outline: none; padding: 10px; border-radius: 2px; font-family: 'Inter', sans-serif; }
         .btn-feedback { background: var(--gold); color: #000; padding: 12px; border: none; border-radius: 2px; font-weight: 700; text-transform: uppercase; cursor: pointer; transition: 0.3s; width: 100%; }
         .suporte-card { text-align: center; border: 1px solid var(--gold); padding: 40px; background: #000; }
         .suporte-label { color: var(--gold); text-transform: uppercase; font-weight: 700; font-size: 0.8rem; margin-bottom: 10px; }
@@ -335,7 +389,7 @@
     <header>
         <div class="logo">
             <img src="selo.png" alt="Selo Portal Pleno">
-            <span>Portal Pleno O Código</span>
+            <span>Portal Pleno | O Código</span>
         </div>
         <nav>
             <ul id="main-nav">
@@ -360,7 +414,7 @@
                 </div>
             </div>
             <div class="hero-center">
-                <h1>Desvende os Segredos da Mente Humana e Transforme Sua Vida com Nossos Ebooks e Audiobooks Exclusivos.</h1>
+                <h1>Desvende os Segredos da Mente Humana e Transforme Sua Vida com Nossos Ebooks e Audiobooks Exclusivos</h1>
                 <div class="line-hero"></div>
             </div>
             <div class="column-box">
@@ -394,9 +448,13 @@
                         <span class="price-label">Por Apenas</span>
                         <div class="price-value" id="target-price">R$ 0,00</div>
                         <div class="btn-group">
-                            <p style="font-size: 0.65rem; color: var(--gold); text-align: center; margin-bottom: 5px; font-weight: 700; text-transform: uppercase;">Pagamento seguro via Kiwify.</p>
+                            <p style="font-size: 0.65rem; color: var(--gold); text-align: center; margin-bottom: 5px; font-weight: 700; text-transform: uppercase;">Pagamento seguro via Kiwify: Pix, Cartão de Crédito e mais.</p>
                             <button class="btn-gold" onclick="checkout()">Adicionar ao Carrinho</button>
                             <button class="btn-red" onclick="checkout()">Compre Agora</button>
+                            <button class="btn-red" onclick="checkout()">COMBO EBOOKS (Economize 20%)</button>
+                            <button class="btn-red" onclick="checkout()">COMBO AUDIOBOOK (Oferta Especial)</button>
+                            <button class="btn-red" onclick="checkout()">COMBO COMPLETO (Melhor Oferta)</button>
+                            <p style="font-size: 0.7rem; color: #666; text-align: center; margin-top: 10px; font-weight: 700;">Leve o combo e acelere sua transformação por um preço exclusivo.</p>
                         </div>
                     </div>
                 </div>
@@ -419,8 +477,7 @@
     </main>
 
     <div class="final-footer">
-        © 2006 Portal Pleno | O Código - Todos os direitos reservados.
-    </div>
+        © 2026 PORTAL PLENO | O CÓDIGO | ZÊNITE GLOBAL LABS CNPJ 66.543.032/0001-41 | Todos os Direitos Reservados</div>
 
     <script>
         /* ============================================================
@@ -428,43 +485,20 @@
         ============================================================ */
         const hardware = {
             e: [
-                {
-                    img: 'ebook04.webp',
-                    title: 'Descubra Você',
-                    price: 'R$ 29,50',
-                    link: 'https://pay.kiwify.com.br/P8UTO6L',
-                    desc: '<p>A chave para conexões autênticas e duradouras. Este guia explora os fundamentos da empatia e da comunicação estratégica para fortalecer seus laços pessoais e profissionais.</p>'
-                },
-                {
-                    img: 'ebook05.webp',
-                    title: 'Engenharia da Colisão',
-                    price: 'R$ 39,00',
-                    link: 'https://pay.kiwify.com.br/oRZAlbz',
-                    desc: '<p>Manual de Engenharia de Relacionamento. Aprenda a navegar por conflitos e transformar confrontos em oportunidades de crescimento e alinhamento emocional.</p>'
-                },
-                {
-                    img: 'ebook06.webp',
-                    title: 'Autópsia da Personalidade',
-                    price: 'R$ 59,90',
-                    link: 'https://pay.kiwify.com.br/sD4nqRO',
-                    desc: '<p>Exame Cadavérico do Ego. Uma análise profunda sobre as camadas da psique humana e como desconstruir padrões limitantes para alcançar a verdadeira essência.</p>'
-                }
+                { img: 'ebook01.webp', title: 'O Código', price: 'R$ 47,00', format: 'PDF', desc: 'A base da engenharia mental.' },
+                { img: 'ebook02.webp', title: 'Soberania Mental', price: 'R$ 47,00', format: 'PDF', desc: 'Engenharia mental avançada.' },
+                { img: 'ebook03.webp', title: 'Engenharia da Colisão', price: 'R$ 47,00', format: 'PDF', desc: 'Relacionamentos.' },
+                { img: 'ebook04.webp', title: 'Descubra Você', price: 'R$ 47,00', format: 'PDF', desc: 'Autoconhecimento.' },
+                { img: 'ebook05.webp', title: 'Autópsia da Personalidade', price: 'R$ 47,00', format: 'PDF', desc: 'Ego e Psique.' },
+                { img: 'ebook06.webp', title: 'Verdade em Vida', price: 'R$ 47,00', format: 'PDF', desc: 'Propósito.' }
             ],
             a: [
-                {
-                    img: 'audio04.webp',
-                    title: 'Descubra Você (Audiobook)',
-                    price: 'R$ 37,50',
-                    link: 'https://pay.kiwify.com.br/lDiv2Do',
-                    desc: '<p>A experiência sonora de Descubra Você. Ideal para quem busca evolução constante durante o dia a dia, com narração imersiva e insights poderosos.</p>'
-                },
-                {
-                    img: 'audio05.webp',
-                    title: 'Engenharia da Colisão (Audiobook)',
-                    price: 'R$ 39,50',
-                    link: 'https://pay.kiwify.com.br/PmaKDGV',
-                    desc: '<p>Soberania do Aço nos Relacionamentos em formato áudio. Transforme sua percepção sobre interações humanas enquanto se desloca ou realiza suas tarefas.</p>'
-                }
+                { img: 'audio01.webp', title: 'O Código (Audio)', price: 'R$ 57,00', format: 'MP3', desc: 'Áudio imersivo.' },
+                { img: 'audio02.webp', title: 'Soberania Mental (Audio)', price: 'R$ 57,00', format: 'MP3', desc: 'Soberania sonora.' },
+                { img: 'audio03.webp', title: 'Engenharia da Colisão (Audio)', price: 'R$ 57,00', format: 'MP3', desc: 'Relacionamentos sonora.' },
+                { img: 'audio04.webp', title: 'Descubra Você (Audio)', price: 'R$ 57,00', format: 'MP3', desc: 'Autoconhecimento sonora.' },
+                { img: 'audio05.webp', title: 'Autópsia da Personalidade (Audio)', price: 'R$ 57,00', format: 'MP3', desc: 'Psique sonora.' },
+                { img: 'audio06.webp', title: 'Verdade em Vida (Audio)', price: 'R$ 57,00', format: 'MP3', desc: 'Propósito sonora.' }
             ]
         };
 
@@ -609,7 +643,7 @@
                             </div>
                             <div class="sobre-texto-wrapper">
                                 <h1 style="color: var(--gold, #d4af37); margin-bottom: 20px;">A Mente por trás d'O Código</h1>
-                                <p style="line-height: 1.6; margin-bottom: 15px;">Por trás de cada técnica e estratégia apresentada, está a experiência de <strong>Júlio Bhrósz</strong>. Com mais de 15 anos dedicados ao estudo profundo do comportamento humano e da engenharia mental, Júlio desenvolveu uma metodologia desenhada para um único fim: a <strong>soberania intelectual</strong>.</p>
+                                <p style="line-height: 1.6; margin-bottom: 15px;">Por trás de cada técnica e estratégia apresentada, está a experiência de <strong>Júlio Bhrósz</strong>. Com mais de 15 anos dedicados ao estudo profundo do comportamento humano e da engenharia mental, Júlio desenvolveu uma methodology desenhada para um único fim: a <strong>soberania intelectual</strong>.</p>
                                 <p style="line-height: 1.6; margin-bottom: 15px;">Sua jornada é pautada na desconstrução de padrões limitantes, ajudando milhares de pessoas a assumirem o controle de seus próprios processos mentais. Para Júlio, o conhecimento não deve apenas ser acumulado, mas decodificado em ferramentas de poder e liberdade.</p>
                                 <div class="quote" style="font-style: italic; border-left: 4px solid var(--gold); padding-left: 15px; margin-top: 20px;">"O Código não é apenas um livro, é a chave para a liberdade mental."</div>
                             </div>

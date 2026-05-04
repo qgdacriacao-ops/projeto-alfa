@@ -1,46 +1,487 @@
-function irTitulos() {
-    resetTelas();
-    var grid = document.getElementById('render-grid');
-    if (!grid) return;
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/\"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "vxqqwilkqh");
+</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal Pleno | O Código</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        /* ============================================================
+           VARIÁVEIS GLOBAIS
+        ============================================================ */
+        :root {
+            --gold: #FFD700;
+            --bg-black: #000;
+            --white: #fff;
+            --bg-light: #f9f9f9;
+            --red-btn: #d30000;
+            --glow: rgba(255, 215, 0, 0.6);
+            --ice-gray: #E8EAEB;
+            --chumbo: #2C2C2C;
+            --text-dark: #1A1A1A;
+            --border: #D1D1D1;
+        }
 
-    grid.innerHTML = ''; // Limpa a sujeira anterior
+        /* ============================================================
+           RESET E BASE
+        ============================================================ */
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        body, html {
+            height: 100%;
+            background-color: var(--bg-black);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
 
-    // Une os dados do seu arquivo original
-    var allItems = hardware.e.concat(hardware.a);
+        #preloader, #particle-canvas { display: none !important; }
 
-    allItems.forEach(function(item) {
-        // Criação mecânica e precisa de cada elemento
-        var card = document.createElement('div');
-        card.className = 'card-flutuante';
-        
-        // Define o clique para abrir a sinopse usando os dados do item
-        card.onclick = function() {
-            abrirSinopse(item.img, item.title, item.price, item.link, item.desc);
+        /* ============================================================
+           HEADER E NAVEGAÇÃO
+        ============================================================ */
+        header {
+            background: #000;
+            padding: 0 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 2000;
+            height: 85px;
+            border-bottom: 2px solid var(--gold);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: #fff;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+        .logo img { height: 60px; }
+
+        nav { overflow: hidden; flex: 1; display: flex; justify-content: flex-end; }
+        nav ul { list-style: none; display: flex; gap: 20px; align-items: center; }
+        nav a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: 0.3s;
+            border-bottom: 2px solid transparent;
+            padding-bottom: 5px;
+            white-space: nowrap;
+        }
+        nav a:hover, nav a.active { color: var(--gold); border-bottom: 2px solid var(--gold); }
+
+        #btn-voltar {
+            display: none;
+            color: var(--gold);
+            border: 1px solid var(--gold);
+            padding: 5px 12px;
+            font-size: 0.6rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        #bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('capa.webp') no-repeat center center;
+            background-size: cover;
+            z-index: 1;
+            filter: brightness(0.4);
+        }
+
+        main {
+            width: 100%;
+            overflow-x: hidden;
+            flex: 1;
+            position: relative;
+            z-index: 10;
+            padding-top: 85px;
+        }
+
+        .view-home {
+            min-height: calc(100vh - 85px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 5%;
+            width: 100%;
+            gap: 20px;
+        }
+        .column-box { width: 300px; flex-shrink: 0; text-align: center; transition: 0.4s; }
+        .column-box:hover { transform: scale(1.02); filter: drop-shadow(0 0 15px var(--glow)); }
+        .column-box p { color: var(--gold); letter-spacing: 5px; font-size: 0.7rem; margin-bottom: 10px; font-weight: 700; }
+        .display-box { width: 100%; height: 420px; cursor: pointer; position: relative; }
+        .display-box img { width: 100%; height: 100%; object-fit: contain; transition: opacity 0.5s ease; }
+
+        .hero-center { flex: 1; min-width: 0; text-align: center; padding: 0 10px; }
+        .hero-center h1 {
+            color: #fff;
+            font-size: clamp(1.1rem, 4vw, 2.5rem);
+            text-transform: uppercase;
+            line-height: 1.1;
+            letter-spacing: 1px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .line-hero { width: 85%; height: 5px; background: var(--gold); margin: 25px auto; box-shadow: 0 0 20px var(--gold); }
+
+        .view-galeria { display: none; background: #000; min-height: 100vh; padding: 60px 5% 100px; width: 100%; }
+        .grid-produtos {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        .card-flutuante {
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.4s ease;
+            animation: flutuar 4s ease-in-out infinite;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .card-flutuante img { width: 100%; max-width: 200px; height: 300px; object-fit: contain; transition: 0.4s; }
+        .card-flutuante:hover img { transform: scale(1.05); filter: drop-shadow(0 0 20px var(--glow)); }
+        .card-flutuante .stars { color: var(--gold); margin-top: 10px; font-weight: 700; }
+        .card-title { color: #fff; margin-top: 10px; font-weight: 700; font-size: 0.8rem; text-transform: uppercase; }
+        @keyframes flutuar { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+
+        .view-sinopse { display: none; background-color: var(--ice-gray); min-height: 100vh; padding: 0 0 80px; color: var(--text-dark); }
+        .container-trindade {
+            max-width: 1350px;
+            margin: 60px auto 20px;
+            display: grid;
+            grid-template-columns: 300px 1fr 220px;
+            gap: 45px;
+            padding: 0 5%;
+            width: 100%;
+            overflow-x: hidden;
+        }
+        .col-mockup { display: flex; align-items: flex-start; justify-content: center; }
+        .col-mockup img {
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+            object-fit: contain;
+            filter: drop-shadow(0 8px 20px rgba(0,0,0,0.18));
+            border-radius: 2px;
+            background: transparent;
+        }
+        .col-texto h1 { font-family: 'Playfair Display', serif; font-size: clamp(1.4rem, 3.5vw, 3rem); margin-bottom: 5px; color: #000; line-height: 1.1; word-break: break-word; }
+        .author { font-size: 1.1rem; color: #8B6B00; margin-bottom: 40px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
+        .description { line-height: 2.1; font-size: 1.15rem; color: #333; text-align: justify; }
+        .description p { margin-bottom: 25px; }
+        .section-title { font-size: 1rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: #666; border-bottom: 1px solid var(--border); padding-bottom: 10px; margin: 40px 0 15px; display: block; }
+        .col-compra { position: sticky; top: 105px; height: fit-content; }
+        .buy-card { background: var(--chumbo); padding: 25px 15px; border-radius: 4px; color: var(--white); box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+        .price-label { font-size: 0.65rem; color: var(--gold); text-transform: uppercase; margin-bottom: 5px; display: block; text-align: center; font-weight: 700; }
+        .price-value { font-size: 1.9rem; font-weight: 700; margin-bottom: 25px; text-align: center; color: var(--white); }
+        .btn-group { display: flex; flex-direction: column; gap: 10px; }
+        .btn-gold { display: block; background: var(--gold); color: #000; text-align: center; padding: 14px 5px; font-weight: 800; font-size: 0.7rem; text-transform: uppercase; border-radius: 4px; transition: 0.3s; border: 1px solid var(--gold); width: 100%; cursor: pointer; }
+        .btn-gold:hover { opacity: 0.88; }
+        .btn-red { display: block; background: #ff0000; color: var(--white); text-align: center; padding: 12px 5px; font-weight: 700; font-size: 0.65rem; text-transform: uppercase; border-radius: 4px; transition: 0.3s; border: none; width: 100%; cursor: pointer; }
+        .btn-red:hover { opacity: 0.88; }
+
+        .product-details { max-width: 1350px; margin: 0 auto; padding: 0 5%; }
+        .details-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 25px; margin-top: 20px; }
+        .detail-item { display: flex; flex-direction: column; gap: 5px; }
+        .detail-label { font-size: 0.75rem; color: #777; text-transform: uppercase; font-weight: 700; }
+        .detail-value { font-size: 0.95rem; color: #111; font-weight: 500; }
+
+        .view-info-extra { display: none; min-height: 100vh; padding: 60px 0 100px; width: 100%; position: relative; z-index: 20; }
+        .layout-avaliacoes { display: grid; grid-template-columns: 1fr 400px 1fr; gap: 30px; align-items: start; }
+        .card-review { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,215,0,0.2); padding: 20px; margin-bottom: 20px; border-radius: 4px; }
+        .card-review .stars { color: var(--gold); margin-bottom: 10px; }
+        .card-review .text { color: #fff; font-style: italic; margin-bottom: 15px; font-size: 0.9rem; }
+        .card-review .author-info { color: #888; font-size: 0.8rem; }
+        .form-review-container { background: #111; padding: 30px; border: 1px solid var(--gold); border-radius: 4px; }
+        .form-review-container h3 { color: var(--gold); margin-bottom: 20px; text-transform: uppercase; text-align: center; }
+        .input-group { margin-bottom: 15px; }
+        .input-group label { display: block; color: #fff; font-size: 0.7rem; text-transform: uppercase; margin-bottom: 5px; }
+        .input-group input, .input-group textarea, .input-group select { width: 100%; background: #000; border: 1px solid #333; padding: 10px; color: #fff; font-family: inherit; }
+        .btn-enviar { width: 100%; background: var(--gold); color: #000; border: none; padding: 15px; font-weight: 800; text-transform: uppercase; cursor: pointer; }
+
+        .sobre-clean, .contato-clean, .suporte-clean { position: relative; min-height: 80vh; display: flex; align-items: center; justify-content: center; padding: 40px 5%; }
+        .sobre-content, .contato-content, .suporte-content { background: rgba(0,0,0,0.85); padding: 40px; max-width: 900px; width: 100%; color: #fff; box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
+        .sobre-content h1, .contato-content h1, .suporte-content h1 { color: var(--gold); margin-bottom: 30px; text-transform: uppercase; text-align: center; }
+        .quote { font-style: italic; font-size: 1.3rem; border-left: 4px solid var(--gold); padding-left: 20px; margin: 30px 0; color: #eee; }
+        .contato-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+        .email-item { background: #000; padding: 15px; border-radius: 2px; border: 1px solid var(--gold); cursor: pointer; transition: 0.3s; margin-bottom: 10px; }
+        .email-item:hover { background: rgba(255,215,0,0.1); }
+        .email-label { display: block; color: var(--gold); font-size: 0.8rem; text-transform: uppercase; font-weight: 700; margin-bottom: 5px; }
+        .email-address { display: block; color: #fff; font-size: 1rem; word-break: break-all; }
+        .btn-feedback { background: var(--gold); color: #000; padding: 12px; border: none; border-radius: 2px; font-weight: 700; text-transform: uppercase; cursor: pointer; transition: 0.3s; width: 100%; }
+        .suporte-card { text-align: center; border: 1px solid var(--gold); padding: 40px; background: #000; }
+        .suporte-label { color: var(--gold); text-transform: uppercase; font-weight: 700; font-size: 0.8rem; margin-bottom: 10px; }
+        .suporte-email { font-size: 1.3rem; font-weight: 700; word-break: break-all; }
+
+        .final-footer { background: #000; color: #666; text-align: center; padding: 30px; font-size: 0.8rem; border-top: 1px solid var(--gold); z-index: 100; }
+
+        @media (max-width: 1024px) {
+            .grid-produtos { grid-template-columns: repeat(2, 1fr); }
+            .container-trindade { grid-template-columns: 1fr; }
+            .col-compra { position: static; }
+            .details-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 768px) {
+            header { height: auto; padding: 10px 5%; flex-direction: column; gap: 10px; }
+            .logo span { font-size: 0.7rem; }
+            nav { width: 100%; justify-content: center; }
+            nav ul { gap: 10px; flex-wrap: wrap; justify-content: center; }
+            nav a { font-size: 0.55rem; }
+            .view-home { flex-direction: column; padding-top: 20px; }
+            .column-box { width: 100%; }
+            .display-box { height: 300px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="bg"></div>
+
+    <header>
+        <div class="logo">
+            <img src="selo.png" alt="Selo Portal Pleno">
+            <span>Portal Pleno | O Código</span>
+        </div>
+        <nav>
+            <ul id="main-nav">
+                <li><a id="nav-home" class="active" onclick="irHome()">Início</a></li>
+                <li><a id="nav-ebook" onclick="irTitulos()">Ebook</a></li>
+                <li><a id="nav-sinopse" onclick="abrirSinopseDefault()">Sinopse</a></li>
+                <li><a id="nav-depoimentos" onclick="abrirInfo('depoimentos')">Depoimentos</a></li>
+                <li><a id="nav-sobre" onclick="abrirInfo('sobre')">Sobre</a></li>
+                <li><a id="nav-contato" onclick="abrirInfo('contato')">Contato</a></li>
+                <li><a id="nav-suporte" onclick="abrirInfo('suporte')">Suporte</a></li>
+                <li><div id="btn-voltar" onclick="voltarFluxo()">Voltar</div></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main id="main-content">
+        <div id="view-home" class="view-home">
+            <div class="column-box">
+                <p>EBOOKS</p>
+                <div class="display-box" onclick="irSinopseHome('e')">
+                    <img id="loop-e" src="ebook04.webp" alt="Ebook">
+                </div>
+            </div>
+            <div class="hero-center">
+                <h1>Desvende os Segredos da Mente Humana e Transforme Sua Vida com Nossos Ebooks e Audiobooks Exclusivos</h1>
+                <div class="line-hero"></div>
+            </div>
+            <div class="column-box">
+                <p>AUDIOBOOKS</p>
+                <div class="display-box" onclick="irSinopseHome('a')">
+                    <img id="loop-a" src="audio04.webp" alt="Audiobook">
+                </div>
+            </div>
+        </div>
+
+        <section id="view-galeria" class="view-galeria">
+            <div class="grid-produtos" id="render-grid"></div>
+        </section>
+
+        <section id="view-sinopse" class="view-sinopse">
+            <div class="container-trindade">
+                <div class="col-mockup">
+                    <img id="target-img" src="" alt="Mockup do Produto">
+                </div>
+                <div class="col-texto">
+                    <h1 id="target-title">TÍTULO DO ATIVO</h1>
+                    <p class="author">Por Júlio Bhrósz</p>
+                    <div class="description">
+                        <p>Análise técnica da soberania intelectual e engenharia de comportamento humano aplicada ao alto desempenho mental.</p>
+                        <span class="section-title">Sinopse</span>
+                        <div id="target-desc"></div>
+                    </div>
+                </div>
+                <div class="col-compra">
+                    <div class="buy-card">
+                        <span class="price-label">Por Apenas</span>
+                        <div class="price-value" id="target-price">R$ 0,00</div>
+                        <div class="btn-group">
+                            <p style="font-size: 0.65rem; color: var(--gold); text-align: center; margin-bottom: 5px; font-weight: 700; text-transform: uppercase;">Pagamento seguro via Kiwify: Pix, Cartão de Crédito e mais.</p>
+                            <button class="btn-gold" onclick="checkout()">Compre Agora</button>
+                            <button class="btn-red" onclick="window.open('https://pay.kiwify.com.br/Wp9Y8Gz', '_blank')">COMBO EBOOKS (Economize 20%)</button>
+                            <button class="btn-red" onclick="window.open('https://pay.kiwify.com.br/Y3X9W0l', '_blank')">COMBO AUDIOBOOK (Oferta Especial)</button>
+                            <button class="btn-red" onclick="window.open('https://pay.kiwify.com.br/L49W2zX', '_blank')">COMBO COMPLETO (Melhor Oferta)</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="product-details">
+                <div class="details-grid">
+                    <div class="detail-item"><span class="detail-label">Data de Lançamento</span><span class="detail-value">Maio de 2026</span></div>
+                    <div class="detail-item"><span class="detail-label">Idioma</span><span class="detail-value">Português</span></div>
+                    <div class="detail-item"><span class="detail-label">Formato</span><span class="detail-value">Digital (PDF/MP3)</span></div>
+                    <div class="detail-item"><span class="detail-label">Compatibilidade</span><span class="detail-value">Kindle, Tablet, Smartphone, PC</span></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="view-info-extra" class="view-info-extra">
+            <div id="content-info"></div>
+        </section>
+    </main>
+
+    <div class="final-footer">
+        © 2026 PORTAL PLENO | O CÓDIGO | ZÊNITE GLOBAL LABS CNPJ 66.543.032/0001-41 | Todos os Direitos Reservados
+    </div>
+
+    <script>
+        /* ============================================================
+           DADOS E HARDWARE (Atualizados com TX 04, 05, 06)
+        ============================================================ */
+        const hardware = {
+            e: [
+                { img: 'ebook01.webp', title: 'Know yourself First', price: '$ 11.00', link: 'https://pay.kiwify.com/8S4FCE0', desc: '<p>The architecture of a fulfilling life begins in your own heart.</p>' },
+                { img: 'ebook02.webp', title: 'Engineering Collision', price: '$ 11.50', link: 'https://pay.kiwify.com/ZjtlaGh', desc: '<p>A technical intervention for the Reader who chooses to architect a bond with Steel.</p>' },
+                { img: 'ebook03.webp', title: 'The Supremacy Code', price: '$ 11.99', link: 'https://pay.kiwify.com/NcdLsaN', desc: '<p>Total opening of the psychic structure to reclaim Supremacy.</p>' },
+                { img: 'ebook04.webp', title: 'Descubra Você', price: 'R$ 29,50', link: 'https://pay.kiwify.com.br/P8UTO6L', desc: '<p>Desvende Sua Essência, Transforme Seus Relacionamentos. Um mapa prático para quem deseja construir vínculos reais e significativos.</p>' },
+                { img: 'ebook05.webp', title: 'Engenharia da Colisão', price: 'R$ 39,00', link: 'https://pay.kiwify.com.br/oRZAlbz', desc: '<p>A Soberania do Aço nos Relacionamentos. Manual de Engenharia de Relacionamento de alto impacto para casais que buscam controle absoluto.</p>' },
+                { img: 'ebook06.webp', title: 'Autópsia da Personalidade', price: 'R$ 59,90', link: 'https://pay.kiwify.com.br/sD4nqRO', desc: '<p>O Fim das Migalhas Emocionais. Dissecação dos tecidos necrosados da sua história para que a vida real possa emergir.</p>' }
+            ],
+            a: [
+                { img: 'audio01.webp', title: 'Audio: Know yourself First', price: '$ 15.00', link: '#', desc: 'Versão em áudio do best-seller.' },
+                { img: 'audio02.webp', title: 'Audio: Engineering Collision', price: '$ 15.50', link: '#', desc: 'Aperfeiçoe sua união ouvindo este guia.' },
+                { img: 'audio03.webp', title: 'Audio: The Supremacy Code', price: '$ 15.99', link: '#', desc: 'Domine sua mente através da instrução sonora.' },
+                { img: 'audio04.webp', title: 'Descubra Você (Audiobook)', price: 'R$ 47,00', link: 'https://pay.kiwify.com.br/V7Q9rZ1', desc: '<p>A jornada de autodescoberta agora em formato audiobook para você processar enquanto evolui.</p>' },
+                { img: 'audio05.webp', title: 'Engenharia da Colisão (Audiobook)', price: 'R$ 57,00', link: 'https://pay.kiwify.com.br/Y8mP2X4', desc: '<p>O manual técnico de soberania nos relacionamentos em formato de áudio de alta imersão.</p>' },
+                { img: 'audio06.webp', title: 'Autópsia da Personalidade (Audiobook)', price: 'R$ 77,00', link: 'https://pay.kiwify.com.br/K9L0W4z', desc: '<p>O protocolo definitivo para eliminar dependências emocionais, narrado para impacto profundo.</p>' }
+            ]
         };
 
-        // Monta a estrutura interna sem risco de erro de sintaxe de texto
-        var img = document.createElement('img');
-        img.src = item.img;
-        img.alt = item.title;
+        let currentProductLink = "";
 
-        var stars = document.createElement('div');
-        stars.className = 'stars';
-        stars.innerText = '★★★★★';
+        /* ============================================================
+           NAVEGAÇÃO E RENDERIZAÇÃO (Correção da Imagem)
+        ============================================================ */
+        function resetTelas() {
+            const views = ['view-home', 'view-galeria', 'view-sinopse', 'view-info-extra'];
+            views.forEach(v => document.getElementById(v).style.display = 'none');
+            document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+            document.getElementById('btn-voltar').style.display = 'block';
+        }
 
-        var title = document.createElement('div');
-        title.className = 'card-title';
-        title.innerText = item.title;
+        function irHome() {
+            resetTelas();
+            document.getElementById('view-home').style.display = 'flex';
+            document.getElementById('nav-home').classList.add('active');
+            document.getElementById('btn-voltar').style.display = 'none';
+        }
 
-        // Montagem do card
-        card.appendChild(img);
-        card.appendChild(stars);
-        card.appendChild(title);
-        
-        // Injeção na grid
-        grid.appendChild(card);
-    });
+        function irTitulos() {
+            resetTelas();
+            const grid = document.getElementById('render-grid');
+            grid.innerHTML = ''; 
+            const allItems = hardware.e.concat(hardware.a);
 
-    document.getElementById('view-galeria').style.display = 'block';
-    document.getElementById('nav-ebook').classList.add('active');
-    window.scrollTo(0, 0);
-}
+            allItems.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'card-flutuante';
+                card.onclick = () => abrirSinopse(item.img, item.title, item.price, item.link, item.desc);
+
+                card.innerHTML = `
+                    <img src="${item.img}" alt="${item.title}">
+                    <div class="stars">★★★★★</div>
+                    <div class="card-title">${item.title}</div>
+                `;
+                grid.appendChild(card);
+            });
+
+            document.getElementById('view-galeria').style.display = 'block';
+            document.getElementById('nav-ebook').classList.add('active');
+            window.scrollTo(0,0);
+        }
+
+        function abrirSinopse(img, title, price, link, desc) {
+            resetTelas();
+            document.getElementById('target-img').src = img;
+            document.getElementById('target-title').innerText = title;
+            document.getElementById('target-price').innerText = price;
+            document.getElementById('target-desc').innerHTML = desc;
+            currentProductLink = link;
+            document.getElementById('view-sinopse').style.display = 'block';
+            document.getElementById('nav-sinopse').classList.add('active');
+            window.scrollTo(0,0);
+        }
+
+        function checkout() {
+            if(currentProductLink && currentProductLink !== "#") window.open(currentProductLink, '_blank');
+            else alert("Link de compra em processamento.");
+        }
+
+        function abrirSinopseDefault() {
+            const def = hardware.e[3]; // Descubra Você como padrão
+            abrirSinopse(def.img, def.title, def.price, def.link, def.desc);
+        }
+
+        function irSinopseHome(tipo) {
+            const item = (tipo === 'e') ? hardware.e[3] : hardware.a[3];
+            abrirSinopse(item.img, item.title, item.price, item.link, item.desc);
+        }
+
+        function voltarFluxo() { irHome(); }
+
+        function abrirInfo(tipo) {
+            resetTelas();
+            const container = document.getElementById('content-info');
+            container.innerHTML = `<h1 style="color:white; text-align:center; margin-top:50px;">Carregando ${tipo}...</h1>`;
+            document.getElementById('view-info-extra').style.display = 'block';
+            document.getElementById('nav-' + tipo).classList.add('active');
+        }
+
+        // Loops da Home
+        let idxE = 0, idxA = 0;
+        setInterval(() => {
+            idxE = (idxE + 1) % hardware.e.length;
+            document.getElementById('loop-e').style.opacity = 0;
+            setTimeout(() => {
+                document.getElementById('loop-e').src = hardware.e[idxE].img;
+                document.getElementById('loop-e').style.opacity = 1;
+            }, 500);
+        }, 4000);
+
+        setInterval(() => {
+            idxA = (idxA + 1) % hardware.a.length;
+            document.getElementById('loop-a').style.opacity = 0;
+            setTimeout(() => {
+                document.getElementById('loop-a').src = hardware.a[idxA].img;
+                document.getElementById('loop-a').style.opacity = 1;
+            }, 500);
+        }, 4500);
+
+        window.onload = irHome;
+    </script>
+</body>
+</html>

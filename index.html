@@ -1,253 +1,46 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <script type="text/javascript">
-        (function(c,l,a,r,i,t,y){
-            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-        })(window, document, "clarity", "script", "vxqqwilkqh");
-    </script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portal Pleno | O Código</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-    <style>
-        /* ============================================================
-           VARIÁVEIS E ESTILOS (PRESERVADOS DO ORIGINAL)
-        ============================================================ */
-        :root {
-            --gold: #FFD700;
-            --bg-black: #000;
-            --white: #fff;
-            --bg-light: #f9f9f9;
-            --red-btn: #d30000;
-        }
+function irTitulos() {
+    resetTelas();
+    var grid = document.getElementById('render-grid');
+    if (!grid) return;
 
-        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        body { font-family: 'Inter', sans-serif; background-color: var(--bg-black); color: var(--white); overflow-x: hidden; }
+    grid.innerHTML = ''; // Limpa a sujeira anterior
 
-        /* HEADER E NAV */
-        header { background: #111; padding: 15px 20px; border-bottom: 1px solid #333; position: fixed; width: 100%; top: 0; z-index: 1000; display: flex; align-items: center; justify-content: space-between; }
-        .logo { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--gold); font-weight: 700; letter-spacing: 1px; }
-        nav { display: flex; gap: 15px; }
-        nav a { color: #888; text-decoration: none; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; transition: 0.3s; padding: 5px 0; border-bottom: 2px solid transparent; }
-        nav a.active { color: var(--gold); border-bottom-color: var(--gold); }
+    // Une os dados do seu arquivo original
+    var allItems = hardware.e.concat(hardware.a);
 
-        /* VIEWS */
-        .view-section { display: none; padding-top: 80px; min-height: 100vh; animation: fadeIn 0.5s ease; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-
-        /* HOME / VITRINE */
-        .hero { text-align: center; padding: 40px 20px; }
-        .hero h1 { font-family: 'Playfair Display', serif; font-size: 2.2rem; margin-bottom: 10px; color: var(--gold); }
-        .hero p { color: #ccc; font-size: 0.9rem; margin-bottom: 30px; }
-
-        .vitrine-container { display: flex; flex-direction: column; gap: 40px; align-items: center; }
-        .loop-box { position: relative; width: 220px; height: 320px; perspective: 1000px; }
-        .loop-box img { width: 100%; height: 100%; object-fit: cover; border-radius: 5px; box-shadow: 0 10px 30px rgba(0,0,0,0.8); transition: opacity 0.5s ease; border: 1px solid #333; }
-        .loop-label { margin-top: 15px; font-size: 0.75rem; color: var(--gold); font-weight: 700; letter-spacing: 2px; text-transform: uppercase; }
-
-        .btn-acessar { margin-top: 40px; background: transparent; border: 1px solid var(--gold); color: var(--gold); padding: 12px 40px; font-weight: 700; cursor: pointer; transition: 0.3s; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 2px; }
-        .btn-acessar:hover { background: var(--gold); color: #000; }
-
-        /* GALERIA */
-        .grid-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 15px; padding: 20px; }
-        .card-flutuante { background: #111; border: 1px solid #222; border-radius: 4px; overflow: hidden; position: relative; cursor: pointer; transition: 0.3s; }
-        .card-flutuante img { width: 100%; display: block; filter: grayscale(30%); }
-        .card-title { padding: 10px; font-size: 0.7rem; font-weight: 700; text-align: center; color: #ccc; }
-        .stars { color: var(--gold); font-size: 0.6rem; text-align: center; padding-bottom: 5px; }
-
-        /* DETALHES / SINOPSE */
-        #view-detalhes { background: var(--bg-black); color: var(--white); }
-        .detalhes-header { padding: 20px; display: flex; gap: 20px; border-bottom: 1px solid #222; }
-        .detalhes-img { width: 120px; box-shadow: 0 5px 15px rgba(0,0,0,0.5); }
-        .detalhes-info h2 { font-size: 1.4rem; color: var(--gold); margin-bottom: 5px; }
-        .price-tag { color: #00FF00; font-weight: 700; font-size: 1.1rem; }
-        .sinopse-texto { padding: 20px; font-size: 0.95rem; line-height: 1.6; color: #ddd; white-space: pre-line; }
-        .btn-comprar { display: block; width: calc(100% - 40px); margin: 20px auto; background: var(--red-btn); color: #fff; text-align: center; padding: 15px; text-decoration: none; font-weight: 700; border-radius: 4px; text-transform: uppercase; }
-
-        footer { padding: 30px 20px; text-align: center; border-top: 1px solid #222; font-size: 0.65rem; color: #555; }
-    </style>
-</head>
-<body>
-
-    <header>
-        <div class="logo">BHRÓSZ</div>
-        <nav>
-            <a href="#" id="nav-home" class="active" onclick="irHome()">Início</a>
-            <a href="#" id="nav-ebook" onclick="irTitulos()">Catálogo</a>
-        </nav>
-    </header>
-
-    <section id="view-home" class="view-section" style="display: block;">
-        <div class="hero">
-            <h1>O CÓDIGO</h1>
-            <p>O Fim das Migalhas Emocionais</p>
-            <div class="vitrine-container">
-                <div class="loop-box">
-                    <img id="loop-e" src="ebook01.webp" alt="Ebooks">
-                    <div class="loop-label">E-BOOKS</div>
-                </div>
-                <div class="loop-box">
-                    <img id="loop-a" src="audiobook01.webp" alt="Audiobooks">
-                    <div class="loop-label">AUDIOBOOKS</div>
-                </div>
-                <button class="btn-acessar" onclick="irTitulos()">ACESSAR TODOS</button>
-            </div>
-        </div>
-    </section>
-
-    <section id="view-galeria" class="view-section">
-        <div style="padding: 10px 20px;">
-            <button onclick="irHome()" style="background:transparent; color:var(--gold); border:1px solid #333; padding:5px 15px; font-size:0.7rem; cursor:pointer;">&larr; VOLTAR</button>
-        </div>
-        <div id="render-grid" class="grid-container">
-            </div>
-    </section>
-
-    <section id="view-detalhes" class="view-section">
-        <div style="padding: 10px 20px;">
-            <button onclick="irTitulos()" style="background:transparent; color:var(--gold); border:1px solid #333; padding:5px 15px; font-size:0.7rem; cursor:pointer;">&larr; VOLTAR</button>
-        </div>
-        <div class="detalhes-header">
-            <img id="det-img" src="" alt="" class="detalhes-img">
-            <div class="detalhes-info">
-                <h2 id="det-title">Título</h2>
-                <div class="price-tag" id="det-price">R$ 0,00</div>
-            </div>
-        </div>
-        <div class="sinopse-texto" id="det-desc">
-            </div>
-        <a href="#" id="det-link" target="_blank" class="btn-comprar">ADQUIRIR AGORA</a>
-    </section>
-
-    <footer>
-        &copy; 2024 JÚLIO BHRÓSZ - TODOS OS DIREITOS RESERVADOS
-    </footer>
-
-    <script>
-        /* ============================================================
-           BASE DE DADOS RETIFICADA (CONFORME SOLICITADO)
-        ============================================================ */
-        const sinopses = {
-            descubra: `Descubra Você: Desvende Sua Essência, Transforme Seus Relacionamentos\n\nVocê sente que está vivendo em um ciclo repetitivo de encontros frustrantes e desencontros emocionais? Muitas vezes, depositamos no outro a responsabilidade pela nossa felicidade, apenas para encontrar desilusão. Mas a verdade é que a chave para conexões autênticas e duradouras nunca esteve no "parceiro ideal", mas sim escondida dentro da sua própria essência.\n\nEm “Descubra Você”, Júlio Bhrósz convida você para uma jornada profunda de autodescoberta. Este e-book não é apenas um guia de conselhos; é um mapa prático para quem deseja parar de sobreviver a relações vazias e começar a construir vínculos reais e significativos.`,
-            découvrez: `Découvrez-vous : Révélez Votre Essence, Transformez Vos Relations\n\nAvez-vous l'impression de vivre dans un cycle répétitif de rencontres frustrantes et de malentendus émotionnels ? Bien souvent, nous plaçons la responsabilité de notre bonheur sur l'autre, pour ne récolter que de la déception.`,
-            engenharia: `Engenharia da Colisão: A Soberania do Aço nos Relacionamentos\n\nO seu relacionamento é uma estrutura de argila ou uma armadura de aço? A maioria dos casais vive sob a fragilidade de acordos superficiais, esperando que o tempo resolva fissuras estruturais que, na verdade, exigem intervenção técnica. Em "Engenharia da Colisão", Júlio Bhrósz apresenta o método definitivo para casais que decidiram abandonar a instabilidade emocional e assumir o controle absoluto da sua dinâmica afetiva.`,
-            autopsia: `Autópsia da Personalidade: O Fim das Migalhas Emocionais\n\nO que resta de você quando as camadas de autodecepção são removidas? A maioria das pessoas passa a vida tentando "consertar" o que nunca funcionou, alimentando-se de migalhas emocionais e aceitando a falência da própria identidade. Em "Autópsia da Personalidade", Júlio Bhrósz executa o procedimento definitivo: a abertura completa da estrutura psíquica para identificar a causa mortis da sua vontade e a origem da sua submissão.`,
-            supremacy: `The Supremacy Code: Delete Emotional Crumbs, Reclaim Your Sovereignty\n\nWhat remains of you when the layers of self-death are stripped away? Most people spend their existence trying to "fix" a broken identity, feeding on emotional crumbs and accepting the slow decay of their own will.`,
-            know_first: `Know Yourself First: Unravel Your Essence, Transform Your Relationships\n\nAre you exhausted from chasing a ghost? Many people spend their lives trapped in a loop of disappointing encounters, believing that the "right person" is the missing piece to their happiness.`
+    allItems.forEach(function(item) {
+        // Criação mecânica e precisa de cada elemento
+        var card = document.createElement('div');
+        card.className = 'card-flutuante';
+        
+        // Define o clique para abrir a sinopse usando os dados do item
+        card.onclick = function() {
+            abrirSinopse(item.img, item.title, item.price, item.link, item.desc);
         };
 
-        const hardware = {
-            e: [
-                { img: 'ebook01.webp', title: 'Know yourself First', price: '$11.00', link: 'https://pay.kiwify.com/8S4FCE0', desc: sinopses.know_first },
-                { img: 'ebook02.webp', title: 'Engineering Collision', price: '$11.50', link: 'https://pay.kiwify.com/ZjtlaGh', desc: sinopses.engenharia },
-                { img: 'ebook03.webp', title: 'The Supremacy Code', price: '$11.99', link: 'https://pay.kiwify.com/NcdLsaN', desc: sinopses.supremacy },
-                { img: 'ebook04.webp', title: 'Descubra Você', price: 'R$29,50', link: 'https://pay.kiwify.com.br/P8UTO6L', desc: sinopses.descubra },
-                { img: 'ebook05.webp', title: 'Engenharia da Colisão', price: 'R$39,00', link: 'https://pay.kiwify.com.br/oRZAlbz', desc: sinopses.engenharia },
-                { img: 'ebook06.webp', title: 'Autópsia da Personalidade', price: 'R$59,90', link: 'https://pay.kiwify.com.br/sD4nqRO', desc: sinopses.autopsia },
-                { img: 'ebook07.webp', title: 'Découvrez-Vous', price: '€10,00', link: 'https://pay.kiwify.com/GFUBNBT', desc: sinopses.découvrez },
-                { img: 'ebook08.webp', title: 'Autopsie de la Personnalité', price: '€13,80', link: 'https://pay.kiwify.com/4zixbEz', desc: sinopses.autopsia },
-                { img: 'ebook09.webp', title: 'Autópsia de la Personalidad', price: '€11,80', link: 'https://pay.kiwify.com/4zixbEz', desc: sinopses.autopsia }
-            ],
-            a: [
-                { img: 'audiobook01.webp', title: 'Know yourself First', price: '$13.95', link: 'https://pay.kiwify.com/ilgU4Kg', desc: sinopses.know_first },
-                { img: 'audiobook02.webp', title: 'The Engineering Collision', price: '$14.95', link: 'https://pay.kiwify.com/2LTHnl0', desc: sinopses.engenharia },
-                { img: 'audiobook03.webp', title: 'The Supremacy Code', price: '$15.95', link: 'https://pay.kiwify.com/TGmTjRA', desc: sinopses.supremacy },
-                { img: 'audiobook04.webp', title: 'Descubra Você', price: 'R$37,50', link: 'https://pay.kiwify.com.br/lDiv2Do', desc: sinopses.descubra },
-                { img: 'audiobook05.webp', title: 'Engenharia da Colisão', price: 'R$39,50', link: 'https://pay.kiwify.com.br/PmaKDGV', desc: sinopses.engenharia },
-                { img: 'audiobook06.webp', title: 'Autópsia da Personalidade', price: 'R$57,50', link: 'https://pay.kiwify.com.br/nJO91Ia', desc: sinopses.autopsia }
-            ]
-        };
+        // Monta a estrutura interna sem risco de erro de sintaxe de texto
+        var img = document.createElement('img');
+        img.src = item.img;
+        img.alt = item.title;
 
-        /* ============================================================
-           LÓGICA DE NAVEGAÇÃO E RENDERIZAÇÃO (RETIFICADA)
-        ============================================================ */
-        let iE = 0, iA = 0;
+        var stars = document.createElement('div');
+        stars.className = 'stars';
+        stars.innerText = '★★★★★';
 
-        function resetTelas() {
-            document.querySelectorAll('.view-section').forEach(s => s.style.display = 'none');
-            document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
-        }
+        var title = document.createElement('div');
+        title.className = 'card-title';
+        title.innerText = item.title;
 
-        function irHome() {
-            resetTelas();
-            document.getElementById('view-home').style.display = 'block';
-            document.getElementById('nav-home').classList.add('active');
-            window.scrollTo(0, 0);
-        }
+        // Montagem do card
+        card.appendChild(img);
+        card.appendChild(stars);
+        card.appendChild(title);
+        
+        // Injeção na grid
+        grid.appendChild(card);
+    });
 
-        function irTitulos() {
-            resetTelas();
-            var grid = document.getElementById('render-grid');
-            if (!grid) return;
-
-            var all = hardware.e.concat(hardware.a);
-            var html = '';
-
-            for (var i = 0; i < all.length; i++) {
-                var item = all[i];
-                var descLimpa = item.desc.replace(/'/g, "\\'");
-                
-                // Concatenação segura para evitar erro de exibição de texto puro
-                html += '<div class="card-flutuante" onclick="abrirSinopse(\''+item.img+'\', \''+item.title+'\', \''+item.price+'\', \''+item.link+'\', \''+descLimpa+'\')">' +
-                        '<img src="'+item.img+'" alt="'+item.title+'">' +
-                        '<div class="stars">★★★★★</div>' +
-                        '<div class="card-title">'+item.title+'</div>' +
-                        '</div>';
-            }
-
-            grid.innerHTML = html;
-            document.getElementById('view-galeria').style.display = 'block';
-            document.getElementById('nav-ebook').classList.add('active');
-            window.scrollTo(0, 0);
-        }
-
-        function abrirSinopse(img, title, price, link, desc) {
-            resetTelas();
-            document.getElementById('det-img').src = img;
-            document.getElementById('det-title').innerText = title;
-            document.getElementById('det-price').innerText = price;
-            document.getElementById('det-link').href = link;
-            document.getElementById('det-desc').innerText = desc;
-            document.getElementById('view-detalhes').style.display = 'block';
-            window.scrollTo(0, 0);
-        }
-
-        /* ============================================================
-           LOOPS DE IMAGEM
-        ============================================================ */
-        function iniciarLoops() {
-            setInterval(function() {
-                var el = document.getElementById('loop-e');
-                if(el) {
-                    el.style.opacity = 0;
-                    setTimeout(function() {
-                        iE = (iE + 1) % hardware.e.length;
-                        el.src = hardware.e[iE].img;
-                        el.style.opacity = 1;
-                    }, 500);
-                }
-            }, 3000);
-
-            setInterval(function() {
-                var el = document.getElementById('loop-a');
-                if(el) {
-                    el.style.opacity = 0;
-                    setTimeout(function() {
-                        iA = (iA + 1) % hardware.a.length;
-                        el.src = hardware.a[iA].img;
-                        el.style.opacity = 1;
-                    }, 500);
-                }
-            }, 3500);
-        }
-
-        window.onload = function() {
-            irHome();
-            iniciarLoops();
-        };
-    </script>
-</body>
-</html>
+    document.getElementById('view-galeria').style.display = 'block';
+    document.getElementById('nav-ebook').classList.add('active');
+    window.scrollTo(0, 0);
+}

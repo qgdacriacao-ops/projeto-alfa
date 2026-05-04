@@ -396,7 +396,7 @@
                 <li><a id="nav-home" class="active" onclick="irHome()">Início</a></li>
                 <li><a id="nav-ebook" onclick="irTitulos()">Ebook</a></li>
                 <li><a id="nav-sinopse" onclick="abrirSinopseDefault()">Sinopse</a></li>
-                <li><a id="nav-depoimentos" onclick="abrirInfo('depoimentos')">depoimentos</a></li>
+                <li><a id="nav-depoimentos" onclick="abrirInfo('depoimentos')">Depoimentos</a></li>
                 <li><a id="nav-sobre" onclick="abrirInfo('sobre')">Sobre</a></li>
                 <li><a id="nav-contato" onclick="abrirInfo('contato')">Contato</a></li>
                 <li><a id="nav-suporte" onclick="abrirInfo('suporte')">Suporte</a></li>
@@ -558,7 +558,7 @@
             const grid = document.getElementById('render-grid');
             const allItems = [...hardware.e, ...hardware.a];
             grid.innerHTML = allItems.map(item => `
-                <div class="card-flutuante" onclick="abrirSinopse('${item.img}', '${item.title}', '${item.price}', '${item.link}', '${item.desc.replace(/'/g, "\\'")}')">
+                <div class="card-flutuante" onclick="abrirSinopse('${item.img}', '${item.title}', '${item.price}', '${item.link}', '${item.desc.replace(/'/g, "\\'")}', '${item.format}')">
                     <img src="${item.img}" alt="${item.title}">
                     <div class="stars">★★★★★</div>
                     <div class="card-title">${item.title}</div>
@@ -570,13 +570,20 @@
             historico = 'titulos';
         }
 
-        function abrirSinopse(img, title, price, link, desc) {
+        function abrirSinopse(img, title, price, link, desc, format) {
             resetTelas();
             linkAtual = link;
             document.getElementById('target-img').src = img;
             document.getElementById('target-title').innerText = title;
             document.getElementById('target-price').innerText = price;
             document.getElementById('target-desc').innerHTML = desc;
+            
+            // Ajuste dinâmico de detalhes técnicos
+            const isAudio = title.toLowerCase().includes('audio');
+            document.querySelector('.details-title').innerText = isAudio ? 'Detalhes do Audiobook' : 'Detalhes do eBook';
+            document.querySelector('.detail-item:nth-child(4) .detail-value').innerText = format || (isAudio ? 'Digital (MP3)' : 'Digital (PDF/ePub)');
+            document.querySelector('.detail-item:nth-child(5) .detail-value').innerText = isAudio ? 'Smartphone, PC, Tablet, Som Automotivo' : 'Kindle, Tablet, Smartphone, PC';
+
             document.getElementById('view-sinopse').style.display = 'block';
             document.getElementById('btn-voltar').style.display = 'block';
             ativarMenu('sinopse');
@@ -585,12 +592,12 @@
 
         function irSinopseHome(tipo) {
             const item = tipo === 'e' ? hardware.e[iE] : hardware.a[iA];
-            abrirSinopse(item.img, item.title, item.price, item.link, item.desc);
+            abrirSinopse(item.img, item.title, item.price, item.link, item.desc, item.format);
         }
 
         function abrirSinopseDefault() {
             const d = hardware.e[0];
-            abrirSinopse(d.img, d.title, d.price, d.link, d.desc);
+            abrirSinopse(d.img, d.title, d.price, d.link, d.desc, d.format);
         }
 
         function checkout() {

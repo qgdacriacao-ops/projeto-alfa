@@ -451,9 +451,9 @@
                             <p style="font-size: 0.65rem; color: var(--gold); text-align: center; margin-bottom: 5px; font-weight: 700; text-transform: uppercase;">Pagamento seguro via Kiwify: Pix, Cartão de Crédito e mais.</p>
                             <button class="btn-gold" onclick="checkout()">Adicionar ao Carrinho</button>
                             <button class="btn-red" onclick="checkout()">Compre Agora</button>
-                            <button class="btn-red" onclick="checkout()">COMBO EBOOKS (Economize 20%)</button>
-                            <button class="btn-red" onclick="checkout()">COMBO AUDIOBOOK (Oferta Especial)</button>
-                            <button class="btn-red" onclick="checkout()">COMBO COMPLETO (Melhor Oferta)</button>
+                            <button class="btn-red" onclick="window.open('https://pay.kiwify.com.br/Wp9Y8Gz', '_blank')">COMBO EBOOKS (Economize 20%)</button>
+                            <button class="btn-red" onclick="window.open('https://pay.kiwify.com.br/Y3X9W0l', '_blank')">COMBO AUDIOBOOK (Oferta Especial)</button>
+                            <button class="btn-red" onclick="window.open('https://pay.kiwify.com.br/L49W2zX', '_blank')">COMBO COMPLETO (Melhor Oferta)</button>
                             <p style="font-size: 0.7rem; color: #666; text-align: center; margin-top: 10px; font-weight: 700;">Leve o combo e acelere sua transformação por um preço exclusivo.</p>
                         </div>
                     </div>
@@ -485,20 +485,20 @@
         ============================================================ */
         const hardware = {
             e: [
-                { img: 'ebook01.webp', title: 'O Código', price: 'R$ 47,00', format: 'PDF', desc: 'A base da engenharia mental.' },
-                { img: 'ebook02.webp', title: 'Soberania Mental', price: 'R$ 47,00', format: 'PDF', desc: 'Engenharia mental avançada.' },
-                { img: 'ebook03.webp', title: 'Engenharia da Colisão', price: 'R$ 47,00', format: 'PDF', desc: 'Relacionamentos.' },
-                { img: 'ebook04.webp', title: 'Descubra Você', price: 'R$ 47,00', format: 'PDF', desc: 'Autoconhecimento.' },
-                { img: 'ebook05.webp', title: 'Autópsia da Personalidade', price: 'R$ 47,00', format: 'PDF', desc: 'Ego e Psique.' },
-                { img: 'ebook06.webp', title: 'Verdade em Vida', price: 'R$ 47,00', format: 'PDF', desc: 'Propósito.' }
+                { img: 'ebook01.webp', title: 'O Código', price: 'R$ 47,00', format: 'PDF', link: 'https://pay.kiwify.com.br/WvG3m0V', desc: 'O guia definitivo para desconstruir padrões mentais e assumir o controle da sua realidade através da engenharia comportamental.' },
+                { img: 'ebook02.webp', title: 'Soberania Mental', price: 'R$ 47,00', format: 'PDF', link: 'https://pay.kiwify.com.br/S53H0K3', desc: 'Aprofunde-se nas técnicas de autogestão intelectual e aprenda a blindar sua mente contra influências externas indesejadas.' },
+                { img: 'ebook03.webp', title: 'Engenharia da Colisão', price: 'R$ 47,00', format: 'PDF', link: 'https://pay.kiwify.com.br/zR0mOQf', desc: 'Uma análise crua sobre as interações humanas, revelando como os choques de personalidade moldam nossos relacionamentos e crescimento.' },
+                { img: 'ebook04.webp', title: 'Descubra Você', price: 'R$ 47,00', format: 'PDF', link: 'https://pay.kiwify.com.br/C38rY2l', desc: 'Uma jornada introspectiva para identificar sua essência por trás das máscaras sociais e construir uma identidade autêntica.' },
+                { img: 'ebook05.webp', title: 'Autópsia da Personalidade', price: 'R$ 47,00', format: 'PDF', link: 'https://pay.kiwify.com.br/RzXm56q', desc: 'Disseque as camadas do seu ego e entenda os mecanismos psicológicos que sustentam suas escolhas e comportamentos.' },
+                { img: 'ebook06.webp', title: 'Verdade em Vida', price: 'R$ 47,00', format: 'PDF', link: 'https://pay.kiwify.com.br/h4m7G3O', desc: 'Como alinhar suas ações diárias com seu propósito maior, vivendo uma existência pautada pela integridade e clareza mental.' }
             ],
             a: [
-                { img: 'audio01.webp', title: 'O Código (Audio)', price: 'R$ 57,00', format: 'MP3', desc: 'Áudio imersivo.' },
-                { img: 'audio02.webp', title: 'Soberania Mental (Audio)', price: 'R$ 57,00', format: 'MP3', desc: 'Soberania sonora.' },
-                { img: 'audio03.webp', title: 'Engenharia da Colisão (Audio)', price: 'R$ 57,00', format: 'MP3', desc: 'Relacionamentos sonora.' },
-                { img: 'audio04.webp', title: 'Descubra Você (Audio)', price: 'R$ 57,00', format: 'MP3', desc: 'Autoconhecimento sonora.' },
-                { img: 'audio05.webp', title: 'Autópsia da Personalidade (Audio)', price: 'R$ 57,00', format: 'MP3', desc: 'Psique sonora.' },
-                { img: 'audio06.webp', title: 'Verdade em Vida (Audio)', price: 'R$ 57,00', format: 'MP3', desc: 'Propósito sonora.' }
+                { img: 'audio01.webp', title: 'O Código (Audio)', price: 'R$ 57,00', format: 'MP3', link: 'https://pay.kiwify.com.br/K47O594', desc: 'A experiência imersiva d\'O Código em áudio, ideal para absorver os conceitos de engenharia mental em qualquer lugar.' },
+                { img: 'audio02.webp', title: 'Soberania Mental (Audio)', price: 'R$ 57,00', format: 'MP3', link: 'https://pay.kiwify.com.br/pW0X1rE', desc: 'Domine as técnicas de soberania intelectual através desta narração detalhada e envolvente.' },
+                { img: 'audio03.webp', title: 'Engenharia da Colisão (Audio)', price: 'R$ 57,00', format: 'MP3', link: 'https://pay.kiwify.com.br/R2G6N1m', desc: 'Entenda a dinâmica dos relacionamentos e colisões de personalidade nesta versão em áudio de alta qualidade.' },
+                { img: 'audio04.webp', title: 'Descubra Você (Audio)', price: 'R$ 57,00', format: 'MP3', link: 'https://pay.kiwify.com.br/mY0H7Wz', desc: 'Uma jornada de autoconhecimento narrada para facilitar a reflexão e a descoberta da sua verdadeira essência.' },
+                { img: 'audio05.webp', title: 'Autópsia da Personalidade (Audio)', price: 'R$ 57,00', format: 'MP3', link: 'https://pay.kiwify.com.br/V5m2X9Q', desc: 'Aprofunde-se na análise do ego e da psique com a conveniência do formato audiobook.' },
+                { img: 'audio06.webp', title: 'Verdade em Vida (Audio)', price: 'R$ 57,00', format: 'MP3', link: 'https://pay.kiwify.com.br/S87V2qY', desc: 'Conecte-se com seu propósito e alinhe sua vida através das lições narradas neste audiobook inspirador.' }
             ]
         };
 

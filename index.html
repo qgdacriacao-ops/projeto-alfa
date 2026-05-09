@@ -27,34 +27,12 @@
             --chumbo: #2C2C2C;
             --text-dark: #1A1A1A;
             --border: #D1D1D1;
-          }
-
-/* --- ESTILO DO CTA FIXO (COPIADO DO CTA FIXO SITE.HTML) --- */
-        .col-compra {
-            position: -webkit-sticky !important;
-            position: sticky !important;
-            top: 110px !important;
-            height: fit-content !important;
-            z-index: 999 !important;
-            display: block !important;
         }
 
-        .buy-card {
-            background: var(--chumbo) !important;
-            padding: 25px 15px !important;
-            border-radius: 5px !important;
-            color: #fff !important;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-
-        .cta-tag { color: var(--gold); font-weight: 900; font-size: 0.65rem; letter-spacing: 1px; display: block; margin-bottom: 5px; }
-        .price-value { font-size: 2.2rem; font-weight: 900; color: #fff; margin-bottom: 10px; }
-        .secure-tag { color: var(--gold); font-size: 0.55rem; font-weight: 700; text-transform: uppercase; line-height: 1.3; display: block; margin-bottom: 20px; }
-
-        .btn-cta { width: 100%; border: none; padding: 12px; font-weight: 900; text-transform: uppercase; cursor: pointer; border-radius: 4px; font-size: 0.65rem; margin-bottom: 10px; }
-        .btn-yellow { background: var(--gold); color: #000; }
-        .btn-red { background: var(--red-btn); color: #fff; }        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        /* ============================================================
+           RESET E BASE
+        ============================================================ */
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         body, html {
             height: 100%;
             background-color: var(--bg-black);
@@ -212,11 +190,9 @@
             gap: 45px;
             padding: 0 5%;
             width: 100%;
-            overflow-x: hidden!important;
-            align-items: flex-start !important;
+            overflow-x: hidden;
         }
-        
-/* --- CORREÇÃO DO LAYOUT --- */
+        /* --- CORREÇÃO DO LAYOUT --- */
         .col-mockup img {
             width: 100%;
             max-width: 100%;
@@ -525,79 +501,77 @@
     </header>
 
     <main id="main-content">
-    <div id="view-home" class="view-home">
-        <div class="column-box">
-            <p>EBOOKS</p>
-            <div class="display-box" onclick="irSinopseHome('e')">
-                <img id="loop-e" src="ebook04.webp" alt="Ebook">
+        <div id="view-home" class="view-home">
+            <div class="column-box">
+                <p>EBOOKS</p>
+                <div class="display-box" onclick="irSinopseHome('e')">
+                    <img id="loop-e" src="ebook04.webp" alt="Ebook">
+                </div>
+            </div>
+            <div class="hero-center">
+                <h1>Desvende os Segredos da Mente Humana e Transforme Sua Vida com Nossos Ebooks e Audiobooks Exclusivos.</h1>
+                <div class="line-hero"></div>
+            </div>
+            <div class="column-box">
+                <p>AUDIOBOOKS</p>
+                <div class="display-box" onclick="irSinopseHome('a')">
+                    <img id="loop-a" src="audio04.webp" alt="Audiobook">
+                </div>
             </div>
         </div>
-        <div class="hero-center">
-            <h1>Desvende os Segredos da Mente Humana e Transforme Sua Vida com Nossos Ebooks e Audiobooks Exclusivos.</h1>
-            <div class="line-hero"></div>
+
+        <section id="view-galeria" class="view-galeria">
+    <div class="grid-produtos" id="render-grid"></div>
+</section>
+
+<section id="view-sinopse" class="view-content">
+    <div class="container-trindade">
+        
+        <div class="col-mockup">
+            <img id="target-img" src="" alt="Capa">
         </div>
-        <div class="column-box">
-            <p>AUDIOBOOKS</p>
-            <div class="display-box" onclick="irSinopseHome('a')">
-                <img id="loop-a" src="audio04.webp" alt="Audiobook">
+
+        <div class="col-texto">
+            <h1 id="target-title"></h1>
+            <p class="author">Por Júlio Bhrósz</p>
+            <div id="target-desc" class="description"></div>
+        </div>
+
+        <div class="col-compra">
+                    <div class="buy-card">
+                        <span class="price-label">Por Apenas</span>
+                        <div class="price-value" id="target-price">R$ 0,00</div>
+                        <div class="btn-group">
+                            <p style="font-size: 0.65rem; color: var(--gold); text-align: center; margin-bottom: 5px; font-weight: 700; text-transform: uppercase;">Pagamento seguro via Kiwify: Pix, Cartão de Crédito e mais.</p>
+                            <button class="btn-gold" onclick="checkout()">Adicionar ao Carrinho</button>
+                            <button class="btn-red" onclick="checkout()">Compre Agora</button>
+                            <button class="btn-red" onclick="checkout()">COMBO EBOOKS (Economize 20%)</button>
+                            <button class="btn-red" onclick="checkout()">COMBO AUDIOBOOK (Oferta Especial)</button>
+                            <button class="btn-red" onclick="checkout()">COMBO COMPLETO (Melhor Oferta)</button>
+                            <p style="font-size: 0.7rem; color: #666; text-align: center; margin-top: 10px; font-weight: 700;">Leve o combo e acelere sua transformação por um preço exclusivo.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
+    <div class="product-details">
+        <div class="details-title">Detalhes do eBook</div>
+        <div class="details-grid">
+            <div class="detail-item"><span class="detail-label">Editora</span><span class="detail-value">Portal Pleno O Código</span></div>
+            <div class="detail-item"><span class="detail-label">Data de Lançamento</span><span class="detail-value">Março de 2026</span></div>
+            <div class="detail-item"><span class="detail-label">Idioma</span><span class="detail-value">Português</span></div>
+            <div class="detail-item"><span class="detail-label">Formato</span><span class="detail-value">Digital (PDF/ePub)</span></div>
+            <div class="detail-item"><span class="detail-label">Compatibilidade</span><span class="detail-value">Kindle, Tablet, Smartphone, PC</span></div>
         </div>
     </div>
+</section>
 
-    <section id="view-galeria" class="view-galeria">
-        <div class="grid-produtos" id="render-grid"></div>
-    </section>
-
-    <section id="view-sinopse" class="view-content">
-        <div class="container-trindade">
-            
-            <div class="col-mockup">
-                <img id="target-img" src="" alt="Capa">
-            </div>
-
-            <div class="col-texto">
-                <h1 id="target-title"></h1>
-                <p class="author">Por Júlio Bhrósz</p>
-                <div id="target-desc" class="description"></div>
-                
-                <div class="product-details">
-                    <div class="details-title">Detalhes do eBook</div>
-                    <div class="details-grid">
-                        <div class="detail-item"><span class="detail-label">Editora</span><span class="detail-value">Portal Pleno O Código</span></div>
-                        <div class="detail-item"><span class="detail-label">Data de Lançamento</span><span class="detail-value">Março de 2026</span></div>
-                        <div class="detail-item"><span class="detail-label">Idioma</span><span class="detail-value">Português</span></div>
-                        <div class="detail-item"><span class="detail-label">Formato</span><span class="detail-value">Digital (PDF/ePub)</span></div>
-                        <div class="detail-item"><span class="detail-label">Compatibilidade</span><span class="detail-value">Kindle, Tablet, Smartphone, PC</span></div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-compra">
-                <div class="buy-card">
-                    <span class="price-label">Por Apenas</span>
-                    <div class="price-value" id="target-price">R$ 0,00</div>
-                    <div class="btn-group">
-                        <p style="font-size: 0.65rem; color: var(--gold); text-align: center; margin-bottom: 5px; font-weight: 700; text-transform: uppercase;">Pagamento seguro via Kiwify: Pix, Cartão de Crédito e mais.</p>
-                        <button class="btn-gold" onclick="checkout()">Adicionar ao Carrinho</button>
-                        <button class="btn-red" onclick="checkout()">Compre Agora</button>
-                        <button class="btn-red" onclick="checkout()">COMBO EBOOKS (Economize 20%)</button>
-                        <button class="btn-red" onclick="checkout()">COMBO AUDIOBOOK (Oferta Especial)</button>
-                        <button class="btn-red" onclick="checkout()">COMBO COMPLETO (Melhor Oferta)</button>
-                        <p style="font-size: 0.7rem; color: #666; text-align: center; margin-top: 10px; font-weight: 700;">Leve o combo e acelere sua transformação por um preço exclusivo.</p>
-                    </div>
-                </div>
-            </div>
-
-        </div> </section>
-
-    <section id="view-info-extra" class="view-info-extra">
-        <div id="content-info"></div>
-    </section>
+<section id="view-info-extra" class="view-info-extra">
+    <div id="content-info"></div>
+</section>
 
     <div class="final-footer">
         © 2006 Portal Pleno | O Código - Todos os direitos reservados.
     </div>
-</main>
 
     <script>
     const hardware = {

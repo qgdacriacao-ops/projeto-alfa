@@ -432,10 +432,17 @@
 /* --- FIM DO BLOCO UNIFICADO RETIFICADO --- */
 
         /* FOOTER */
-        .final-footer { background: #000; color: #666; text-align: center; padding: 14px; font-size: 0.6rem; }
-
-        /* FOOTER */
-        .final-footer { background: #000; color: #666; text-align: center; padding: 14px; font-size: 0.6rem; }
+        .final-footer { 
+    background: #000; 
+    color: #666; 
+    text-align: center; 
+    padding: 30px; 
+    font-size: 0.8rem; 
+    border-top: 1px solid var(--gold); 
+    z-index: 9999; /* Aumentamos para garantir que fique no topo */
+    position: relative; /* Garante que ele respeite o fluxo da página */
+    clear: both; /* Limpa qualquer elemento flutuante que possa estar escondendo ele */
+}
 
         /* NOVOS ESTILOS PARA O "SOBRE" COM FOTO */
         .sobre-container-flex { display: flex; align-items: center; gap: 40px; max-width: 1000px; margin: 0 auto; text-align: left; }
@@ -802,16 +809,16 @@
             else if (tipo === 'sobre') {
                 // ROTA RETOMADA: SUBSTUIÇÃO EXCLUSIVA DO CONTEÚDO DA ABA SOBRE
                 container.innerHTML = `
-                <div class="sobre-clean">
-                    <div class="sobre-fundo" style="background: url('banner.webp') no-repeat center center; background-size: cover; filter: brightness(0.3); position: absolute; top:0; left:0; width:100%; height:100%; z-index:-1;"></div>
-                    <div class="sobre-content" style="position: relative; z-index: 1; padding: 40px 5%;">
-                        <div class="sobre-container-flex">
-                            <div class="sobre-foto-wrapper">
-                                <img src="foto_autor.png" alt="Júlio Bhrósz" class="foto-autor-img">
-                            </div>
-                            <div class="sobre-texto-wrapper">
-                                <h1 style="color: var(--gold, #d4af37); margin-bottom: 20px;">A Mente por trás d'O Código</h1>
-                                <strong>Júlio Bhrósz</strong>. O mundo não é justo. Ele é um mercado de valores invisíveis. Se você se sente ignorado, trocado ou tratado como um "plano B", não é por acaso. É porque você está jogando com as regras que foram impostas a você, não as que você domina.
+<div class="sobre-clean">
+    <div class="sobre-content" style="position: relative; z-index: 1; padding: 40px 5%; background: transparent;">
+        <div class="sobre-container-flex" style="display: flex; align-items: center; gap: 40px; text-align: justify;">
+            <div class="sobre-foto-wrapper">
+                <img src="foto_autor.png" alt="Júlio Bhrósz" class="foto-autor-img" style="width: 300px; height: auto; border: none; background: transparent;">
+            </div>
+            <div class="sobre-texto-wrapper" style="flex: 1;">
+                <h1 style="color: var(--gold, #d4af37); margin-bottom: 20px; text-align: center;">A Mente por trás d'O Código</h1>
+                <p style="text-align: justify; text-justify: inter-word; color: #fff; line-height: 1.6;">
+                    <strong>Júlio Bhrósz</strong>. O mundo não é justo. Ele é um mercado de valores invisíveis. Se você se sente ignorado, trocado ou tratado como um "plano B", não é por acaso. É porque você está jogando com as regras que foram impostas a você, não as que você domina.
 
 Eu não estou aqui para te oferecer um abraço ou a ilusão de que "tudo vai ficar bem". Eu dediquei os últimos 15 anos a uma busca implacável: desvendar por que alguns prosperam e outros definham, mesmo com o mesmo potencial. Cansei de ver mentes brilhantes presas na insegurança, enquanto a mediocridade ascende. Por isso, eu decifrei o que a maioria teme ensinar.
 

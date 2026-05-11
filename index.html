@@ -328,21 +328,22 @@
         .quote { font-style: italic; font-size: 1.3rem; border-left: 4px solid var(--gold); padding-left: 20px; margin: 30px 0; color: #eee; }
         .contato-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
         .email-accounts h3 { color: var(--gold); font-size: 1rem; text-transform: uppercase; margin-bottom: 20px; }
-        .email-item { background: #000; padding: 15px; border-radius: 2px; border: 1px solid var(--gold); cursor: pointer; transition: 0.3s; margin-bottom: 10px; }
+        .email-item { background: #000; padding: 15px; border: 1px solid var(--gold); cursor: pointer; transition: 0.3s; margin-bottom: 10px; }
         .email-item:hover { background: rgba(255,215,0,0.1); }
         .email-label { display: block; color: var(--gold); font-size: 0.8rem; text-transform: uppercase; font-weight: 700; margin-bottom: 5px; }
         .email-address { display: block; color: #fff; font-size: 1rem; word-break: break-all; }
         .form-group { margin-bottom: 15px; display: flex; flex-direction: column; }
         .form-group label { color: #fff; font-size: 0.8rem; text-transform: uppercase; font-weight: 700; margin-bottom: 5px; }
-        .form-group input, .form-group textarea { background: #000; color: #fff; border: none; outline: none; padding: 10px; border-radius: 2px; font-family: 'Inter', sans-serif; }
+        .form-group input, .form-group textarea { background: #000; color: #fff; border: 1px solid var(--gold); padding: 10px; border-radius: 2px; font-family: 'Inter', sans-serif; }
         .btn-feedback { background: var(--gold); color: #000; padding: 12px; border: none; border-radius: 2px; font-weight: 700; text-transform: uppercase; cursor: pointer; transition: 0.3s; width: 100%; }
         .suporte-card { text-align: center; border: 1px solid var(--gold); padding: 40px; background: #000; }
         .suporte-label { color: var(--gold); text-transform: uppercase; font-weight: 700; font-size: 0.8rem; margin-bottom: 10px; }
         .suporte-email { font-size: 1.3rem; font-weight: 700; word-break: break-all; }
 
         /* FOOTER */
-        .final-footer { background: #000; color: #666; text-align: center; padding: 30px; font-size: 0.8rem; border-top: 1px solid var(--gold); z-index: 100; }
+        .final-footer { background: #000; color: #666; text-align: center; padding: 14px; font-size: 0.8rem; border-top: 1px solid var(--gold); z-index: 100; }
 
+       
         /* NOVOS ESTILOS PARA O "SOBRE" COM FOTO */
         .sobre-container-flex { display: flex; align-items: center; gap: 40px; max-width: 1000px; margin: 0 auto; text-align: left; }
         .foto-autor-img { width: 300px; height: auto; border-radius: 10px; border: 2px solid var(--gold); }
@@ -426,10 +427,10 @@
         </div>
 
         <section id="view-galeria" class="view-galeria">
-            <div class="grid-produtos" id="render-grid"></div>
-        </section>
+     <div class="grid-produtos" id="render-grid"></div>
+ </section>
 
-        <section id="view-sinopse" class="view-sinopse">
+<section id="view-sinopse" class="view-sinopse">
             <div class="container-trindade">
                 <div class="col-mockup">
                     <img id="target-img" src="" alt="Mockup do Produto">
@@ -478,32 +479,89 @@
 
     <div class="final-footer">
         © 2026 Portal Pleno | O Código<br>
-        ZÊNITE GLOBAL LABS CNPJ 66.543.032/0001-41<br>
-       Todos os Direitos Reservados
+        ZÊNITE GLOBAL LABS CNPJ 66.543.032/0001-41 Todos os Direitos Reservados
     </div>
 
     <script>
-        /* ============================================================
-           DADOS E HARDWARE
-        ============================================================ */
-        const hardware = {
-            e: [
-                { img: 'ebook01.webp', title: 'O Código', price: 'R$ 47,00', format: 'PDF', desc: 'A base da engenharia mental.' },
-                { img: 'ebook02.webp', title: 'Soberania Mental', price: 'R$ 47,00', format: 'PDF', desc: 'Engenharia mental avançada.' },
-                { img: 'ebook03.webp', title: 'Engenharia da Colisão', price: 'R$ 47,00', format: 'PDF', desc: 'Relacionamentos.' },
-                { img: 'ebook04.webp', title: 'Descubra Você', price: 'R$ 47,00', format: 'PDF', desc: 'Autoconhecimento.' },
-                { img: 'ebook05.webp', title: 'Autópsia da Personalidade', price: 'R$ 47,00', format: 'PDF', desc: 'Ego e Psique.' },
-                { img: 'ebook06.webp', title: 'Verdade em Vida', price: 'R$ 47,00', format: 'PDF', desc: 'Propósito.' }
-            ],
-            a: [
-                { img: 'audio01.webp', title: 'O Código (Audio)', price: 'R$ 57,00', format: 'MP3', desc: 'Áudio imersivo.' },
-                { img: 'audio02.webp', title: 'Soberania Mental (Audio)', price: 'R$ 57,00', format: 'MP3', desc: 'Soberania sonora.' },
-                { img: 'audio03.webp', title: 'Engenharia da Colisão (Audio)', price: 'R$ 57,00', format: 'MP3', desc: 'Relacionamentos sonora.' },
-                { img: 'audio04.webp', title: 'Descubra Você (Audio)', price: 'R$ 57,00', format: 'MP3', desc: 'Autoconhecimento sonora.' },
-                { img: 'audio05.webp', title: 'Autópsia da Personalidade (Audio)', price: 'R$ 57,00', format: 'MP3', desc: 'Psique sonora.' },
-                { img: 'audio06.webp', title: 'Verdade em Vida (Audio)', price: 'R$ 57,00', format: 'MP3', desc: 'Propósito sonora.' }
-            ]
-        };
+    const hardware = {
+        e: [
+            { img: 'ebook01.webp', title: 'Know yourself First', price: '$11.00', link: 'https://pay.kiwify.com/8S4FCE0', desc: `<p>Know Yourself First: Unravel Your Essence, Transform Your Relationships...</p>` },
+
+            { img: 'ebook02.webp', title: 'Engineering Collision', price: '$11.50', link: 'https://pay.kiwify.com/ZjtlaGh', desc: `<p>The Engineering of Collision: From Fragile Clay to the Sovereignty of Steel...</p>` },
+
+            { img: 'ebook03.webp', title: 'The Supremacy Code', price: '$11.99', link: 'https://pay.kiwify.com/NcdLsaN', desc: `<p>The Supremacy Code: Delete Emotional Crumbs, Reclaim Your Sovereignty...</p>` },
+
+            { 
+                img: 'ebook04.webp', 
+                title: 'Descubra Você', 
+                price: 'R$29,50', 
+                link: 'https://pay.kiwify.com.br/P8UTO6L', 
+                desc: `
+                    <p><strong>Descubra Você: Desvende Sua Essência, Transforme Seus Relacionamentos</strong></p>
+                    <p>Você sente que está vivendo em um ciclo repetitivo de encontros frustrantes e desencontros emocionais?</p>
+                    <p>Muitas vezes, depositamos no outro a responsabilidade pela nossa felicidade, apenas para encontrar desilusão. Mas a verdade é que a chave para conexões autênticas e duradouras nunca esteve no "parceiro ideal", mas sim escondida dentro da sua própria essência.</p>
+                    <p>Em <strong>“Descubra Você”</strong>, Júlio Bhrósz convida você para uma jornada profunda de autodescoberta. Este e-book não é apenas um guia de conselhos; é um mapa prático para quem deseja parar de sobreviver a relações vazias e começar a construir vínculos reais e significativos.</p>
+                    <p><strong>O que você vai encontrar nesta jornada:</strong></p>
+                    <p>• <strong>O Elo Perdido:</strong> Entenda por que a busca externa por validação é um caminho sem fim e aprenda como o autoconhecimento é o único pilar capaz de sustentar vínculos verdadeiros.</p>
+                    <p>• <strong>Seu Mapa Relacional:</strong> Desvende como sua história familiar e os padrões invisíveis moldam suas escolhas atuais. Aprenda a romper com o passado para traçar novos caminhos de afeto.</p>
+                    <p>• <strong>Identidade e Propósito:</strong> Vá além dos rótulos que o mundo te impôs. Descubra quem você é em sua essência, mapeie seus desejos e entenda como seu propósito de vida se entrelaça com o amor.</p>
+                    <p>• <strong>Superando Barreiras Internas:</strong> Identifique os medos ocultos que geram autossabotagem e adquira a coragem necessária para viver relacionamentos plenos e transparentes.</p>
+                    <p>• <strong>A Arte da Conexão:</strong> Domine a comunicação empática. Aprenda a estabelecer limites saudáveis e a cultivar o respeito mútuo, transformando conflitos em oportunidades de crescimento recíproco.</p>
+                    <p><em>A jornada mais importante da sua vida começa agora.</em></p>
+                    <p>Não espere mais pelo amor ideal. Comece a cultivá-lo a partir do seu interior e mude para sempre a forma como você ama e é amado.</p>
+                    <p>Dê o primeiro passo para a sua transformação. Adquira agora e descubra o poder de ser você mesmo em todos os seus relacionamentos.</p>` 
+            },
+
+            { 
+                img: 'ebook05.webp', 
+                title: 'Engenharia da Colisão', 
+                price: 'R$39,00', 
+                link: 'https://pay.kiwify.com.br/oRZAlbz', 
+                desc: `
+                    <p><strong>Engenharia da Colisão: A Soberania do Aço nos Relacionamentos</strong></p>
+                    <p>O seu relacionamento é uma estrutura de argila ou uma armadura de aço?</p>
+                    <p>A maioria dos casais vive sob a fragilidade de acordos superficiais, esperando que o tempo resolva fissuras estruturais. Em "Engenharia da Colisão", Júlio Bhrósz apresenta o método definitivo para casais que decidiram assumir o controle absoluto da sua dinâmica afetiva.</p>
+                    <p><strong>O que você irá processar nesta obra:</strong></p>
+                    <p>• <strong>Estanqueidade Emocional:</strong> Aprenda a blindar o seu relacionamento contra infiltrações externas.</p>
+                    <p>• <strong>O Princípio da Colisão:</strong> Entenda como transformar o impacto dos conflitos em energia de fusão.</p>
+                    <p>• <strong>Do Barro ao Aço:</strong> Substitua a "argila" das expectativas infantis pela soberania do aço.</p>
+                    <p>• <strong>Arquitetura da Soberania:</strong> Domine as leis que regem a estabilidade entre dois indivíduos autônomos.</p>
+                    <p>• <strong>Sistemas de Alta Performance:</strong> Implemente protocolos de comunicação com precisão de engrenagens.</p>
+                    <p>Pare de remendar o que deveria ser reconstruído. Assuma o comando da sua estrutura.</p>` 
+            },
+
+            { 
+                img: 'ebook06.webp', 
+                title: 'Autópsia da Personalidade', 
+                price: 'R$59,90', 
+                link: 'https://pay.kiwify.com.br/sD4nqRO', 
+                desc: `
+                    <p><strong>Autópsia da Personalidade: O Fim das Migalhas Emocionais</strong></p>
+                    <p>O que resta de você quando as camadas de autodecepção são removidas?</p>
+                    <p>Em "Autópsia da Personalidade", Júlio Bhrósz executa o procedimento definitivo: a abertura completa da estrutura psíquica para identificar a origem da sua submissão.</p>
+                    <p><strong>Os Protocolos de Exame deste Volume:</strong></p>
+                    <p>• <strong>Dissecação dos Padrões:</strong> Identifique os tecidos necrosados da sua história que ditam suas reações.</p>
+                    <p>• <strong>Extirpação de Migalhas:</strong> Protocolo rigoroso para identificar e deletar dependências afetivas.</p>
+                    <p>• <strong>Identificação do Parasitismo:</strong> Saiba quem são os agentes externos que se alimentam da sua falta de limites.</p>
+                    <p>• <strong>O Resgate da Supremacia:</strong> Reestabeleça o comando central da sua mente.</p>
+                    <p>Reconfigure o seu núcleo operacional para nunca mais aceitar menos do que o topo.</p>` 
+            },
+
+            { img: 'ebook07.webp', title: 'Découvrez-Vous', price: '€10,00', link: 'https://pay.kiwify.com/GFUBNBT', desc: `<p>Découvrez-vous : Révélez Votre Essence, Transformez Vos Relations...</p>` },
+
+            { img: 'ebook08.webp', title: 'Autopsie de la Personnalité', price: '€13,80', link: 'https://pay.kiwify.com/4zixbEz', desc: `<p>Autopsie de la Personnalité: La Fin des Miettes Émotionnelles...</p>` },
+
+            { img: 'ebook09.webp', title: 'Autópsia de la Personalidad', price: '€11,80', link: 'https://pay.kiwify.com/4zixbEz', desc: `<p>Autopsia de la Personalidad: El Fin de las Migajas Emocionales...</p>` }
+        ],
+        a: [
+            { img: 'audiobook01.webp', title: 'Know yourself First', price: '$13.95', link: 'https://pay.kiwify.com/ilgU4Kg', desc: `<p>Audiobook Premium...</p>` },
+            { img: 'audiobook02.webp', title: 'The Engineering Collision', price: '$14.95', link: 'https://pay.kiwify.com/2LTHnl0', desc: `<p>Audiobook Premium...</p>` },
+            { img: 'audiobook03.webp', title: 'the Supremacy Code', price: '$15.95', link: 'https://pay.kiwify.com/TGmTjRA', desc: `<p>Audiobook Premium...</p>` },
+            { img: 'audiobook04.webp', title: 'Descubra Você', price: 'R$37,50', link: 'https://pay.kiwify.com.br/lDiv2Do', desc: `<p>Audiobook Premium...</p>` },
+            { img: 'audiobook05.webp', title: 'Engenharia da Colisão', price: 'R$39,50', link: 'https://pay.kiwify.com.br/PmaKDGV', desc: `<p>Audiobook Premium...</p>` },
+            { img: 'audiobook06.webp', title: 'Autópsia da Personalidade', price: 'R$57,50', link: 'https://pay.kiwify.com.br/nJO91Ia', desc: `<p>Audiobook Premium...</p>` }
+        ]
+    };
 
         const staticReviews = [
             { text: "A descoberta de soi a mudado minha perspectiva.", author: "Maria S.", email: "Verificado", book: "Descubra Você", rating: "★★★★★" },
@@ -560,17 +618,25 @@
             resetTelas();
             const grid = document.getElementById('render-grid');
             const allItems = [...hardware.e, ...hardware.a];
-            grid.innerHTML = allItems.map(item => `
-                <div class="card-flutuante" onclick="abrirSinopse('${item.img}', '${item.title}', '${item.price}', '${item.link}', '${item.desc.replace(/'/g, "\\'")}')">
+
+            grid.innerHTML = allItems.map((item, index) => `
+                <div class="card-flutuante" onclick="carregarEabrir(${index})">
                     <img src="${item.img}" alt="${item.title}">
                     <div class="stars">★★★★★</div>
                     <div class="card-title">${item.title}</div>
                 </div>
             `).join('');
+
             document.getElementById('view-galeria').style.display = 'block';
             document.getElementById('btn-voltar').style.display = 'block';
             ativarMenu('ebook');
             historico = 'titulos';
+        }
+
+        function carregarEabrir(index) {
+            const allItems = [...hardware.e, ...hardware.a];
+            const item = allItems[index];
+            abrirSinopse(item.img, item.title, item.price, item.link, item.desc);
         }
 
         function abrirSinopse(img, title, price, link, desc) {
@@ -646,8 +712,42 @@
                             </div>
                             <div class="sobre-texto-wrapper">
                                 <h1 style="color: var(--gold, #d4af37); margin-bottom: 20px;">A Mente por trás d'O Código</h1>
-                                <p style="line-height: 1.6; margin-bottom: 15px;">Por trás de cada técnica e estratégia apresentada, está a experiência de <strong>Júlio Bhrósz</strong>. Com mais de 15 anos dedicados ao estudo profundo do comportamento humano e da engenharia mental, Júlio desenvolveu uma methodology desenhada para um único fim: a <strong>soberania intelectual</strong>.</p>
-                                <p style="line-height: 1.6; margin-bottom: 15px;">Sua jornada é pautada na desconstrução de padrões limitantes, ajudando milhares de pessoas a assumirem o controle de seus próprios processos mentais. Para Júlio, o conhecimento não deve apenas ser acumulado, mas decodificado em ferramentas de poder e liberdade.</p>
+                                <strong>Júlio Bhrósz</strong>. O mundo não é justo. Ele é um mercado de valores invisíveis. Se você se sente ignorado, trocado ou tratado como um "plano B", não é por acaso. É porque você está jogando com as regras que foram impostas a você, não as que você domina.
+
+Eu não estou aqui para te oferecer um abraço ou a ilusão de que "tudo vai ficar bem". Eu dediquei os últimos 15 anos a uma busca implacável: desvendar por que alguns prosperam e outros definham, mesmo com o mesmo potencial. Cansei de ver mentes brilhantes presas na insegurança, enquanto a mediocridade ascende. Por isso, eu decifrei o que a maioria teme ensinar.
+
+Chega de Migalhas: A Ciência do Comando
+
+A minha autoridade não vem de um diploma emoldurado, mas da linha de frente, onde a teoria encontra a realidade. No Portal Pleno, eu sou o estrategista da sua reconstrução.
+
+Eu condensei o que há de mais avançado no estudo do comportamento humano – os insights que as mentes de elite em Harvard e Stanford discutem a portas fechadas – e transformei em um arsenal de ferramentas práticas. Não é "autoajuda" genérica. É a ciência do comando aplicada à sua vida.
+
+Você vai aprender a:
+
+•
+Assumir o controle absoluto sobre suas reações e a narrativa que você projeta.
+
+•
+Parar de reagir por impulso e começar a agir com estratégia deliberada.
+
+•
+Reverter a percepção que o mundo tem de você, de "plano B" a prioridade.
+
+O Código Está Aberto: Sua Decisão, Seu Domínio
+
+O segredo que mantinha você refém da aprovação alheia foi desvendado. O código está aberto, mas não é para todos. É para quem tem a coragem de abandonar a passividade e reescrever as próprias regras.
+
+A partir de agora, a passividade é uma escolha. Você pode continuar implorando por atenção, ou pode assumir o comando do seu destino e se tornar a pessoa que o mundo não apenas respeita, mas busca.
+
+As regras mudaram. E agora, elas pertencem a você. Pronto para dominar o jogo?
+
+Fundamentação Científica Aplicada:
+
+A metodologia de JB integra protocolos de Inteligência Emocional da Harvard University, mecanismos de Neuroplasticidade da University of Oxford e modelos de Psicologia Social e Status de Stanford para uma transformação comprovada e duradoura.
+
+
+</strong>.</p>
+                                <p style="line-height: 1.6; margin-bottom: 15px;">Descubra como Click Aqui</p>
                                 <div class="quote" style="font-style: italic; border-left: 4px solid var(--gold); padding-left: 15px; margin-top: 20px;">"O Código não é apenas um livro, é a chave para a liberdade mental."</div>
                             </div>
                         </div>

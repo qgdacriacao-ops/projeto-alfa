@@ -322,28 +322,121 @@
 
         /* ESTILOS ESPECÍFICOS PARA SOBRE, CONTATO, SUPORTE */
         .sobre-clean, .contato-clean, .suporte-clean { position: relative; min-height: 80vh; display: flex; align-items: center; justify-content: center; padding: 40px 5%; }
-        .sobre-fundo, .contato-fundo, .suporte-fundo { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
-        .sobre-content, .contato-content, .suporte-content { background: rgba(0,0,0,0.85); border: 1px solid var(--gold); padding: 40px; max-width: 900px; width: 100%; color: #fff; box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
-        .sobre-content h1, .contato-content h1, .suporte-content h1 { color: var(--gold); margin-bottom: 30px; text-transform: uppercase; text-align: center; }
-        .quote { font-style: italic; font-size: 1.3rem; border-left: 4px solid var(--gold); padding-left: 20px; margin: 30px 0; color: #eee; }
-        .contato-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
-        .email-accounts h3 { color: var(--gold); font-size: 1rem; text-transform: uppercase; margin-bottom: 20px; }
-        .email-item { background: #000; padding: 15px; border: 1px solid var(--gold); cursor: pointer; transition: 0.3s; margin-bottom: 10px; }
-        .email-item:hover { background: rgba(255,215,0,0.1); }
-        .email-label { display: block; color: var(--gold); font-size: 0.8rem; text-transform: uppercase; font-weight: 700; margin-bottom: 5px; }
-        .email-address { display: block; color: #fff; font-size: 1rem; word-break: break-all; }
-        .form-group { margin-bottom: 15px; display: flex; flex-direction: column; }
-        .form-group label { color: #fff; font-size: 0.8rem; text-transform: uppercase; font-weight: 700; margin-bottom: 5px; }
-        .form-group input, .form-group textarea { background: #000; color: #fff; border: 1px solid var(--gold); padding: 10px; border-radius: 2px; font-family: 'Inter', sans-serif; }
-        .btn-feedback { background: var(--gold); color: #000; padding: 12px; border: none; border-radius: 2px; font-weight: 700; text-transform: uppercase; cursor: pointer; transition: 0.3s; width: 100%; }
-        .suporte-card { text-align: center; border: 1px solid var(--gold); padding: 40px; background: #000; }
-        .suporte-label { color: var(--gold); text-transform: uppercase; font-weight: 700; font-size: 0.8rem; margin-bottom: 10px; }
-        .suporte-email { font-size: 1.3rem; font-weight: 700; word-break: break-all; }
+        /* --- INÍCIO DO BLOCO UNIFICADO RETIFICADO --- */
+
+/* 1. CONFIGURAÇÃO DOS FUNDOS */
+.sobre-fundo, .contato-fundo, .suporte-fundo { 
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%; 
+    z-index: -1; 
+}
+
+/* 2. ABA SOBRE (LIMPA E TEXTO JUSTIFICADO) */
+.sobre-content { 
+    background: transparent !important; /* O !important garante que nada mude essa transparência */
+    border: none; 
+    padding: 0; 
+    max-width: 1000px; 
+    width: 100%; 
+    color: #fff; 
+    box-shadow: none;
+    text-align: justify; 
+    text-justify: inter-word; 
+}
+
+/* Força qualquer parágrafo dentro do Sobre a também ser justificado */
+.sobre-content p, .sobre-container-flex div {
+    text-align: justify;
+    background: transparent !important;
+}
+
+/* 3. ABA CONTATO (MANTÉM O PADRÃO ORIGINAL COM BORDA) */
+.contato-content { 
+    background: rgba(0,0,0,0.85); 
+    border: 1px solid var(--gold); 
+    padding: 40px; 
+    max-width: 900px; 
+    width: 100%; 
+    color: #fff; 
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5); 
+    text-align: left;
+}
+
+/* 4. ABA SUPORTE (SEM BORDAS E FONTE REDUZIDA) */
+/* ABA SUPORTE SEM O TÍTULO REDUNDANTE */
+.suporte-content { 
+    background: transparent; 
+    border: none; 
+    padding: 20px; 
+    max-width: 900px; 
+    width: 100%; 
+    color: #fff; 
+    text-align: center;
+}
+
+/* Este comando abaixo é o que remove a palavra que você destacou */
+.suporte-content h1 { 
+    display: none; 
+}
+
+.suporte-card { 
+    text-align: center; 
+    border: none; 
+    padding: 20px 0; 
+    background: transparent; 
+}
+
+.suporte-email { 
+    font-size: 1.1rem; 
+    font-weight: 700; 
+    word-break: break-all; 
+}
+/* 5. TÍTULOS */
+.sobre-content h1, .contato-content h1, .suporte-content h1 { 
+    color: var(--gold); 
+    margin-bottom: 30px; 
+    text-transform: uppercase; 
+    text-align: center; 
+}
+
+/* 6. ELEMENTOS DE CONTATO */
+.contato-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+.email-accounts h3 { color: var(--gold); font-size: 1rem; text-transform: uppercase; margin-bottom: 20px; }
+
+.email-item { 
+    background: #000; 
+    padding: 15px; 
+    border: 1px solid var(--gold); 
+    cursor: pointer; 
+    transition: 0.3s; 
+    margin-bottom: 10px; 
+}
+
+.email-item:hover { background: rgba(255,215,0,0.1); }
+
+/* 7. FORMULÁRIO E BOTÕES */
+.form-group { margin-bottom: 15px; display: flex; flex-direction: column; }
+.form-group label { color: #fff; font-size: 0.8rem; text-transform: uppercase; font-weight: 700; margin-bottom: 5px; }
+.form-group input, .form-group textarea { background: #000; color: #fff; border: 1px solid var(--gold); padding: 10px; border-radius: 2px; font-family: 'Inter', sans-serif; }
+.btn-feedback { background: var(--gold); color: #000; padding: 12px; border: none; border-radius: 2px; font-weight: 700; text-transform: uppercase; cursor: pointer; transition: 0.3s; width: 100%; }
+
+/* 8. DETALHES GERAIS */
+.quote { font-style: italic; font-size: 1.3rem; border-left: 4px solid var(--gold); padding-left: 20px; margin: 30px 0; color: #eee; }
+.email-label { display: block; color: var(--gold); font-size: 0.8rem; text-transform: uppercase; font-weight: 700; margin-bottom: 5px; }
+.email-address { display: block; color: #fff; font-size: 1rem; word-break: break-all; }
+.suporte-label { color: var(--gold); text-transform: uppercase; font-weight: 700; font-size: 0.8rem; margin-bottom: 10px; }
+
+/* --- FIM DO BLOCO UNIFICADO RETIFICADO --- */
 
         /* FOOTER */
-        .final-footer { background: #000; color: #666; text-align: center; padding: 14px; font-size: 0.8rem; border-top: 1px solid var(--gold); z-index: 100; }
+        .final-footer { background: #000; color: #666; text-align: center; padding: 14px; font-size: 0.6rem; }
 
-       
+        /* FOOTER */
+        .final-footer { background: #000; color: #666; text-align: center; padding: 14px; font-size: 0.6rem; }
+
         /* NOVOS ESTILOS PARA O "SOBRE" COM FOTO */
         .sobre-container-flex { display: flex; align-items: center; gap: 40px; max-width: 1000px; margin: 0 auto; text-align: left; }
         .foto-autor-img { 

@@ -346,7 +346,13 @@
        
         /* NOVOS ESTILOS PARA O "SOBRE" COM FOTO */
         .sobre-container-flex { display: flex; align-items: center; gap: 40px; max-width: 1000px; margin: 0 auto; text-align: left; }
-        .foto-autor-img { width: 300px; height: auto; border-radius: 10px; border: 2px solid var(--gold); }
+        .foto-autor-img { 
+    width: 300px; 
+    height: auto; 
+    border: none;          /* REMOVE A BORDA */
+    border-radius: 0;       /* REMOVE O ARREDONDAMENTO */
+    background: transparent; /* GARANTE O FUNDO TRANSPARENTE */
+}
 
         /* ============================================================
            RESPONSIVIDADE

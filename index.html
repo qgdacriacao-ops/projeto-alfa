@@ -13,497 +13,105 @@
     <title>Portal Pleno | O Código</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <style>
-        /* ============================================================
-           VARIÁVEIS GLOBAIS
-        ============================================================ */
         :root {
-            --gold: #FFD700;
-            --bg-black: #000;
-            --white: #fff;
-            --bg-light: #f9f9f9;
-            --red-btn: #d30000;
-            --glow: rgba(255, 215, 0, 0.6);
-            --ice-gray: #E8EAEB;
-            --chumbo: #2C2C2C;
-            --text-dark: #1A1A1A;
-            --border: #D1D1D1;
+            --gold: #FFD700; --bg-black: #000; --white: #fff; --bg-light: #f9f9f9;
+            --red-btn: #d30000; --glow: rgba(255, 215, 0, 0.6); --ice-gray: #E8EAEB;
+            --chumbo: #2C2C2C; --text-dark: #1A1A1A; --border: #D1D1D1; --red: #CC0000;
         }
 
-        /* ============================================================
-           RESET E BASE
-        ============================================================ */
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        body, html {
-            height: 100%;
-            background-color: var(--bg-black);
-            font-family: 'Inter', sans-serif;
-            overflow-x: hidden;
-            display: flex;
-            flex-direction: column;
-            width: 100%;
-        }
+        body, html { height: 100%; background-color: var(--bg-black); font-family: 'Inter', sans-serif; overflow-x: hidden; display: flex; flex-direction: column; width: 100%; }
 
-        /* Ocultando Preloader e Canvas caso existam */
-        #preloader, #particle-canvas { display: none !important; }
-
-        /* ============================================================
-           HEADER E NAVEGAÇÃO
-        ============================================================ */
-        header {
-            background: #000;
-            padding: 0 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 2000;
-            height: 85px;
-            border-bottom: 2px solid var(--gold);
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            color: #fff;
-            font-weight: 700;
-            text-transform: uppercase;
-            font-size: 0.9rem;
-            flex-shrink: 0;
-        }
+        header { background: #000; padding: 0 5%; display: flex; justify-content: space-between; align-items: center; position: fixed; top: 0; width: 100%; z-index: 2000; height: 85px; border-bottom: 2px solid var(--gold); }
+        .logo { display: flex; align-items: center; gap: 15px; color: #fff; font-weight: 700; text-transform: uppercase; font-size: 0.9rem; flex-shrink: 0; }
         .logo img { height: 60px; }
 
         nav { overflow: hidden; flex: 1; display: flex; justify-content: flex-end; }
         nav ul { list-style: none; display: flex; gap: 20px; align-items: center; }
-        nav a {
-            text-decoration: none;
-            color: #fff;
-            font-size: 0.65rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: 0.3s;
-            border-bottom: 2px solid transparent;
-            padding-bottom: 5px;
-            white-space: nowrap;
-        }
+        nav a { text-decoration: none; color: #fff; font-size: 0.65rem; font-weight: 700; text-transform: uppercase; cursor: pointer; transition: 0.3s; border-bottom: 2px solid transparent; padding-bottom: 5px; white-space: nowrap; }
         nav a:hover, nav a.active { color: var(--gold); border-bottom: 2px solid var(--gold); }
 
-        #btn-voltar {
-            display: none;
-            color: var(--gold);
-            border: 1px solid var(--gold);
-            padding: 5px 12px;
-            font-size: 0.6rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            cursor: pointer;
-            white-space: nowrap;
-        }
+        #btn-voltar { display: none; color: var(--gold); border: 1px solid var(--gold); padding: 5px 12px; font-size: 0.6rem; font-weight: 700; text-transform: uppercase; cursor: pointer; white-space: nowrap; }
 
-        /* ============================================================
-           BACKGROUND FIXO
-        ============================================================ */
-        #bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('capa.webp') no-repeat center center;
-            background-size: cover;
-            z-index: 1;
-            filter: brightness(0.4);
-        }
+        #bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: url('capa.webp') no-repeat center center; background-size: cover; z-index: 1; filter: brightness(0.4); }
 
-        /* ============================================================
-           MAIN CONTENT
-        ============================================================ */
-        main {
-            width: 100%;
-            overflow-x: hidden;
-            flex: 1;
-            position: relative;
-            z-index: 10;
-            padding-top: 85px;
-        }
+        main { width: 100%; flex: 1; position: relative; z-index: 10; padding-top: 85px; }
 
-        /* VIEW 1: HOME */
-        .view-home {
-            min-height: calc(100vh - 85px);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 5%;
-            width: 100%;
-            gap: 20px;
-        }
-        .column-box { width: 300px; flex-shrink: 0; text-align: center; transition: 0.4s; }
-        .column-box:hover { transform: scale(1.02); filter: drop-shadow(0 0 15px var(--glow)); }
+        .view-home { min-height: calc(100vh - 85px); display: flex; justify-content: space-between; align-items: center; padding: 0 5%; width: 100%; gap: 20px; }
+        .column-box { width: 300px; flex-shrink: 0; text-align: center; }
         .column-box p { color: var(--gold); letter-spacing: 5px; font-size: 0.7rem; margin-bottom: 10px; font-weight: 700; }
         .display-box { width: 100%; height: 420px; cursor: pointer; position: relative; }
         .display-box img { width: 100%; height: 100%; object-fit: contain; transition: opacity 0.5s ease; }
 
-        .hero-center { flex: 1; min-width: 0; text-align: center; padding: 0 10px; }
-        .hero-center h1 {
-            color: #fff;
-            font-size: clamp(1.1rem, 4.5vw, 2.2rem);
-            text-transform: uppercase;
-            line-height: 1.25;
-        }
+        .hero-center { flex: 1; text-align: center; padding: 0 10px; }
+        .hero-center h1 { color: #fff; font-size: clamp(1.1rem, 4.5vw, 2.2rem); text-transform: uppercase; line-height: 1.25; }
         .line-hero { width: 85%; height: 5px; background: var(--gold); margin: 15px auto; box-shadow: 0 0 20px var(--gold); }
 
-        /* VIEW 2: GALERIA */
         .view-galeria { display: none; background: #000; min-height: 100vh; padding: 60px 5% 100px; width: 100%; }
-        .grid-produtos {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            max-width: 1400px;
-            margin: 0 auto;
-            width: 100%;
-        }
-        .card-flutuante {
-            text-align: center;
-            cursor: pointer;
-            transition: transform 0.4s ease;
-            animation: flutuar 4s ease-in-out infinite;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        .card-flutuante img { width: 100%; max-width: 200px; height: 300px; object-fit: contain; transition: 0.4s; }
-        .card-flutuante:hover img { transform: scale(1.05); filter: drop-shadow(0 0 20px var(--glow)); }
-        .card-flutuante .stars { color: var(--gold); margin-top: 10px; font-weight: 700; }
-        .card-title { color: #fff; margin-top: 10px; font-weight: 700; font-size: 0.8rem; text-transform: uppercase; }
-        @keyframes flutuar { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+        .grid-produtos { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 40px; max-width: 1400px; margin: 0 auto; width: 100%; }
+        .card-flutuante { text-align: center; cursor: pointer; transition: 0.4s ease; display: flex; flex-direction: column; align-items: center; }
+        .card-flutuante img { width: 100%; max-width: 180px; height: 260px; object-fit: contain; }
+        .card-flutuante:hover { transform: translateY(-10px); }
+        .card-flutuante .stars { color: var(--gold); margin-top: 10px; font-weight: 700; font-size: 0.8rem; }
+        .card-title { color: #fff; margin-top: 10px; font-weight: 700; font-size: 0.75rem; text-transform: uppercase; }
 
-        /* VIEW 3: SINOPSE */
         .view-sinopse { display: none; background-color: var(--ice-gray); min-height: 100vh; padding: 0 0 80px; color: var(--text-dark); }
-        .container-trindade {
-            max-width: 1350px;
-            margin: 60px auto 20px;
-            display: grid;
-            grid-template-columns: 300px 1fr 220px;
-            gap: 45px;
-            padding: 0 5%;
-            width: 100%;
-            overflow-x: hidden;
-        }
-        .col-mockup { display: flex; align-items: flex-start; justify-content: center; }
-        .col-mockup img {
-            width: 100%;
-            max-width: 100%;
-            height: auto;
-            object-fit: contain;
-            filter: drop-shadow(0 8px 20px rgba(0,0,0,0.18));
-            border-radius: 2px;
-            background: transparent;
-        }
-        .col-texto h1 { font-family: 'Playfair Display', serif; font-size: clamp(1.4rem, 3.5vw, 3rem); margin-bottom: 5px; color: #000; line-height: 1.1; word-break: break-word; }
-        .author { font-size: 1.1rem; color: #8B6B00; margin-bottom: 40px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
+        .container-trindade { max-width: 1350px; margin: 60px auto 20px; display: grid; grid-template-columns: 300px 1fr 280px; gap: 45px; padding: 0 5%; width: 100%; }
+        .col-mockup img { width: 100%; height: auto; filter: drop-shadow(0 8px 20px rgba(0,0,0,0.18)); }
+        .col-texto h1 { font-family: 'Playfair Display', serif; font-size: clamp(1.4rem, 3.5vw, 3rem); margin-bottom: 5px; color: #000; }
+        .author { font-size: 1.1rem; color: #8B6B00; margin-bottom: 40px; font-weight: 700; text-transform: uppercase; }
         .description { line-height: 2.1; font-size: 1.15rem; color: #333; text-align: justify; }
-        .description p { margin-bottom: 25px; }
-        .section-title { font-size: 1rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: #666; border-bottom: 1px solid var(--border); padding-bottom: 10px; margin: 40px 0 15px; display: block; }
-        .col-compra {
-            position: sticky;
-            top: 105px;
-            height: fit-content;
-        }
-        .buy-card {
-            background: var(--chumbo);
-            padding: 25px 15px;
-            border-radius: 4px;
-            color: var(--white);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-        }
-        .price-label {
-            font-size: 0.65rem;
-            color: var(--gold);
-            text-transform: uppercase;
-            margin-bottom: 5px;
-            display: block;
-            text-align: center;
-            font-weight: 700;
-        }
-        .price-value {
-            font-size: 1.9rem;
-            font-weight: 700;
-            margin-bottom: 25px;
-            text-align: center;
-            color: var(--white);
-        }
+
+        .col-compra { position: sticky; top: 105px; height: fit-content; }
+        .buy-card { background: var(--chumbo); padding: 25px 15px; border-radius: 4px; color: var(--white); box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+        .price-label { font-size: 0.65rem; color: var(--gold); text-transform: uppercase; margin-bottom: 5px; display: block; text-align: center; font-weight: 700; }
+        .price-value { font-size: 1.9rem; font-weight: 700; margin-bottom: 25px; text-align: center; color: var(--white); }
         .btn-group { display: flex; flex-direction: column; gap: 10px; }
-        .btn-gold {
-            display: block;
-            background: var(--gold);
-            color: #000;
-            text-align: center;
-            padding: 14px 5px;
-            font-weight: 800;
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            border-radius: 4px;
-            transition: 0.3s;
-            border: 1px solid var(--gold);
-            width: 100%;
-            cursor: pointer;
-        }
-        .btn-gold:hover { opacity: 0.88; }
-        .btn-red {
-            display: block;
-            background: #ff0000;
-            color: var(--white);
-            text-align: center;
-            padding: 12px 5px;
-            font-weight: 700;
-            font-size: 0.65rem;
-            text-transform: uppercase;
-            border-radius: 4px;
-            transition: 0.3s;
-            border: none;
-            width: 100%;
-            cursor: pointer;
-        }
-        .btn-red:hover { opacity: 0.88; }
+        .btn-gold { background: var(--gold); color: #000; padding: 14px 5px; font-weight: 800; font-size: 0.7rem; text-transform: uppercase; border-radius: 4px; border: 1px solid var(--gold); width: 100%; cursor: pointer; }
+        .btn-red { background: var(--red); color: var(--white); padding: 12px 5px; font-weight: 700; font-size: 0.65rem; text-transform: uppercase; border-radius: 4px; border: none; width: 100%; cursor: pointer; transition: 0.3s; }
 
-        .product-details {
-            max-width: 1350px;
-            margin: 0 auto 60px;
-            padding: 0 5%;
-            width: 100%;
-        }
-        .product-details .details-title {
-            margin-bottom: 25px;
-        }
-        .details-title {
-            font-size: 1.2rem;
-            color: #000;
-            text-transform: uppercase;
-            font-weight: 700;
-            letter-spacing: 1px;
-        }
-        .details-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 25px;
-        }
-        .detail-item {
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-        }
-        .detail-label {
-            font-size: 0.75rem;
-            color: #777;
-            text-transform: uppercase;
-            font-weight: 700;
-        }
-        .detail-value {
-            font-size: 0.95rem;
-            color: #111;
-            font-weight: 500;
-        }
+        .product-details { max-width: 1350px; margin: 0 auto; padding: 40px 5%; border-top: 1px solid var(--border); }
+        .details-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; }
+        .detail-label { font-size: 0.75rem; color: #777; text-transform: uppercase; font-weight: 700; display: block; }
+        .detail-value { font-size: 0.95rem; color: #111; font-weight: 500; }
 
-        .view-info-extra { display: none; min-height: 100vh; padding: 60px 0 100px; width: 100%; position: relative; z-index: 20; }
-        .layout-avaliacoes { display: grid; grid-template-columns: 1fr 400px 1fr; gap: 30px; align-items: start; }
-        .card-review { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,215,0,0.2); padding: 20px; margin-bottom: 20px; border-radius: 4px; }
-        .card-review .stars { color: var(--gold); margin-bottom: 10px; }
-        .card-review .text { color: #fff; font-style: italic; margin-bottom: 15px; font-size: 0.9rem; }
-        .card-review .author-info { color: #888; font-size: 0.8rem; }
-        .form-review-container { background: #111; padding: 30px; border: 1px solid var(--gold); border-radius: 4px; }
-        .form-review-container h3 { color: var(--gold); margin-bottom: 20px; text-transform: uppercase; text-align: center; }
-        .input-group { margin-bottom: 15px; }
-        .input-group label { display: block; color: #fff; font-size: 0.7rem; text-transform: uppercase; margin-bottom: 5px; }
-        .input-group input, .input-group textarea, .input-group select { width: 100%; background: #000; border: 1px solid #333; padding: 10px; color: #fff; font-family: inherit; }
-        .btn-enviar { width: 100%; background: var(--gold); color: #000; border: none; padding: 15px; font-weight: 800; text-transform: uppercase; cursor: pointer; }
+        /* Estilos Depoimentos */
+        .layout-avaliacoes { display: grid; grid-template-columns: 1fr 350px 1fr; gap: 20px; align-items: start; }
+        .card-review { background: #1a1a1a; padding: 15px; border-radius: 5px; margin-bottom: 15px; border-left: 3px solid var(--gold); }
+        .card-review .stars { color: var(--gold); margin-bottom: 5px; }
+        .form-review-container { background: #111; padding: 20px; border-radius: 8px; border: 1px solid #333; }
+        .input-group { margin-bottom: 10px; }
+        .input-group label { display: block; color: var(--gold); font-size: 0.7rem; margin-bottom: 5px; }
+        .input-group input, .input-group textarea, .input-group select { width: 100%; background: #222; border: 1px solid #444; color: #fff; padding: 8px; border-radius: 4px; }
+        .btn-enviar { background: var(--gold); color: #000; width: 100%; padding: 10px; font-weight: 700; border: none; cursor: pointer; margin-top: 10px; }
 
-        /* ESTILOS ESPECÍFICOS PARA SOBRE, CONTATO, SUPORTE */
-        .sobre-clean, .contato-clean, .suporte-clean { position: relative; min-height: 80vh; display: flex; align-items: center; justify-content: center; padding: 40px 5%; }
-        /* --- INÍCIO DO BLOCO UNIFICADO RETIFICADO --- */
+        .view-info-extra { display: none; min-height: 100vh; padding: 60px 0 100px; width: 100%; background: #000; }
+        .sobre-clean { display: flex; align-items: center; justify-content: center; padding: 40px 5%; }
+        .sobre-content { background: rgba(0,0,0,0.85); border: 1px solid var(--gold); padding: 40px; max-width: 1000px; color: #fff; }
+        .sobre-container-flex { display: flex; align-items: center; gap: 40px; }
+        .foto-autor-img { width: 300px; border-radius: 10px; border: 2px solid var(--gold); }
 
-/* 1. CONFIGURAÇÃO DOS FUNDOS */
-.sobre-fundo, .contato-fundo, .suporte-fundo { 
-    position: absolute; 
-    top: 0; 
-    left: 0; 
-    width: 100%; 
-    height: 100%; 
-    z-index: -1; 
-}
+        .final-footer { background: #000; color: #666; text-align: center; padding: 30px; font-size: 0.8rem; border-top: 1px solid var(--gold); }
 
-/* 2. ABA SOBRE (LIMPA E TEXTO JUSTIFICADO) */
-.sobre-content { 
-    background: transparent !important; /* O !important garante que nada mude essa transparência */
-    border: none; 
-    padding: 0; 
-    max-width: 1000px; 
-    width: 100%; 
-    color: #fff; 
-    box-shadow: none;
-    text-align: justify; 
-    text-justify: inter-word; 
-}
-
-/* Força qualquer parágrafo dentro do Sobre a também ser justificado */
-.sobre-content p, .sobre-container-flex div {
-    text-align: justify;
-    background: transparent !important;
-}
-
-/* 3. ABA CONTATO (MANTÉM O PADRÃO ORIGINAL COM BORDA) */
-.contato-content { 
-    background: rgba(0,0,0,0.85); 
-    border: 1px solid var(--gold); 
-    padding: 40px; 
-    max-width: 900px; 
-    width: 100%; 
-    color: #fff; 
-    box-shadow: 0 20px 50px rgba(0,0,0,0.5); 
-    text-align: left;
-}
-
-/* 4. ABA SUPORTE (SEM BORDAS E FONTE REDUZIDA) */
-/* ABA SUPORTE SEM O TÍTULO REDUNDANTE */
-.suporte-content { 
-    background: transparent; 
-    border: none; 
-    padding: 20px; 
-    max-width: 900px; 
-    width: 100%; 
-    color: #fff; 
-    text-align: center;
-}
-
-/* Este comando abaixo é o que remove a palavra que você destacou */
-.suporte-content h1 { 
-    display: none; 
-}
-
-.suporte-card { 
-    text-align: center; 
-    border: none; 
-    padding: 20px 0; 
-    background: transparent; 
-}
-
-.suporte-email { 
-    font-size: 1.1rem; 
-    font-weight: 700; 
-    word-break: break-all; 
-}
-/* 5. TÍTULOS */
-.sobre-content h1, .contato-content h1, .suporte-content h1 { 
-    color: var(--gold); 
-    margin-bottom: 30px; 
-    text-transform: uppercase; 
-    text-align: center; 
-}
-
-/* 6. ELEMENTOS DE CONTATO */
-.contato-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
-.email-accounts h3 { color: var(--gold); font-size: 1rem; text-transform: uppercase; margin-bottom: 20px; }
-
-.email-item { 
-    background: #000; 
-    padding: 15px; 
-    border: 1px solid var(--gold); 
-    cursor: pointer; 
-    transition: 0.3s; 
-    margin-bottom: 10px; 
-}
-
-.email-item:hover { background: rgba(255,215,0,0.1); }
-
-/* 7. FORMULÁRIO E BOTÕES */
-.form-group { margin-bottom: 15px; display: flex; flex-direction: column; }
-.form-group label { color: #fff; font-size: 0.8rem; text-transform: uppercase; font-weight: 700; margin-bottom: 5px; }
-.form-group input, .form-group textarea { background: #000; color: #fff; border: 1px solid var(--gold); padding: 10px; border-radius: 2px; font-family: 'Inter', sans-serif; }
-.btn-feedback { background: var(--gold); color: #000; padding: 12px; border: none; border-radius: 2px; font-weight: 700; text-transform: uppercase; cursor: pointer; transition: 0.3s; width: 100%; }
-
-/* 8. DETALHES GERAIS */
-.quote { font-style: italic; font-size: 1.3rem; border-left: 4px solid var(--gold); padding-left: 20px; margin: 30px 0; color: #eee; }
-.email-label { display: block; color: var(--gold); font-size: 0.8rem; text-transform: uppercase; font-weight: 700; margin-bottom: 5px; }
-.email-address { display: block; color: #fff; font-size: 1rem; word-break: break-all; }
-.suporte-label { color: var(--gold); text-transform: uppercase; font-weight: 700; font-size: 0.8rem; margin-bottom: 10px; }
-
-/* --- FIM DO BLOCO UNIFICADO RETIFICADO --- */
-
-        /* FOOTER */
-        .final-footer { 
-    background: #000; 
-    color: #666; 
-    text-align: center; 
-    padding: 30px; 
-    font-size: 0.8rem; 
-    border-top: 1px solid var(--gold); 
-    z-index: 9999; /* Aumentamos para garantir que fique no topo */
-    position: relative; /* Garante que ele respeite o fluxo da página */
-    clear: both; /* Limpa qualquer elemento flutuante que possa estar escondendo ele */
-}
-
-        /* NOVOS ESTILOS PARA O "SOBRE" COM FOTO */
-        .sobre-container-flex { display: flex; align-items: center; gap: 40px; max-width: 1000px; margin: 0 auto; text-align: left; }
-        .foto-autor-img { 
-    width: 300px; 
-    height: auto; 
-    border: none;          /* REMOVE A BORDA */
-    border-radius: 0;       /* REMOVE O ARREDONDAMENTO */
-    background: transparent; /* GARANTE O FUNDO TRANSPARENTE */
-}
-
-        /* ============================================================
-           RESPONSIVIDADE
-        ============================================================ */
         @media (max-width: 1024px) {
-            .grid-produtos { grid-template-columns: repeat(2, 1fr); gap: 40px; }
-            .container-trindade { grid-template-columns: 1fr; gap: 30px; }
-            .col-compra { position: static; }
-            .details-grid { grid-template-columns: repeat(2, 1fr); }
-            .contato-wrapper { grid-template-columns: 1fr; }
-        }
-
-        @media (max-width: 768px) {
-            header { padding: 0 3%; }
-            .logo span { display: none; }
-            nav { justify-content: flex-start; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
-            nav::-webkit-scrollbar { display: none; }
-            nav ul { gap: 15px; padding: 10px 0; }
-            nav a { font-size: 0.6rem; }
-
-            .view-home { flex-direction: column; padding: 40px 5%; min-height: auto; gap: 40px; }
-            .column-box { width: 100%; max-width: 320px; }
-            .display-box { height: 350px; }
-            .hero-center h1 { font-size: 1.5rem; }
-
-            .container-trindade { margin-top: 30px; }
-            .details-grid { grid-template-columns: 1fr; }
             .layout-avaliacoes { grid-template-columns: 1fr; }
-            .form-review-container { position: static; order: -1; }
-
-            .sobre-content, .contato-content, .suporte-content { padding: 25px; }
-            .sobre-container-flex { flex-direction: column; text-align: center; }
-            .foto-autor-img { width: 220px; }
+            .form-review-container { order: -1; }
         }
     </style>
 </head>
 <body>
-
     <div id="bg"></div>
-
     <header>
         <div class="logo">
-            <img src="selo.webp" alt="Selo Portal Pleno">
-            <span>Portal Pleno | O Código</span>
+            <img src="selo.png" alt="Selo Portal Pleno">
+            <span>Portal Pleno O Código</span>
         </div>
         <nav>
             <ul id="main-nav">
                 <li><a id="nav-home" class="active" onclick="irHome()">Início</a></li>
                 <li><a id="nav-ebook" onclick="irTitulos()">Ebook</a></li>
                 <li><a id="nav-sinopse" onclick="abrirSinopseDefault()">Sinopse</a></li>
-                <li><a id="nav-depoimentos" onclick="abrirInfo('depoimentos')">depoimentos</a></li>
+                <li><a id="nav-depoimentos" onclick="abrirInfo('depoimentos')">Depoimentos</a></li>
                 <li><a id="nav-sobre" onclick="abrirInfo('sobre')">Sobre</a></li>
                 <li><a id="nav-contato" onclick="abrirInfo('contato')">Contato</a></li>
                 <li><a id="nav-suporte" onclick="abrirInfo('suporte')">Suporte</a></li>
@@ -512,43 +120,24 @@
         </nav>
     </header>
 
-    <main id="main-content">
+    <main>
         <div id="view-home" class="view-home">
-            <div class="column-box">
-                <p>EBOOKS</p>
-                <div class="display-box" onclick="irSinopseHome('e')">
-                    <img id="loop-e" src="ebook04.webp" alt="Ebook">
-                </div>
-            </div>
-            <div class="hero-center">
-                <h1>Desvende os Segredos da Mente Humana e Transforme Sua Vida com Nossos Ebooks e Audiobooks Exclusivos</h1>
-                <div class="line-hero"></div>
-            </div>
-            <div class="column-box">
-                <p>AUDIOBOOKS</p>
-                <div class="display-box" onclick="irSinopseHome('a')">
-                    <img id="loop-a" src="audio04.webp" alt="Audiobook">
-                </div>
-            </div>
+            <div class="column-box"><p>EBOOKS</p><div class="display-box" onclick="irSinopseHome('e')"><img id="loop-e" src="ebook04.webp"></div></div>
+            <div class="hero-center"><h1>Desvende os Segredos da Mente Humana e Transforme Sua Vida com Nossos Ebooks e Audiobooks Exclusivos.</h1><div class="line-hero"></div></div>
+            <div class="column-box"><p>AUDIOBOOKS</p><div class="display-box" onclick="irSinopseHome('a')"><img id="loop-a" src="audio04.webp"></div></div>
         </div>
 
         <section id="view-galeria" class="view-galeria">
-     <div class="grid-produtos" id="render-grid"></div>
- </section>
+            <div class="grid-produtos" id="render-grid"></div>
+        </section>
 
-<section id="view-sinopse" class="view-sinopse">
+        <section id="view-sinopse" class="view-sinopse">
             <div class="container-trindade">
-                <div class="col-mockup">
-                    <img id="target-img" src="" alt="Mockup do Produto">
-                </div>
+                <div class="col-mockup"><img id="target-img" src=""></div>
                 <div class="col-texto">
-                    <h1 id="target-title">TÍTULO DO ATIVO</h1>
+                    <h1 id="target-title">TÍTULO</h1>
                     <p class="author">Por Júlio Bhrósz</p>
-                    <div class="description">
-                        <p>Análise técnica da soberania intelectual e engenharia de comportamento humano aplicada ao alto desempenho mental.</p>
-                        <span class="section-title">Sinopse</span>
-                        <div id="target-desc"></div>
-                    </div>
+                    <div class="description" id="target-desc"></div>
                 </div>
                 <div class="col-compra">
                     <div class="buy-card">
@@ -567,219 +156,101 @@
                 </div>
             </div>
             <div class="product-details">
-                <div class="details-title">Detalhes do eBook</div>
                 <div class="details-grid">
-                    <div class="detail-item"><span class="detail-label">Editora</span><span class="detail-value">Portal Pleno O Código</span></div>
-                    <div class="detail-item"><span class="detail-label">Data de Lançamento</span><span class="detail-value">Março de 2026</span></div>
+                    <div class="detail-item"><span class="detail-label">Data de Lançamento</span><span class="detail-value">Março 2026</span></div>
                     <div class="detail-item"><span class="detail-label">Idioma</span><span class="detail-value">Português</span></div>
-                    <div class="detail-item"><span class="detail-label">Formato</span><span class="detail-value">Digital (PDF/ePub)</span></div>
-                    <div class="detail-item"><span class="detail-label">Compatibilidade</span><span class="detail-value">Kindle, Tablet, Smartphone, PC</span></div>
+                    <div class="detail-item"><span class="detail-label">Formato</span><span class="detail-value" id="target-format">PDF</span></div>
                 </div>
             </div>
         </section>
 
-        <section id="view-info-extra" class="view-info-extra">
-            <div id="content-info"></div>
-        </section>
+        <section id="view-info-extra" class="view-info-extra"><div id="content-info"></div></section>
     </main>
 
-    <div class="final-footer">
-        © 2026 Portal Pleno | O Código<br>
-        ZÊNITE GLOBAL LABS CNPJ 66.543.032/0001-41 Todos os Direitos Reservados
-    </div>
+    <footer class="final-footer">© 2026 Portal Pleno | O Código | CNPJ 66.543.032/0001-41 J&S Intermed Solution - Todos os direitos Reservados</footer>
 
     <script>
-    const hardware = {
-        e: [
-            { img: 'ebook01.webp', title: 'Know yourself First', price: '$11.00', link: 'https://pay.kiwify.com/8S4FCE0', desc: `<p>Know Yourself First: Unravel Your Essence, Transform Your Relationships...</p>` },
-
-            { img: 'ebook02.webp', title: 'Engineering Collision', price: '$11.50', link: 'https://pay.kiwify.com/ZjtlaGh', desc: `<p>The Engineering of Collision: From Fragile Clay to the Sovereignty of Steel...</p>` },
-
-            { img: 'ebook03.webp', title: 'The Supremacy Code', price: '$11.99', link: 'https://pay.kiwify.com/NcdLsaN', desc: `<p>The Supremacy Code: Delete Emotional Crumbs, Reclaim Your Sovereignty...</p>` },
-
-            { 
-                img: 'ebook04.webp', 
-                title: 'Descubra Você', 
-                price: 'R$29,50', 
-                link: 'https://pay.kiwify.com.br/P8UTO6L', 
-                desc: `
-                    <p><strong>Descubra Você: Desvende Sua Essência, Transforme Seus Relacionamentos</strong></p>
-                    <p>Você sente que está vivendo em um ciclo repetitivo de encontros frustrantes e desencontros emocionais?</p>
-                    <p>Muitas vezes, depositamos no outro a responsabilidade pela nossa felicidade, apenas para encontrar desilusão. Mas a verdade é que a chave para conexões autênticas e duradouras nunca esteve no "parceiro ideal", mas sim escondida dentro da sua própria essência.</p>
-                    <p>Em <strong>“Descubra Você”</strong>, Júlio Bhrósz convida você para uma jornada profunda de autodescoberta. Este e-book não é apenas um guia de conselhos; é um mapa prático para quem deseja parar de sobreviver a relações vazias e começar a construir vínculos reais e significativos.</p>
-                    <p><strong>O que você vai encontrar nesta jornada:</strong></p>
-                    <p>• <strong>O Elo Perdido:</strong> Entenda por que a busca externa por validação é um caminho sem fim e aprenda como o autoconhecimento é o único pilar capaz de sustentar vínculos verdadeiros.</p>
-                    <p>• <strong>Seu Mapa Relacional:</strong> Desvende como sua história familiar e os padrões invisíveis moldam suas escolhas atuais. Aprenda a romper com o passado para traçar novos caminhos de afeto.</p>
-                    <p>• <strong>Identidade e Propósito:</strong> Vá além dos rótulos que o mundo te impôs. Descubra quem você é em sua essência, mapeie seus desejos e entenda como seu propósito de vida se entrelaça com o amor.</p>
-                    <p>• <strong>Superando Barreiras Internas:</strong> Identifique os medos ocultos que geram autossabotagem e adquira a coragem necessária para viver relacionamentos plenos e transparentes.</p>
-                    <p>• <strong>A Arte da Conexão:</strong> Domine a comunicação empática. Aprenda a estabelecer limites saudáveis e a cultivar o respeito mútuo, transformando conflitos em oportunidades de crescimento recíproco.</p>
-                    <p><em>A jornada mais importante da sua vida começa agora.</em></p>
-                    <p>Não espere mais pelo amor ideal. Comece a cultivá-lo a partir do seu interior e mude para sempre a forma como você ama e é amado.</p>
-                    <p>Dê o primeiro passo para a sua transformação. Adquira agora e descubra o poder de ser você mesmo em todos os seus relacionamentos.</p>` 
-            },
-
-            { 
-                img: 'ebook05.webp', 
-                title: 'Engenharia da Colisão', 
-                price: 'R$39,00', 
-                link: 'https://pay.kiwify.com.br/oRZAlbz', 
-                desc: `
-                    <p><strong>Engenharia da Colisão: A Soberania do Aço nos Relacionamentos</strong></p>
-                    <p>O seu relacionamento é uma estrutura de argila ou uma armadura de aço?</p>
-                    <p>A maioria dos casais vive sob a fragilidade de acordos superficiais, esperando que o tempo resolva fissuras estruturais. Em "Engenharia da Colisão", Júlio Bhrósz apresenta o método definitivo para casais que decidiram assumir o controle absoluto da sua dinâmica afetiva.</p>
-                    <p><strong>O que você irá processar nesta obra:</strong></p>
-                    <p>• <strong>Estanqueidade Emocional:</strong> Aprenda a blindar o seu relacionamento contra infiltrações externas.</p>
-                    <p>• <strong>O Princípio da Colisão:</strong> Entenda como transformar o impacto dos conflitos em energia de fusão.</p>
-                    <p>• <strong>Do Barro ao Aço:</strong> Substitua a "argila" das expectativas infantis pela soberania do aço.</p>
-                    <p>• <strong>Arquitetura da Soberania:</strong> Domine as leis que regem a estabilidade entre dois indivíduos autônomos.</p>
-                    <p>• <strong>Sistemas de Alta Performance:</strong> Implemente protocolos de comunicação com precisão de engrenagens.</p>
-                    <p>Pare de remendar o que deveria ser reconstruído. Assuma o comando da sua estrutura.</p>` 
-            },
-
-            { 
-                img: 'ebook06.webp', 
-                title: 'Autópsia da Personalidade', 
-                price: 'R$59,90', 
-                link: 'https://pay.kiwify.com.br/sD4nqRO', 
-                desc: `
-                    <p><strong>Autópsia da Personalidade: O Fim das Migalhas Emocionais</strong></p>
-                    <p>O que resta de você quando as camadas de autodecepção são removidas?</p>
-                    <p>Em "Autópsia da Personalidade", Júlio Bhrósz executa o procedimento definitivo: a abertura completa da estrutura psíquica para identificar a origem da sua submissão.</p>
-                    <p><strong>Os Protocolos de Exame deste Volume:</strong></p>
-                    <p>• <strong>Dissecação dos Padrões:</strong> Identifique os tecidos necrosados da sua história que ditam suas reações.</p>
-                    <p>• <strong>Extirpação de Migalhas:</strong> Protocolo rigoroso para identificar e deletar dependências afetivas.</p>
-                    <p>• <strong>Identificação do Parasitismo:</strong> Saiba quem são os agentes externos que se alimentam da sua falta de limites.</p>
-                    <p>• <strong>O Resgate da Supremacia:</strong> Reestabeleça o comando central da sua mente.</p>
-                    <p>Reconfigure o seu núcleo operacional para nunca mais aceitar menos do que o topo.</p>` 
-            },
-
-            { img: 'ebook07.webp', title: 'Découvrez-Vous', price: '€10,00', link: 'https://pay.kiwify.com/GFUBNBT', desc: `<p>Découvrez-vous : Révélez Votre Essence, Transformez Vos Relations...</p>` },
-
-            { img: 'ebook08.webp', title: 'Autopsie de la Personnalité', price: '€13,80', link: 'https://pay.kiwify.com/4zixbEz', desc: `<p>Autopsie de la Personnalité: La Fin des Miettes Émotionnelles...</p>` },
-
-            { img: 'ebook09.webp', title: 'Autópsia de la Personalidad', price: '€11,80', link: 'https://pay.kiwify.com/4zixbEz', desc: `<p>Autopsia de la Personalidad: El Fin de las Migajas Emocionales...</p>` }
-        ],
-        a: [
-            { img: 'audiobook01.webp', title: 'Know yourself First', price: '$13.95', link: 'https://pay.kiwify.com/ilgU4Kg', desc: `<p>Audiobook Premium...</p>` },
-            { img: 'audiobook02.webp', title: 'The Engineering Collision', price: '$14.95', link: 'https://pay.kiwify.com/2LTHnl0', desc: `<p>Audiobook Premium...</p>` },
-            { img: 'audiobook03.webp', title: 'the Supremacy Code', price: '$15.95', link: 'https://pay.kiwify.com/TGmTjRA', desc: `<p>Audiobook Premium...</p>` },
-            { img: 'audiobook04.webp', title: 'Descubra Você', price: 'R$37,50', link: 'https://pay.kiwify.com.br/lDiv2Do', desc: `<p>Audiobook Premium...</p>` },
-            { img: 'audiobook05.webp', title: 'Engenharia da Colisão', price: 'R$39,50', link: 'https://pay.kiwify.com.br/PmaKDGV', desc: `<p>Audiobook Premium...</p>` },
-            { img: 'audiobook06.webp', title: 'Autópsia da Personalidade', price: 'R$57,50', link: 'https://pay.kiwify.com.br/nJO91Ia', desc: `<p>Audiobook Premium...</p>` }
-        ]
-    };
+        const hardware = {
+            e: [
+                { img: 'ebook01.webp', title: 'O Código', price: 'R$ 47,00', format: 'PDF', desc: 'A base da engenharia mental.' },
+                { img: 'ebook02.webp', title: 'Soberania Mental', price: 'R$ 47,00', format: 'PDF', desc: 'Engenharia mental avançada.' },
+                { img: 'ebook03.webp', title: 'Engenharia da Colisão', price: 'R$ 47,00', format: 'PDF', desc: 'Relacionamentos de alto impacto.' },
+                { img: 'ebook04.webp', title: 'Descubra Você', price: 'R$ 47,00', format: 'PDF', desc: 'Conexões e autoconhecimento.' },
+                { img: 'ebook05.webp', title: 'Autópsia da Personalidade', price: 'R$ 47,00', format: 'PDF', desc: 'Ego e Psique profunda.' },
+                { img: 'ebook06.webp', title: 'Verdade em Vida', price: 'R$ 47,00', format: 'PDF', desc: 'Propósito e ação.' }
+            ],
+            a: [
+                { img: 'audio01.webp', title: 'O Código (Audio)', price: 'R$ 57,00', format: 'MP3', desc: 'Áudio imersivo.' },
+                { img: 'audio02.webp', title: 'Soberania Mental (Audio)', price: 'R$ 57,00', format: 'MP3', desc: 'Soberania sonora.' },
+                { img: 'audio03.webp', title: 'Engenharia da Colisão (Audio)', price: 'R$ 57,00', format: 'MP3', desc: 'Engenharia sonora.' },
+                { img: 'audio04.webp', title: 'Descubra Você (Audio)', price: 'R$ 57,00', format: 'MP3', desc: 'Descoberta sonora.' },
+                { img: 'audio05.webp', title: 'Autópsia da Personalidade (Audio)', price: 'R$ 57,00', format: 'MP3', desc: 'Psique sonora.' },
+                { img: 'audio06.webp', title: 'Verdade em Vida (Audio)', price: 'R$ 57,00', format: 'MP3', desc: 'Verdade sonora.' }
+            ]
+        };
 
         const staticReviews = [
-            { text: "A descoberta de soi a mudado minha perspectiva.", author: "Maria S.", email: "Verificado", book: "Descubra Você", rating: "★★★★★" },
-            { text: "Profundidade incomparável.", author: "Carlos O.", email: "Verificado", book: "Verdade em Vida", rating: "★★★★★" },
-            { text: "A engenharia mental aplicada na prática.", author: "Ricardo F.", email: "Verificado", book: "Engenharia da Colisão", rating: "★★★★★" },
-            { text: "Essencial para quem busca liberdade intelectual.", author: "Ana P.", email: "Verificado", book: "Autópsia da Personalidade", rating: "★★★★★" },
-            { text: "O audiobook é fantástico para ouvir no carro.", author: "Lucas M.", email: "Verificado", book: "Descubra Você (Audio)", rating: "★★★★★" },
-            { text: "Júlio Bhrósz entrega o que promete.", author: "Fernanda R.", email: "Verificado", book: "O Código", rating: "★★★★★" }
+            { rating: '★★★★★', text: "Mudou minha perspectiva.", author: "João S." },
+            { rating: '★★★★★', text: "Conteúdo denso e prático.", author: "Maria F." },
+            { rating: '★★★★★', text: "Excelente material.", author: "Ricardo M." },
+            { rating: '★★★★★', text: "O audiobook é fantástico.", author: "Ana P." },
+            { rating: '★★★★★', text: "Vale cada centavo.", author: "Lucas T." },
+            { rating: '★★★★★', text: "Recomendo a todos.", author: "Carla R." }
         ];
 
-        /* ============================================================
-           ESTADOS E NAVEGAÇÃO
-        ============================================================ */
-        let iE = 0, iA = 0;
-        let linkAtual = '';
-        let historico = 'home';
-        const menus = ['home', 'ebook', 'sinopse', 'depoimentos', 'sobre', 'contato', 'suporte'];
-
-        // CARROSSEL HOME
-        setInterval(() => {
-            iE = (iE + 1) % hardware.e.length;
-            const el = document.getElementById('loop-e');
-            if(el) { el.style.opacity = 0; setTimeout(() => { el.src = hardware.e[iE].img; el.style.opacity = 1; }, 500); }
-        }, 3000);
-
-        setInterval(() => {
-            iA = (iA + 1) % hardware.a.length;
-            const el = document.getElementById('loop-a');
-            if(el) { el.style.opacity = 0; setTimeout(() => { el.src = hardware.a[iA].img; el.style.opacity = 1; }, 500); }
-        }, 3000);
+        let iE = 0, iA = 0, historico = 'home';
+        setInterval(() => { iE = (iE + 1) % hardware.e.length; document.getElementById('loop-e').src = hardware.e[iE].img; }, 3000);
+        setInterval(() => { iA = (iA + 1) % hardware.a.length; document.getElementById('loop-a').src = hardware.a[iA].img; }, 3000);
 
         function resetTelas() {
-            ['view-home', 'view-galeria', 'view-sinopse', 'view-info-extra', 'btn-voltar'].forEach(id => {
-                const el = document.getElementById(id); if(el) el.style.display = 'none';
+            ['view-home','view-galeria','view-sinopse','view-info-extra','btn-voltar'].forEach(id => {
+                const el = document.getElementById(id);
+                if(el) el.style.display = 'none';
             });
-            window.scrollTo(0, 0);
         }
 
         function ativarMenu(id) {
             document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
-            const alvo = document.getElementById('nav-' + id);
-            if(alvo) alvo.classList.add('active');
+            const activeLink = document.getElementById('nav-' + id);
+            if(activeLink) activeLink.classList.add('active');
         }
 
-        function irHome() {
-            resetTelas();
-            document.getElementById('view-home').style.display = 'flex';
-            document.getElementById('bg').style.display = 'block';
-            ativarMenu('home');
-            historico = 'home';
-        }
+        function irHome() { resetTelas(); document.getElementById('view-home').style.display = 'flex'; ativarMenu('home'); historico = 'home'; }
 
         function irTitulos() {
             resetTelas();
             const grid = document.getElementById('render-grid');
-            const allItems = [...hardware.e, ...hardware.a];
-
-            grid.innerHTML = allItems.map((item, index) => `
-                <div class="card-flutuante" onclick="carregarEabrir(${index})">
-                    <img src="${item.img}" alt="${item.title}">
+            grid.innerHTML = [...hardware.e, ...hardware.a].map(item => `
+                <div class="card-flutuante" onclick="abrirSinopse('${item.img}', '${item.title}', '${item.price}', '${item.desc}', '${item.format}')">
+                    <img src="${item.img}">
                     <div class="stars">★★★★★</div>
                     <div class="card-title">${item.title}</div>
                 </div>
             `).join('');
-
             document.getElementById('view-galeria').style.display = 'block';
             document.getElementById('btn-voltar').style.display = 'block';
             ativarMenu('ebook');
             historico = 'titulos';
         }
 
-        function carregarEabrir(index) {
-            const allItems = [...hardware.e, ...hardware.a];
-            const item = allItems[index];
-            abrirSinopse(item.img, item.title, item.price, item.link, item.desc);
-        }
-
-        function abrirSinopse(img, title, price, link, desc) {
+        function abrirSinopse(img, title, price, desc, format) {
             resetTelas();
-            linkAtual = link;
             document.getElementById('target-img').src = img;
             document.getElementById('target-title').innerText = title;
             document.getElementById('target-price').innerText = price;
             document.getElementById('target-desc').innerHTML = desc;
+            document.getElementById('target-format').innerText = format;
             document.getElementById('view-sinopse').style.display = 'block';
             document.getElementById('btn-voltar').style.display = 'block';
             ativarMenu('sinopse');
             historico = 'sinopse';
         }
 
-        function irSinopseHome(tipo) {
-            const item = tipo === 'e' ? hardware.e[iE] : hardware.a[iA];
-            abrirSinopse(item.img, item.title, item.price, item.link, item.desc);
-        }
+        function abrirSinopseDefault() { const item = hardware.e[0]; abrirSinopse(item.img, item.title, item.price, item.desc, item.format); }
+        function irSinopseHome(tipo) { const item = tipo === 'e' ? hardware.e[iE] : hardware.a[iA]; abrirSinopse(item.img, item.title, item.price, item.desc, item.format); }
 
-        function abrirSinopseDefault() {
-            const d = hardware.e[0];
-            abrirSinopse(d.img, d.title, d.price, d.link, d.desc);
-        }
+        function renderReview(r) { return `<div class="card-review"><div class="stars">${r.rating}</div><div>"${r.text}"</div><div style="font-size:0.7rem; margin-top:5px; color:var(--gold)">- ${r.author}</div></div>`; }
 
-        function checkout() {
-            if(linkAtual && linkAtual !== '#') window.open(linkAtual, '_blank');
-        }
-
-        function voltarFluxo() {
-            if (historico === 'sinopse' || historico === 'info') irTitulos();
-            else irHome();
-        }
-
-        /* ============================================================
-           ABAS DE INFORMAÇÃO (AQUI ESTÁ A "RETOMADA DA ROTA")
-        ============================================================ */
         function abrirInfo(tipo) {
             resetTelas();
             const container = document.getElementById('content-info');
@@ -795,158 +266,27 @@
                         <div class="layout-avaliacoes">
                             <div class="col-depoimentos">${colEsq}</div>
                             <div class="form-review-container">
-                                <h3>CONTE SUA EXPERIÊNCIA E APAREÇA AQUI!</h3>
-                                <div class="input-group"><label>Nome</label><input type="text" placeholder="Seu nome"></div>
-                                <div class="input-group"><label>E-mail</label><input type="email" placeholder="seu@email.com"></div>
-                                <div class="input-group"><label>Texto (Máx 100 char)</label><textarea maxlength="100" rows="3"></textarea></div>
-                                <div class="input-group"><label>Nota</label><select><option>EXCELENTE</option><option>ÓTIMO</option><option>MUITO BOM</option><option>BOM</option><option>REGULAR</option></select></div>
-                                <button class="btn-enviar" onclick="this.innerText='ENVIADO'">Enviar</button>
+                                <h3 style="text-align:center; color:var(--gold); margin-bottom:20px;">CONTE SUA EXPERIÊNCIA!</h3>
+                                <div class="input-group"><label>Nome</label><input type="text"></div>
+                                <div class="input-group"><label>E-mail</label><input type="email"></div>
+                                <div class="input-group"><label>Texto</label><textarea maxlength="100"></textarea></div>
+                                <button class="btn-enviar" onclick="alert('Enviado para moderação!')">Enviar</button>
                             </div>
                             <div class="col-depoimentos">${colDir}</div>
                         </div>
                     </div>`;
-            } 
-            else if (tipo === 'sobre') {
-                // ROTA RETOMADA: SUBSTUIÇÃO EXCLUSIVA DO CONTEÚDO DA ABA SOBRE
-                container.innerHTML = `
-<div class="sobre-clean">
-    <div class="sobre-content" style="position: relative; z-index: 1; padding: 40px 5%; background: transparent;">
-        <div class="sobre-container-flex" style="display: flex; align-items: center; gap: 40px; text-align: justify;">
-            <div class="sobre-foto-wrapper">
-                <img src="foto_autor.webp" alt="Júlio Bhrósz" class="foto-autor-img" style="width: 300px; height: auto; border: none; background: transparent;">
-            </div>
-            <div class="sobre-texto-wrapper" style="flex: 1;">
-                <h1 style="color: var(--gold, #d4af37); margin-bottom: 20px; text-align: center;">A Mente por trás d'O Código</h1>
-                <p style="text-align: justify; text-justify: inter-word; color: #fff; line-height: 1.6;">
-                    <strong>Júlio Bhrósz</strong>. O mundo não é justo. Ele é um mercado de valores invisíveis. Se você se sente ignorado, trocado ou tratado como um "plano B", não é por acaso. É porque você está jogando com as regras que foram impostas a você, não as que você domina.
-
-Eu não estou aqui para te oferecer um abraço ou a ilusão de que "tudo vai ficar bem". Eu dediquei os últimos 15 anos a uma busca implacável: desvendar por que alguns prosperam e outros definham, mesmo com o mesmo potencial. Cansei de ver mentes brilhantes presas na insegurança, enquanto a mediocridade ascende. Por isso, eu decifrei o que a maioria teme ensinar.
-
-Chega de Migalhas: A Ciência do Comando
-
-A minha autoridade não vem de um diploma emoldurado, mas da linha de frente, onde a teoria encontra a realidade. No Portal Pleno, eu sou o estrategista da sua reconstrução.
-
-Eu condensei o que há de mais avançado no estudo do comportamento humano – os insights que as mentes de elite em Harvard e Stanford discutem a portas fechadas – e transformei em um arsenal de ferramentas práticas. Não é "autoajuda" genérica. É a ciência do comando aplicada à sua vida.
-
-Você vai aprender a:
-
-•
-Assumir o controle absoluto sobre suas reações e a narrativa que você projeta.
-
-•
-Parar de reagir por impulso e começar a agir com estratégia deliberada.
-
-•
-Reverter a percepção que o mundo tem de você, de "plano B" a prioridade.
-
-O Código Está Aberto: Sua Decisão, Seu Domínio
-
-O segredo que mantinha você refém da aprovação alheia foi desvendado. O código está aberto, mas não é para todos. É para quem tem a coragem de abandonar a passividade e reescrever as próprias regras.
-
-A partir de agora, a passividade é uma escolha. Você pode continuar implorando por atenção, ou pode assumir o comando do seu destino e se tornar a pessoa que o mundo não apenas respeita, mas busca.
-
-As regras mudaram. E agora, elas pertencem a você. Pronto para dominar o jogo?
-
-Fundamentação Científica Aplicada:
-
-A metodologia de JB integra protocolos de Inteligência Emocional da Harvard University, mecanismos de Neuroplasticidade da University of Oxford e modelos de Psicologia Social e Status de Stanford para uma transformação comprovada e duradoura.
-
-
-</strong>.</p>
-                                <p style="line-height: 1.6; margin-bottom: 15px;">Descubra como Click Aqui</p>
-                                <div class="quote" style="font-style: italic; border-left: 4px solid var(--gold); padding-left: 15px; margin-top: 20px;">"O Código não é apenas um livro, é a chave para a liberdade mental."</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>`;
-            } 
-            else if (tipo === 'contato') {
-                container.innerHTML = `
-                    <div class="contato-clean">
-                        <div class="contato-fundo" style="background: url('banner.webp') no-repeat center center; background-size: contain; filter: brightness(0.3);"></div>
-                        <div class="contato-content">
-                            <h1>Entre em Contato</h1>
-                            <div class="contato-wrapper">
-                                <div class="feedback-form">
-                                    <h2>Envie seu Feedback</h2>
-                                    <div class="form-group"><label>Nome</label><input type="text"></div>
-                                    <div class="form-group"><label>E-mail</label><input type="email"></div>
-                                    <div class="form-group"><label>Mensagem</label><textarea></textarea></div>
-                                    <button class="btn-feedback" onclick="this.innerText='ENVIADO'">Enviar Feedback</button>
-                                </div>
-                                <div class="email-accounts">
-                                    <h3>Contas Oficiais</h3>
-                                    <div class="email-item" onclick="copiarEmail('contato@portalpleno.com.br')">
-                                        <span class="email-label">Contato</span>
-                                        <span class="email-address">contato@portalpleno.com.br</span>
-                                    </div>
-                                    <div class="email-item" onclick="copiarEmail('comercial@portalpleno.com.br')">
-                                        <span class="email-label">Comercial</span>
-                                        <span class="email-address">comercial@portalpleno.com.br</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>`;
-            } 
-            else if (tipo === 'suporte') {
-                container.innerHTML = `
-                    <div class="suporte-clean">
-                        <div class="suporte-fundo" style="background: url('banner.webp') no-repeat center center; background-size: contain; filter: brightness(0.3);"></div>
-                        <div class="suporte-content">
-                            <h1>Suporte</h1>
-                            <div class="suporte-card">
-                                <div class="suporte-label">E-mail</div>
-                                <div class="suporte-email">suportebook@portalpleno.com.br</div>
-                            </div>
-                        </div>
-                    </div>`;
-            }
-            historico = 'info';
-        }
-
-        function renderReview(r) { 
-            return `<div class="card-review"><div class="stars">${r.rating}</div><div class="text">"${r.text}"</div><div class="author-info"><strong>${r.author}</strong><br>${r.email} | ${r.book}</div></div>`; 
-        }
-        
-        function copiarEmail(email) { 
-            navigator.clipboard.writeText(email).then(() => alert('E-mail copiado!')); 
-        }
-
-        /* ============================================================
-           SWIPE E GESTOS
-        ============================================================ */
-        let touchstartX = 0;
-        let touchendX = 0;
-
-        function handleGesture() {
-            const diff = touchstartX - touchendX;
-            const currentActive = document.querySelector('nav a.active');
-            if(!currentActive) return;
-            const currentMenuIdx = menus.indexOf(currentActive.id.replace('nav-', ''));
-            
-            if (Math.abs(diff) > 100) { 
-                if (diff > 0) { 
-                    const nextIdx = (currentMenuIdx + 1) % menus.length;
-                    navigateByMenu(menus[nextIdx]);
-                } else { 
-                    const prevIdx = (currentMenuIdx - 1 + menus.length) % menus.length;
-                    navigateByMenu(menus[prevIdx]);
-                }
+            } else if(tipo === 'sobre') {
+                container.innerHTML = `<div class="sobre-clean"><div class="sobre-content"><div class="sobre-container-flex"><img src="foto_autor.webp" class="foto-autor-img"><div><h1>A Mente por trás d'O Código</h1><p>Júlio Bhrósz, 15 anos de engenharia mental...</p></div></div></div></div>`;
+            } else if(tipo === 'contato') {
+                container.innerHTML = `<div style="color:#fff; text-align:center; padding:100px;"><h1>Contato</h1><p>contato@portalpleno.com.br</p></div>`;
+            } else if(tipo === 'suporte') {
+                container.innerHTML = `<div style="color:#fff; text-align:center; padding:100px;"><h1>Suporte</h1><p>suportebook@portalpleno.com.br</p></div>`;
             }
         }
 
-        function navigateByMenu(tipo) {
-            if (tipo === 'home') irHome();
-            else if (tipo === 'ebook') irTitulos();
-            else if (tipo === 'sinopse') abrirSinopseDefault();
-            else abrirInfo(tipo);
-        }
-
-        document.addEventListener('touchstart', e => { touchstartX = e.changedTouches[0].screenX; }, false);
-        document.addEventListener('touchend', e => { touchendX = e.changedTouches[0].screenX; handleGesture(); }, false);
-
-        window.onload = () => { irHome(); };
+        function voltarFluxo() { irHome(); }
+        function checkout() { alert('Redirecionando para Kiwify...'); }
+        window.onload = irHome;
     </script>
 </body>
 </html>

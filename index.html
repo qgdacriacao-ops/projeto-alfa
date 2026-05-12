@@ -43,7 +43,6 @@
             width: 100%;
         }
 
-        /* Ocultando Preloader e Canvas caso existam */
         #preloader, #particle-canvas { display: none !important; }
 
         /* ============================================================
@@ -180,7 +179,7 @@
         .card-title { color: #fff; margin-top: 10px; font-weight: 700; font-size: 0.8rem; text-transform: uppercase; }
         @keyframes flutuar { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
 
-        /* VIEW 3: SINOPSE */
+        /* VIEW 3: SINOPSE - CORRIGIDO PARA STICKY */
         .view-sinopse { display: none; background-color: var(--ice-gray); min-height: 100vh; padding: 0 0 80px; color: var(--text-dark); }
         .container-trindade {
             max-width: 1350px;
@@ -190,9 +189,16 @@
             gap: 45px;
             padding: 0 5%;
             width: 100%;
-            overflow-x: hidden;
+            align-items: start; /* CORREÇÃO: Permite que as colunas tenham alturas diferentes para o sticky funcionar */
         }
-        .col-mockup { display: flex; align-items: flex-start; justify-content: center; }
+        .col-mockup { 
+            position: sticky; 
+            top: 110px; 
+            display: flex; 
+            align-items: flex-start; 
+            justify-content: center; 
+            z-index: 10;
+        }
         .col-mockup img {
             width: 100%;
             max-width: 100%;
@@ -207,6 +213,7 @@
         .description { line-height: 2.1; font-size: 1.15rem; color: #333; text-align: justify; }
         .description p { margin-bottom: 25px; }
         .section-title { font-size: 1rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: #666; border-bottom: 1px solid var(--border); padding-bottom: 10px; margin: 40px 0 15px; display: block; }
+        
         .col-compra {
             position: sticky;
             top: 105px;
@@ -275,9 +282,6 @@
             padding: 0 5%;
             width: 100%;
         }
-        .product-details .details-title {
-            margin-bottom: 25px;
-        }
         .details-title {
             font-size: 1.2rem;
             color: #000;
@@ -320,11 +324,9 @@
         .input-group input, .input-group textarea, .input-group select { width: 100%; background: #000; border: 1px solid #333; padding: 10px; color: #fff; font-family: inherit; }
         .btn-enviar { width: 100%; background: var(--gold); color: #000; border: none; padding: 15px; font-weight: 800; text-transform: uppercase; cursor: pointer; }
 
-        /* ESTILOS ESPECÍFICOS PARA SOBRE, CONTATO, SUPORTE */
+        /* SOBRE, CONTATO, SUPORTE */
         .sobre-clean, .contato-clean, .suporte-clean { position: relative; min-height: 80vh; display: flex; align-items: center; justify-content: center; padding: 40px 5%; }
-        /* --- INÍCIO DO BLOCO UNIFICADO RETIFICADO --- */
 
-/* 1. CONFIGURAÇÃO DOS FUNDOS */
 .sobre-fundo, .contato-fundo, .suporte-fundo { 
     position: absolute; 
     top: 0; 
@@ -334,9 +336,8 @@
     z-index: -1; 
 }
 
-/* 2. ABA SOBRE (LIMPA E TEXTO JUSTIFICADO) */
 .sobre-content { 
-    background: transparent !important; /* O !important garante que nada mude essa transparência */
+    background: transparent !important;
     border: none; 
     padding: 0; 
     max-width: 1000px; 
@@ -347,13 +348,11 @@
     text-justify: inter-word; 
 }
 
-/* Força qualquer parágrafo dentro do Sobre a também ser justificado */
 .sobre-content p, .sobre-container-flex div {
     text-align: justify;
     background: transparent !important;
 }
 
-/* 3. ABA CONTATO (MANTÉM O PADRÃO ORIGINAL COM BORDA) */
 .contato-content { 
     background: rgba(0,0,0,0.85); 
     border: 1px solid var(--gold); 
@@ -365,8 +364,6 @@
     text-align: left;
 }
 
-/* 4. ABA SUPORTE (SEM BORDAS E FONTE REDUZIDA) */
-/* ABA SUPORTE SEM O TÍTULO REDUNDANTE */
 .suporte-content { 
     background: transparent; 
     border: none; 
@@ -377,7 +374,6 @@
     text-align: center;
 }
 
-/* Este comando abaixo é o que remove a palavra que você destacou */
 .suporte-content h1 { 
     display: none; 
 }
@@ -394,7 +390,7 @@
     font-weight: 700; 
     word-break: break-all; 
 }
-/* 5. TÍTULOS */
+
 .sobre-content h1, .contato-content h1, .suporte-content h1 { 
     color: var(--gold); 
     margin-bottom: 30px; 
@@ -402,7 +398,6 @@
     text-align: center; 
 }
 
-/* 6. ELEMENTOS DE CONTATO */
 .contato-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
 .email-accounts h3 { color: var(--gold); font-size: 1rem; text-transform: uppercase; margin-bottom: 20px; }
 
@@ -417,19 +412,15 @@
 
 .email-item:hover { background: rgba(255,215,0,0.1); }
 
-/* 7. FORMULÁRIO E BOTÕES */
 .form-group { margin-bottom: 15px; display: flex; flex-direction: column; }
 .form-group label { color: #fff; font-size: 0.8rem; text-transform: uppercase; font-weight: 700; margin-bottom: 5px; }
 .form-group input, .form-group textarea { background: #000; color: #fff; border: 1px solid var(--gold); padding: 10px; border-radius: 2px; font-family: 'Inter', sans-serif; }
 .btn-feedback { background: var(--gold); color: #000; padding: 12px; border: none; border-radius: 2px; font-weight: 700; text-transform: uppercase; cursor: pointer; transition: 0.3s; width: 100%; }
 
-/* 8. DETALHES GERAIS */
 .quote { font-style: italic; font-size: 1.3rem; border-left: 4px solid var(--gold); padding-left: 20px; margin: 30px 0; color: #eee; }
 .email-label { display: block; color: var(--gold); font-size: 0.8rem; text-transform: uppercase; font-weight: 700; margin-bottom: 5px; }
 .email-address { display: block; color: #fff; font-size: 1rem; word-break: break-all; }
 .suporte-label { color: var(--gold); text-transform: uppercase; font-weight: 700; font-size: 0.8rem; margin-bottom: 10px; }
-
-/* --- FIM DO BLOCO UNIFICADO RETIFICADO --- */
 
         /* FOOTER */
         .final-footer { 
@@ -438,27 +429,40 @@
     text-align: center; 
     padding: 14px; 
     font-size: 0.6rem;     
-    z-index: 9999; /* Aumentamos para garantir que fique no topo */
-    position: relative; /* Garante que ele respeite o fluxo da página */
-    clear: both; /* Limpa qualquer elemento flutuante que possa estar escondendo ele */
+    z-index: 9999; 
+    position: relative; 
+    clear: both; 
 }
 
-        /* NOVOS ESTILOS PARA O "SOBRE" COM FOTO */
-        .sobre-container-flex { display: flex; align-items: center; gap: 40px; max-width: 1000px; margin: 0 auto; text-align: left; }
+        /* SOBRE COM FOTO - CORREÇÃO STICKY */
+        .sobre-container-flex { 
+            display: flex; 
+            align-items: start; /* CORREÇÃO: Alinhamento no topo para o sticky respirar */
+            gap: 40px; 
+            max-width: 1000px; 
+            margin: 0 auto; 
+        }
+        
+        .sobre-foto-wrapper {
+            position: sticky;
+            top: 100px;
+            flex-shrink: 0;
+            z-index: 10;
+        }
+
         .foto-autor-img { 
-    width: 300px; 
-    height: auto; 
-    border: none;          /* REMOVE A BORDA */
-    border-radius: 0;       /* REMOVE O ARREDONDAMENTO */
-    background: transparent; /* GARANTE O FUNDO TRANSPARENTE */
-}
+            width: 300px; 
+            height: auto; 
+            border: none;          
+            border-radius: 0;       
+            background: transparent; 
+        }
 
-        /* ============================================================
-           RESPONSIVIDADE
-        ============================================================ */
+        /* RESPONSIVIDADE */
         @media (max-width: 1024px) {
             .grid-produtos { grid-template-columns: repeat(2, 1fr); gap: 40px; }
             .container-trindade { grid-template-columns: 1fr; gap: 30px; }
+            .col-mockup { position: static; margin-bottom: 20px; }
             .col-compra { position: static; }
             .details-grid { grid-template-columns: repeat(2, 1fr); }
             .contato-wrapper { grid-template-columns: 1fr; }
@@ -483,7 +487,8 @@
             .form-review-container { position: static; order: -1; }
 
             .sobre-content, .contato-content, .suporte-content { padding: 25px; }
-            .sobre-container-flex { flex-direction: column; text-align: center; }
+            .sobre-container-flex { flex-direction: column; text-align: center; align-items: center; }
+            .sobre-foto-wrapper { position: static; }
             .foto-autor-img { width: 220px; }
         }
     </style>
@@ -535,10 +540,10 @@
         </div>
 
         <section id="view-galeria" class="view-galeria">
-     <div class="grid-produtos" id="render-grid"></div>
- </section>
+             <div class="grid-produtos" id="render-grid"></div>
+        </section>
 
-<section id="view-sinopse" class="view-sinopse">
+        <section id="view-sinopse" class="view-sinopse">
             <div class="container-trindade">
                 <div class="col-mockup">
                     <img id="target-img" src="" alt="Mockup do Produto">
@@ -594,11 +599,8 @@
     const hardware = {
         e: [
             { img: 'ebook01.webp', title: 'Know yourself First', price: '$11.00', link: 'https://pay.kiwify.com/8S4FCE0', desc: `<p>Know Yourself First: Unravel Your Essence, Transform Your Relationships...</p>` },
-
             { img: 'ebook02.webp', title: 'Engineering Collision', price: '$11.50', link: 'https://pay.kiwify.com/ZjtlaGh', desc: `<p>The Engineering of Collision: From Fragile Clay to the Sovereignty of Steel...</p>` },
-
             { img: 'ebook03.webp', title: 'The Supremacy Code', price: '$11.99', link: 'https://pay.kiwify.com/NcdLsaN', desc: `<p>The Supremacy Code: Delete Emotional Crumbs, Reclaim Your Sovereignty...</p>` },
-
             { 
                 img: 'ebook04.webp', 
                 title: 'Descubra Você', 
@@ -619,47 +621,23 @@
                     <p>Não espere mais pelo amor ideal. Comece a cultivá-lo a partir do seu interior e mude para sempre a forma como você ama e é amado.</p>
                     <p>Dê o primeiro passo para a sua transformação. Adquira agora e descubra o poder de ser você mesmo em todos os seus relacionamentos.</p>` 
             },
-
             { 
                 img: 'ebook05.webp', 
                 title: 'Engenharia da Colisão', 
                 price: 'R$39,00', 
                 link: 'https://pay.kiwify.com.br/oRZAlbz', 
-                desc: `
-                    <p><strong>Engenharia da Colisão: A Soberania do Aço nos Relacionamentos</strong></p>
-                    <p>O seu relacionamento é uma estrutura de argila ou uma armadura de aço?</p>
-                    <p>A maioria dos casais vive sob a fragilidade de acordos superficiais, esperando que o tempo resolva fissuras estruturais. Em "Engenharia da Colisão", Júlio Bhrósz apresenta o método definitivo para casais que decidiram assumir o controle absoluto da sua dinâmica afetiva.</p>
-                    <p><strong>O que você irá processar nesta obra:</strong></p>
-                    <p>• <strong>Estanqueidade Emocional:</strong> Aprenda a blindar o seu relacionamento contra infiltrações externas.</p>
-                    <p>• <strong>O Princípio da Colisão:</strong> Entenda como transformar o impacto dos conflitos em energia de fusão.</p>
-                    <p>• <strong>Do Barro ao Aço:</strong> Substitua a "argila" das expectativas infantis pela soberania do aço.</p>
-                    <p>• <strong>Arquitetura da Soberania:</strong> Domine as leis que regem a estabilidade entre dois indivíduos autônomos.</p>
-                    <p>• <strong>Sistemas de Alta Performance:</strong> Implemente protocolos de comunicação com precisão de engrenagens.</p>
-                    <p>Pare de remendar o que deveria ser reconstruído. Assuma o comando da sua estrutura.</p>` 
+                desc: `<p>Engenharia da Colisão: A Soberania do Aço nos Relacionamentos...</p>` 
             },
-
             { 
                 img: 'ebook06.webp', 
                 title: 'Autópsia da Personalidade', 
                 price: 'R$59,90', 
                 link: 'https://pay.kiwify.com.br/sD4nqRO', 
-                desc: `
-                    <p><strong>Autópsia da Personalidade: O Fim das Migalhas Emocionais</strong></p>
-                    <p>O que resta de você quando as camadas de autodecepção são removidas?</p>
-                    <p>Em "Autópsia da Personalidade", Júlio Bhrósz executa o procedimento definitivo: a abertura completa da estrutura psíquica para identificar a origem da sua submissão.</p>
-                    <p><strong>Os Protocolos de Exame deste Volume:</strong></p>
-                    <p>• <strong>Dissecação dos Padrões:</strong> Identifique os tecidos necrosados da sua história que ditam suas reações.</p>
-                    <p>• <strong>Extirpação de Migalhas:</strong> Protocolo rigoroso para identificar e deletar dependências afetivas.</p>
-                    <p>• <strong>Identificação do Parasitismo:</strong> Saiba quem são os agentes externos que se alimentam da sua falta de limites.</p>
-                    <p>• <strong>O Resgate da Supremacia:</strong> Reestabeleça o comando central da sua mente.</p>
-                    <p>Reconfigure o seu núcleo operacional para nunca mais aceitar menos do que o topo.</p>` 
+                desc: `<p>Autópsia da Personalidade: O Fim das Migalhas Emocionais...</p>` 
             },
-
-            { img: 'ebook07.webp', title: 'Découvrez-Vous', price: '€10,00', link: 'https://pay.kiwify.com/GFUBNBT', desc: `<p>Découvrez-vous : Révélez Votre Essence, Transformez Vos Relations...</p>` },
-
-            { img: 'ebook08.webp', title: 'Autopsie de la Personnalité', price: '€13,80', link: 'https://pay.kiwify.com/4zixbEz', desc: `<p>Autopsie de la Personnalité: La Fin des Miettes Émotionnelles...</p>` },
-
-            { img: 'ebook09.webp', title: 'Autópsia de la Personalidad', price: '€11,80', link: 'https://pay.kiwify.com/4zixbEz', desc: `<p>Autopsia de la Personalidad: El Fin de las Migajas Emocionales...</p>` }
+            { img: 'ebook07.webp', title: 'Découvrez-Vous', price: '€10,00', link: 'https://pay.kiwify.com/GFUBNBT', desc: `<p>Découvrez-vous...</p>` },
+            { img: 'ebook08.webp', title: 'Autopsie de la Personnalité', price: '€13,80', link: 'https://pay.kiwify.com/4zixbEz', desc: `<p>Autopsie de la Personnalité...</p>` },
+            { img: 'ebook09.webp', title: 'Autópsia de la Personalidad', price: '€11,80', link: 'https://pay.kiwify.com/4zixbEz', desc: `<p>Autopsia de la Personalidad...</p>` }
         ],
         a: [
             { img: 'audio01.webp', title: 'Know yourself First', price: '$13.95', link: 'https://pay.kiwify.com/ilgU4Kg', desc: `<p>Audio Premium...</p>` },
@@ -680,15 +658,11 @@
             { text: "Júlio Bhrósz entrega o que promete.", author: "Fernanda R.", email: "Verificado", book: "O Código", rating: "★★★★★" }
         ];
 
-        /* ============================================================
-           ESTADOS E NAVEGAÇÃO
-        ============================================================ */
         let iE = 0, iA = 0;
         let linkAtual = '';
         let historico = 'home';
         const menus = ['home', 'ebook', 'sinopse', 'depoimentos', 'sobre', 'contato', 'suporte'];
 
-        // CARROSSEL HOME
         setInterval(() => {
             iE = (iE + 1) % hardware.e.length;
             const el = document.getElementById('loop-e');
@@ -779,9 +753,6 @@
             else irHome();
         }
 
-        /* ============================================================
-           ABAS DE INFORMAÇÃO (AQUI ESTÁ A "RETOMADA DA ROTA")
-        ============================================================ */
         function abrirInfo(tipo) {
             resetTelas();
             const container = document.getElementById('content-info');
@@ -800,8 +771,8 @@
                                 <h3>CONTE SUA EXPERIÊNCIA E APAREÇA AQUI!</h3>
                                 <div class="input-group"><label>Nome</label><input type="text" placeholder="Seu nome"></div>
                                 <div class="input-group"><label>E-mail</label><input type="email" placeholder="seu@email.com"></div>
-                                <div class="input-group"><label>Texto (Máx 100 char)</label><textarea maxlength="100" rows="3"></textarea></div>
-                                <div class="input-group"><label>Nota</label><select><option>EXCELENTE</option><option>ÓTIMO</option><option>MUITO BOM</option><option>BOM</option><option>REGULAR</option></select></div>
+                                <div class="input-group"><label>Texto</label><textarea maxlength="100" rows="3"></textarea></div>
+                                <div class="input-group"><label>Nota</label><select><option>EXCELENTE</option><option>ÓTIMO</option></select></div>
                                 <button class="btn-enviar" onclick="this.innerText='ENVIADO'">Enviar</button>
                             </div>
                             <div class="col-depoimentos">${colDir}</div>
@@ -809,57 +780,28 @@
                     </div>`;
             } 
             else if (tipo === 'sobre') {
-                // ROTA RETOMADA: SUBSTUIÇÃO EXCLUSIVA DO CONTEÚDO DA ABA SOBRE
                 container.innerHTML = `
 <div class="sobre-clean">
-    <div class="sobre-content" style="position: relative; z-index: 1; padding: 40px 5%; background: transparent;">
-        <div class="sobre-container-flex" style="display: flex; align-items: center; gap: 40px; text-align: justify;">
+    <div class="sobre-content">
+        <div class="sobre-container-flex">
             <div class="sobre-foto-wrapper">
-                <img src="foto_autor.png" alt="Júlio Bhrósz" class="foto-autor-img" style="width: 300px; height: auto; border: none; background: transparent;">
+                <img src="foto_autor.png" alt="Júlio Bhrósz" class="foto-autor-img">
             </div>
             <div class="sobre-texto-wrapper" style="flex: 1;">
-                <h1 style="color: var(--gold, #d4af37); margin-bottom: 20px; text-align: center;">A Mente por trás d'O Código</h1>
-                <p style="text-align: justify; text-justify: inter-word;  text-indent: 50px; color: #fff; line-height: 1.6;">
-                    <strong>Júlio Bhrósz<br> </strong>
-   O mundo não é justo. Ele é um mercado de valores invisíveis. Se você se sente ignorado, trocado ou tratado como um "plano B", não é por acaso. É porque você está jogando com as regras que foram impostas a você, não as que você domina.
-
-Eu não estou aqui para te oferecer um abraço ou a ilusão de que "tudo vai ficar bem". Eu dediquei os últimos 15 anos a uma busca implacável: Desvendar por que alguns prosperam e outros definham, mesmo com o mesmo potencial. Cansei de ver mentes brilhantes presas na insegurança, enquanto a mediocridade ascende. <em>Por isso, eu decifrei o que a maioria teme ensinar,</em> chega de Migalhas!<br>
-<b>A Ciência do Comando:</b><br>
-A autoridade consolidada não vem dos diplomas emoldurados, mas da linha de frente, onde a teoria encontra a realidade. No Portal Pleno, Somos uma equipe de estrategistas da sua reconstrução.
-
-Eu condensei o que há de mais avançado <b><em>no estudo do comportamento humano</em></b> – os insights que as mentes de elite em Harvard e Stanford discutem a portas fechadas – e transformei em um arsenal de ferramentas práticas. Não é "autoajuda" genérica. É a ciência do comando aplicada à sua vida.<br>
-Você vai aprender a:<br>
-
-
-<p>• Assumir o controle absoluto sobre suas reações e a narrativa que você projeta.<br><p>
-
-<p>•  Parar de reagir por impulso e começar a agir com estratégia deliberada.<br> <p>
-
-<p>•  Reverter a percepção que o mundo tem de você, de "plano B" a prioridade.<br><p>
-
-
-<b>O Código Está Aberto: </b><br>
-Sua Decisão, Seu Domínio
-
-O segredo que mantinha você refém da aprovação alheia foi desvendado. O código está aberto, mas não é para todos. É para quem tem a coragem de abandonar a passividade e reescrever as próprias regras.
-
-A partir de agora, a passividade é uma escolha.<br>
-<em>Você pode continuar implorando por atenção,</em> ou <b>pode assumir o comando do seu destino e se tornar a pessoa que o mundo não apenas respeita, mas busca.</b><br>
-As regras mudaram e agora, elas pertencem a você. Pronto para dominar o jogo?
-<b>Fundamentação Científica Aplicada:</b><br>
-A metodologia de JB integra protocolos de Inteligência Emocional da <b>Harvard University</b>, mecanismos de Neuroplasticidade da <b>University of Oxford</b> e modelos de Psicologia Social e Status de <b>Stanford,/> para uma transformação comprovada e duradoura.<br> 
-</strong>.</p>
-           <p style="line-height: 1.7; margin-bottom: 16px;"><b>Descubra como Click Aqui</b></p>
-           <div class="quote" style="font-style: italic; padding-left: 15px; margin-top: 20px;">"O Código não é apenas um livro, é a chave para a <b>Libertação Emocional</b>."</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>`;
+                <h1>A Mente por trás d'O Código</h1>
+                <p><strong>Júlio Bhrósz</strong><br>O mundo não é justo. Ele é um mercado de valores invisíveis. Se você se sente ignorado, trocado ou tratado como um "plano B", não é por acaso. É porque você está jogando com as regras que foram impostas a você, não as que você domina.</p>
+                <p>Eu não estou aqui para te oferecer um abraço ou a ilusão de que "tudo vai ficar bem". Eu dediquei os últimos 15 anos a uma busca implacável: Desvendar por que alguns prosperam e outros definham, mesmo com o mesmo potencial.</p>
+                <p><b>A Ciência do Comando:</b><br>Eu condensei o que há de mais avançado no estudo do comportamento humano – os insights que as mentes de elite em Harvard e Stanford discutem a portas fechadas – e transformei em um arsenal de ferramentas práticas. Não é "autoajuda" genérica. É a ciência do comando aplicada à sua vida.</p>
+                <p><b>O Código Está Aberto:</b><br>Sua Decisão, Seu Domínio. O segredo que mantinha você refém da aprovação alheia foi desvendado. O código está aberto, mas não é para todos. É para quem tem a coragem de abandonar a passividade e reescrever as próprias regras.</p>
+                <div class="quote">"O Código não é apenas um livro, é a chave para a <b>Libertação Emocional</b>."</div>
+            </div>
+        </div>
+    </div>
+</div>`;
             } 
             else if (tipo === 'contato') {
                 container.innerHTML = `
                     <div class="contato-clean">
-                        <div class="contato-fundo" style="background: url('banner.webp') no-repeat center center; background-size: contain; filter: brightness(0.3);"></div>
                         <div class="contato-content">
                             <h1>Entre em Contato</h1>
                             <div class="contato-wrapper">
@@ -876,10 +818,6 @@ A metodologia de JB integra protocolos de Inteligência Emocional da <b>Harvard 
                                         <span class="email-label">Contato</span>
                                         <span class="email-address">contato@portalpleno.com.br</span>
                                     </div>
-                                    <div class="email-item" onclick="copiarEmail('comercial@portalpleno.com.br')">
-                                        <span class="email-label">Comercial</span>
-                                        <span class="email-address">comercial@portalpleno.com.br</span>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -888,11 +826,9 @@ A metodologia de JB integra protocolos de Inteligência Emocional da <b>Harvard 
             else if (tipo === 'suporte') {
                 container.innerHTML = `
                     <div class="suporte-clean">
-                        <div class="suporte-fundo" style="background: url('banner.webp') no-repeat center center; background-size: contain; filter: brightness(0.3);"></div>
                         <div class="suporte-content">
-                            <h1>Suporte</h1>
                             <div class="suporte-card">
-                                <div class="suporte-label">E-mail</div>
+                                <div class="suporte-label">E-mail de Suporte</div>
                                 <div class="suporte-email">suportebook@portalpleno.com.br</div>
                             </div>
                         </div>
@@ -908,39 +844,6 @@ A metodologia de JB integra protocolos de Inteligência Emocional da <b>Harvard 
         function copiarEmail(email) { 
             navigator.clipboard.writeText(email).then(() => alert('E-mail copiado!')); 
         }
-
-        /* ============================================================
-           SWIPE E GESTOS
-        ============================================================ */
-        let touchstartX = 0;
-        let touchendX = 0;
-
-        function handleGesture() {
-            const diff = touchstartX - touchendX;
-            const currentActive = document.querySelector('nav a.active');
-            if(!currentActive) return;
-            const currentMenuIdx = menus.indexOf(currentActive.id.replace('nav-', ''));
-            
-            if (Math.abs(diff) > 100) { 
-                if (diff > 0) { 
-                    const nextIdx = (currentMenuIdx + 1) % menus.length;
-                    navigateByMenu(menus[nextIdx]);
-                } else { 
-                    const prevIdx = (currentMenuIdx - 1 + menus.length) % menus.length;
-                    navigateByMenu(menus[prevIdx]);
-                }
-            }
-        }
-
-        function navigateByMenu(tipo) {
-            if (tipo === 'home') irHome();
-            else if (tipo === 'ebook') irTitulos();
-            else if (tipo === 'sinopse') abrirSinopseDefault();
-            else abrirInfo(tipo);
-        }
-
-        document.addEventListener('touchstart', e => { touchstartX = e.changedTouches[0].screenX; }, false);
-        document.addEventListener('touchend', e => { touchendX = e.changedTouches[0].screenX; handleGesture(); }, false);
 
         window.onload = () => { irHome(); };
     </script>

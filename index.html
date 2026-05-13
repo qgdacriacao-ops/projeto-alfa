@@ -231,7 +231,7 @@
             color: var(--gold);
             text-transform: uppercase;
             margin-bottom: 5px;
-            display: block;
+            display: flex;
             text-align: center;
             font-weight: 700;
         }
@@ -325,8 +325,7 @@
         .btn-enviar { width: 100%; background: var(--gold); color: #000; border: none; padding: 15px; font-weight: 800; text-transform: uppercase; cursor: pointer; }
 
         /* SOBRE, CONTATO, SUPORTE */
-        .sobre-clean, .contato-clean, .suporte-clean { position: relative; min-height: 80vh; 
-; align-items: center; justify-content: center; padding: 40px 5%; }
+        .sobre-clean, .contato-clean, .suporte-clean { position: relative; min-height: 80vh; display: flex; align-items: center; justify-content: center; padding: 40px 5%; }
 
 .sobre-fundo, .contato-fundo, .suporte-fundo { 
     position: absolute; 
@@ -429,7 +428,7 @@
     color: #666; 
     text-align: center; 
     padding: 14px; 
-    font-size: 0.6rem;     
+    font-size: 0.7rem;     
     z-index: 9999; 
     position: relative; 
     clear: both; 
@@ -440,7 +439,7 @@
     display: flex; 
     align-items: start;
     gap: 20px; /* DIMINUA O GAP: De 40px para 20px para encostar mais na esquerda */
-    max-width: 1200px; /* AUMENTE O MAX-WIDTH: De 1000px para 1200px para expandir o container */
+    max-width: 1100px; /* AUMENTE O MAX-WIDTH: De 1000px para 1200px para expandir o container */
     margin: 0 auto; 
     padding-left: 2%; /* ADICIONE ISSO: Garante que não cole na borda da tela */
 }
@@ -599,15 +598,29 @@
     <script>
     const hardware = {
         e: [
-            { img: 'ebook01.webp', title: 'Know yourself First', price: '$11.00', link: 'https://pay.kiwify.com/8S4FCE0', desc: `<p>Know Yourself First: Unravel Your Essence, Transform Your Relationships...</p>` },
-            { img: 'ebook02.webp', title: 'Engineering Collision', price: '$11.50', link: 'https://pay.kiwify.com/ZjtlaGh', desc: `<p>The Engineering of Collision: From Fragile Clay to the Sovereignty of Steel...</p>` },
-            { img: 'ebook03.webp', title: 'The Supremacy Code', price: '$11.99', link: 'https://pay.kiwify.com/NcdLsaN', desc: `<p>The Supremacy Code: Delete Emotional Crumbs, Reclaim Your Sovereignty...</p>` },
-            { 
-                img: 'ebook04.webp', 
-                title: 'Descubra Você', 
-                price: 'R$29,50', 
-                link: 'https://pay.kiwify.com.br/P8UTO6L', 
-                desc: `
+            { img: 'ebook01.webp', 
+             title: 'Know yourself First', 
+             price: '$11.00', 
+             link: 'https://pay.kiwify.com/8S4FCE0', 
+             desc: `<p>Know Yourself First: Unravel Your Essence, Transform Your Relationships...</p>` },
+            
+            { img: 'ebook02.webp', 
+             title: 'Engineering Collision', 
+             price: '$11.50', 
+             link: 'https://pay.kiwify.com/ZjtlaGh', 
+             desc: `<p>The Engineering of Collision: From Fragile Clay to the Sovereignty of Steel...</p>` },
+            
+            { img: 'ebook03.webp', 
+             title: 'The Supremacy Code',
+             price: '$11.99', 
+             link: 'https://pay.kiwify.com/NcdLsaN', 
+             desc: `<p>The Supremacy Code: Delete Emotional Crumbs, Reclaim Your Sovereignty...</p>` },
+            
+            { img: 'ebook04.webp', 
+              title: 'Descubra Você', 
+              price: 'R$29,50', 
+              link: 'https://pay.kiwify.com.br/P8UTO6L', 
+              desc: `
                     <p><strong>Descubra Você: Desvende Sua Essência, Transforme Seus Relacionamentos</strong></p>
                     <p>Você sente que está vivendo em um ciclo repetitivo de encontros frustrantes e desencontros emocionais?</p>
                     <p>Muitas vezes, depositamos no outro a responsabilidade pela nossa felicidade, apenas para encontrar desilusão. Mas a verdade é que a chave para conexões autênticas e duradouras nunca esteve no "parceiro ideal", mas sim escondida dentro da sua própria essência.</p>
@@ -791,21 +804,21 @@
             <div class="sobre-texto-wrapper" style="flex: 1;">
                 <h1>A Mente por trás d'O Código</h1>
                 <p><strong>Júlio Bhrósz</strong><br>
-O mundo não é justo. Ele é um mercado de valores invisíveis. Se você se sente ignorado, trocado ou tratado como um "plano B", não é por acaso. É porque você está jogando com as regras que foram impostas a você, não as que você domina.
+  <p>O mundo não é justo. Ele é um mercado de valores invisíveis. Se você se sente ignorado, trocado ou tratado como um "plano B", não é por acaso. É porque você está jogando com as regras que foram impostas a você, não as que você domina.</p>
 
 Eu não estou aqui para te oferecer um abraço ou a ilusão de que "tudo vai ficar bem". Eu dediquei os últimos 15 anos a uma busca implacável: Desvendar por que alguns prosperam e outros definham, mesmo com o mesmo potencial. Cansei de ver mentes brilhantes presas na insegurança, enquanto a mediocridade ascende. <em>Por isso, eu decifrei o que a maioria teme ensinar,</em> chega de Migalhas!<br>
 <b>A Ciência do Comando:</b><br>
-A autoridade consolidada não vem dos diplomas emoldurados, mas da linha de frente, onde a teoria encontra a realidade. No Portal Pleno, Somos uma equipe de estrategistas da sua reconstrução.
+   <p>A autoridade consolidada não vem dos diplomas emoldurados, mas da linha de frente, onde a teoria encontra a realidade. No Portal Pleno, Somos uma equipe de estrategistas da sua reconstrução.</p>
 
 Eu condensei o que há de mais avançado <b><em>no estudo do comportamento humano</em></b> – os insights que as mentes de elite em Harvard e Stanford discutem a portas fechadas – e transformei em um arsenal de ferramentas práticas. Não é "autoajuda" genérica. É a ciência do comando aplicada à sua vida.<br>
 Você vai aprender a:<br>
 
 
-<p>• Assumir o controle absoluto sobre suas reações e a narrativa que você projeta.<br><p>
+<p>•  Assumir o controle absoluto sobre suas reações e a narrativa que você projeta.<br></p>
 
-<p>•  Parar de reagir por impulso e começar a agir com estratégia deliberada.<br> <p>
+<p>•  Parar de reagir por impulso e começar a agir com estratégia deliberada.<br> </p>
 
-<p>•  Reverter a percepção que o mundo tem de você, de "plano B" a prioridade.<br><p>
+<p>•  Reverter a percepção que o mundo tem de você, de "plano B" a prioridade.<br></p>
 
 
 <b>O Código Está Aberto: </b><br>
@@ -841,11 +854,19 @@ A metodologia de JB integra protocolos de Inteligência Emocional da <b>Harvard 
                                 </div>
                                 <div class="email-accounts">
                                     <h3>Contas Oficiais</h3>
-                                    <div class="email-item" onclick="copiarEmail('contato@portalpleno.com.br')">
-                                        <span class="email-label">Contato</span>
-                                        <span class="email-address">contato@portalpleno.com.br</span>
-                                    </div>
-                                </div>
+                                    <div class="email-accounts">
+    <h3 style="color: var(--gold); font-size: 1rem; text-transform: uppercase; margin-bottom: 20px;">Contas Oficiais</h3>
+    
+    <div class="email-item">
+        <span class="email-label">Comercial</span>
+        <span class="email-address">contato@portalpleno.com.br</span>
+    </div>
+    
+    <div class="email-item">
+        <span class="email-label">Parcerias</span>
+        <span class="email-address">comercial@portalpleno.com.br</span>
+    </div>
+</div>
                             </div>
                         </div>
                     </div>`;

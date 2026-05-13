@@ -13,50 +13,6 @@
     <title>Portal Pleno | O Código</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <style>
-
-/* ANIMAÇÃO AVANÇADA DA SETA CURVA */
-@keyframes apontar-e-pulsar {
-    0% { 
-        opacity: 0.2; 
-        transform: translateX(15px) scale(0.9) rotate(0deg); /* Começa longe, pequena e apagada */
-    }
-    50% { 
-        opacity: 1; 
-        transform: translateX(0px) scale(1.1) rotate(-5deg); /* Chega perto, cresce e acende */
-    }
-    100% { 
-        opacity: 0.2; 
-        transform: translateX(15px) scale(0.9) rotate(0deg); /* Volta pro início */
-    }
-}
-
-.container-seta-curva {
-    display: inline-block;
-    vertical-align: middle;
-    margin-left: 12px;
-    width: 60px; /* TAMANHO DA SETA - Ajuste aqui se quiser maior ou menor */
-    height: auto;
-    cursor: default;
-}
-
-.seta-svg-curva {
-    width: 100%;
-    height: auto;
-    fill: #ff0000; /* COR VERMELHA */
-    filter: drop-shadow(0 0 5px rgba(255, 0, 0, 0.6)); /* Brilho intermitente */
-    animation: apontar-e-pulsar 1s infinite ease-in-out; /* Animação intermitente */
-}
-
-/* Garante que o link Click Aqui fique no padrão visual */
-.link-cta-aqui {
-    color: var(--gold);
-    text-decoration: underline;
-    cursor: pointer;
-    transition: 0.3s;
-}
-.link-cta-aqui:hover {
-    color: #fff;
-}
         /* ============================================================
            VARIÁVEIS GLOBAIS
         ============================================================ */
@@ -226,17 +182,22 @@
         /* VIEW 3: SINOPSE - CORRIGIDO PARA STICKY */
         .view-sinopse { display: none; background-color: var(--ice-gray); min-height: 100vh; padding: 0 0 80px; color: var(--text-dark); }
         .container-trindade {
-    display: grid;
-    grid-template-columns: 300px 1fr 220px;
-    gap: 45px;
-    align-items: start; /* Essencial para as colunas não esticarem juntas */
-}
-        .col-mockup {
-    position: -webkit-sticky;
-    position: sticky;
-    top: 110px;
-    height: fit-content;
-}
+            max-width: 1350px;
+            margin: 60px auto 20px;
+            display: grid;
+            grid-template-columns: 300px 1fr 220px;
+            gap: 45px;
+            padding: 0 5%;
+            width: 100%;
+            align-items: start; /* CORREÇÃO: Permite que as colunas tenham alturas diferentes para o sticky funcionar */
+        }
+        .col-mockup { 
+            position: sticky; 
+            top: 110px; 
+            display: flex; 
+            align-items: flex-start; 
+            justify-content: center; 
+            z-index: 10;
         }
         .col-mockup img {
             width: 100%;
@@ -254,13 +215,10 @@
         .section-title { font-size: 1rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: #666; border-bottom: 1px solid var(--border); padding-bottom: 10px; margin: 40px 0 15px; display: block; }
         
         .col-compra {
-    position: -webkit-sticky; /* Suporte para Safari */
-    position: sticky;
-    top: 140px; /* A distância que ele para em relação ao topo do navegador */
-    height: fit-content; /* Obrigatório para o sticky funcionar */
-    z-index: 100;
-    margin-bottom: 20px; /* Limite inferior para não colar no rodapé */
-}
+            position: sticky;
+            top: 105px;
+            height: fit-content;
+        }
         .buy-card {
             background: var(--chumbo);
             padding: 25px 15px;
@@ -763,25 +721,18 @@
             abrirSinopse(item.img, item.title, item.price, item.link, item.desc);
         }
 
-function abrirSinopse(img, title, price, link, desc) {
-    window.scrollTo(0, 0); 
-    resetTelas();
-    
-    linkAtual = link;
-
-    // Alimenta os IDs que já existem no teu HTML
-    document.getElementById('target-img').src = img;
-    document.getElementById('target-title').innerText = title;
-    document.getElementById('target-price').innerText = price;
-    document.getElementById('target-desc').innerHTML = desc;
-
-    // Mostra a secção
-    document.getElementById('view-sinopse').style.display = 'block';
-    document.getElementById('btn-voltar').style.display = 'block';
-    
-    ativarMenu('sinopse');
-    historico = 'sinopse';
-}
+        function abrirSinopse(img, title, price, link, desc) {
+            resetTelas();
+            linkAtual = link;
+            document.getElementById('target-img').src = img;
+            document.getElementById('target-title').innerText = title;
+            document.getElementById('target-price').innerText = price;
+            document.getElementById('target-desc').innerHTML = desc;
+            document.getElementById('view-sinopse').style.display = 'block';
+            document.getElementById('btn-voltar').style.display = 'block';
+            ativarMenu('sinopse');
+            historico = 'sinopse';
+        }
 
         function irSinopseHome(tipo) {
             const item = tipo === 'e' ? hardware.e[iE] : hardware.a[iA];
@@ -867,19 +818,7 @@ As regras mudaram e agora, elas pertencem a você. Pronto para dominar o jogo?
 <b>Fundamentação Científica Aplicada:</b><br>
 A metodologia de JB integra protocolos de Inteligência Emocional da <b>Harvard University</b>, mecanismos de Neuroplasticidade da <b>University of Oxford</b> e modelos de Psicologia Social e Status de <b>Stanford,/> para uma transformação comprovada e duradoura.<br> 
 </strong>.</p>
-           <p style="line-height: 1.7; margin-bottom: 20px; font-size: 1.2rem; color: #fff; display: flex; align-items: center; flex-wrap: wrap;">
-    <span style="white-space: nowrap;">Descubra como 
-        <span class="link-cta-aqui" style="margin-left: 5px;" onclick="abrirSinopse(hardware.e[5].img, hardware.e[5].title, hardware.e[5].price, hardware.e[5].link, hardware.e[5].desc, hardware.e[5].details)">
-            <b>Click Aqui</b>
-        </span>
-    </span>
-
-    <span class="container-seta-curva" style="display: inline-flex; width: 50px; margin-left: 10px;">
-        <svg class="seta-svg-curva" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style="transform: rotate(180deg);">
-            <path d="M 90 20 C 70 0, 30 0, 10 20 L 0 10 L 0 40 L 30 40 L 20 30 C 35 15, 65 15, 80 30 L 90 20 Z" />
-        </svg>
-    </span>
-</p>
+           <p style="line-height: 1.7; margin-bottom: 16px;"><b>Descubra como Click Aqui</b></p>
            <div class="quote" style="font-style: italic; padding-left: 15px; margin-top: 20px;">"O Código não é apenas um livro, é a chave para a <b>Libertação Emocional</b>."</div>
                             </div>
                         </div>
@@ -900,18 +839,12 @@ A metodologia de JB integra protocolos de Inteligência Emocional da <b>Harvard 
                                     <button class="btn-feedback" onclick="this.innerText='ENVIADO'">Enviar Feedback</button>
                                 </div>
                                 <div class="email-accounts">
-    <h3 style="color: var(--gold); font-size: 1rem; text-transform: uppercase; margin-bottom: 20px;">Contas Oficiais</h3>
-    
-    <div class="email-item">
-        <span class="email-label">Comercial</span>
-        <span class="email-address">contato@portalpleno.com.br</span>
-    </div>
-    
-    <div class="email-item">
-        <span class="email-label">Parcerias</span>
-        <span class="email-address">comercialr@portalpleno.com.br</span>
-    </div>
-</div>
+                                    <h3>Contas Oficiais</h3>
+                                    <div class="email-item" onclick="copiarEmail('contato@portalpleno.com.br')">
+                                        <span class="email-label">Contato</span>
+                                        <span class="email-address">contato@portalpleno.com.br</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>`;

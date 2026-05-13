@@ -13,6 +13,50 @@
     <title>Portal Pleno | O Código</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <style>
+
+/* ANIMAÇÃO AVANÇADA DA SETA CURVA */
+@keyframes apontar-e-pulsar {
+    0% { 
+        opacity: 0.2; 
+        transform: translateX(15px) scale(0.9) rotate(0deg); /* Começa longe, pequena e apagada */
+    }
+    50% { 
+        opacity: 1; 
+        transform: translateX(0px) scale(1.1) rotate(-5deg); /* Chega perto, cresce e acende */
+    }
+    100% { 
+        opacity: 0.2; 
+        transform: translateX(15px) scale(0.9) rotate(0deg); /* Volta pro início */
+    }
+}
+
+.container-seta-curva {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 12px;
+    width: 60px; /* TAMANHO DA SETA - Ajuste aqui se quiser maior ou menor */
+    height: auto;
+    cursor: default;
+}
+
+.seta-svg-curva {
+    width: 100%;
+    height: auto;
+    fill: #ff0000; /* COR VERMELHA */
+    filter: drop-shadow(0 0 5px rgba(255, 0, 0, 0.6)); /* Brilho intermitente */
+    animation: apontar-e-pulsar 1s infinite ease-in-out; /* Animação intermitente */
+}
+
+/* Garante que o link Click Aqui fique no padrão visual */
+.link-cta-aqui {
+    color: var(--gold);
+    text-decoration: underline;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.link-cta-aqui:hover {
+    color: #fff;
+}
         /* ============================================================
            VARIÁVEIS GLOBAIS
         ============================================================ */
@@ -182,22 +226,17 @@
         /* VIEW 3: SINOPSE - CORRIGIDO PARA STICKY */
         .view-sinopse { display: none; background-color: var(--ice-gray); min-height: 100vh; padding: 0 0 80px; color: var(--text-dark); }
         .container-trindade {
-            max-width: 1350px;
-            margin: 60px auto 20px;
-            display: grid;
-            grid-template-columns: 300px 1fr 220px;
-            gap: 45px;
-            padding: 0 5%;
-            width: 100%;
-            align-items: start; /* CORREÇÃO: Permite que as colunas tenham alturas diferentes para o sticky funcionar */
-        }
-        .col-mockup { 
-            position: sticky; 
-            top: 110px; 
-            display: flex; 
-            align-items: flex-start; 
-            justify-content: center; 
-            z-index: 10;
+    display: grid;
+    grid-template-columns: 300px 1fr 220px;
+    gap: 45px;
+    align-items: start; /* Essencial para as colunas não esticarem juntas */
+}
+        .col-mockup {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 110px;
+    height: fit-content;
+}
         }
         .col-mockup img {
             width: 100%;
@@ -215,10 +254,13 @@
         .section-title { font-size: 1rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: #666; border-bottom: 1px solid var(--border); padding-bottom: 10px; margin: 40px 0 15px; display: block; }
         
         .col-compra {
-            position: sticky;
-            top: 105px;
-            height: fit-content;
-        }
+    position: -webkit-sticky; /* Suporte para Safari */
+    position: sticky;
+    top: 140px; /* A distância que ele para em relação ao topo do navegador */
+    height: fit-content; /* Obrigatório para o sticky funcionar */
+    z-index: 100;
+    margin-bottom: 20px; /* Limite inferior para não colar no rodapé */
+}
         .buy-card {
             background: var(--chumbo);
             padding: 25px 15px;
@@ -428,7 +470,7 @@
     color: #666; 
     text-align: center; 
     padding: 14px; 
-    font-size: 0.7rem;     
+    font-size: 0.6rem;     
     z-index: 9999; 
     position: relative; 
     clear: both; 
@@ -438,8 +480,8 @@
         .sobre-container-flex { 
     display: flex; 
     align-items: start;
-    gap: 20px; /* DIMINUA O GAP: De 40px para 20px para encostar mais na esquerda */
-    max-width: 1100px; /* AUMENTE O MAX-WIDTH: De 1000px para 1200px para expandir o container */
+    gap: 10px; /* DIMINUA O GAP: De 40px para 20px para encostar mais na esquerda */
+    max-width: 1200px; /* AUMENTE O MAX-WIDTH: De 1000px para 1200px para expandir o container */
     margin: 0 auto; 
     padding-left: 2%; /* ADICIONE ISSO: Garante que não cole na borda da tela */
 }
@@ -527,7 +569,7 @@
             <div class="hero-center" style="text-align: center; max-width: 1000px; margin: 0 auto;">
                 <h1>Aprenda os segredos ocultos da mente humana<br>
                     <br>Acesse<br> estratégias práticas<br>
-                    transformar sua vida<br><em>hoje</em><br><br>
+                    transforme sua vida<br><em>hoje</em><br><br>
                     em nossos  exclusivos Ebooks e Audios</h1>
                
             </div>
@@ -598,29 +640,15 @@
     <script>
     const hardware = {
         e: [
-            { img: 'ebook01.webp', 
-             title: 'Know yourself First', 
-             price: '$11.00', 
-             link: 'https://pay.kiwify.com/8S4FCE0', 
-             desc: `<p>Know Yourself First: Unravel Your Essence, Transform Your Relationships...</p>` },
-            
-            { img: 'ebook02.webp', 
-             title: 'Engineering Collision', 
-             price: '$11.50', 
-             link: 'https://pay.kiwify.com/ZjtlaGh', 
-             desc: `<p>The Engineering of Collision: From Fragile Clay to the Sovereignty of Steel...</p>` },
-            
-            { img: 'ebook03.webp', 
-             title: 'The Supremacy Code',
-             price: '$11.99', 
-             link: 'https://pay.kiwify.com/NcdLsaN', 
-             desc: `<p>The Supremacy Code: Delete Emotional Crumbs, Reclaim Your Sovereignty...</p>` },
-            
-            { img: 'ebook04.webp', 
-              title: 'Descubra Você', 
-              price: 'R$29,50', 
-              link: 'https://pay.kiwify.com.br/P8UTO6L', 
-              desc: `
+            { img: 'ebook01.webp', title: 'Know yourself First', price: '$11.00', link: 'https://pay.kiwify.com/8S4FCE0', desc: `<p>Know Yourself First: Unravel Your Essence, Transform Your Relationships...</p>` },
+            { img: 'ebook02.webp', title: 'Engineering Collision', price: '$11.50', link: 'https://pay.kiwify.com/ZjtlaGh', desc: `<p>The Engineering of Collision: From Fragile Clay to the Sovereignty of Steel...</p>` },
+            { img: 'ebook03.webp', title: 'The Supremacy Code', price: '$11.99', link: 'https://pay.kiwify.com/NcdLsaN', desc: `<p>The Supremacy Code: Delete Emotional Crumbs, Reclaim Your Sovereignty...</p>` },
+            { 
+                img: 'ebook04.webp', 
+                title: 'Descubra Você', 
+                price: 'R$29,50', 
+                link: 'https://pay.kiwify.com.br/P8UTO6L', 
+                desc: `
                     <p><strong>Descubra Você: Desvende Sua Essência, Transforme Seus Relacionamentos</strong></p>
                     <p>Você sente que está vivendo em um ciclo repetitivo de encontros frustrantes e desencontros emocionais?</p>
                     <p>Muitas vezes, depositamos no outro a responsabilidade pela nossa felicidade, apenas para encontrar desilusão. Mas a verdade é que a chave para conexões autênticas e duradouras nunca esteve no "parceiro ideal", mas sim escondida dentro da sua própria essência.</p>
@@ -735,18 +763,25 @@
             abrirSinopse(item.img, item.title, item.price, item.link, item.desc);
         }
 
-        function abrirSinopse(img, title, price, link, desc) {
-            resetTelas();
-            linkAtual = link;
-            document.getElementById('target-img').src = img;
-            document.getElementById('target-title').innerText = title;
-            document.getElementById('target-price').innerText = price;
-            document.getElementById('target-desc').innerHTML = desc;
-            document.getElementById('view-sinopse').style.display = 'block';
-            document.getElementById('btn-voltar').style.display = 'block';
-            ativarMenu('sinopse');
-            historico = 'sinopse';
-        }
+function abrirSinopse(img, title, price, link, desc) {
+    window.scrollTo(0, 0); 
+    resetTelas();
+    
+    linkAtual = link;
+
+    // Alimenta os IDs que já existem no teu HTML
+    document.getElementById('target-img').src = img;
+    document.getElementById('target-title').innerText = title;
+    document.getElementById('target-price').innerText = price;
+    document.getElementById('target-desc').innerHTML = desc;
+
+    // Mostra a secção
+    document.getElementById('view-sinopse').style.display = 'block';
+    document.getElementById('btn-voltar').style.display = 'block';
+    
+    ativarMenu('sinopse');
+    historico = 'sinopse';
+}
 
         function irSinopseHome(tipo) {
             const item = tipo === 'e' ? hardware.e[iE] : hardware.a[iA];
@@ -804,21 +839,21 @@
             <div class="sobre-texto-wrapper" style="flex: 1;">
                 <h1>A Mente por trás d'O Código</h1>
                 <p><strong>Júlio Bhrósz</strong><br>
-  <p>O mundo não é justo. Ele é um mercado de valores invisíveis. Se você se sente ignorado, trocado ou tratado como um "plano B", não é por acaso. É porque você está jogando com as regras que foram impostas a você, não as que você domina.</p>
+O mundo não é justo. Ele é um mercado de valores invisíveis. Se você se sente ignorado, trocado ou tratado como um "plano B", não é por acaso. É porque você está jogando com as regras que foram impostas a você, não as que você domina.
 
 Eu não estou aqui para te oferecer um abraço ou a ilusão de que "tudo vai ficar bem". Eu dediquei os últimos 15 anos a uma busca implacável: Desvendar por que alguns prosperam e outros definham, mesmo com o mesmo potencial. Cansei de ver mentes brilhantes presas na insegurança, enquanto a mediocridade ascende. <em>Por isso, eu decifrei o que a maioria teme ensinar,</em> chega de Migalhas!<br>
 <b>A Ciência do Comando:</b><br>
-   <p>A autoridade consolidada não vem dos diplomas emoldurados, mas da linha de frente, onde a teoria encontra a realidade. No Portal Pleno, Somos uma equipe de estrategistas da sua reconstrução.</p>
+A autoridade consolidada não vem dos diplomas emoldurados, mas da linha de frente, onde a teoria encontra a realidade. No Portal Pleno, Somos uma equipe de estrategistas da sua reconstrução.
 
 Eu condensei o que há de mais avançado <b><em>no estudo do comportamento humano</em></b> – os insights que as mentes de elite em Harvard e Stanford discutem a portas fechadas – e transformei em um arsenal de ferramentas práticas. Não é "autoajuda" genérica. É a ciência do comando aplicada à sua vida.<br>
 Você vai aprender a:<br>
 
 
-<p>•  Assumir o controle absoluto sobre suas reações e a narrativa que você projeta.<br></p>
+<p>• Assumir o controle absoluto sobre suas reações e a narrativa que você projeta.<br><p>
 
-<p>•  Parar de reagir por impulso e começar a agir com estratégia deliberada.<br> </p>
+<p>•  Parar de reagir por impulso e começar a agir com estratégia deliberada.<br> <p>
 
-<p>•  Reverter a percepção que o mundo tem de você, de "plano B" a prioridade.<br></p>
+<p>•  Reverter a percepção que o mundo tem de você, de "plano B" a prioridade.<br><p>
 
 
 <b>O Código Está Aberto: </b><br>
@@ -832,7 +867,19 @@ As regras mudaram e agora, elas pertencem a você. Pronto para dominar o jogo?
 <b>Fundamentação Científica Aplicada:</b><br>
 A metodologia de JB integra protocolos de Inteligência Emocional da <b>Harvard University</b>, mecanismos de Neuroplasticidade da <b>University of Oxford</b> e modelos de Psicologia Social e Status de <b>Stanford,/> para uma transformação comprovada e duradoura.<br> 
 </strong>.</p>
-           <p style="line-height: 1.7; margin-bottom: 16px;"><b>Descubra como Click Aqui</b></p>
+           <p style="line-height: 1.7; margin-bottom: 20px; font-size: 1.2rem; color: #fff; display: flex; align-items: center; flex-wrap: wrap;">
+    <span style="white-space: nowrap;">Descubra como 
+        <span class="link-cta-aqui" style="margin-left: 5px;" onclick="abrirSinopse(hardware.e[5].img, hardware.e[5].title, hardware.e[5].price, hardware.e[5].link, hardware.e[5].desc, hardware.e[5].details)">
+            <b>Click Aqui</b>
+        </span>
+    </span>
+
+    <span class="container-seta-curva" style="display: inline-flex; width: 50px; margin-left: 10px;">
+        <svg class="seta-svg-curva" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style="transform: rotate(180deg);">
+            <path d="M 90 20 C 70 0, 30 0, 10 20 L 0 10 L 0 40 L 30 40 L 20 30 C 35 15, 65 15, 80 30 L 90 20 Z" />
+        </svg>
+    </span>
+</p>
            <div class="quote" style="font-style: italic; padding-left: 15px; margin-top: 20px;">"O Código não é apenas um livro, é a chave para a <b>Libertação Emocional</b>."</div>
                             </div>
                         </div>
@@ -853,8 +900,6 @@ A metodologia de JB integra protocolos de Inteligência Emocional da <b>Harvard 
                                     <button class="btn-feedback" onclick="this.innerText='ENVIADO'">Enviar Feedback</button>
                                 </div>
                                 <div class="email-accounts">
-                                    <h3>Contas Oficiais</h3>
-                                    <div class="email-accounts">
     <h3 style="color: var(--gold); font-size: 1rem; text-transform: uppercase; margin-bottom: 20px;">Contas Oficiais</h3>
     
     <div class="email-item">
@@ -864,7 +909,7 @@ A metodologia de JB integra protocolos de Inteligência Emocional da <b>Harvard 
     
     <div class="email-item">
         <span class="email-label">Parcerias</span>
-        <span class="email-address">comercial@portalpleno.com.br</span>
+        <span class="email-address">comercialr@portalpleno.com.br</span>
     </div>
 </div>
                             </div>

@@ -225,28 +225,19 @@
 
         /* VIEW 3: SINOPSE - CORRIGIDO PARA STICKY */
         .view-sinopse { display: none; background-color: var(--ice-gray); min-height: 100vh; padding: 0 0 80px; color: var(--text-dark); }
-       .container-trindade {
-            display: grid;
-            grid-template-columns: 300px 1fr 210px;
-            gap: 40px;
-            align-items: start;
-            padding: 15px;
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            box-sizing: border-box;
-            overflow: visible !important;
-        }
+        .container-trindade {
+    display: grid;
+    grid-template-columns: 300px 1fr 210px;
+    gap:40px;
+    align-items: start;
+    padding: 15px;
+    width: 100%;
+    max-width: 100px;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
 
-        .col-mockup {
-            position: -webkit-sticky !important;
-            position: sticky !important;
-            top: 110px !important;
-            height: fit-content !important;
-            z-index: 100 !important;
-        }
-
-        .col-mockup img {
+ .col-mockup img {
             width: 100%;
             max-width: 100%;
             height: auto;
@@ -254,20 +245,20 @@
             filter: drop-shadow(0 8px 20px rgba(0,0,0,0.18));
             border-radius: 2px;
             background: transparent;
-        }
-
-        .col-texto {
-            max-width: 100%;
-            overflow: visible !important;
-        }
-
+}
+        .col-texto h1 { font-family: 'Playfair Display', serif; font-size: clamp(1.4rem, 3.5vw, 3rem); margin-bottom: 5px; color: #000; line-height: 1.1; word-break: break-word; }
+        .author { font-size: 1.1rem; color: #8B6B00; margin-bottom: 40px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
+        .description { line-height: 2.1; font-size: 1.15rem; color: #333; text-align: justify; }
+        .description p { margin-bottom: 25px; }
+        .section-title { font-size: 1rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: #666; border-bottom: 1px solid var(--border); padding-bottom: 10px; margin: 40px 0 15px; display: block; }
+        
         .col-compra {
-            position: -webkit-sticky !important;
-            position: sticky !important;
-            top: 110px !important;
-            height: fit-content !important;
-            z-index: 100 !important;
-        }
+    position: -webkit-sticky; /* Suporte para Safari */
+    position: sticky;
+    top: 70px; /* A distância que ele para em relação ao topo do navegador */
+    height: fit-content; /* Obrigatório para o sticky funcionar */
+    z-index: 100;
+    margin-bottom: 20px; /* Limite inferior para não colar no rodapé */
 }
         .buy-card {
             background: var(--chumbo);

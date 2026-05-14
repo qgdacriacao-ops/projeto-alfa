@@ -78,8 +78,7 @@
         ============================================================ */
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         body, html {
-            height: auto;
-            min-height: 100%;
+            height: 100%;
             background-color: var(--bg-black);
             font-family: 'Inter', sans-serif;
             overflow-x: hidden;
@@ -167,7 +166,7 @@
         ============================================================ */
         main {
             width: 100%;
-            overflow-x: visible !important;
+            overflow-x: hidden;
             flex: 1;
             position: relative;
             z-index: 10;
@@ -225,8 +224,8 @@
         @keyframes flutuar { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
 
         /* VIEW 3: SINOPSE - CORRIGIDO PARA STICKY */
-        .view-sinopse { display: none; background-color: var(--ice-gray); min-height: 100vh; padding: 0 0 80px; color: var(--text-dark); overflow: visible !important; }
-        .container-trindade {
+        .view-sinopse { display: none; background-color: var(--ice-gray); min-height: 100vh; padding: 0 0 80px; color: var(--text-dark); }
+       .container-trindade {
             display: grid;
             grid-template-columns: 300px 1fr 210px;
             gap: 40px;
@@ -269,13 +268,7 @@
             height: fit-content !important;
             z-index: 100 !important;
         }
-
-        .col-texto h1 { font-family: 'Playfair Display', serif; font-size: clamp(1.4rem, 3.5vw, 3rem); margin-bottom: 5px; color: #000; line-height: 1.1; word-break: break-word; }
-        .author { font-size: 1.1rem; color: #8B6B00; margin-bottom: 40px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
-        .description { line-height: 2.1; font-size: 1.15rem; color: #333; text-align: justify; }
-        .description p { margin-bottom: 25px; }
-        .section-title { font-size: 1rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: #666; border-bottom: 1px solid var(--border); padding-bottom: 10px; margin: 40px 0 15px; display: block; }
-        
+}
         .buy-card {
             background: var(--chumbo);
             padding: 25px 15px;
@@ -632,17 +625,12 @@
         </div>
     </div>
 
-            <div class="product-details">
-                <div class="details-title">Detalhes do eBook</div>
-                <div class="details-grid">
-                    <div class="detail-item"><span class="detail-label">Editora</span><span class="detail-value">Portal Pleno O Código</span></div>
-                    <div class="detail-item"><span class="detail-label">Data de Lançamento</span><span class="detail-value">Março de 2026</span></div>
-                    <div class="detail-item"><span class="detail-label">Idioma</span><span class="detail-value">Português</span></div>
-                    <div class="detail-item"><span class="detail-label">Formato</span><span class="detail-value">Digital (PDF/ePub)</span></div>
-                    <div class="detail-item"><span class="detail-label">Compatibilidade</span><span class="detail-value">Kindle, Tablet, Smartphone, PC</span></div>
-                </div>
+    <div class="product-details">
+        <div class="details-title" id="target-detail-header">Detalhes do Produto</div>
+        <div class="details-grid" id="target-detail-grid">
             </div>
-        </section>
+    </div>
+</section>
 
         <section id="view-info-extra" class="view-info-extra">
             <div id="content-info"></div>
@@ -654,14 +642,11 @@
         ZÊNITE GLOBAL LABS CNPJ 66.543.032/0001-41 Todos os Direitos Reservados
     </div>
 
-    <script>
-    const hardware = {
+<script>
+   const hardware = {
         e: [
-            { img: 'ebook01.webp', title: 'Know yourself First', price: '$11.00', link: 'https://pay.kiwify.com/8S4FCE0', desc: `<p>Know Yourself First: Unravel Your Essence, Transform Your Relationships...</p>` },
-            { img: 'ebook02.webp', title: 'Engineering Collision', price: '$11.50', link: 'https://pay.kiwify.com/ZjtlaGh', desc: `<p>The Engineering of Collision: From Fragile Clay to the Sovereignty of Steel...</p>` },
-            { img: 'ebook03.webp', title: 'The Supremacy Code', price: '$11.99', link: 'https://pay.kiwify.com/NcdLsaN', desc: `<p>The Supremacy Code: Delete Emotional Crumbs, Reclaim Your Sovereignty...</p>` },
             { 
-                img: 'ebook04.webp', 
+                img: 'ebook01.webp', 
                 title: 'Descubra Você', 
                 price: 'R$29,50', 
                 link: 'https://pay.kiwify.com.br/P8UTO6L', 
@@ -680,145 +665,210 @@
                     <p>Não espere mais pelo amor ideal. Comece a cultivá-lo a partir do seu interior e mude para sempre a forma como você ama e é amado.</p>
                     <p>Dê o primeiro passo para a sua transformação. Adquira agora e descubra o poder de ser você mesmo em todos os seus relacionamentos.</p>` 
             },
-            { 
-                img: 'ebook05.webp', 
-                title: 'Engenharia da Colisão', 
-                price: 'R$39,00', 
-                link: 'https://pay.kiwify.com.br/oRZAlbz', 
-                desc: `<p>Engenharia da Colisão: A Soberania do Aço nos Relacionamentos...</p>` 
-            },
-            { 
-                img: 'ebook06.webp', 
-                title: 'Autópsia da Personalidade', 
-                price: 'R$59,90', 
-                link: 'https://pay.kiwify.com.br/sD4nqRO', 
-                desc: `<p>Autópsia da Personalidade: O Fim das Migalhas Emocionais...</p>` 
-            },
+            { img: 'ebook02.webp', title: 'Engenharia da Colisão', price: 'R$39,00', link: 'https://pay.kiwify.com.br/oRZAlbz', desc: `<p>Engenharia da Colisão: A Soberania do Aço...</p>` },
+            { img: 'ebook03.webp', title: 'Autópsia da Personalidade', price: 'R$59,90', link: 'https://pay.kiwify.com.br/sD4nqRO', desc: `<p>Autópsia da Personalidade: O Fim das Migalhas...</p>` },
+            { img: 'ebook04.webp', title: 'Know yourself First', price: '$11.00', link: 'https://pay.kiwify.com/8S4FCE0', desc: `<p>Know Yourself First...</p>` },
+            { img: 'ebook05.webp', title: 'Engineering Collision', price: '$11.50', link: 'https://pay.kiwify.com/ZjtlaGh', desc: `<p>The Engineering of Collision...</p>` },
+            { img: 'ebook06.webp', title: 'The Supremacy Code', price: '$11.99', link: 'https://pay.kiwify.com/NcdLsaN', desc: `<p>The Supremacy Code...</p>` },
             { img: 'ebook07.webp', title: 'Découvrez-Vous', price: '€10,00', link: 'https://pay.kiwify.com/GFUBNBT', desc: `<p>Découvrez-vous...</p>` },
-            { img: 'ebook08.webp', title: 'Conócete a ti Mismo', price: '€10,00', link: 'https://pay.kiwify.com/f3GZ9n3', desc: `<p>Conócete a ti mismo...</p>` }
+            { img: 'ebook08.webp', title: 'Autopsie de la Personnalité', price: '€13,80', link: 'https://pay.kiwify.com/4zixbEz', desc: `<p>Autopsie de la Personnalité...</p>` },
+            { img: 'ebook09.webp', title: 'Autópsia de la Personalidad', price: '€11,80', link: 'https://pay.kiwify.com/4zixbEz', desc: `<p>Autopsia de la Personalidad...</p>` }
         ],
         a: [
-            { img: 'audio01.webp', title: 'Áudio Estratégico 1', price: 'R$15,00', link: '#', desc: '<p>Descrição do áudio 1...</p>' },
-            { img: 'audio02.webp', title: 'Áudio Estratégico 2', price: 'R$15,00', link: '#', desc: '<p>Descrição do áudio 2...</p>' },
-            { img: 'audio03.webp', title: 'Áudio Estratégico 3', price: 'R$15,00', link: '#', desc: '<p>Descrição do áudio 3...</p>' },
-            { img: 'audio04.webp', title: 'Áudio Estratégico 4', price: 'R$15,00', link: '#', desc: '<p>Descrição do áudio 4...</p>' }
+            { img: 'audio01.webp', title: 'Descubra Você Audio', price: 'R$37,50', link: 'https://pay.kiwify.com.br/lDiv2Do', desc: `<p>Audio Premium...</p>` },
+            { img: 'audio02.webp', title: 'Engenharia da Colisão Audio', price: 'R$39,50', link: 'https://pay.kiwify.com.br/PmaKDGV', desc: `<p>Audio Premium...</p>` },
+            { img: 'audio03.webp', title: 'Autópsia da Personalidade Audio', price: 'R$57,50', link: 'https://pay.kiwify.com.br/nJO91Ia', desc: `<p>Audio Premium...</p>` },
+            { img: 'audio04.webp', title: 'Know yourself First Audio', price: '$13.95', link: 'https://pay.kiwify.com/ilgU4Kg', desc: `<p>Audio Premium...</p>` },
+            { img: 'audio05.webp', title: 'The Engineering Collision Audio', price: '$14.95', link: 'https://pay.kiwify.com/2LTHnl0', desc: `<p>Audio Premium...</p>` },
+            { img: 'audio06.webp', title: 'the Supremacy Code Audio', price: '$15.95', link: 'https://pay.kiwify.com/TGmTjRA', desc: `<p>Audio Premium...</p>` }
         ]
     };
 
     const staticReviews = [
-        { rating: '★★★★★', text: 'O Código mudou minha perspectiva sobre relações.', author: 'Mariana S.', email: 'mariana@email.com', book: 'Descubra Você' },
-        { rating: '★★★★★', text: 'Estratégias que realmente funcionam no dia a dia.', author: 'Ricardo T.', email: 'ricardo@email.com', book: 'Engenharia da Colisão' },
-        { rating: '★★★★★', text: 'Leitura obrigatória para quem busca soberania mental.', author: 'Carla F.', email: 'carla@email.com', book: 'Autópsia da Personalidade' },
-        { rating: '★★★★★', text: 'Simplesmente transformador.', author: 'João P.', email: 'joao@email.com', book: 'Descubra Você' },
-        { rating: '★★★★★', text: 'Melhor investimento que fiz este ano.', author: 'Ana L.', email: 'ana@email.com', book: 'The Supremacy Code' },
-        { rating: '★★★★★', text: 'A metodologia de JB é impecável.', author: 'Lucas M.', email: 'lucas@email.com', book: 'Engineering Collision' }
+        { text: "A descoberta de soi a mudado minha perspectiva.", author: "Maria S.", email: "Verificado", book: "Descubra Você", rating: "★★★★★" },
+        { text: "Profundidade incomparável.", author: "Carlos O.", email: "Verificado", book: "Verdade em Vida", rating: "★★★★★" },
+        { text: "A engenharia mental aplicada na prática.", author: "Ricardo F.", email: "Verificado", book: "Engenharia da Colisão", rating: "★★★★★" },
+        { text: "Essencial para quem busca liberdade intelectual.", author: "Ana P.", email: "Verificado", book: "Autópsia da Personalidade", rating: "★★★★★" },
+        { text: "O audio é fantástico para ouvir no carro.", author: "Lucas M.", email: "Verificado", book: "Descubra Você (Audio)", rating: "★★★★★" },
+        { text: "Júlio Bhrósz entrega o que promete.", author: "Fernanda R.", email: "Verificado", book: "O Código", rating: "★★★★★" }
     ];
 
-    let currentAtivo = null;
-    let historico = 'home';
+    let linkAtual = '';
+    let historico = 'vitrine';
+    let iE = 0; 
+    let iA = 0;
 
-    function irHome() {
-        resetTelas();
-        document.getElementById('view-home').style.display = 'flex';
-        ativarMenu('home');
-        historico = 'home';
-    }
-
-    function irTitulos() {
-        resetTelas();
-        const galeria = document.getElementById('view-galeria');
-        galeria.style.display = 'block';
-        document.getElementById('btn-voltar').style.display = 'block';
-        ativarMenu('ebook');
-        renderGrid();
-        historico = 'galeria';
-    }
-
-    function renderGrid() {
-        const grid = document.getElementById('render-grid');
-        grid.innerHTML = hardware.e.map(item => `
-            <div class="card-flutuante" onclick="abrirSinopse('${item.img}', '${item.title}', '${item.price}', '${item.link}', \`${item.desc}\`)">
+    // IMPORTANTE: Para a Home voltar, a função de renderizar precisa saber onde buscar
+    function renderVitrine() {
+        const container = document.getElementById('hardware-container');
+        if (!container) return;
+        
+        // Combina as duas listas para a Home não ficar vazia
+        const todosProdutos = [...hardware.e, ...hardware.a];
+        container.innerHTML = todosProdutos.map(item => `
+            <div class="card" onclick="abrirSinopse('${item.img}', '${item.title}', '${item.price}', '${item.link}', \`${item.desc}\`)">
                 <img src="${item.img}" alt="${item.title}">
-                <div class="stars">★★★★★</div>
-                <div class="card-title">${item.title}</div>
+                <h3>${item.title}</h3>
+                <p class="price">${item.price}</p>
             </div>
         `).join('');
     }
+        setInterval(() => {
+            iE = (iE + 1) % hardware.e.length;
+            const el = document.getElementById('loop-e');
+            if(el) { el.style.opacity = 0; setTimeout(() => { el.src = hardware.e[iE].img; el.style.opacity = 1; }, 500); }
+        }, 3000);
 
-    function abrirSinopse(img, title, price, link, desc) {
-        resetTelas();
-        document.getElementById('view-sinopse').style.display = 'block';
-        document.getElementById('btn-voltar').style.display = 'block';
-        document.getElementById('target-img').src = img;
-        document.getElementById('target-title').innerText = title;
-        document.getElementById('target-price').innerText = price;
-        document.getElementById('target-desc').innerHTML = desc;
-        currentAtivo = link;
-        ativarMenu('sinopse');
-        historico = 'sinopse';
-        window.scrollTo(0,0);
-    }
+        setInterval(() => {
+            iA = (iA + 1) % hardware.a.length;
+            const el = document.getElementById('loop-a');
+            if(el) { el.style.opacity = 0; setTimeout(() => { el.src = hardware.a[iA].img; el.style.opacity = 1; }, 500); }
+        }, 3000);
 
-    function abrirSinopseDefault() {
-        const item = hardware.e[3];
-        abrirSinopse(item.img, item.title, item.price, item.link, item.desc);
-    }
+        function resetTelas() {
+            ['view-home', 'view-galeria', 'view-sinopse', 'view-info-extra', 'btn-voltar'].forEach(id => {
+                const el = document.getElementById(id); if(el) el.style.display = 'none';
+            });
+            window.scrollTo(0, 0);
+        }
 
-    function irSinopseHome(tipo) {
-        const item = tipo === 'e' ? hardware.e[3] : hardware.a[3];
-        abrirSinopse(item.img, item.title, item.price, item.link, item.desc);
-    }
+        function ativarMenu(id) {
+            document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+            const alvo = document.getElementById('nav-' + id);
+            if(alvo) alvo.classList.add('active');
+        }
 
-    function checkout() {
-        if (currentAtivo) window.open(currentAtivo, '_blank');
-    }
+        function irHome() {
+            resetTelas();
+            document.getElementById('view-home').style.display = 'flex';
+            document.getElementById('bg').style.display = 'block';
+            ativarMenu('home');
+            historico = 'home';
+        }
 
-    function resetTelas() {
-        ['view-home', 'view-galeria', 'view-sinopse', 'view-info-extra'].forEach(id => {
-            document.getElementById(id).style.display = 'none';
-        });
-        document.getElementById('btn-voltar').style.display = 'none';
-    }
+        function irTitulos() {
+            resetTelas();
+            const grid = document.getElementById('render-grid');
+            const allItems = [...hardware.e, ...hardware.a];
 
-    function ativarMenu(id) {
-        document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
-        const target = document.getElementById('nav-' + id);
-        if (target) target.classList.add('active');
-    }
+            grid.innerHTML = allItems.map((item, index) => `
+                <div class="card-flutuante" onclick="carregarEabrir(${index})">
+                    <img src="${item.img}" alt="${item.title}">
+                    <div class="stars">★★★★★</div>
+                    <div class="card-title">${item.title}</div>
+                </div>
+            `).join('');
 
-    function voltarFluxo() {
-        if (historico === 'sinopse' || historico === 'info') irTitulos();
-        else irHome();
-    }
+            document.getElementById('view-galeria').style.display = 'block';
+            document.getElementById('btn-voltar').style.display = 'block';
+            ativarMenu('ebook');
+            historico = 'titulos';
+        }
 
-    function abrirInfo(tipo) {
-        resetTelas();
-        const container = document.getElementById('content-info');
-        document.getElementById('view-info-extra').style.display = 'block';
-        document.getElementById('btn-voltar').style.display = 'block';
-        ativarMenu(tipo);
+        function carregarEabrir(index) {
+            const allItems = [...hardware.e, ...hardware.a];
+            const item = allItems[index];
+            abrirSinopse(item.img, item.title, item.price, item.link, item.desc);
+        } // <--- ESSA CHAVE AQUI É A QUE ESTAVA FALTANDO E TRAVOU TUDO
 
-        if (tipo === 'depoimentos') {
-            const colEsq = staticReviews.slice(0, 3).map(r => renderReview(r)).join('');
-            const colDir = staticReviews.slice(3, 6).map(r => renderReview(r)).join('');
-            container.innerHTML = `
-                <div style="color:#fff; padding:20px 5%;">
-                    <div class="layout-avaliacoes">
-                        <div class="col-depoimentos">${colEsq}</div>
-                        <div class="form-review-container">
-                            <h3>CONTE SUA EXPERIÊNCIA E APAREÇA AQUI!</h3>
-                            <div class="input-group"><label>Nome</label><input type="text" placeholder="Seu nome"></div>
-                            <div class="input-group"><label>E-mail</label><input type="email" placeholder="seu@email.com"></div>
-                            <div class="input-group"><label>Texto</label><textarea maxlength="100" rows="3"></textarea></div>
-                            <div class="input-group"><label>Nota</label><select><option>EXCELENTE</option><option>ÓTIMO</option></select></div>
-                            <button class="btn-enviar" onclick="this.innerText='ENVIADO'">Enviar</button>
+        function abrirSinopse(img, title, price, link, desc) {
+            // 1. Primeiro resetamos as telas
+            resetTelas();
+
+            // 2. FORÇAR ROLAGEM AO TOPO: O setTimeout garante que o scroll ocorra 
+            // APÓS a nova tela (view-sinopse) ser exibida.
+            setTimeout(() => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'instant'
+                });
+            }, 10);
+
+            linkAtual = link;
+
+            // Preenche os dados básicos do topo
+            document.getElementById('target-img').src = img;
+            document.getElementById('target-title').innerText = title;
+            document.getElementById('target-price').innerText = price;
+            document.getElementById('target-desc').innerHTML = desc;
+
+            // Lógica de identificação de Áudio vs Ebook
+            const isAudio = title.toLowerCase().includes('audio') || img.toLowerCase().includes('audio');
+
+            const grid = document.getElementById('target-detail-grid');
+            const header = document.getElementById('target-detail-header');
+
+            if (isAudio) {
+                header.innerText = "Detalhes do Áudio";
+                grid.innerHTML = `
+                    <div class="detail-item"><span class="detail-label">Editora</span><span class="detail-value">Portal Pleno O Código</span></div>
+                    <div class="detail-item"><span class="detail-label">Lançamento</span><span class="detail-value">Maio de 2026</span></div>
+                    <div class="detail-item"><span class="detail-label">Idioma</span><span class="detail-value">Português</span></div>
+                    <div class="detail-item"><span class="detail-label">Formato</span><span class="detail-value">Digital (MP3/Wave)</span></div>
+                    <div class="detail-item"><span class="detail-label">Hardware</span><span class="detail-value">iOS, Android, Players, PC</span></div>`;
+            } else {
+                header.innerText = "Detalhes do eBook";
+                grid.innerHTML = `
+                    <div class="detail-item"><span class="detail-label">Editora</span><span class="detail-value">Portal Pleno O Código</span></div>
+                    <div class="detail-item"><span class="detail-label">Lançamento</span><span class="detail-value">Março de 2026</span></div>
+                    <div class="detail-item"><span class="detail-label">Idioma</span><span class="detail-value">Português</span></div>
+                    <div class="detail-item"><span class="detail-label">Formato</span><span class="detail-value">Digital (PDF/ePub)</span></div>
+                    <div class="detail-item"><span class="detail-label">Compatibilidade</span><span class="detail-value">Kindle, Tablet, Smartphone, PC</span></div>`;
+            }
+
+            document.getElementById('view-sinopse').style.display = 'block';
+            document.getElementById('btn-voltar').style.display = 'block';
+            ativarMenu('sinopse');
+            historico = 'sinopse';
+        }
+
+        function irSinopseHome(tipo) {
+            const item = tipo === 'e' ? hardware.e[iE] : hardware.a[iA];
+            abrirSinopse(item.img, item.title, item.price, item.link, item.desc);
+        }
+
+        function abrirSinopseDefault() {
+            const d = hardware.e[0];
+            abrirSinopse(d.img, d.title, d.price, d.link, d.desc);
+        }
+
+        function checkout() {
+            if(linkAtual && linkAtual !== '#') window.open(linkAtual, '_blank');
+        }
+
+        function voltarFluxo() {
+            if (historico === 'sinopse' || historico === 'info') irTitulos();
+            else irHome();
+        }
+
+        function abrirInfo(tipo) {
+            resetTelas();
+            const container = document.getElementById('content-info');
+            document.getElementById('view-info-extra').style.display = 'block';
+            document.getElementById('btn-voltar').style.display = 'block';
+            ativarMenu(tipo);
+
+            if (tipo === 'depoimentos') {
+                const colEsq = staticReviews.slice(0, 3).map(r => renderReview(r)).join('');
+                const colDir = staticReviews.slice(3, 6).map(r => renderReview(r)).join('');
+                container.innerHTML = `
+                    <div style="color:#fff; padding:20px 5%;">
+                        <div class="layout-avaliacoes">
+                            <div class="col-depoimentos">${colEsq}</div>
+                            <div class="form-review-container">
+                                <h3>CONTE SUA EXPERIÊNCIA E APAREÇA AQUI!</h3>
+                                <div class="input-group"><label>Nome</label><input type="text" placeholder="Seu nome"></div>
+                                <div class="input-group"><label>E-mail</label><input type="email" placeholder="seu@email.com"></div>
+                                <div class="input-group"><label>Texto</label><textarea maxlength="100" rows="3"></textarea></div>
+                                <div class="input-group"><label>Nota</label><select><option>EXCELENTE</option><option>ÓTIMO</option></select></div>
+                                <button class="btn-enviar" onclick="this.innerText='ENVIADO'">Enviar</button>
+                            </div>
+                            <div class="col-depoimentos">${colDir}</div>
                         </div>
-                        <div class="col-depoimentos">${colDir}</div>
-                    </div>
-                </div>`;
-        } 
-        else if (tipo === 'sobre') {
-            container.innerHTML = `
+                    </div>`;
+            } 
+            else if (tipo === 'sobre') {
+                container.innerHTML = `
 <div class="sobre-clean">
     <div class="sobre-content">
         <div class="sobre-container-flex">
@@ -854,7 +904,7 @@ A partir de agora, a passividade é uma escolha.<br>
 <em>Você pode continuar implorando por atenção,</em> ou <b>pode assumir o comando do seu destino e se tornar a pessoa que o mundo não apenas respeita, mas busca.</b><br>
 As regras mudaram e agora, elas pertencem a você. Pronto para dominar o jogo?
 <b>Fundamentação Científica Aplicada:</b><br>
-A metodologia de JB integra protocolos de Inteligência Emocional da <b>Harvard University</b>, mecanismos de Neuroplasticidade da <b>University of Oxford</b> e modelos de Psicologia Social e Status de <b>Stanford</b> para uma transformação comprovada e duradoura.<br> 
+A metodologia de JB integra protocolos de Inteligência Emocional da <b>Harvard University</b>, mecanismos de Neuroplasticidade da <b>University of Oxford</b> e modelos de Psicologia Social e Status de <b>Stanford,/> para uma transformação comprovada e duradoura.<br> 
 </strong>.</p>
            <p style="line-height: 1.7; margin-bottom: 20px; font-size: 1.2rem; color: #fff; display: flex; align-items: center; flex-wrap: wrap;">
     <span style="white-space: nowrap;">Descubra como 
@@ -874,60 +924,60 @@ A metodologia de JB integra protocolos de Inteligência Emocional da <b>Harvard 
                         </div>
                     </div>
                 </div>`;
-        } 
-        else if (tipo === 'contato') {
-            container.innerHTML = `
-                <div class="contato-clean">
-                    <div class="contato-content">
-                        <h1>Entre em Contato</h1>
-                        <div class="contato-wrapper">
-                            <div class="feedback-form">
-                                <h2>Envie seu Feedback</h2>
-                                <div class="form-group"><label>Nome</label><input type="text"></div>
-                                <div class="form-group"><label>E-mail</label><input type="email"></div>
-                                <div class="form-group"><label>Mensagem</label><textarea></textarea></div>
-                                <button class="btn-feedback" onclick="this.innerText='ENVIADO'">Enviar Feedback</button>
-                            </div>
-                            <div class="email-accounts">
-<h3 style="color: var(--gold); font-size: 1rem; text-transform: uppercase; margin-bottom: 20px;">Contas Oficiais</h3>
-
-<div class="email-item">
-    <span class="email-label">Comercial</span>
-    <span class="email-address">contato@portalpleno.com.br</span>
-</div>
-
-<div class="email-item">
-    <span class="email-label">Parcerias</span>
-    <span class="email-address">comercialr@portalpleno.com.br</span>
-</div>
-</div>
-                        </div>
-                    </div>
-                </div>`;
-        } 
-        else if (tipo === 'suporte') {
-            container.innerHTML = `
-                <div class="suporte-clean">
-                    <div class="suporte-content">
-                        <div class="suporte-card">
-                            <div class="suporte-label">E-mail de Suporte</div>
-                            <div class="suporte-email">suportebook@portalpleno.com.br</div>
-                        </div>
-                    </div>
-                </div>`;
-        }
-        historico = 'info';
-    }
-
-    function renderReview(r) { 
-        return `<div class="card-review"><div class="stars">${r.rating}</div><div class="text">"${r.text}"</div><div class="author-info"><strong>${r.author}</strong><br>${r.email} | ${r.book}</div></div>`; 
-    }
+            } 
+            else if (tipo === 'contato') {
+                container.innerHTML = `
+                    <div class="contato-clean">
+                        <div class="contato-content">
+                            <h1>Entre em Contato</h1>
+                            <div class="contato-wrapper">
+                                <div class="feedback-form">
+                                    <h2>Envie seu Feedback</h2>
+                                    <div class="form-group"><label>Nome</label><input type="text"></div>
+                                    <div class="form-group"><label>E-mail</label><input type="email"></div>
+                                    <div class="form-group"><label>Mensagem</label><textarea></textarea></div>
+                                    <button class="btn-feedback" onclick="this.innerText='ENVIADO'">Enviar Feedback</button>
+                                </div>
+                                <div class="email-accounts">
+    <h3 style="color: var(--gold); font-size: 1rem; text-transform: uppercase; margin-bottom: 20px;">Contas Oficiais</h3>
     
-    function copiarEmail(email) { 
-        navigator.clipboard.writeText(email).then(() => alert('E-mail copiado!')); 
-    }
+    <div class="email-item">
+        <span class="email-label">Comercial</span>
+        <span class="email-address">contato@portalpleno.com.br</span>
+    </div>
+    
+    <div class="email-item">
+        <span class="email-label">Parcerias</span>
+        <span class="email-address">comercialr@portalpleno.com.br</span>
+    </div>
+</div>
+                            </div>
+                        </div>
+                    </div>`;
+            } 
+            else if (tipo === 'suporte') {
+                container.innerHTML = `
+                    <div class="suporte-clean">
+                        <div class="suporte-content">
+                            <div class="suporte-card">
+                                <div class="suporte-label">E-mail de Suporte</div>
+                                <div class="suporte-email">suportebook@portalpleno.com.br</div>
+                            </div>
+                        </div>
+                    </div>`;
+            }
+            historico = 'info';
+        }
 
-    window.onload = () => { irHome(); };
-</script>
+        function renderReview(r) { 
+            return `<div class="card-review"><div class="stars">${r.rating}</div><div class="text">"${r.text}"</div><div class="author-info"><strong>${r.author}</strong><br>${r.email} | ${r.book}</div></div>`; 
+        }
+        
+        function copiarEmail(email) { 
+            navigator.clipboard.writeText(email).then(() => alert('E-mail copiado!')); 
+        }
+
+        window.onload = () => { irHome(); };
+    </script>
 </body>
 </html>

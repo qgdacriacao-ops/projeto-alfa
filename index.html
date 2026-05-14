@@ -226,18 +226,24 @@
         /* VIEW 3: SINOPSE - CORRIGIDO PARA STICKY */
         .view-sinopse { display: none; background-color: var(--ice-gray); min-height: 100vh; padding: 0 0 80px; color: var(--text-dark); }
         .container-trindade {
-    display: grid;
-    grid-template-columns: 300px 1fr 210px;
-    gap:40px;
-    align-items: start;
-    padding: 15px;
-    width: 100%;
-    max-width: 100px;
-    margin: 0 auto;
-    box-sizing: border-box;
-}
-
- .col-mockup img {
+            max-width: 1350px;
+            margin: 60px auto 20px;
+            display: grid;
+            grid-template-columns: 300px 1fr 220px;
+            gap: 45px;
+            padding: 0 5%;
+            width: 100%;
+            align-items: start; /* CORREÇÃO: Permite que as colunas tenham alturas diferentes para o sticky funcionar */
+        }
+        .col-mockup { 
+            position: sticky; 
+            top: 110px; 
+            display: flex; 
+            align-items: flex-start; 
+            justify-content: center; 
+            z-index: 10;
+        }
+        .col-mockup img {
             width: 100%;
             max-width: 100%;
             height: auto;
@@ -245,7 +251,7 @@
             filter: drop-shadow(0 8px 20px rgba(0,0,0,0.18));
             border-radius: 2px;
             background: transparent;
-}
+        }
         .col-texto h1 { font-family: 'Playfair Display', serif; font-size: clamp(1.4rem, 3.5vw, 3rem); margin-bottom: 5px; color: #000; line-height: 1.1; word-break: break-word; }
         .author { font-size: 1.1rem; color: #8B6B00; margin-bottom: 40px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
         .description { line-height: 2.1; font-size: 1.15rem; color: #333; text-align: justify; }

@@ -227,28 +227,19 @@
         .view-sinopse { display: none; background-color: var(--ice-gray); min-height: 100vh; padding: 0 0 80px; color: var(--text-dark); }
         .container-trindade {
     display: grid;
-    grid-template-columns: 300px 1fr 220px;
-    gap: 45px;
-    align-items: start; /* Essencial para as colunas não esticarem juntas */
-}
-       .col-mockup {
-    position: -webkit-sticky;
-    position: sticky;
-    top: 110px;
-    height: fit-content;
-    width: 300px; /* Largura da coluna lateral */
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    z-index: 100;
+    grid-template-columns: 300px 1fr 210px;
+    gap: 40px;
+    align-items: start;
+    padding: 15px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    box-sizing: border-box;
 }
 
-.col-mockup img {
-    width: 100%;
-    max-width: 300px; /* REDUÇÃO FIXA: Agora o mockup não invade o texto */
-    height: auto;
-    object-fit: contain;
-    filter: drop-shadow(0 8px 20px rgba(0,0,0,0.2));
+.col-mockup, .col-texto, .col-compra {
+    flex: 1 1 300px; /* Faz as colunas ocuparem 100% apenas quando não houver espaço */
+    max-width: 100%;
 }
         .col-texto h1 { font-family: 'Playfair Display', serif; font-size: clamp(1.4rem, 3.5vw, 3rem); margin-bottom: 5px; color: #000; line-height: 1.1; word-break: break-word; }
         .author { font-size: 1.1rem; color: #8B6B00; margin-bottom: 40px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
@@ -259,7 +250,7 @@
         .col-compra {
     position: -webkit-sticky; /* Suporte para Safari */
     position: sticky;
-    top: 140px; /* A distância que ele para em relação ao topo do navegador */
+    top: 70px; /* A distância que ele para em relação ao topo do navegador */
     height: fit-content; /* Obrigatório para o sticky funcionar */
     z-index: 100;
     margin-bottom: 20px; /* Limite inferior para não colar no rodapé */
@@ -481,27 +472,28 @@
 
         /* SOBRE COM FOTO - CORREÇÃO STICKY */
         .sobre-container-flex { 
-    display: flex; 
-    align-items: start;
-    gap: 10px; /* DIMINUA O GAP: De 40px para 20px para encostar mais na esquerda */
-    max-width: 1200px; /* AUMENTE O MAX-WIDTH: De 1000px para 1200px para expandir o container */
-    margin: 0 auto; 
-    padding-left: 2%; /* ADICIONE ISSO: Garante que não cole na borda da tela */
-}
+            display: flex; 
+            align-items: start;
+            gap: 60px; /* Respiro visual solicitado */
+            max-width: 1300px; 
+            margin: 0; /* Perto da margem esquerda */
+            padding-left: 5%; 
+        }
         
         .sobre-foto-wrapper {
             position: sticky;
             top: 100px;
             flex-shrink: 0;
             z-index: 10;
+            margin-left: -80px; /* Deslocamento de 50% para a esquerda */
         }
 
         .foto-autor-img { 
-    width: 250px; /* DIMINUA: De 300px para 250px se quiser que ela ocupe menos espaço horizontal */
-    height: auto; 
-    border: none;          
-    background: transparent; 
-}
+            width: 250px; 
+            height: auto; 
+            border: none;          
+            background: transparent; 
+        }
 
         /* RESPONSIVIDADE */
         @media (max-width: 1024px) {
@@ -621,13 +613,8 @@
 
     <div class="product-details">
         <div class="details-title" id="target-detail-header">Detalhes do Produto</div>
-        <div class="details-grid">
-            <div class="detail-item"><span class="detail-label">Editora</span><span class="detail-value">Portal Pleno O Código</span></div>
-            <div class="detail-item"><span class="detail-label">Data de Lançamento</span><span class="detail-value">Março de 2026</span></div>
-            <div class="detail-item"><span class="detail-label">Idioma</span><span class="detail-value">Português</span></div>
-            <div class="detail-item"><span class="detail-label">Formato</span><span id="target-format" class="detail-value">Digital</span></div>
-            <div class="detail-item"><span class="detail-label">Compatibilidade</span><span id="target-compat" class="detail-value">Multiplataforma</span></div>
-        </div>
+        <div class="details-grid" id="target-detail-grid">
+            </div>
     </div>
 </section>
 
@@ -641,74 +628,77 @@
         ZÊNITE GLOBAL LABS CNPJ 66.543.032/0001-41 Todos os Direitos Reservados
     </div>
 
-    <script>
-    const hardware = {
-    e: [
-        { 
-            img: 'ebook01.webp', 
-            title: 'Descubra Você', 
-            price: 'R$29,50', 
-            link: 'https://pay.kiwify.com.br/P8UTO6L', 
-            desc: `
-                <p><strong>Descubra Você: Desvende Sua Essência, Transforme Seus Relacionamentos</strong></p>
-                <p>Você sente que está vivendo em um ciclo repetitivo de encontros frustrantes e desencontros emocionais?</p>
-                <p>Muitas vezes, depositamos no outro a responsabilidade pela nossa felicidade, apenas para encontrar desilusão. Mas a verdade é que a chave para conexões autênticas e duradouras nunca esteve no "parceiro ideal", mas sim escondida dentro da sua própria essência.</p>
-                <p>Em <strong>“Descubra Você”</strong>, Júlio Bhrósz convida você para uma jornada profunda de autodescoberta. Este e-book não é apenas um guia de conselhos; é um mapa prático para quem deseja parar de sobreviver a relações vazias e começar a construir vínculos reais e significativos.</p>
-                <p><strong>O que você vai encontrar nesta jornada:</strong></p>
-                <p>• <strong>O Elo Perdido:</strong> Entenda por que a busca externa por validação é um caminho sem fim e aprenda como o autoconhecimento é o único pilar capaz de sustentar vínculos verdadeiros.</p>
-                <p>• <strong>Seu Mapa Relacional:</strong> Desvende como sua história familiar e os padrões invisíveis moldam suas escolhas atuais. Aprenda a romper com o passado para traçar novos caminhos de afeto.</p>
-                <p>• <strong>Identidade e Propósito:</strong> Vá além dos rótulos que o mundo te impôs. Descubra quem você é em sua essência, mapeie seus desejos e entenda como seu propósito de vida se entrelaça com o amor.</p>
-                <p>• <strong>Superando Barreiras Internas:</strong> Identifique os medos ocultos que geram autossabotagem e adquira a coragem necessária para viver relacionamentos plenos e transparentes.</p>
-                <p>• <strong>A Arte da Conexão:</strong> Domine a comunicação empática. Aprenda a estabelecer limites saudáveis e a cultivar o respeito mútuo, transformando conflitos em oportunidades de crescimento recíproco.</p>
-                <p><em>A jornada mais importante da sua vida começa agora.</em></p>
-                <p>Não espere mais pelo amor ideal. Comece a cultivá-lo a partir do seu interior e mude para sempre a forma como você ama e é amado.</p>
-                <p>Dê o primeiro passo para a sua transformação. Adquira agora e descubra o poder de ser você mesmo em todos os seus relacionamentos.</p>` 
-        },
-        { 
-            img: 'ebook02.webp', 
-            title: 'Engenharia da Colisão', 
-            price: 'R$39,00', 
-            link: 'https://pay.kiwify.com.br/oRZAlbz', 
-            desc: `<p>Engenharia da Colisão: A Soberania do Aço nos Relacionamentos...</p>` 
-        },
-        { 
-            img: 'ebook03.webp', 
-            title: 'Autópsia da Personalidade', 
-            price: 'R$59,90', 
-            link: 'https://pay.kiwify.com.br/sD4nqRO', 
-            desc: `<p>Autópsia da Personalidade: O Fim das Migalhas Emocionais...</p>` 
-        },
-        { img: 'ebook04.webp', title: 'Know yourself First', price: '$11.00', link: 'https://pay.kiwify.com/8S4FCE0', desc: `<p>Know Yourself First: Unravel Your Essence, Transform Your Relationships...</p>` },
-        { img: 'ebook05.webp', title: 'Engineering Collision', price: '$11.50', link: 'https://pay.kiwify.com/ZjtlaGh', desc: `<p>The Engineering of Collision: From Fragile Clay to the Sovereignty of Steel...</p>` },
-        { img: 'ebook06.webp', title: 'The Supremacy Code', price: '$11.99', link: 'https://pay.kiwify.com/NcdLsaN', desc: `<p>The Supremacy Code: Delete Emotional Crumbs, Reclaim Your Sovereignty...</p>` },
-        { img: 'ebook07.webp', title: 'Découvrez-Vous', price: '€10,00', link: 'https://pay.kiwify.com/GFUBNBT', desc: `<p>Découvrez-vous...</p>` },
-        { img: 'ebook08.webp', title: 'Autopsie de la Personnalité', price: '€13,80', link: 'https://pay.kiwify.com/4zixbEz', desc: `<p>Autopsie de la Personnalité...</p>` },
-        { img: 'ebook09.webp', title: 'Autópsia de la Personalidad', price: '€11,80', link: 'https://pay.kiwify.com/4zixbEz', desc: `<p>Autopsia de la Personalidad...</p>` }
-    ],
-    a: [            
-        { img: 'audio01.webp', title: 'Descubra Você', price: 'R$37,50', link: 'https://pay.kiwify.com.br/lDiv2Do', desc: `<p>Audio Premium...</p>` },
-        { img: 'audio02.webp', title: 'Engenharia da Colisão', price: 'R$39,50', link: 'https://pay.kiwify.com.br/PmaKDGV', desc: `<p>Audio Premium...</p>` },
-        { img: 'audio03.webp', title: 'Autópsia da Personalidade', price: 'R$57,50', link: 'https://pay.kiwify.com.br/nJO91Ia', desc: `<p>Audio Premium...</p>` }, // <--- VÍRGULA ADICIONADA AQUI
-        { img: 'audio04.webp', title: 'Know yourself First', price: '$13.95', link: 'https://pay.kiwify.com/ilgU4Kg', desc: `<p>Audio Premium...</p>` },
-        { img: 'audio05.webp', title: 'The Engineering Collision', price: '$14.95', link: 'https://pay.kiwify.com/2LTHnl0', desc: `<p>Audio Premium...</p>` },
-        { img: 'audio06.webp', title: 'the Supremacy Code', price: '$15.95', link: 'https://pay.kiwify.com/TGmTjRA', desc: `<p>Audio Premium...</p>` }            
-    ]
-};
+<script>
+   const hardware = {
+        e: [
+            { 
+                img: 'ebook01.webp', 
+                title: 'Descubra Você', 
+                price: 'R$29,50', 
+                link: 'https://pay.kiwify.com.br/P8UTO6L', 
+                desc: `
+                    <p><strong>Descubra Você: Desvende Sua Essência, Transforme Seus Relacionamentos</strong></p>
+                    <p>Você sente que está vivendo em um ciclo repetitivo de encontros frustrantes e desencontros emocionais?</p>
+                    <p>Muitas vezes, depositamos no outro a responsabilidade pela nossa felicidade, apenas para encontrar desilusão. Mas a verdade é que a chave para conexões autênticas e duradouras nunca esteve no "parceiro ideal", mas sim escondida dentro da sua própria essência.</p>
+                    <p>Em <strong>“Descubra Você”</strong>, Júlio Bhrósz convida você para uma jornada profunda de autodescoberta. Este e-book não é apenas um guia de conselhos; é um mapa prático para quem deseja parar de sobreviver a relações vazias e começar a construir vínculos reais e significativos.</p>
+                    <p><strong>O que você vai encontrar nesta jornada:</strong></p>
+                    <p>• <strong>O Elo Perdido:</strong> Entenda por que a busca externa por validação é um caminho sem fim e aprenda como o autoconhecimento é o único pilar capaz de sustentar vínculos verdadeiros.</p>
+                    <p>• <strong>Seu Mapa Relacional:</strong> Desvende como sua história familiar e os padrões invisíveis moldam suas escolhas atuais. Aprenda a romper com o passado para traçar novos caminhos de afeto.</p>
+                    <p>• <strong>Identidade e Propósito:</strong> Vá além dos rótulos que o mundo te impôs. Descubra quem você é em sua essência, mapeie seus desejos e entenda como seu propósito de vida se entrelaça com o amor.</p>
+                    <p>• <strong>Superando Barreiras Internas:</strong> Identifique os medos ocultos que geram autossabotagem e adquira a coragem necessária para viver relacionamentos plenos e transparentes.</p>
+                    <p>• <strong>A Arte da Conexão:</strong> Domine a comunicação empática. Aprenda a estabelecer limites saudáveis e a cultivar o respeito mútuo, transformando conflitos em oportunidades de crescimento recíproco.</p>
+                    <p><em>A jornada mais importante da sua vida começa agora.</em></p>
+                    <p>Não espere mais pelo amor ideal. Comece a cultivá-lo a partir do seu interior e mude para sempre a forma como você ama e é amado.</p>
+                    <p>Dê o primeiro passo para a sua transformação. Adquira agora e descubra o poder de ser você mesmo em todos os seus relacionamentos.</p>` 
+            },
+            { img: 'ebook02.webp', title: 'Engenharia da Colisão', price: 'R$39,00', link: 'https://pay.kiwify.com.br/oRZAlbz', desc: `<p>Engenharia da Colisão: A Soberania do Aço...</p>` },
+            { img: 'ebook03.webp', title: 'Autópsia da Personalidade', price: 'R$59,90', link: 'https://pay.kiwify.com.br/sD4nqRO', desc: `<p>Autópsia da Personalidade: O Fim das Migalhas...</p>` },
+            { img: 'ebook04.webp', title: 'Know yourself First', price: '$11.00', link: 'https://pay.kiwify.com/8S4FCE0', desc: `<p>Know Yourself First...</p>` },
+            { img: 'ebook05.webp', title: 'Engineering Collision', price: '$11.50', link: 'https://pay.kiwify.com/ZjtlaGh', desc: `<p>The Engineering of Collision...</p>` },
+            { img: 'ebook06.webp', title: 'The Supremacy Code', price: '$11.99', link: 'https://pay.kiwify.com/NcdLsaN', desc: `<p>The Supremacy Code...</p>` },
+            { img: 'ebook07.webp', title: 'Découvrez-Vous', price: '€10,00', link: 'https://pay.kiwify.com/GFUBNBT', desc: `<p>Découvrez-vous...</p>` },
+            { img: 'ebook08.webp', title: 'Autopsie de la Personnalité', price: '€13,80', link: 'https://pay.kiwify.com/4zixbEz', desc: `<p>Autopsie de la Personnalité...</p>` },
+            { img: 'ebook09.webp', title: 'Autópsia de la Personalidad', price: '€11,80', link: 'https://pay.kiwify.com/4zixbEz', desc: `<p>Autopsia de la Personalidad...</p>` }
+        ],
+        a: [
+            { img: 'audio01.webp', title: 'Descubra Você Audio', price: 'R$37,50', link: 'https://pay.kiwify.com.br/lDiv2Do', desc: `<p>Audio Premium...</p>` },
+            { img: 'audio02.webp', title: 'Engenharia da Colisão Audio', price: 'R$39,50', link: 'https://pay.kiwify.com.br/PmaKDGV', desc: `<p>Audio Premium...</p>` },
+            { img: 'audio03.webp', title: 'Autópsia da Personalidade Audio', price: 'R$57,50', link: 'https://pay.kiwify.com.br/nJO91Ia', desc: `<p>Audio Premium...</p>` },
+            { img: 'audio04.webp', title: 'Know yourself First Audio', price: '$13.95', link: 'https://pay.kiwify.com/ilgU4Kg', desc: `<p>Audio Premium...</p>` },
+            { img: 'audio05.webp', title: 'The Engineering Collision Audio', price: '$14.95', link: 'https://pay.kiwify.com/2LTHnl0', desc: `<p>Audio Premium...</p>` },
+            { img: 'audio06.webp', title: 'the Supremacy Code Audio', price: '$15.95', link: 'https://pay.kiwify.com/TGmTjRA', desc: `<p>Audio Premium...</p>` }
+        ]
+    };
 
-        const staticReviews = [
-            { text: "A descoberta de soi a mudado minha perspectiva.", author: "Maria S.", email: "Verificado", book: "Descubra Você", rating: "★★★★★" },
-            { text: "Profundidade incomparável.", author: "Carlos O.", email: "Verificado", book: "Verdade em Vida", rating: "★★★★★" },
-            { text: "A engenharia mental aplicada na prática.", author: "Ricardo F.", email: "Verificado", book: "Engenharia da Colisão", rating: "★★★★★" },
-            { text: "Essencial para quem busca liberdade intelectual.", author: "Ana P.", email: "Verificado", book: "Autópsia da Personalidade", rating: "★★★★★" },
-            { text: "O audio é fantástico para ouvir no carro.", author: "Lucas M.", email: "Verificado", book: "Descubra Você (Audio)", rating: "★★★★★" },
-            { text: "Júlio Bhrósz entrega o que promete.", author: "Fernanda R.", email: "Verificado", book: "O Código", rating: "★★★★★" }
-        ];
+    const staticReviews = [
+        { text: "A descoberta de soi a mudado minha perspectiva.", author: "Maria S.", email: "Verificado", book: "Descubra Você", rating: "★★★★★" },
+        { text: "Profundidade incomparável.", author: "Carlos O.", email: "Verificado", book: "Verdade em Vida", rating: "★★★★★" },
+        { text: "A engenharia mental aplicada na prática.", author: "Ricardo F.", email: "Verificado", book: "Engenharia da Colisão", rating: "★★★★★" },
+        { text: "Essencial para quem busca liberdade intelectual.", author: "Ana P.", email: "Verificado", book: "Autópsia da Personalidade", rating: "★★★★★" },
+        { text: "O audio é fantástico para ouvir no carro.", author: "Lucas M.", email: "Verificado", book: "Descubra Você (Audio)", rating: "★★★★★" },
+        { text: "Júlio Bhrósz entrega o que promete.", author: "Fernanda R.", email: "Verificado", book: "O Código", rating: "★★★★★" }
+    ];
 
-        let iE = 0, iA = 0;
-        let linkAtual = '';
-        let historico = 'home';
-        const menus = ['home', 'ebook', 'sinopse', 'depoimentos', 'sobre', 'contato', 'suporte'];
+    let linkAtual = '';
+    let historico = 'vitrine';
+    let iE = 0; 
+    let iA = 0;
 
+    // IMPORTANTE: Para a Home voltar, a função de renderizar precisa saber onde buscar
+    function renderVitrine() {
+        const container = document.getElementById('hardware-container');
+        if (!container) return;
+        
+        // Combina as duas listas para a Home não ficar vazia
+        const todosProdutos = [...hardware.e, ...hardware.a];
+        container.innerHTML = todosProdutos.map(item => `
+            <div class="card" onclick="abrirSinopse('${item.img}', '${item.title}', '${item.price}', '${item.link}', \`${item.desc}\`)">
+                <img src="${item.img}" alt="${item.title}">
+                <h3>${item.title}</h3>
+                <p class="price">${item.price}</p>
+            </div>
+        `).join('');
+    }
         setInterval(() => {
             iE = (iE + 1) % hardware.e.length;
             const el = document.getElementById('loop-e');
@@ -768,19 +758,49 @@
         } // <--- ESSA CHAVE AQUI É A QUE ESTAVA FALTANDO E TRAVOU TUDO
 
         function abrirSinopse(img, title, price, link, desc) {
-            window.scrollTo(0, 0);
+            // 1. Primeiro resetamos as telas
             resetTelas();
+
+            // 2. FORÇAR ROLAGEM AO TOPO: O setTimeout garante que o scroll ocorra 
+            // APÓS a nova tela (view-sinopse) ser exibida.
+            setTimeout(() => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'instant'
+                });
+            }, 10);
+
             linkAtual = link;
 
+            // Preenche os dados básicos do topo
             document.getElementById('target-img').src = img;
             document.getElementById('target-title').innerText = title;
             document.getElementById('target-price').innerText = price;
             document.getElementById('target-desc').innerHTML = desc;
 
-            // Ajuste automático do tamanho do mockup (Redução para não invadir o texto)
-            const imgElement = document.getElementById('target-img');
-            imgElement.style.maxWidth = "300px";
-            imgElement.style.height = "auto";
+            // Lógica de identificação de Áudio vs Ebook
+            const isAudio = title.toLowerCase().includes('audio') || img.toLowerCase().includes('audio');
+
+            const grid = document.getElementById('target-detail-grid');
+            const header = document.getElementById('target-detail-header');
+
+            if (isAudio) {
+                header.innerText = "Detalhes do Áudio";
+                grid.innerHTML = `
+                    <div class="detail-item"><span class="detail-label">Editora</span><span class="detail-value">Portal Pleno O Código</span></div>
+                    <div class="detail-item"><span class="detail-label">Lançamento</span><span class="detail-value">Maio de 2026</span></div>
+                    <div class="detail-item"><span class="detail-label">Idioma</span><span class="detail-value">Português</span></div>
+                    <div class="detail-item"><span class="detail-label">Formato</span><span class="detail-value">Digital (MP3/Wave)</span></div>
+                    <div class="detail-item"><span class="detail-label">Hardware</span><span class="detail-value">iOS, Android, Players, PC</span></div>`;
+            } else {
+                header.innerText = "Detalhes do eBook";
+                grid.innerHTML = `
+                    <div class="detail-item"><span class="detail-label">Editora</span><span class="detail-value">Portal Pleno O Código</span></div>
+                    <div class="detail-item"><span class="detail-label">Lançamento</span><span class="detail-value">Março de 2026</span></div>
+                    <div class="detail-item"><span class="detail-label">Idioma</span><span class="detail-value">Português</span></div>
+                    <div class="detail-item"><span class="detail-label">Formato</span><span class="detail-value">Digital (PDF/ePub)</span></div>
+                    <div class="detail-item"><span class="detail-label">Compatibilidade</span><span class="detail-value">Kindle, Tablet, Smartphone, PC</span></div>`;
+            }
 
             document.getElementById('view-sinopse').style.display = 'block';
             document.getElementById('btn-voltar').style.display = 'block';

@@ -1109,7 +1109,6 @@
             resetTelas();
             const grid = document.getElementById('render-grid');
             const allItems = [...hardware.e, ...hardware.a];
-
             grid.innerHTML = allItems.map((item, index) => `
                 <div class="card-flutuante" onclick="carregarEabrir(${index})">
                     <img src="${item.img}" alt="${item.title}">
@@ -1117,14 +1116,13 @@
                     <div class="card-title">${item.title}</div>
                 </div>
             `).join('');
-
             document.getElementById('view-galeria').style.display = 'block';
             document.getElementById('btn-voltar').style.display = 'block';
             ativarMenu('ebook');
             historico = 'titulos';
-        }
+        } // <--- ESTA CHAVE FALTAVA AQUI E ESTAVA TRAVANDO O SITE!
 
-function irLivros() {
+        function irLivros() {
             resetTelas();
             ativarMenu('livros');
             historico = 'livros';
@@ -1160,9 +1158,7 @@ function irLivros() {
             const allItems = [...hardware.e, ...hardware.a];
             const item = allItems[index];
             abrirSinopse(item.img, item.title, item.price, item.link, item.desc);
-        } // <--- ESSA CHAVE AQUI É A QUE ESTAVA FALTANDO E TRAVOU TUDO
-
-        function abrirSinopse(img, title, price, link, desc) {
+        }
             // 1. Primeiro resetamos as telas
             resetTelas();
 

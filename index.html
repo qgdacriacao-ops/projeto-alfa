@@ -539,103 +539,6 @@
             .sobre-foto-wrapper { position: static; }
             .foto-autor-img { width: 220px; }
         }
-
-        /* ESTILOS EXCLUSIVOS: NOVA ABA LIVROS IMPRESSOS */
-        .view-livros-impressos { 
-            display: none; 
-            background: linear-gradient(135deg, #141414 0%, #070708 100%); /* Fundo diferente da galeria comum */
-            min-height: 100vh; 
-            padding: 60px 5% 100px; 
-            width: 100%; 
-        }
-        .container-livros-impressos {
-            display: grid;
-            grid-template-columns: 1fr 1fr; /* Duas colunas idênticas */
-            gap: 50px;
-            max-width: 1400px;
-            margin: 0 auto;
-            width: 100%;
-        }
-        .coluna-impressos {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 215, 0, 0.1);
-            border-radius: 8px;
-            padding: 30px 20px;
-        }
-        .coluna-impressos h2 {
-            color: var(--gold);
-            text-align: center;
-            text-transform: uppercase;
-            font-size: 1.2rem;
-            margin-bottom: 30px;
-            letter-spacing: 2px;
-            border-bottom: 1px solid rgba(255, 215, 0, 0.3);
-            padding-bottom: 15px;
-        }
-        .grid-impressos {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 25px;
-        }
-        .card-impresso {
-            text-align: center;
-            background: rgba(0, 0, 0, 0.4);
-            padding: 15px;
-            border-radius: 4px;
-            border: 1px solid #222;
-            transition: 0.3s;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: space-between;
-        }
-        .card-impresso:hover {
-            border-color: var(--gold);
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.1);
-        }
-        .card-impresso img {
-            width: 100%;
-            max-width: 140px;
-            height: 200px;
-            object-fit: contain;
-            margin-bottom: 12px;
-        }
-        .title-impresso {
-            color: #fff;
-            font-size: 0.75rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            margin-bottom: 8px;
-            min-height: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .price-impresso {
-            color: var(--gold);
-            font-weight: 700;
-            font-size: 0.9rem;
-            margin-bottom: 12px;
-        }
-        .btn-amazon {
-            display: inline-block;
-            background: #FF9900; /* Cor padrão Amazon */
-            color: #000;
-            text-decoration: none;
-            font-size: 0.65rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            padding: 8px 12px;
-            border-radius: 4px;
-            width: 100%;
-            transition: 0.2s;
-        }
-        .btn-amazon:hover { background: #e68a00; }
-
-        @media (max-width: 900px) {
-            .container-livros-impressos { grid-template-columns: 1fr; gap: 30px; }
-        }
     </style>
 </head>
 <body>
@@ -650,8 +553,8 @@
         <nav>
             <ul id="main-nav">
                 <li><a id="nav-home" class="active" onclick="irHome()">Início</a></li>
-                <li><a id="nav-ebook" onclick="irTitulos()">Ebook</a></li>
                 <li><a id="nav-livros" onclick="irTitulos()">Livros</a></li>
+                <li><a id="nav-ebook" onclick="irTitulos()">Ebook</a></li>
                 <li><a id="nav-sinopse" onclick="abrirSinopseDefault()">Sinopse</a></li>
                 <li><a id="nav-depoimentos" onclick="abrirInfo('depoimentos')">depoimentos</a></li>
                 <li><a id="nav-sobre" onclick="abrirInfo('sobre')">Sobre</a></li>
@@ -716,22 +619,7 @@
 
         <section id="view-galeria" class="view-galeria">
              <div class="grid-produtos" id="render-grid"></div>
-        </section><!-- NOVA VIEW: LIVROS IMPRESSOS (CAPA DURA X CAPA COMUM) -->
-        <section id="view-livros" class="view-livros-impressos">
-            <div class="container-livros-impressos">
-                <!-- Coluna Capa Dura -->
-                <div class="coluna-impressos">
-                    <h2>Ativos Capa Dura</h2>
-                    <div class="grid-impressos" id="render-capa-dura"></div>
-                </div>
-                <!-- Coluna Capa Comum -->
-                <div class="coluna-impressos">
-                    <h2>Ativos Capa Comum</h2>
-                    <div class="grid-impressos" id="render-capa-comum"></div>
-                </div>
-            </div>
         </section>
-
 
         <section id="view-sinopse" class="view-sinopse">
     <div class="container-trindade">
@@ -951,11 +839,23 @@
 <p><strong>"TRUE SOVEREIGNTY IS NOT BORN FROM HOPE; IT IS BORN FROM THE COURAGE TO PERFORM AN AUTOPSY ON YOUR FEARS AND DELETE THE CRUMBS YOU WERE TAUGHT TO CALL A FEAST."</strong></p>` 
             },
             { 
-                  img: 'ebook07.webp', 
+                img: 'ebook07.webp', 
                 title: 'Découvrez-Vous', 
                 price: '€10,00', 
-                 link: 'https://pay.kiwify.com/GFUBNBT', 
-                 desc: `<p>Découvrez-vous...</p>` 
+                link: 'https://pay.kiwify.com/GFUBNBT', 
+                desc: `<p><strong>Découvrez-vous : Révélez Votre Essence, Transformez Vos Relations</strong></p>
+                    <p>Avez-vous l'impression de vivre dans un cycle répétitif de rencontres frustrantes et de malentendus émotionnels?</p>
+                    <p>Bien souvent, nous plaçons la responsabilité de notre bonheur sur l'autre, pour ne récolter que de la déception. Mais la vérité est que la clé de connexions authentiques et durables ne s'est jamais trouvée dans le « partenaire idéal », mais plutôt cachée au cœur de votre propre essence.</p>
+                    <p>Dans <strong>« Découvrez-vous »</strong>, Júlio Bhrósz vous invite à un voyage profond de découverte de soi. Cet e-book n'est pas seulement un guide de conseils ; c'est une carte pratique pour ceux qui souhaitent cesser de survivre à des relations vides et commencer à construire des liens réels et significatifs.</p>
+                    <p><strong>Ce que vous trouverez dans ce voyage :</strong></p>
+                    <p>• <strong>Le Chaînon Manquant :</strong> Comprenez pourquoi la quête externe de validation est une impasse et apprenez comment la connaissance de soi est le seul pilier capable de soutenir des liens véritables.</p>
+                    <p>• <strong>Votre Carte Relationnelle :</strong> Découvrez comment votre histoire familiale et les schémas invisibles façonnent vos choix actuels. Apprenez à rompre avec le passé pour tracer de nouveaux chemins d'affection.</p>
+                    <p>• <strong>Identité et Mission :</strong> Allez au-delà des étiquettes que le monde vous a imposées. Découvrez qui vous êtes dans votre essence, définissez vos désirs et comprenez comment votre mission de vie s'entrelace avec l'amour.</p>
+                    <p>• <strong>Surmonter les Barrières Internes :</strong> Identifiez les peurs cachées qui génèrent l'auto-sabotage et acquérez le courage nécessaire pour vivre des relations épanouies et transparentes.</p>
+                    <p>• <strong>L'Art de la Connexion :</strong> Maîtrisez la communication empathique. Apprenez à établir des limites saines et à cultiver le respect mutuel, transformant les conflits en opportunités de croissance réciproque.</p>
+                    <p><em>Le voyage le plus important de votre vie commence maintenant.</em></p>
+                    <p>N'attendez plus l'amour idéal. Commencez à le cultiver de l'intérieur et changez à jamais la façon dont vous aimez et êtes employé.</p>
+                    <p>Faites le premier pas vers votre transformation. Procurez-le vous maintenant et découvrez le pouvoir d'être vous-même dans toutes vos relations.</p>` 
             },
             {
                   img: 'ebook08.webp',  
@@ -1005,7 +905,26 @@
 
 <p><strong>El Rescate de la Supremacía:</strong> Restablezca el mando central de su mente. Sepa cómo la biología y la mentalidad operan en conjunto para crear un estado de <strong>dominio sobre las propias decisiones</strong>.</p>
 
-<p><strong>Anatomía de la Voluntad:</strong> Entienda cómo se forma la estructura de la personalidad y cómo puede reconfigurar su núcleo operativo para <strong>no volver a aceptar nunca menos que la cima</strong>.</p>`}
+<p><strong>Anatomía de la Voluntad:</strong> Entienda cómo se forma la estructura de la personalidad y cómo puede reconfigurar su núcleo operativo para <strong>no volver a aceptar nunca menos que la cima</strong>.</p>`
+            },
+            { 
+                img: 'ebook10.webp', 
+                title: 'Sherlock Holmes O Dossiê da Engenharia da Colisão', 
+                price: 'R$99,00', 
+                link: 'https://pay.kiwify.com.br/EO6oOFl', 
+                desc: `<p><strong>Sherlock Holmes & O Dossiê da Engenharia da Colisão: A Ciência da Investigação nos Relacionamentos</strong></p>
+                    <p>E se as crises, os silêncios e as dinâmicas ocultas do seu relacionamento pudessem ser decifrados com a precisão cirúrgica do maior detetive da história?</p>
+                    <p>A maioria dos casais ignora os indícios óbvios de desgaste, tratando fissuras estruturais como meros fezes do acaso. Em <strong>“Sherlock Holmes: O Dossiê da Engenharia da Colisão”</strong>, Júlio Bhrósz cruza a lógica analítica vitoriana com o método definitivo de reconstrução afetiva para criar um protocolo de investigação comportamental sem precedentes.</p>
+                    <p>Este não é um livro de teorias vagas; é um <strong>manual de autópsia relacional e engenharia reversa</strong>. Aqui, você deixa de ser refém das dúvidas e assume o papel de investigador-chefe da sua própria realidade conjugal.</p>
+                    <p><strong>O que você vai processar e desvendar neste dossiê:</strong></p>
+                    <p>• <strong>O Método Dedutivo Aplicado:</strong> Aprenda a ler os sinais invisíveis, os microcomportamentos e as omissões que revelam a real saúde da sua estrutura a dois.</p>
+                    <p>• <strong>Rastreamento de Infiltrações:</strong> Descubra como identificar parasitas emocionais e ruídos externos antes que eles causem o colapso definitivo da blindagem do casal.</p>
+                    <p>• <strong>A Física do Impacto Subliminar:</strong> Entenda a mecânica por trás dos confrontos silenciosos e saiba como usar a lógica pura para desarmar armadilhas psicológicas e jogos de manipulação.</p>
+                    <p>• <strong>Arquitetura da Evidência:</strong> Pare de agir por impulso ou emoção reativa. Aprenda a isolar os fatos das expectativas infantis para forjar uma conexão baseada na verdade e na soberania mútua.</p>
+                    <p>• <strong>Engenharia de Casos Complexos:</strong> Implemente protocolos rigorosos de comunicação que funcionam como engrenagens perfeitas, eliminando o atrito desnecessário e solidificando uma base inquebrável.</p>
+                    <p><em>A verdade por trás da colisão está diante dos seus olhos. Falta apenas você aprender a enxergar.</em></p>
+                    <p>Não espere que o tempo resolva o que exige intervenção analítica. Assuma o controle do caso, elimine as migalhas de incerteza e eleve seu vínculo ao nível de soberania absoluta.</p>
+                    <p>Abra este dossiê, execute o escaneamento definitivo e transforme o impacto em poder de fusão estrutural.</p>`}
           ],
         a: [
             { img: 'audio01.webp', title: 'Descubra Você Audio', price: 'R$37,50', link: 'https://pay.kiwify.com.br/lDiv2Do', desc: `<p>Audio Premium...</p>` },
@@ -1014,32 +933,6 @@
             { img: 'audio04.webp', title: 'Know yourself First Audio', price: '$13.95', link: 'https://pay.kiwify.com/ilgU4Kg', desc: `<p>Audio Premium...</p>` },
             { img: 'audio05.webp', title: 'The Engineering Collision Audio', price: '$14.95', link: 'https://pay.kiwify.com/2LTHnl0', desc: `<p>Audio Premium...</p>` },
             { img: 'audio06.webp', title: 'the Supremacy Code Audio', price: '$15.95', link: 'https://pay.kiwify.com/TGmTjRA', desc: `<p>Audio Premium...</p>` }
-        ]
-    },
-    impressos: {
-        capaDura: [
-            { title: "Descubra Você - Capa Dura", price: "R$ 89,90", img: "capadura01.webp", link: "https://www.amazon.com.br" },
-            { title: "Engenharia da Colisão - Capa Dura", price: "R$ 99,00", img: "capadura02.webp", link: "https://www.amazon.com.br" },
-            { title: "Autópsia da Personalidade - Capa Dura", price: "R$ 119,90", img: "capadura03.webp", link: "https://www.amazon.com.br" },
-            { title: "Ativo 4 Hardcover", price: "R$ 89,90", img: "capadura04.webp", link: "https://www.amazon.com.br" },
-            { title: "Ativo 5 Hardcover", price: "R$ 89,90", img: "capadura05.webp", link: "https://www.amazon.com.br" },
-            { title: "Ativo 6 Hardcover", price: "R$ 89,90", img: "capadura06.webp", link: "https://www.amazon.com.br" },
-            { title: "Ativo 7 Hardcover", price: "R$ 89,90", img: "capadura07.webp", link: "https://www.amazon.com.br" },
-            { title: "Ativo 8 Hardcover", price: "R$ 89,90", img: "capadura08.webp", link: "https://www.amazon.com.br" },
-            { title: "Ativo 9 Hardcover", price: "R$ 89,90", img: "capadura09.webp", link: "https://www.amazon.com.br" },
-            { title: "Ativo 10 Hardcover", price: "R$ 89,90", img: "capadura10.webp", link: "https://www.amazon.com.br" }
-        ],
-        capaComum: [
-            { title: "Descubra Você - Capa Comum", price: "R$ 49,90", img: "capacomum01.webp", link: "https://www.amazon.com.br" },
-            { title: "Engenharia da Colisão - Capa Comum", price: "R$ 59,00", img: "capacomum02.webp", link: "https://www.amazon.com.br" },
-            { title: "Autópsia da Personalidade - Capa Comum", price: "R$ 69,90", img: "capacomum03.webp", link: "https://www.amazon.com.br" },
-            { title: "Ativo 4 Paperback", price: "R$ 49,90", img: "capacomum04.webp", link: "https://www.amazon.com.br" },
-            { title: "Ativo 5 Paperback", price: "R$ 49,90", img: "capacomum05.webp", link: "https://www.amazon.com.br" },
-            { title: "Ativo 6 Paperback", price: "R$ 49,90", img: "capacomum06.webp", link: "https://www.amazon.com.br" },
-            { title: "Ativo 7 Paperback", price: "R$ 49,90", img: "capacomum07.webp", link: "https://www.amazon.com.br" },
-            { title: "Ativo 8 Paperback", price: "R$ 49,90", img: "capacomum08.webp", link: "https://www.amazon.com.br" },
-            { title: "Ativo 9 Paperback", price: "R$ 49,90", img: "capacomum09.webp", link: "https://www.amazon.com.br" },
-            { title: "Ativo 10 Paperback", price: "R$ 49,90", img: "capacomum10.webp", link: "https://www.amazon.com.br" }
         ]
     };
 
@@ -1085,7 +978,7 @@
         }, 3000);
 
         function resetTelas() {
-            ['view-home', 'view-galeria', 'view-sinopse', 'view-info-extra', 'view-livros', 'btn-voltar'].forEach(id => {
+            ['view-home', 'view-galeria', 'view-sinopse', 'view-info-extra', 'btn-voltar'].forEach(id => {
                 const el = document.getElementById(id); if(el) el.style.display = 'none';
             });
             window.scrollTo(0, 0);
@@ -1109,6 +1002,7 @@
             resetTelas();
             const grid = document.getElementById('render-grid');
             const allItems = [...hardware.e, ...hardware.a];
+
             grid.innerHTML = allItems.map((item, index) => `
                 <div class="card-flutuante" onclick="carregarEabrir(${index})">
                     <img src="${item.img}" alt="${item.title}">
@@ -1116,49 +1010,20 @@
                     <div class="card-title">${item.title}</div>
                 </div>
             `).join('');
+
             document.getElementById('view-galeria').style.display = 'block';
             document.getElementById('btn-voltar').style.display = 'block';
             ativarMenu('ebook');
             historico = 'titulos';
-        } // <--- ESTA CHAVE FALTAVA AQUI E ESTAVA TRAVANDO O SITE!
-
-        function irLivros() {
-            resetTelas();
-            ativarMenu('livros');
-            historico = 'livros';
-
-            const containerCapaDura = document.getElementById('render-capa-dura');
-            const containerCapaComum = document.getElementById('render-capa-comum');
-
-            // Renderiza os 10 ativos de Capa Dura
-            containerCapaDura.innerHTML = hardware.impressos.capaDura.map(item => `
-                <div class="card-impresso">
-                    <img src="${item.img}" alt="${item.title}">
-                    <div class="title-impresso">${item.title}</div>
-                    <div class="price-impresso">${item.price}</div>
-                    <a href="${item.link}" target="_blank" class="btn-amazon">Ver na Amazon</a>
-                </div>
-            `).join('');
-
-            // Renderiza os 10 ativos de Capa Comum
-            containerCapaComum.innerHTML = hardware.impressos.capaComum.map(item => `
-                <div class="card-impresso">
-                    <img src="${item.img}" alt="${item.title}">
-                    <div class="title-impresso">${item.title}</div>
-                    <div class="price-impresso">${item.price}</div>
-                    <a href="${item.link}" target="_blank" class="btn-amazon">Ver na Amazon</a>
-                </div>
-            `).join('');
-
-            document.getElementById('view-livros').style.display = 'block';
-            document.getElementById('btn-voltar').style.display = 'block';
         }
 
         function carregarEabrir(index) {
             const allItems = [...hardware.e, ...hardware.a];
             const item = allItems[index];
             abrirSinopse(item.img, item.title, item.price, item.link, item.desc);
-        }
+        } // <--- ESSA CHAVE AQUI É A QUE ESTAVA FALTANDO E TRAVOU TUDO
+
+        function abrirSinopse(img, title, price, link, desc) {
             // 1. Primeiro resetamos as telas
             resetTelas();
 
@@ -1225,7 +1090,6 @@
 
         function voltarFluxo() {
             if (historico === 'sinopse' || historico === 'info') irTitulos();
-            else if (historico === 'livros') irHome();
             else irHome();
         }
 

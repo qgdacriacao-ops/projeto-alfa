@@ -507,9 +507,10 @@
         }
 
         /* RESPONSIVIDADE */
-        @media (max-width: 1024px) {
-            .grid-produtos { grid-template-columns: repeat(2, 1fr); gap: 40px; }
-            .container-trindade { grid-template-columns: 1fr; gap: 30px; }
+	        @media (max-width: 1024px) {
+	            .grid-produtos { grid-template-columns: repeat(2, 1fr); gap: 40px; }
+                .view-livros-fisicos-grid { grid-template-columns: 1fr !important; }
+	            .container-trindade { grid-template-columns: 1fr; gap: 30px; }
             .col-mockup { position: static; margin-bottom: 20px; }
             .col-compra { position: static; }
             .details-grid { grid-template-columns: repeat(2, 1fr); }
@@ -553,8 +554,8 @@
         <nav>
             <ul id="main-nav">
                 <li><a id="nav-home" class="active" onclick="irHome()">Início</a></li>
-                <li><a id="nav-livros" onclick="irTitulos()">Livros</a></li>
-                <li><a id="nav-ebook" onclick="irTitulos()">Ebook</a></li>
+                <li><a id="nav-livros" onclick="irTitulos('livros')">Livros</a></li>
+                <li><a id="nav-ebook" onclick="irTitulos('e')">Ebook</a></li>
                 <li><a id="nav-sinopse" onclick="abrirSinopseDefault()">Sinopse</a></li>
                 <li><a id="nav-depoimentos" onclick="abrirInfo('depoimentos')">depoimentos</a></li>
                 <li><a id="nav-sobre" onclick="abrirInfo('sobre')">Sobre</a></li>
@@ -621,6 +622,21 @@
              <div class="grid-produtos" id="render-grid"></div>
         </section>
 
+        <section id="view-livros-fisicos" class="view-galeria" style="display: none; padding-top: 40px;">
+            <div class="view-livros-fisicos-grid" style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 40px;">
+                <!-- Coluna Capa Dura -->
+                <div>
+                    <h2 style="color: var(--gold); text-align: center; text-transform: uppercase; margin-bottom: 30px; border-bottom: 2px solid var(--gold); padding-bottom: 10px;">Capa Dura (Amazon)</h2>
+                    <div id="coluna-capa-dura" style="display: flex; flex-direction: column; gap: 20px;"></div>
+                </div>
+                <!-- Coluna Capa Comum -->
+                <div>
+                    <h2 style="color: #fff; text-align: center; text-transform: uppercase; margin-bottom: 30px; border-bottom: 2px solid #fff; padding-bottom: 10px;">Capa Comum (Amazon)</h2>
+                    <div id="coluna-capa-comum" style="display: flex; flex-direction: column; gap: 20px;"></div>
+                </div>
+            </div>
+        </section>
+
         <section id="view-sinopse" class="view-sinopse">
     <div class="container-trindade">
         <div class="col-mockup">
@@ -636,20 +652,21 @@
             </div>
         </div>
 
-        <div class="col-compra">
-            <div class="buy-card">
-                <span class="price-label">Por Apenas</span>
-                <div class="price-value" id="target-price">R$ 0,00</div>
-                <div class="btn-group">
-                    <p style="font-size: 0.65rem; color: var(--gold); text-align: center; margin-bottom: 5px; font-weight: 700; text-transform: uppercase;">Pagamento seguro via Kiwify.</p>
-                    <button class="btn-gold" onclick="checkout()">Adicionar ao Carrinho</button>
-                    <button class="btn-red" onclick="checkout()">Compre Agora</button>
-                    <button class="btn-red" onclick="checkout()">COMBO EBOOKS</button>
-                    <button class="btn-red" onclick="checkout()">COMBO AUDIO</button>
-                    <button class="btn-red" onclick="checkout()">COMBO COMPLETO</button>
-                </div>
-            </div>
-        </div>
+	        <div class="col-compra">
+	            <div class="buy-card">
+	                <span class="price-label">Por Apenas</span>
+	                <div class="price-value" id="target-price">R$ 0,00</div>
+	                <div class="btn-group">
+	                    <p id="checkout-platform" style="font-size: 0.65rem; color: var(--gold); text-align: center; margin-bottom: 5px; font-weight: 700; text-transform: uppercase;">Pagamento seguro via Kiwify.</p>
+	                    <button id="btn-main-buy" class="btn-gold" onclick="checkout()">Compre Agora</button>
+	                    <div id="combo-buttons" style="display: flex; flex-direction: column; gap: 10px;">
+	                        <button class="btn-red" onclick="checkout()">COMBO EBOOKS</button>
+	                        <button class="btn-red" onclick="checkout()">COMBO AUDIO</button>
+	                        <button class="btn-red" onclick="checkout()">COMBO COMPLETO</button>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
     </div>
 
     <div class="product-details">
@@ -671,6 +688,12 @@
 
 <script>
    const hardware = {
+        a: [
+            { title: "Audiobook 01", img: "audio01.webp", price: "R$ 47,00", link: "https://pay.kiwify.com.br/", desc: "<p>Conteúdo em áudio exclusivo.</p>" },
+            { title: "Audiobook 02", img: "audio02.webp", price: "R$ 47,00", link: "https://pay.kiwify.com.br/", desc: "<p>Conteúdo em áudio exclusivo.</p>" },
+            { title: "Audiobook 03", img: "audio03.webp", price: "R$ 47,00", link: "https://pay.kiwify.com.br/", desc: "<p>Conteúdo em áudio exclusivo.</p>" },
+            { title: "Audiobook 04", img: "audio04.webp", price: "R$ 47,00", link: "https://pay.kiwify.com.br/", desc: "<p>Conteúdo em áudio exclusivo.</p>" }
+        ],
         e: [
             { 
                  img: 'ebook01.webp', 
@@ -946,9 +969,9 @@
     ];
 
     let linkAtual = '';
-    let historico = 'vitrine';
-    let iE = 0; 
-    let iA = 0;
+    let historico = 'home';
+    let iE = 0; // Índice atual para o loop de Ebooks na home
+    let iA = 0; // Índice atual para o loop de Áudios na home
 
     // IMPORTANTE: Para a Home voltar, a função de renderizar precisa saber onde buscar
     function renderVitrine() {
@@ -978,17 +1001,23 @@
         }, 3000);
 
         function resetTelas() {
-            ['view-home', 'view-galeria', 'view-sinopse', 'view-info-extra', 'btn-voltar'].forEach(id => {
+            ['view-home', 'view-galeria', 'view-sinopse', 'view-info-extra', 'view-livros-fisicos', 'btn-voltar'].forEach(id => {
                 const el = document.getElementById(id); if(el) el.style.display = 'none';
             });
+            document.getElementById('bg').style.display = 'none';
             window.scrollTo(0, 0);
         }
 
         function ativarMenu(id) {
             document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
-            const alvo = document.getElementById('nav-' + id);
+            let menuId = id;
+            if (id === 'e') menuId = 'ebook';
+            const alvo = document.getElementById('nav-' + menuId);
             if(alvo) alvo.classList.add('active');
         }
+
+    
+
 
         function irHome() {
             resetTelas();
@@ -998,32 +1027,108 @@
             historico = 'home';
         }
 
-        function irTitulos() {
-            resetTelas();
-            const grid = document.getElementById('render-grid');
-            const allItems = [...hardware.e, ...hardware.a];
+        function escapeHtml(text) {
+            if (!text) return "";
+            return text
+                .replace(/'/g, "\\'")
+                .replace(/"/g, '&quot;')
+                .replace(/\n/g, '');
+        }
 
-            grid.innerHTML = allItems.map((item, index) => `
-                <div class="card-flutuante" onclick="carregarEabrir(${index})">
-                    <img src="${item.img}" alt="${item.title}">
-                    <div class="stars">★★★★★</div>
-                    <div class="card-title">${item.title}</div>
-                </div>
-            `).join('');
+        function irTitulos(tipo) {
+            resetTelas();
+            
+            if (tipo === 'livros') {
+                irLivrosFisicos();
+                return;
+            }
 
             document.getElementById('view-galeria').style.display = 'block';
             document.getElementById('btn-voltar').style.display = 'block';
-            ativarMenu('ebook');
+
+            const container = document.getElementById('render-grid');
+            const listaSelecionada = hardware.e;
+
+            container.innerHTML = listaSelecionada.map((item, index) => {
+                return `
+                    <div class="card-flutuante" onclick="abrirSinopse('${item.img}', '${item.title}', '${item.price}', '${item.link}', '${escapeHtml(item.desc)}')">
+                        <img src="${item.img}" alt="${item.title}">
+                        <div class="card-title">${item.title}</div>
+                    </div>
+                `;
+            }).join('');
+            
+            ativarMenu(tipo);
             historico = 'titulos';
         }
 
-        function carregarEabrir(index) {
-            const allItems = [...hardware.e, ...hardware.a];
-            const item = allItems[index];
-            abrirSinopse(item.img, item.title, item.price, item.link, item.desc);
-        } // <--- ESSA CHAVE AQUI É A QUE ESTAVA FALTANDO E TRAVOU TUDO
+        function irLivrosFisicos() {
+            resetTelas();
+            document.getElementById('view-livros-fisicos').style.display = 'block';
+            document.getElementById('btn-voltar').style.display = 'block';
+            
+            const containerDura = document.getElementById('coluna-capa-dura');
+            const containerComum = document.getElementById('coluna-capa-comum');
 
-        function abrirSinopse(img, title, price, link, desc) {
+            const livrosDura = [
+                { title: "Descubra Você - Capa Dura", img: "ebook01.webp", link: "https://www.amazon.com.br/" },
+                { title: "Engenharia da Colisão - Capa Dura", img: "ebook02.webp", link: "https://www.amazon.com.br/" },
+                { title: "Autópsia da Personalidade - Capa Dura", img: "ebook03.webp", link: "https://www.amazon.com.br/" },
+                { title: "Know yourself First - Capa Dura", img: "ebook04.webp", link: "https://www.amazon.com.br/" },
+                { title: "Engineering Collision - Capa Dura", img: "ebook05.webp", link: "https://www.amazon.com.br/" },
+                { title: "The Supremacy Code - Capa Dura", img: "ebook06.webp", link: "https://www.amazon.com.br/" },
+                { title: "Découvrez-Vous - Capa Dura", img: "ebook07.webp", link: "https://www.amazon.com.br/" },
+                { title: "Autopsie de la Personnalité - Capa Dura", img: "ebook08.webp", link: "https://www.amazon.com.br/" },
+                { title: "Autópsia de la Personalidad - Capa Dura", img: "ebook09.webp", link: "https://www.amazon.com.br/" },
+                { title: "Sherlock Holmes Dossiê - Capa Dura", img: "ebook10.webp", link: "https://www.amazon.com.br/" }
+            ];
+
+            const livrosComum = [
+                { title: "Descubra Você - Capa Comum", img: "ebook01.webp", link: "https://www.amazon.com.br/" },
+                { title: "Engenharia da Colisão - Capa Comum", img: "ebook02.webp", link: "https://www.amazon.com.br/" },
+                { title: "Autópsia da Personalidade - Capa Comum", img: "ebook03.webp", link: "https://www.amazon.com.br/" },
+                { title: "Know yourself First - Capa Comum", img: "ebook04.webp", link: "https://www.amazon.com.br/" },
+                { title: "Engineering Collision - Capa Comum", img: "ebook05.webp", link: "https://www.amazon.com.br/" },
+                { title: "The Supremacy Code - Capa Comum", img: "ebook06.webp", link: "https://www.amazon.com.br/" },
+                { title: "Découvrez-Vous - Capa Comum", img: "ebook07.webp", link: "https://www.amazon.com.br/" },
+                { title: "Autopsie de la Personnalité - Capa Comum", img: "ebook08.webp", link: "https://www.amazon.com.br/" },
+                { title: "Autópsia de la Personalidad - Capa Comum", img: "ebook09.webp", link: "https://www.amazon.com.br/" },
+                { title: "Sherlock Holmes Dossiê - Capa Comum", img: "ebook10.webp", link: "https://www.amazon.com.br/" }
+            ];
+
+            containerDura.innerHTML = livrosDura.map(livro => `
+                <div style="display: flex; align-items: center; gap: 15px; background: rgba(255,255,255,0.05); padding: 10px; border-radius: 4px; border: 1px solid var(--gold);">
+                    <img src="${livro.img}" style="width: 50px; height: 70px; object-fit: contain;">
+                    <div style="flex: 1;">
+                        <h4 style="color: #fff; font-size: 0.7rem; text-transform: uppercase; margin-bottom: 5px;">${livro.title}</h4>
+                        <button onclick="window.open('${livro.link}', '_blank')" style="background: var(--gold); color: #000; border: none; padding: 5px 10px; font-weight: 700; font-size: 0.6rem; text-transform: uppercase; cursor: pointer; border-radius: 2px;">Comprar na Amazon</button>
+                    </div>
+                </div>
+            `).join('');
+
+            containerComum.innerHTML = livrosComum.map(livro => `
+                <div style="display: flex; align-items: center; gap: 15px; background: rgba(255,255,255,0.05); padding: 10px; border-radius: 4px; border: 1px solid #fff;">
+                    <img src="${livro.img}" style="width: 50px; height: 70px; object-fit: contain;">
+                    <div style="flex: 1;">
+                        <h4 style="color: #fff; font-size: 0.7rem; text-transform: uppercase; margin-bottom: 5px;">${livro.title}</h4>
+                        <button onclick="window.open('${livro.link}', '_blank')" style="background: #fff; color: #000; border: none; padding: 5px 10px; font-weight: 700; font-size: 0.6rem; text-transform: uppercase; cursor: pointer; border-radius: 2px;">Comprar na Amazon</button>
+                    </div>
+                </div>
+            `).join('');
+
+            ativarMenu('livros');
+            historico = 'livros-fisicos';
+        }
+
+	           function carregarEabrir(index, tipo) {
+	           const lista = (tipo === 'a') ? hardware.a : hardware.e;
+	           const item = lista[index];
+	           abrirSinopse(item.img, item.title, item.price, item.link, item.desc);
+	           }
+
+            // <--- ESSA CHAVE AQUI É A QUE ESTAVA FALTANDO E TRAVOU TUDO
+
+            function abrirSinopse(img, title, price, link, desc) {
             // 1. Primeiro resetamos as telas
             resetTelas();
 
@@ -1039,10 +1144,25 @@
             linkAtual = link;
 
             // Preenche os dados básicos do topo
-            document.getElementById('target-img').src = img;
-            document.getElementById('target-title').innerText = title;
-            document.getElementById('target-price').innerText = price;
-            document.getElementById('target-desc').innerHTML = desc;
+	            document.getElementById('target-img').src = img;
+	            document.getElementById('target-title').innerText = title;
+	            document.getElementById('target-price').innerText = price;
+	            document.getElementById('target-desc').innerHTML = desc;
+
+	            // Ajusta o texto da plataforma de checkout e visibilidade dos botões
+	            const platformText = document.getElementById('checkout-platform');
+	            const comboButtons = document.getElementById('combo-buttons');
+	            const btnMainBuy = document.getElementById('btn-main-buy');
+
+	            if (link.includes('amazon.com')) {
+	                platformText.innerText = "Compra segura via Amazon.";
+	                btnMainBuy.innerText = "Comprar na Amazon";
+	                comboButtons.style.display = 'none';
+	            } else {
+	                platformText.innerText = "Pagamento seguro via Kiwify.";
+	                btnMainBuy.innerText = "Compre Agora";
+	                comboButtons.style.display = 'flex';
+	            }
 
             // Lógica de identificação de Áudio vs Ebook
             const isAudio = title.toLowerCase().includes('audio') || img.toLowerCase().includes('audio');
@@ -1050,23 +1170,31 @@
             const grid = document.getElementById('target-detail-grid');
             const header = document.getElementById('target-detail-header');
 
-            if (isAudio) {
-                header.innerText = "Detalhes do Áudio";
-                grid.innerHTML = `
-                    <div class="detail-item"><span class="detail-label">Editora</span><span class="detail-value">Portal Pleno O Código</span></div>
-                    <div class="detail-item"><span class="detail-label">Lançamento</span><span class="detail-value">Maio de 2026</span></div>
-                    <div class="detail-item"><span class="detail-label">Idioma</span><span class="detail-value">Português</span></div>
-                    <div class="detail-item"><span class="detail-label">Formato</span><span class="detail-value">Digital (MP3/Wave)</span></div>
-                    <div class="detail-item"><span class="detail-label">Hardware</span><span class="detail-value">iOS, Android, Players, PC</span></div>`;
-            } else {
-                header.innerText = "Detalhes do eBook";
-                grid.innerHTML = `
-                    <div class="detail-item"><span class="detail-label">Editora</span><span class="detail-value">Portal Pleno O Código</span></div>
-                    <div class="detail-item"><span class="detail-label">Lançamento</span><span class="detail-value">Março de 2026</span></div>
-                    <div class="detail-item"><span class="detail-label">Idioma</span><span class="detail-value">Português</span></div>
-                    <div class="detail-item"><span class="detail-label">Formato</span><span class="detail-value">Digital (PDF/ePub)</span></div>
-                    <div class="detail-item"><span class="detail-label">Compatibilidade</span><span class="detail-value">Kindle, Tablet, Smartphone, PC</span></div>`;
-            }
+	            if (isAudio) {
+	                header.innerText = "Detalhes do Áudio";
+	                grid.innerHTML = `
+	                    <div class="detail-item"><span class="detail-label">Editora</span><span class="detail-value">Portal Pleno O Código</span></div>
+	                    <div class="detail-item"><span class="detail-label">Lançamento</span><span class="detail-value">Maio de 2026</span></div>
+	                    <div class="detail-item"><span class="detail-label">Idioma</span><span class="detail-value">Português</span></div>
+	                    <div class="detail-item"><span class="detail-label">Formato</span><span class="detail-value">Digital (MP3/Wave)</span></div>
+	                    <div class="detail-item"><span class="detail-label">Hardware</span><span class="detail-value">iOS, Android, Players, PC</span></div>`;
+	            } else if (link.includes('amazon.com')) {
+	                header.innerText = "Detalhes do Livro Impresso";
+	                grid.innerHTML = `
+	                    <div class="detail-item"><span class="detail-label">Editora</span><span class="detail-value">Portal Pleno O Código</span></div>
+	                    <div class="detail-item"><span class="detail-label">Lançamento</span><span class="detail-value">Junho de 2026</span></div>
+	                    <div class="detail-item"><span class="detail-label">Idioma</span><span class="detail-value">Português</span></div>
+	                    <div class="detail-item"><span class="detail-label">Formato</span><span class="detail-value">Capa Dura / Comum</span></div>
+	                    <div class="detail-item"><span class="detail-label">Envio</span><span class="detail-value">Logística Amazon</span></div>`;
+	            } else {
+	                header.innerText = "Detalhes do eBook";
+	                grid.innerHTML = `
+	                    <div class="detail-item"><span class="detail-label">Editora</span><span class="detail-value">Portal Pleno O Código</span></div>
+	                    <div class="detail-item"><span class="detail-label">Lançamento</span><span class="detail-value">Março de 2026</span></div>
+	                    <div class="detail-item"><span class="detail-label">Idioma</span><span class="detail-value">Português</span></div>
+	                    <div class="detail-item"><span class="detail-label">Formato</span><span class="detail-value">Digital (PDF/ePub)</span></div>
+	                    <div class="detail-item"><span class="detail-label">Compatibilidade</span><span class="detail-value">Kindle, Tablet, Smartphone, PC</span></div>`;
+	            }
 
             document.getElementById('view-sinopse').style.display = 'block';
             document.getElementById('btn-voltar').style.display = 'block';
@@ -1088,10 +1216,18 @@
             if(linkAtual && linkAtual !== '#') window.open(linkAtual, '_blank');
         }
 
-        function voltarFluxo() {
-            if (historico === 'sinopse' || historico === 'info') irTitulos();
-            else irHome();
-        }
+		        function voltarFluxo() {
+	            if (historico === 'sinopse' || historico === 'info') {
+                    const currentActive = document.querySelector('nav a.active');
+                    if (currentActive && currentActive.id === 'nav-livros') {
+                        irLivrosFisicos();
+                    } else {
+                        irTitulos('e');
+                    }
+                } else {
+                    irHome();
+                }
+		        }
 
         function abrirInfo(tipo) {
             resetTelas();
@@ -1229,7 +1365,27 @@ A metodologia de JB integra protocolos de Inteligência Emocional da <b>Harvard 
             navigator.clipboard.writeText(email).then(() => alert('E-mail copiado!')); 
         }
 
-        window.onload = () => { irHome(); };
+        function rodarLoops() {
+            if (hardware.e && hardware.e.length > 0) {
+                setInterval(() => {
+                    iE = (iE + 1) % hardware.e.length;
+                    const img = document.getElementById('loop-e');
+                    if (img) img.src = hardware.e[iE].img;
+                }, 3000);
+            }
+            if (hardware.a && hardware.a.length > 0) {
+                setInterval(() => {
+                    iA = (iA + 1) % hardware.a.length;
+                    const img = document.getElementById('loop-a');
+                    if (img) img.src = hardware.a[iA].img;
+                }, 3500);
+            }
+        }
+
+        window.onload = () => { 
+            irHome(); 
+            rodarLoops();
+        };
     </script>
 </body>
 </html>

@@ -214,7 +214,7 @@
             background: rgba(255,255,255,0.05);
             padding: 15px;
             border-radius: 4px;
-            border: 1px solid var(--gold);
+            border: none;
             transition: 0.3s;
             cursor: pointer;
         }
@@ -223,8 +223,8 @@
             box-shadow: 0 5px 15px rgba(255, 215, 0, 0.2);
         }
         .audiobook-card img {
-            width: 80px;
-            height: 110px;
+            width: 140px;
+            height: 190px;
             object-fit: contain;
         }
         .audiobook-info {
@@ -418,15 +418,15 @@
 
         .view-info-extra { display: none; min-height: 100vh; padding: 60px 0 100px; width: 100%; position: relative; z-index: 20; }
         .layout-avaliacoes { display: grid; grid-template-columns: 1fr 400px 1fr; gap: 30px; align-items: start; }
-        .card-review { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,215,0,0.2); padding: 20px; margin-bottom: 20px; border-radius: 4px; }
+        .card-review { background: rgba(0,0,0,0.45); border: 1px solid rgba(255,215,0,0.2); padding: 20px; margin-bottom: 20px; border-radius: 4px; }
         .card-review .stars { color: var(--gold); margin-bottom: 10px; }
         .card-review .text { color: #fff; font-style: italic; margin-bottom: 15px; font-size: 0.9rem; }
         .card-review .author-info { color: #888; font-size: 0.8rem; }
-        .form-review-container { background: #111; padding: 30px; border: 1px solid var(--gold); border-radius: 4px; }
+        .form-review-container { background: rgba(0,0,0,0.55); padding: 30px; border: 1px solid var(--gold); border-radius: 4px; }
         .form-review-container h3 { color: var(--gold); margin-bottom: 20px; text-transform: uppercase; text-align: center; }
         .input-group { margin-bottom: 15px; }
         .input-group label { display: block; color: #fff; font-size: 0.7rem; text-transform: uppercase; margin-bottom: 5px; }
-        .input-group input, .input-group textarea, .input-group select { width: 100%; background: #000; border: 1px solid #333; padding: 10px; color: #fff; font-family: inherit; }
+        .input-group input, .input-group textarea, .input-group select { width: 100%; background: rgba(0,0,0,0.6); border: 1px solid #555; padding: 10px; color: #fff; font-family: inherit; }
         .btn-enviar { width: 100%; background: var(--gold); color: #000; border: none; padding: 15px; font-weight: 800; text-transform: uppercase; cursor: pointer; }
 
         /* SOBRE, CONTATO, SUPORTE */
@@ -459,13 +459,13 @@
 }
 
 .contato-content { 
-    background: rgba(0,0,0,0.85); 
-    border: 1px solid var(--gold); 
+    background: transparent; 
+    border: none; 
     padding: 40px; 
     max-width: 900px; 
     width: 100%; 
     color: #fff; 
-    box-shadow: 0 20px 50px rgba(0,0,0,0.5); 
+    box-shadow: none; 
     text-align: left;
 }
 
@@ -507,7 +507,7 @@
 .email-accounts h3 { color: var(--gold); font-size: 1rem; text-transform: uppercase; margin-bottom: 20px; }
 
 .email-item { 
-    background: #000; 
+    background: rgba(0,0,0,0.55); 
     padding: 15px; 
     border: 1px solid var(--gold); 
     cursor: pointer; 
@@ -519,7 +519,7 @@
 
 .form-group { margin-bottom: 15px; display: flex; flex-direction: column; }
 .form-group label { color: #fff; font-size: 0.8rem; text-transform: uppercase; font-weight: 700; margin-bottom: 5px; }
-.form-group input, .form-group textarea { background: #000; color: #fff; border: 1px solid var(--gold); padding: 10px; border-radius: 2px; font-family: 'Inter', sans-serif; }
+.form-group input, .form-group textarea { background: rgba(0,0,0,0.6); color: #fff; border: 1px solid var(--gold); padding: 10px; border-radius: 2px; font-family: 'Inter', sans-serif; }
 .btn-feedback { background: var(--gold); color: #000; padding: 12px; border: none; border-radius: 2px; font-weight: 700; text-transform: uppercase; cursor: pointer; transition: 0.3s; width: 100%; }
 
 .quote { font-style: italic; font-size: 1.3rem; border-left: 4px solid var(--gold); padding-left: 20px; margin: 30px 0; color: #eee; }
@@ -693,12 +693,12 @@
             <div class="view-livros-fisicos-grid" style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 40px;">
                 <!-- Coluna Capa Dura -->
                 <div>
-                    <h2 style="color: var(--gold); text-align: center; text-transform: uppercase; margin-bottom: 30px; border-bottom: 2px solid var(--gold); padding-bottom: 10px;">Capa Dura (Amazon)</h2>
+                    <h2 style="color: var(--gold); text-align: center; text-transform: uppercase; margin-bottom: 30px; border-bottom: 2px solid var(--gold); padding-bottom: 10px;">Capa Dura Premium</h2>
                     <div id="coluna-capa-dura" style="display: flex; flex-direction: column; gap: 20px;"></div>
                 </div>
                 <!-- Coluna Capa Comum -->
                 <div>
-                    <h2 style="color: #fff; text-align: center; text-transform: uppercase; margin-bottom: 30px; border-bottom: 2px solid #fff; padding-bottom: 10px;">Capa Comum (Amazon)</h2>
+                    <h2 style="color: var(--gold); text-align: center; text-transform: uppercase; margin-bottom: 30px; border-bottom: 2px solid var(--gold); padding-bottom: 10px;">Capa Comum</h2>
                     <div id="coluna-capa-comum" style="display: flex; flex-direction: column; gap: 20px;"></div>
                 </div>
             </div>
@@ -1168,50 +1168,44 @@
             const containerComum = document.getElementById('coluna-capa-comum');
 
             const livrosDura = [
-                { title: "Descubra Você - Capa Dura", img: "ebook01.webp", link: "https://www.amazon.com.br/" },
-                { title: "Engenharia da Colisão - Capa Dura", img: "ebook02.webp", link: "https://www.amazon.com.br/" },
-                { title: "Autópsia da Personalidade - Capa Dura", img: "ebook03.webp", link: "https://www.amazon.com.br/" },
-                { title: "Know yourself First - Capa Dura", img: "ebook04.webp", link: "https://www.amazon.com.br/" },
-                { title: "Engineering Collision - Capa Dura", img: "ebook05.webp", link: "https://www.amazon.com.br/" },
-                { title: "The Supremacy Code - Capa Dura", img: "ebook06.webp", link: "https://www.amazon.com.br/" },
-                { title: "Découvrez-Vous - Capa Dura", img: "ebook07.webp", link: "https://www.amazon.com.br/" },
-                { title: "Autopsie de la Personnalité - Capa Dura", img: "ebook08.webp", link: "https://www.amazon.com.br/" },
-                { title: "Autópsia de la Personalidad - Capa Dura", img: "ebook09.webp", link: "https://www.amazon.com.br/" },
-                { title: "Sherlock Holmes Dossiê - Capa Dura", img: "ebook10.webp", link: "https://www.amazon.com.br/" }
+                { title: "Descubra Você", price: "R$ 87,00", img: "ebook01.webp", link: "https://www.amazon.com.br/" },
+                { title: "Engenharia da Colisão", price: "R$ 87,00", img: "ebook02.webp", link: "https://www.amazon.com.br/" },
+                { title: "Autópsia da Personalidade", price: "R$ 87,00", img: "ebook03.webp", link: "https://www.amazon.com.br/" },
+                { title: "Know yourself First", price: "$ 19.90", img: "ebook04.webp", link: "https://www.amazon.com.br/" },
+                { title: "Engineering Collision", price: "$ 19.90", img: "ebook05.webp", link: "https://www.amazon.com.br/" },
+                { title: "The Supremacy Code", price: "$ 19.90", img: "ebook06.webp", link: "https://www.amazon.com.br/" },
+                { title: "Découvrez-Vous", price: "€ 18.00", img: "ebook07.webp", link: "https://www.amazon.com.br/" },
+                { title: "Autopsie de la Personnalité", price: "€ 18.00", img: "ebook08.webp", link: "https://www.amazon.com.br/" },
+                { title: "Autópsia de la Personalidad", price: "€ 18.00", img: "ebook09.webp", link: "https://www.amazon.com.br/" },
+                { title: "Sherlock Holmes Dossiê", price: "R$ 97,00", img: "ebook10.webp", link: "https://www.amazon.com.br/" }
             ];
 
             const livrosComum = [
-                { title: "Descubra Você - Capa Comum", img: "ebook01.webp", link: "https://www.amazon.com.br/" },
-                { title: "Engenharia da Colisão - Capa Comum", img: "ebook02.webp", link: "https://www.amazon.com.br/" },
-                { title: "Autópsia da Personalidade - Capa Comum", img: "ebook03.webp", link: "https://www.amazon.com.br/" },
-                { title: "Know yourself First - Capa Comum", img: "ebook04.webp", link: "https://www.amazon.com.br/" },
-                { title: "Engineering Collision - Capa Comum", img: "ebook05.webp", link: "https://www.amazon.com.br/" },
-                { title: "The Supremacy Code - Capa Comum", img: "ebook06.webp", link: "https://www.amazon.com.br/" },
-                { title: "Découvrez-Vous - Capa Comum", img: "ebook07.webp", link: "https://www.amazon.com.br/" },
-                { title: "Autopsie de la Personnalité - Capa Comum", img: "ebook08.webp", link: "https://www.amazon.com.br/" },
-                { title: "Autópsia de la Personalidad - Capa Comum", img: "ebook09.webp", link: "https://www.amazon.com.br/" },
-                { title: "Sherlock Holmes Dossiê - Capa Comum", img: "ebook10.webp", link: "https://www.amazon.com.br/" }
+                { title: "Descubra Você", price: "R$ 47,00", img: "ebook01.webp", link: "https://www.amazon.com.br/" },
+                { title: "Engenharia da Colisão", price: "R$ 47,00", img: "ebook02.webp", link: "https://www.amazon.com.br/" },
+                { title: "Autópsia da Personalidade", price: "R$ 47,00", img: "ebook03.webp", link: "https://www.amazon.com.br/" },
+                { title: "Know yourself First", price: "$ 12.90", img: "ebook04.webp", link: "https://www.amazon.com.br/" },
+                { title: "Engineering Collision", price: "$ 12.90", img: "ebook05.webp", link: "https://www.amazon.com.br/" },
+                { title: "The Supremacy Code", price: "$ 12.90", img: "ebook06.webp", link: "https://www.amazon.com.br/" },
+                { title: "Découvrez-Vous", price: "€ 12.00", img: "ebook07.webp", link: "https://www.amazon.com.br/" },
+                { title: "Autopsie de la Personnalité", price: "€ 12.00", img: "ebook08.webp", link: "https://www.amazon.com.br/" },
+                { title: "Autópsia de la Personalidad", price: "€ 12.00", img: "ebook09.webp", link: "https://www.amazon.com.br/" },
+                { title: "Sherlock Holmes Dossiê", price: "R$ 57,00", img: "ebook10.webp", link: "https://www.amazon.com.br/" }
             ];
 
-            containerDura.innerHTML = livrosDura.map(livro => `
-                <div style="display: flex; align-items: center; gap: 15px; background: rgba(255,255,255,0.05); padding: 10px; border-radius: 4px; border: 1px solid var(--gold);">
-                    <img src="${livro.img}" style="width: 50px; height: 70px; object-fit: contain;">
+            const renderLivro = (livro) => `
+                <div style="display: flex; align-items: center; gap: 15px; background: rgba(255,255,255,0.05); padding: 10px; border-radius: 4px; border: none;">
+                    <img src="${livro.img}" style="width: 110px; height: 150px; object-fit: contain;">
                     <div style="flex: 1;">
-                        <h4 style="color: #fff; font-size: 0.7rem; text-transform: uppercase; margin-bottom: 5px;">${livro.title}</h4>
-                        <button onclick="window.open('${livro.link}', '_blank')" style="background: var(--gold); color: #000; border: none; padding: 5px 10px; font-weight: 700; font-size: 0.6rem; text-transform: uppercase; cursor: pointer; border-radius: 2px;">Comprar na Amazon</button>
+                        <h4 style="color: #fff; font-size: 0.6rem; text-transform: uppercase; margin-bottom: 5px;">${livro.title}</h4>
+                        <span style="color: var(--gold); font-weight: 700; font-size: 0.75rem; margin-bottom: 8px; display: block;">${livro.price}</span>
+                        <button onclick="window.open('${livro.link}', '_blank')" style="background: var(--gold); color: #000; border: none; padding: 5px 10px; font-weight: 700; font-size: 0.55rem; text-transform: uppercase; cursor: pointer; border-radius: 2px;">Comprar Agora</button>
                     </div>
                 </div>
-            `).join('');
+            `;
 
-            containerComum.innerHTML = livrosComum.map(livro => `
-                <div style="display: flex; align-items: center; gap: 15px; background: rgba(255,255,255,0.05); padding: 10px; border-radius: 4px; border: 1px solid #fff;">
-                    <img src="${livro.img}" style="width: 50px; height: 70px; object-fit: contain;">
-                    <div style="flex: 1;">
-                        <h4 style="color: #fff; font-size: 0.7rem; text-transform: uppercase; margin-bottom: 5px;">${livro.title}</h4>
-                        <button onclick="window.open('${livro.link}', '_blank')" style="background: #fff; color: #000; border: none; padding: 5px 10px; font-weight: 700; font-size: 0.6rem; text-transform: uppercase; cursor: pointer; border-radius: 2px;">Comprar na Amazon</button>
-                    </div>
-                </div>
-            `).join('');
+            containerDura.innerHTML = livrosDura.map(renderLivro).join('');
+            containerComum.innerHTML = livrosComum.map(renderLivro).join('');
 
             ativarMenu('livros');
             historico = 'livros-fisicos';
@@ -1488,3 +1482,4 @@ A metodologia de JB integra protocolos de Inteligência Emocional da <b>Harvard 
     </script>
 </body>
 </html>
+Mesma imagem de fundo para todas as páginas - Manus

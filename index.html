@@ -200,6 +200,64 @@
 
         /* VIEW 2: GALERIA */
         .view-galeria { display: none; background: #000; min-height: 100vh; padding: 60px 5% 100px; width: 100%; }
+        .view-audiobooks-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+        .audiobook-card {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: rgba(255,255,255,0.05);
+            padding: 15px;
+            border-radius: 4px;
+            border: 1px solid var(--gold);
+            transition: 0.3s;
+            cursor: pointer;
+        }
+        .audiobook-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.2);
+        }
+        .audiobook-card img {
+            width: 80px;
+            height: 110px;
+            object-fit: contain;
+        }
+        .audiobook-info {
+            flex: 1;
+        }
+        .audiobook-info h4 {
+            color: #fff;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+        .audiobook-info .price {
+            color: var(--gold);
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            display: block;
+        }
+        .btn-comprar-audio {
+            background: var(--gold);
+            color: #000;
+            border: none;
+            padding: 8px 15px;
+            font-weight: 700;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            cursor: pointer;
+            border-radius: 2px;
+            transition: 0.3s;
+        }
+        .btn-comprar-audio:hover {
+            opacity: 0.8;
+        }
         .grid-produtos {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -556,6 +614,7 @@
                 <li><a id="nav-home" class="active" onclick="irHome()">Início</a></li>
                 <li><a id="nav-livros" onclick="irTitulos('livros')">Livros</a></li>
                 <li><a id="nav-ebook" onclick="irTitulos('e')">Ebook</a></li>
+                <li><a id="nav-audiobooks" onclick="irAudiobooks()">Audiobooks</a></li>
                 <li><a id="nav-sinopse" onclick="abrirSinopseDefault()">Sinopse</a></li>
                 <li><a id="nav-depoimentos" onclick="abrirInfo('depoimentos')">depoimentos</a></li>
                 <li><a id="nav-sobre" onclick="abrirInfo('sobre')">Sobre</a></li>
@@ -620,6 +679,14 @@
 
         <section id="view-galeria" class="view-galeria">
              <div class="grid-produtos" id="render-grid"></div>
+        </section>
+
+        <section id="view-audiobooks" class="view-galeria" style="display: none; padding-top: 40px;">
+            <h1 style="color: var(--gold); text-align: center; text-transform: uppercase; margin-bottom: 40px; font-size: 1.5rem; letter-spacing: 2px;">Audiobooks Premium</h1>
+            <div class="view-audiobooks-grid">
+                <div id="coluna-audio-1" style="display: flex; flex-direction: column; gap: 20px;"></div>
+                <div id="coluna-audio-2" style="display: flex; flex-direction: column; gap: 20px;"></div>
+            </div>
         </section>
 
         <section id="view-livros-fisicos" class="view-galeria" style="display: none; padding-top: 40px;">
@@ -1001,7 +1068,7 @@
         }, 3000);
 
         function resetTelas() {
-            ['view-home', 'view-galeria', 'view-sinopse', 'view-info-extra', 'view-livros-fisicos', 'btn-voltar'].forEach(id => {
+            ['view-home', 'view-galeria', 'view-sinopse', 'view-info-extra', 'view-livros-fisicos', 'view-audiobooks', 'btn-voltar'].forEach(id => {
                 const el = document.getElementById(id); if(el) el.style.display = 'none';
             });
             document.getElementById('bg').style.display = 'none';
@@ -1060,6 +1127,36 @@
             
             ativarMenu(tipo);
             historico = 'titulos';
+        }
+
+        function irAudiobooks() {
+            resetTelas();
+            document.getElementById('view-audiobooks').style.display = 'block';
+            document.getElementById('btn-voltar').style.display = 'block';
+            
+            const col1 = document.getElementById('coluna-audio-1');
+            const col2 = document.getElementById('coluna-audio-2');
+
+            const metade = Math.ceil(hardware.a.length / 2);
+            const lista1 = hardware.a.slice(0, metade);
+            const lista2 = hardware.a.slice(metade);
+
+            const renderAudio = (item) => `
+                <div class="audiobook-card" onclick="abrirSinopse('${item.img}', '${item.title}', '${item.price}', '${item.link}', \`${escapeHtml(item.desc)}\`)">
+                    <img src="${item.img}" alt="${item.title}">
+                    <div class="audiobook-info">
+                        <h4>${item.title}</h4>
+                        <span class="price">${item.price}</span>
+                        <button class="btn-comprar-audio" onclick="event.stopPropagation(); window.open('${item.link}', '_blank')">Comprar Agora</button>
+                    </div>
+                </div>
+            `;
+
+            col1.innerHTML = lista1.map(renderAudio).join('');
+            col2.innerHTML = lista2.map(renderAudio).join('');
+
+            ativarMenu('audiobooks');
+            historico = 'audiobooks';
         }
 
         function irLivrosFisicos() {
@@ -1219,11 +1316,13 @@
 		        function voltarFluxo() {
 	            if (historico === 'sinopse' || historico === 'info') {
                     const currentActive = document.querySelector('nav a.active');
-                    if (currentActive && currentActive.id === 'nav-livros') {
-                        irLivrosFisicos();
-                    } else {
-                        irTitulos('e');
-                    }
+	                    if (currentActive && currentActive.id === 'nav-livros') {
+	                        irLivrosFisicos();
+	                    } else if (currentActive && currentActive.id === 'nav-audiobooks') {
+                            irAudiobooks();
+                        } else {
+	                        irTitulos('e');
+	                    }
                 } else {
                     irHome();
                 }
@@ -1336,7 +1435,7 @@ A metodologia de JB integra protocolos de Inteligência Emocional da <b>Harvard 
     
     <div class="email-item">
         <span class="email-label">Parcerias</span>
-        <span class="email-address">comercial@portalpleno.com.br</span>
+        <span class="email-address">comercialr@portalpleno.com.br</span>
     </div>
 </div>
                             </div>

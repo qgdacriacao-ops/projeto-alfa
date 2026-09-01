@@ -20,12 +20,31 @@
             --card-bg: rgba(20, 20, 20, 0.85);
             --text-light: #ffffff;
             --text-muted: #cccccc;
+            --header-bg: rgba(0, 0, 0, 0.9);
+            --bg-gradient: radial-gradient(circle at center, #1a1a1a 0%, #000000 100%);
+            --border-color: rgba(255, 215, 0, 0.2);
+            --box-bg: rgba(0,0,0,0.6);
+            --input-bg: rgba(30, 30, 30, 0.9);
+        }
+
+        /* Tema Claro (Dia) */
+        body.light-theme {
+            --bg-dark: #f5f5f7;
+            --card-bg: rgba(255, 255, 255, 0.9);
+            --text-light: #1d1d1f;
+            --text-muted: #555555;
+            --header-bg: rgba(245, 245, 247, 0.95);
+            --bg-gradient: radial-gradient(circle at center, #ffffff 0%, #e0e0e0 100%);
+            --border-color: rgba(180, 140, 0, 0.4);
+            --box-bg: rgba(255, 255, 255, 0.85);
+            --input-bg: rgba(240, 240, 240, 0.9);
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
         }
 
         body {
@@ -36,16 +55,18 @@
             display: flex;
             flex-direction: column;
             overflow-x: hidden;
+            position: relative;
         }
 
         #bg {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at center, #1a1a1a 0%, #000000 100%);
+            width: 100vw;
+            height: 100vh;
+            background: var(--bg-gradient);
             z-index: -1;
+            pointer-events: none;
         }
 
         header {
@@ -53,7 +74,7 @@
             justify-content: space-between;
             align-items: center;
             padding: 15px 40px;
-            background: rgba(0, 0, 0, 0.9);
+            background: var(--header-bg);
             border-bottom: 1px solid var(--gold);
             position: sticky;
             top: 0;
@@ -64,6 +85,7 @@
             display: flex;
             align-items: center;
             gap: 15px;
+            margin-right: 40px;
         }
 
         .logo img {
@@ -78,6 +100,7 @@
             letter-spacing: 1px;
             color: var(--text-light);
             text-transform: uppercase;
+            white-space: nowrap;
         }
 
         nav ul {
@@ -102,6 +125,27 @@
             color: var(--gold);
         }
 
+        .theme-toggle-btn {
+            background: transparent;
+            border: 1px solid var(--gold);
+            color: var(--text-light);
+            padding: 6px 12px;
+            font-weight: 700;
+            font-size: 0.75rem;
+            border-radius: 20px;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .theme-toggle-btn:hover {
+            background: var(--gold);
+            color: #000;
+        }
+
         #btn-voltar {
             display: none;
             background: var(--gold);
@@ -120,6 +164,8 @@
             max-width: 1400px;
             margin: 0 auto;
             width: 100%;
+            position: relative;
+            z-index: 1;
         }
 
         .view-home {
@@ -128,6 +174,7 @@
             align-items: center;
             gap: 20px;
             min-height: calc(100vh - 160px);
+            background: transparent;
         }
 
         .column-box {
@@ -148,11 +195,11 @@
             width: 100%;
             max-width: 320px;
             height: 480px;
-            border: 1px solid rgba(255, 215, 0, 0.3);
+            border: 1px solid var(--border-color);
             border-radius: 8px;
             overflow: hidden;
             cursor: pointer;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
             transition: transform 0.3s ease, border-color 0.3s ease;
         }
 
@@ -191,7 +238,7 @@
 
         .card-flutuante {
             background: var(--card-bg);
-            border: 1px solid rgba(255, 215, 0, 0.2);
+            border: 1px solid var(--border-color);
             border-radius: 6px;
             padding: 15px;
             text-align: center;
@@ -218,11 +265,10 @@
             color: var(--text-light);
         }
 
-        /* Submenu de Ícones (Carrossel no Topo da Sinopse) */
         .sinopse-carousel-container {
             margin-bottom: 25px;
             background: var(--card-bg);
-            border: 1px solid rgba(255, 215, 0, 0.3);
+            border: 1px solid var(--border-color);
             border-radius: 8px;
             padding: 15px 20px;
         }
@@ -242,7 +288,7 @@
             overflow-x: auto;
             padding-bottom: 8px;
             scrollbar-width: thin;
-            scrollbar-color: var(--gold) rgba(0,0,0,0.5);
+            scrollbar-color: var(--gold) transparent;
         }
 
         .sinopse-thumb-card {
@@ -250,10 +296,10 @@
             cursor: pointer;
             text-align: center;
             transition: transform 0.2s, border-color 0.2s;
-            border: 1px solid rgba(255,255,255,0.1);
+            border: 1px solid var(--border-color);
             border-radius: 4px;
             padding: 5px;
-            background: rgba(0,0,0,0.5);
+            background: var(--box-bg);
         }
 
         .sinopse-thumb-card:hover {
@@ -285,7 +331,7 @@
             background: var(--card-bg);
             padding: 30px;
             border-radius: 8px;
-            border: 1px solid rgba(255, 215, 0, 0.2);
+            border: 1px solid var(--border-color);
         }
 
         .col-mockup img {
@@ -311,7 +357,7 @@
         }
 
         .col-compra .buy-card {
-            background: rgba(0,0,0,0.6);
+            background: var(--box-bg);
             border: 1px solid var(--gold);
             padding: 20px;
             border-radius: 6px;
@@ -362,7 +408,6 @@
             background: #b20000;
         }
 
-        /* Estilos dos Combos Personalizados */
         .combo-container {
             background: var(--card-bg);
             border: 1px solid var(--gold);
@@ -392,8 +437,8 @@
         }
 
         .combo-item {
-            background: rgba(0,0,0,0.6);
-            border: 1px solid rgba(255, 215, 0, 0.2);
+            background: var(--box-bg);
+            border: 1px solid var(--border-color);
             border-radius: 6px;
             padding: 15px;
             display: flex;
@@ -420,7 +465,7 @@
         .combo-item-title {
             font-size: 0.95rem;
             font-weight: 700;
-            color: #fff;
+            color: var(--text-light);
             margin-bottom: 5px;
         }
 
@@ -450,7 +495,7 @@
         .combo-footer-bar {
             position: sticky;
             bottom: 20px;
-            background: rgba(0,0,0,0.95);
+            background: var(--header-bg);
             border: 1px solid var(--gold);
             border-radius: 8px;
             padding: 20px;
@@ -462,7 +507,7 @@
 
         .combo-total-text {
             font-size: 1.2rem;
-            color: #fff;
+            color: var(--text-light);
         }
 
         .combo-total-value {
@@ -480,7 +525,7 @@
 
         .card-depoimento {
             background: var(--card-bg);
-            border: 1px solid rgba(255, 215, 0, 0.2);
+            border: 1px solid var(--border-color);
             border-radius: 8px;
             padding: 20px;
             display: flex;
@@ -490,25 +535,101 @@
 
         .card-depoimento .stars { color: var(--gold); margin-bottom: 10px; }
         .card-depoimento .text { font-style: italic; margin-bottom: 15px; font-size: 0.95rem; line-height: 1.4; }
-        .card-depoimento .author-info { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 10px; font-size: 0.85rem; }
+        .card-depoimento .author-info { border-top: 1px solid var(--border-color); padding-top: 10px; font-size: 0.85rem; }
         .card-depoimento .author-name { color: var(--gold); font-weight: bold; }
         .card-depoimento .book-title { color: var(--text-muted); font-size: 0.75rem; }
+
+        /* Estilos de Formulários Interativos */
+        .form-container {
+            background: var(--card-bg);
+            border: 1px solid var(--gold);
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            color: var(--gold);
+            font-size: 0.85rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            color: var(--text-light);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+        }
+
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+
+        /* Estilos das Redes Sociais */
+        .social-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 15px;
+            margin: 25px 0;
+        }
+
+        .social-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px;
+            border-radius: 6px;
+            text-decoration: none;
+            color: #fff;
+            font-weight: bold;
+            font-size: 0.85rem;
+            transition: transform 0.2s, opacity 0.2s;
+        }
+
+        .social-btn:hover {
+            transform: translateY(-3px);
+            opacity: 0.9;
+        }
+
+        .btn-whatsapp { background: #25D366; }
+        .btn-instagram { background: #E1306C; }
+        .btn-facebook { background: #1877F2; }
+        .btn-x { background: #000000; border: 1px solid var(--border-color); }
+        .btn-telegram { background: #0088cc; }
+        .btn-youtube { background: #FF0000; }
 
         .final-footer {
             text-align: center;
             padding: 20px;
-            background: #000;
-            border-top: 1px solid rgba(255, 215, 0, 0.2);
+            background: var(--header-bg);
+            border-top: 1px solid var(--border-color);
             font-size: 0.75rem;
             color: var(--text-muted);
             margin-top: auto;
+            position: relative;
+            z-index: 10;
         }
 
         @media (max-width: 900px) {
             .view-home { flex-direction: column; }
             .container-trindade { grid-template-columns: 1fr; }
             header { flex-direction: column; gap: 15px; }
-            nav ul { flex-wrap: wrap; justify-content: center; }
+            .logo { margin-right: 0; }
+            nav ul { flex-wrap: wrap; justify-content: center; gap: 12px; }
             .combo-footer-bar { flex-direction: column; gap: 15px; text-align: center; }
         }
     </style>
@@ -533,6 +654,7 @@
                 <li><a id="nav-sobre" onclick="abrirInfo('sobre')">Sobre</a></li>
                 <li><a id="nav-contato" onclick="abrirInfo('contato')">Contato</a></li>
                 <li><a id="nav-suporte" onclick="abrirInfo('suporte')">Suporte</a></li>
+                <li><button class="theme-toggle-btn" onclick="toggleTheme()"><span id="theme-icon">🌙</span> <span id="theme-text">Noturno</span></button></li>
                 <li><div id="btn-voltar" onclick="voltarFluxo()">Voltar</div></li>
             </ul>
         </nav>
@@ -551,12 +673,12 @@
                 <h1 style="font-size: clamp(1.9rem, 4.5vw, 2.1rem); font-weight: 900; line-height: 1.1; margin-bottom: 15px; text-transform: uppercase; letter-spacing: -1px;">
                     Por que suas relações nunca duram?<br>
                 </h1>
-                <h2 style="font-size: clamp(1.2rem, 3vw, 1.8rem); font-weight: 400; margin-bottom: 40px; color: #cccccc;">
+                <h2 style="font-size: clamp(1.2rem, 3vw, 1.8rem); font-weight: 400; margin-bottom: 40px; color: var(--text-muted);">
                     O segredo está no padrão que você carrega
                 </h2>    
                 <p style="font-size: 1.25rem; line-height: 1.6; margin-bottom: 5px; max-width: 900px;">
                     Mude seu estado emocional e nunca mais aceite menos do que<br> 
-                    <span style="color: #cccccc; font-weight: 500; border-bottom: 1px solid #FFD700;">você merece</span> <br><br>
+                    <span style="color: var(--text-muted); font-weight: 500; border-bottom: 1px solid #FFD700;">você merece</span> <br><br>
                 </p>
                 <p style="font-size: 1.5rem; font-weight: 700; color: #FFD700; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 40px;">
                     Mude de vida hoje!
@@ -602,16 +724,12 @@
             </div>
         </section>
 
-        <!-- SEÇÃO SINOPSE COM SUBMENU DE TÍTULOS NO TOPO -->
         <section id="view-sinopse" class="view-sinopse">
-            
-            <!-- LINHA DE ÍCONES / SUBMENU DE TÍTULOS NO TOPO DA ABA SINOPSE -->
             <div class="sinopse-carousel-container">
                 <div class="sinopse-carousel-title">Selecione o Título para Ver a Sinopse:</div>
                 <div class="sinopse-carousel-row" id="sinopse-shortcuts-row"></div>
             </div>
 
-            <!-- BLOCO PRINCIPAL DA SINOPSE -->
             <div class="container-trindade">
                 <div class="col-mockup">
                     <img id="target-img" src="" alt="Mockup do Produto">
@@ -640,7 +758,6 @@
             </div>
         </section>
 
-        <!-- SEÇÃO DINÂMICA DE COMBOS PERSONALIZADOS -->
         <section id="view-combo" class="view-combo">
             <div class="combo-container">
                 <div class="combo-header">
@@ -689,10 +806,10 @@ const hardware = {
   ]
 };
 
-const staticReviews = [
+const defaultReviews = [
   { text: "A descoberta de si mudou minha perspectiva completamente.", author: "Maria S.", email: "Verificado", book: "Descubra Você", rating: "★★★★★" },
   { text: "Profundidade incomparável em cada página.", author: "Carlos O.", email: "Verificado", book: "Verdade em Vida", rating: "★★★★★" },
-  { text: "A engenharia mental aplicada na prática diária.", author: "Ricardo F.", email: "Verificado", book: "Engenharia da Colisão", rating: "★★★★★" },
+  { text: "A engenharia mental applied na prática diária.", author: "Ricardo F.", email: "Verificado", book: "Engenharia da Colisão", rating: "★★★★★" },
   { text: "Essencial para quem busca verdadeira liberdade intelectual.", author: "Ana P.", email: "Verificado", book: "Autópsia da Personalidade", rating: "★★★★★" },
   { text: "O áudio é fantástico para ouvir durante o trajeto.", author: "Lucas M.", email: "Verificado", book: "Descubra Você (Audio)", rating: "★★★★★" },
   { text: "Júlio Bhrósz entrega exatamente o que promete.", author: "Fernanda R.", email: "Verificado", book: "O Código", rating: "★★★★★" }
@@ -703,6 +820,27 @@ let historico = 'home';
 let iE = 0;
 let iA = 0;
 let comboSelecionados = [];
+
+function toggleTheme() {
+  const isLight = document.body.classList.toggle('light-theme');
+  localStorage.setItem('theme', isLight ? 'light' : 'dark');
+  atualizarBotaoTema(isLight);
+}
+
+function atualizarBotaoTema(isLight) {
+  document.getElementById('theme-icon').innerText = isLight ? '☀️' : '🌙';
+  document.getElementById('theme-text').innerText = isLight ? 'Claro' : 'Noturno';
+}
+
+function inicializarTema() {
+  const savedTheme = localStorage.getItem('theme');
+  if (savedTheme === 'light') {
+    document.body.classList.add('light-theme');
+    atualizarBotaoTema(true);
+  } else {
+    atualizarBotaoTema(false);
+  }
+}
 
 function resetTelas() {
   ['view-home', 'view-galeria', 'view-sinopse', 'view-info-extra', 'view-livros-fisicos', 'view-audiobooks', 'view-combo', 'btn-voltar'].forEach(id => {
@@ -770,10 +908,10 @@ function irAudiobooks() {
   const col2 = document.getElementById('coluna-audio-2');
   
   const renderCardAudio = (item) => `
-    <div style="display: flex; align-items: center; gap: 15px; background: rgba(255,255,255,0.05); padding: 10px; border-radius: 4px;">
+    <div style="display: flex; align-items: center; gap: 15px; background: var(--box-bg); padding: 10px; border-radius: 4px; border: 1px solid var(--border-color);">
       <img src="${item.img}" alt="${item.title}" onclick="abrirSinopse('${item.img}', '${item.title}', '${item.price}', '${item.link}', \`${escapeHtml(item.desc)}\`)" style="width: 100px; height: 100px; object-fit: cover; cursor: pointer;">
       <div>
-        <h4 style="color: #fff; font-size: 0.9rem; margin-bottom: 5px;">${item.title}</h4>
+        <h4 style="color: var(--text-light); font-size: 0.9rem; margin-bottom: 5px;">${item.title}</h4>
         <span style="color: var(--gold); font-weight: 700; display: block; margin-bottom: 8px;">${item.price}</span>
         <button onclick="abrirSinopse('${item.img}', '${item.title}', '${item.price}', '${item.link}', \`${escapeHtml(item.desc)}\`)" style="background: var(--gold); color: #000; border: none; padding: 5px 10px; cursor: pointer; font-weight: bold; border-radius: 2px;">Ouvir Sinopse</button>
       </div>
@@ -825,10 +963,10 @@ function irLivrosFisicos() {
   ];
 
   const renderLivro = (livro) => `
-    <div style="display: flex; align-items: center; gap: 15px; background: rgba(255,255,255,0.05); padding: 10px; border-radius: 4px;">
+    <div style="display: flex; align-items: center; gap: 15px; background: var(--box-bg); padding: 10px; border-radius: 4px; border: 1px solid var(--border-color);">
       <img src="${livro.img}" alt="${livro.title}" onclick="window.open('${livro.link}', '_blank')" style="width: 120px; height: 150px; object-fit: contain; cursor: pointer;">
       <div style="flex: 1;">
-        <h4 style="color: #fff; font-size: 0.8rem; text-transform: uppercase; margin-bottom: 5px;">${livro.title}</h4>
+        <h4 style="color: var(--text-light); font-size: 0.8rem; text-transform: uppercase; margin-bottom: 5px;">${livro.title}</h4>
         <span style="color: var(--gold); font-weight: 700; font-size: 0.85rem; margin-bottom: 8px; display: block;">${livro.price}</span>
         <button onclick="window.open('${livro.link}', '_blank')" style="background: var(--gold); color: #000; border: none; padding: 5px 10px; font-weight: 700; font-size: 0.65rem; text-transform: uppercase; cursor: pointer; border-radius: 2px;">Comprar Agora</button>
       </div>
@@ -855,7 +993,6 @@ function checkout() {
   if (linkAtual && linkAtual !== '#') window.open(linkAtual, '_blank');
 }
 
-/* LÓGICA DE COMBOS DINÂMICOS */
 function abrirCombo(tipo) {
   resetTelas();
   document.getElementById('view-combo').style.display = 'block';
@@ -944,6 +1081,69 @@ function voltarFluxo() {
   }
 }
 
+/* Lógica da Biblioteca de Depoimentos (Limite 50 - FIFO) */
+function obterDepoimentos() {
+  const salvos = localStorage.getItem('depoimentos_portal_pleno');
+  if (salvos) return JSON.parse(salvos);
+  return defaultReviews;
+}
+
+function salvarDepoimento(event) {
+  event.preventDefault();
+  const autor = document.getElementById('dep-nome').value.trim();
+  const email = document.getElementById('dep-email').value.trim();
+  const book = document.getElementById('dep-livro').value;
+  const ratingVal = document.getElementById('dep-rating').value;
+  const text = document.getElementById('dep-texto').value.trim();
+
+  if (!autor || !text) {
+    alert("Por favor, preencha seu nome e o depoimento.");
+    return;
+  }
+
+  const ratingStars = '★'.repeat(parseInt(ratingVal)) + '☆'.repeat(5 - parseInt(ratingVal));
+  const novoDepoimento = { text, author: autor, email: email ? "Verificado" : "Leitor", book, rating: ratingStars };
+
+  let lista = obterDepoimentos();
+  lista.unshift(novoDepoimento);
+
+  if (lista.length > 50) {
+    lista = lista.slice(0, 50); // Mantém no máximo 50 itens
+  }
+
+  localStorage.setItem('depoimentos_portal_pleno', JSON.stringify(lista));
+  alert("Obrigado por compartilhar seu depoimento! Ele já está registrado.");
+  abrirInfo('depoimentos');
+}
+
+function enviarDadosContato(event) {
+  event.preventDefault();
+  const nome = document.getElementById('cnt-nome').value;
+  const email = document.getElementById('cnt-email').value;
+  const rede = document.getElementById('cnt-rede').value;
+  const userRede = document.getElementById('cnt-user').value;
+
+  alert(`Obrigado, ${nome}! Seus dados (${rede}: ${userRede}) foram registrados para futuro contato.`);
+  document.getElementById('form-contato-leitor').reset();
+}
+
+function enviarSolicitacaoSuporte(event) {
+  event.preventDefault();
+  const nome = document.getElementById('sup-nome').value;
+  const email = document.getElementById('sup-email').value;
+  const protocolo = "PP-" + Math.floor(100000 + Math.random() * 900000);
+
+  document.getElementById('suporte-ticket-status').style.display = 'block';
+  document.getElementById('suporte-ticket-status').innerHTML = `
+    <div style="background: rgba(0, 255, 0, 0.1); border: 1px solid var(--gold); padding: 15px; border-radius: 6px; margin-top: 15px;">
+      <h3 style="color: var(--gold); margin-bottom: 5px;">Solicitação Registrada com Sucesso!</h3>
+      <p style="font-size: 0.9rem;">Protocolo: <strong>${protocolo}</strong></p>
+      <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 5px;">Obrigado, <strong>${nome}</strong>. Nossa equipe analisou sua mensagem e enviará o suporte para o e-mail <strong>${email}</strong> dentro de poucas horas.</p>
+    </div>
+  `;
+  document.getElementById('form-suporte-leitor').reset();
+}
+
 function abrirInfo(tipo) {
   resetTelas();
   const container = document.getElementById('content-info');
@@ -953,7 +1153,7 @@ function abrirInfo(tipo) {
 
   if (tipo === 'sobre') {
     container.innerHTML = `
-      <div style="max-width: 800px; margin: 40px auto; color: #fff; line-height: 1.6;">
+      <div style="max-width: 800px; margin: 40px auto; color: var(--text-light); line-height: 1.6; background: var(--box-bg); padding: 30px; border-radius: 8px; border: 1px solid var(--border-color);">
         <h1 style="color: var(--gold); margin-bottom: 20px; text-transform: uppercase;">A Mente por trás d'O Código</h1>
         <p style="font-size: 1.1rem; color: var(--gold); font-weight: bold; margin-bottom: 15px;">Júlio Bhrósz</p>
         <p style="margin-bottom: 15px;">O mundo não é justo. Ele é um mercado de valores invisíveis. Se você se sente ignorado, trocado ou tratado como um "plano B", não é por acaso.</p>
@@ -961,11 +1161,50 @@ function abrirInfo(tipo) {
         <p>Nossos acervos em livros, e-books e audiobooks foram estruturados para entregar clareza cirúrgica onde há confusão e dependência.</p>
       </div>`;
   } else if (tipo === 'depoimentos') {
+    const listaAtual = obterDepoimentos();
     container.innerHTML = `
       <div style="max-width: 1100px; margin: 20px auto;">
-        <h1 style="color: var(--gold); text-align: center; text-transform: uppercase; margin-bottom: 30px;">O que dizem nossos leitores</h1>
+        <h1 style="color: var(--gold); text-align: center; text-transform: uppercase; margin-bottom: 20px;">Biblioteca de Depoimentos</h1>
+        
+        <div class="form-container">
+          <h3 style="color: var(--gold); margin-bottom: 15px; text-transform: uppercase;">Deixe seu Depoimento</h3>
+          <form onsubmit="salvarDepoimento(event)">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+              <div class="form-group">
+                <label>Seu Nome</label>
+                <input type="text" id="dep-nome" required placeholder="Ex: Maria Santos">
+              </div>
+              <div class="form-group">
+                <label>Seu E-mail (Informativo)</label>
+                <input type="email" id="dep-email" placeholder="seuemail@exemplo.com">
+              </div>
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+              <div class="form-group">
+                <label>Obra Avaliada</label>
+                <select id="dep-livro">
+                  ${[...hardware.e, ...hardware.a].map(item => `<option value="${item.title}">${item.title}</option>`).join('')}
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Nota</label>
+                <select id="dep-rating">
+                  <option value="5">★★★★★ (5/5)</option>
+                  <option value="4">★★★★☆ (4/5)</option>
+                  <option value="3">★★★☆☆ (3/5)</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Seu Depoimento / Transformação</label>
+              <textarea id="dep-texto" rows="3" required placeholder="Conte como esta obra impactou sua visão..."></textarea>
+            </div>
+            <button type="submit" class="btn-gold" style="width: auto; padding: 10px 30px;">Publicar Depoimento</button>
+          </form>
+        </div>
+
         <div class="grid-depoimentos">
-          ${staticReviews.map(rev => `
+          ${listaAtual.map(rev => `
             <div class="card-depoimento">
               <div class="stars">${rev.rating}</div>
               <div class="text">"${rev.text}"</div>
@@ -979,18 +1218,94 @@ function abrirInfo(tipo) {
       </div>`;
   } else if (tipo === 'contato') {
     container.innerHTML = `
-      <div style="max-width: 600px; margin: 40px auto; color: #fff; text-align: center; line-height: 1.8;">
-        <h1 style="color: var(--gold); text-transform: uppercase; margin-bottom: 20px;">Contato</h1>
-        <p>Para parcerias, imprensa ou dúvidas institucionais:</p>
-        <p style="color: var(--gold); font-weight: bold; font-size: 1.1rem; margin-top: 10px;">contato@portalpleno.com.br</p>
+      <div style="max-width: 800px; margin: 40px auto; color: var(--text-light); line-height: 1.8; background: var(--box-bg); padding: 30px; border-radius: 8px; border: 1px solid var(--border-color);">
+        <h1 style="color: var(--gold); text-transform: uppercase; margin-bottom: 10px; text-align: center;">Conecte-se Conosco</h1>
+        <p style="text-align: center; color: var(--text-muted); font-size: 0.9rem;">Siga nossas redes sociais oficiais ou deixe seu perfil para contato direto.</p>
+        
+        <div class="social-grid">
+          <a href="https://wa.me/seunumero" target="_blank" class="social-btn btn-whatsapp">WhatsApp</a>
+          <a href="https://instagram.com" target="_blank" class="social-btn btn-instagram">Instagram</a>
+          <a href="https://facebook.com" target="_blank" class="social-btn btn-facebook">Facebook</a>
+          <a href="https://x.com" target="_blank" class="social-btn btn-x">X / Twitter</a>
+          <a href="https://t.me" target="_blank" class="social-btn btn-telegram">Telegram</a>
+          <a href="https://youtube.com" target="_blank" class="social-btn btn-youtube">YouTube</a>
+        </div>
+
+        <div style="border-top: 1px solid var(--border-color); padding-top: 20px; margin-top: 20px;">
+          <h3 style="color: var(--gold); text-transform: uppercase; font-size: 1rem; margin-bottom: 15px; text-align: center;">Cadastre sua Rede Social</h3>
+          <form id="form-contato-leitor" onsubmit="enviarDadosContato(event)">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+              <div class="form-group">
+                <label>Seu Nome</label>
+                <input type="text" id="cnt-nome" required placeholder="Digite seu nome">
+              </div>
+              <div class="form-group">
+                <label>Seu E-mail</label>
+                <input type="email" id="cnt-email" required placeholder="seuemail@exemplo.com">
+              </div>
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+              <div class="form-group">
+                <label>Sua Rede Social Principal</label>
+                <select id="cnt-rede">
+                  <option value="Instagram">Instagram</option>
+                  <option value="WhatsApp">WhatsApp</option>
+                  <option value="Telegram">Telegram</option>
+                  <option value="X">X (Twitter)</option>
+                  <option value="Facebook">Facebook</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Seu User / Arroba / Número</label>
+                <input type="text" id="cnt-user" required placeholder="Ex: @seuuser ou número">
+              </div>
+            </div>
+            <button type="submit" class="btn-gold" style="width: 100%;">Enviar Meus Dados</button>
+          </form>
+        </div>
       </div>`;
   } else if (tipo === 'suporte') {
     container.innerHTML = `
-      <div style="max-width: 600px; margin: 40px auto; color: #fff; text-align: center; line-height: 1.8;">
-        <h1 style="color: var(--gold); text-transform: uppercase; margin-bottom: 20px;">Suporte ao Cliente</h1>
-        <p>Dúvidas sobre entregas, acesso a e-books ou downloads de áudios?</p>
-        <p style="color: var(--gold); font-weight: bold; font-size: 1.1rem; margin-top: 10px;">suportebook@portalpleno.com.br</p>
-        <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 20px;">Atendimento em dias úteis de 09:00 às 18:00.</p>
+      <div style="max-width: 800px; margin: 40px auto; color: var(--text-light); line-height: 1.8; background: var(--box-bg); padding: 30px; border-radius: 8px; border: 1px solid var(--border-color);">
+        <h1 style="color: var(--gold); text-transform: uppercase; margin-bottom: 10px; text-align: center;">Central Interna de Suporte</h1>
+        <p style="text-align: center; color: var(--text-muted); font-size: 0.9rem; margin-bottom: 25px;">Está com dúvidas ou dificuldades com a sua compra? Preencha o formulário interno abaixo.</p>
+        
+        <form id="form-suporte-leitor" onsubmit="enviarSolicitacaoSuporte(event)">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+            <div class="form-group">
+              <label>Nome Completo</label>
+              <input type="text" id="sup-nome" required placeholder="Seu nome completo">
+            </div>
+            <div class="form-group">
+              <label>E-mail da Compra</label>
+              <input type="email" id="sup-email" required placeholder="seuemail@exemplo.com">
+            </div>
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+            <div class="form-group">
+              <label>Ativo Adquirido</label>
+              <select id="sup-ativo">
+                ${[...hardware.e, ...hardware.a].map(item => `<option value="${item.title}">${item.title}</option>`).join('')}
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Tipo de Dificuldade</label>
+              <select id="sup-tipo">
+                <option value="Acesso ao E-book">Acesso ao E-book / Download</option>
+                <option value="Acesso ao Audiobook">Acesso ao Audiobook / Áudio</option>
+                <option value="Dúvida sobre Pagamento">Dúvida sobre Pagamento</option>
+                <option value="Entrega do Livro Físico">Entrega do Livro Físico</option>
+                <option value="Outros">Outros</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Descrição do Problema</label>
+            <textarea id="sup-mensagem" rows="4" required placeholder="Relate o que aconteceu detalhadamente..."></textarea>
+          </div>
+          <button type="submit" class="btn-gold">Solicitar Ajuda e Gerar Ticket</button>
+        </form>
+        <div id="suporte-ticket-status" style="display: none;"></div>
       </div>`;
   }
   historico = 'info';
@@ -1027,6 +1342,7 @@ function rodarLoops() {
 }
 
 window.onload = () => {
+  inicializarTema();
   irHome();
   rodarLoops();
 };

@@ -177,6 +177,7 @@
 
         #btn-voltar {
             display: none;
+            border: 0;
             background: var(--gold);
             color: #000;
             padding: 5px 15px;
@@ -792,15 +793,59 @@
             letter-spacing: 1px;
         }
 
+        html, body {
+            width: 100%;
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+
+        main, section, .grid-produtos, .container-trindade, .combo-container, #content-info {
+            min-width: 0;
+            max-width: 100%;
+        }
+
+        .sobre-texto-wrapper h1 {
+            color: var(--gold);
+            font-size: clamp(1.45rem, 3vw, 2rem);
+            line-height: 1.2;
+            margin-bottom: 15px;
+        }
+
+        .link-cta-aqui {
+            color: var(--gold);
+            font-weight: 800;
+            cursor: pointer;
+            text-decoration: underline;
+            text-underline-offset: 4px;
+            transition: color 0.2s ease, transform 0.2s ease;
+        }
+
+        .link-cta-aqui:hover {
+            color: var(--gold-bright);
+            transform: translateX(2px);
+        }
+
+        .container-seta-curva {
+            vertical-align: middle;
+        }
+
+        .seta-svg-curva {
+            width: 50px;
+            height: 50px;
+            fill: #ef3340;
+            overflow: visible;
+        }
+
         .audio-card {
             display: flex;
             align-items: center;
-            gap: 18px;
-            min-height: 210px;
+            gap: 16px;
+            min-height: 238px;
             background: var(--box-bg);
-            padding: 16px;
+            padding: 14px;
             border: 1px solid var(--border-color);
             border-radius: 8px;
+            overflow: hidden;
             transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
         }
 
@@ -811,9 +856,9 @@
         }
 
         .audio-card-img {
-            width: 150px !important;
-            height: 178px !important;
-            flex: 0 0 150px;
+            width: 178px !important;
+            height: 210px !important;
+            flex: 0 0 178px;
             object-fit: contain !important;
             border-radius: 6px;
             background: rgba(0, 0, 0, 0.2);
@@ -827,24 +872,29 @@
 
         .audio-card-title {
             color: var(--text-light);
-            font-size: 1rem;
+            font-size: 0.88rem;
             line-height: 1.3;
-            margin-bottom: 8px;
+            margin-bottom: 7px;
+            overflow-wrap: anywhere;
         }
 
         .audio-card-price {
             color: var(--gold);
             font-weight: 800;
+            font-size: 0.82rem;
             display: block;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
 
         .audio-card-button {
             background: linear-gradient(135deg, var(--gold-bright), var(--gold), var(--gold-deep));
             color: #000;
             border: 0;
-            padding: 8px 14px;
+            width: auto;
+            max-width: 150px;
+            padding: 6px 10px;
             cursor: pointer;
+            font-size: 0.72rem;
             font-weight: 800;
             border-radius: 4px;
         }
@@ -887,18 +937,39 @@
         }
 
         @media (max-width: 700px) {
-            main { padding: 14px; }
-            header { padding: 14px 16px; }
-            .display-box { height: 400px; }
-            .sobre-content { padding: 20px; }
+            main { padding: 12px; overflow-x: hidden; }
+            header { padding: 12px 14px; width: 100%; }
+            .logo { max-width: 100%; }
+            .logo span { white-space: normal; font-size: 0.98rem; }
+            nav, nav ul { width: 100%; max-width: 100%; }
+            nav ul { gap: 10px; justify-content: center; }
+            nav a { font-size: 0.68rem; letter-spacing: 0.5px; }
+            .display-box { height: 360px; }
+            .grid-produtos { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+            .card-flutuante { padding: 10px; min-width: 0; }
+            .card-flutuante img { height: 230px; }
+            .sobre-content { padding: 20px 16px; }
             .sobre-container-flex { grid-template-columns: 1fr !important; }
             .sobre-foto-wrapper, .foto-autor-img { margin: 0 auto; }
-            .audio-card { align-items: flex-start; }
-            .audio-card-img { width: 118px !important; height: 150px !important; flex-basis: 118px; }
+            .audio-card { align-items: center; gap: 12px; min-height: 176px; padding: 10px; }
+            .audio-card-img { width: 112px !important; height: 150px !important; flex-basis: 112px; }
+            .audio-card-title { font-size: 0.76rem; }
+            .audio-card-price { font-size: 0.75rem; }
+            .audio-card-button { max-width: 122px; padding: 6px 8px; font-size: 0.64rem; }
             .asset-meta-grid { grid-template-columns: 1fr 1fr; }
             .autopsia-callout { align-items: flex-start; }
             .autopsia-callout svg { flex-basis: 58px; width: 58px; }
+            .autopsia-callout a { font-size: 0.78rem; overflow-wrap: anywhere; }
             #content-info [style*="grid-template-columns: 1fr 1fr"] { grid-template-columns: 1fr !important; }
+        }
+
+        @media (max-width: 420px) {
+            .grid-produtos { grid-template-columns: 1fr; }
+            .card-flutuante img { height: 300px; }
+            .audio-card-img { width: 96px !important; height: 132px !important; flex-basis: 96px; }
+            .audio-card-title { font-size: 0.72rem; }
+            .section-heading { display: block; }
+            .section-heading span { display: block; margin-top: 6px; }
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -1074,16 +1145,156 @@ const hardware = {
     { id: "a6", img: "audio07.webp", title: "The Supremacy Code Audio", priceVal: 15.95, price: "$15.95", link: "https://pay.kiwify.com/TGmTjRA", desc: "<p><strong>The Supremacy Code (English Audio Edition):</strong> Master emotional clarity, break dependency, and cultivate individual power through this structured audio guide.</p>" }
   ],
   e: [
-    { id: "e1", img: "ebook01.webp", title: "Descubra Você", priceVal: 9.70, price: "R$ 9,70", link: "https://pay.kiwify.com.br/P8UTO6L", desc: `<p><strong>Descubra Você: Desvende Sua Essência, Transforme Seus Relacionamentos</strong></p><p>Você sente que está vivendo em um ciclo repetitivo de encontros frustrantes e desencontros emocionais?</p><p>Muitas vezes, depositamos no outro a responsabilidade pela nossa felicidade, apenas para encontrar desilusão. Mas a verdade é que a chave para conexões autênticas e duradouras nunca esteve no "parceiro ideal", mas sim escondida dentro da sua própria essência.</p><p>Em <strong>“Descubra Você”</strong>, Júlio Bhrósz convida você para uma jornada profunda de autodescoberta. Este e-book não é apenas um guia de conselhos; é um mapa prático para quem deseja parar de sobreviver a relações vazias e começar a construir vínculos reais e significativos.</p>` },
-    { id: "e2", img: "ebook02.webp", title: "Engenharia da Colisão", priceVal: 39.57, price: "R$ 39,57", link: "https://pay.kiwify.com.br/oRZAlbz", desc: `<p><strong>Engenharia da Colisão: A Soberania do Aço nos Relacionamentos</strong></p><p>A maioria dos casais vive sob a fragilidade de acordos superficiais. Em <strong>“Engenharia da Colisão”</strong>, Júlio Bhrósz apresenta o método definitivo para casais que decidiram abandonar a instabilidade emocional.</p>` },
-    { id: "e3", img: "ebook03.webp", title: "Autópsia da Personalidade", priceVal: 59.90, price: "R$ 59,90", link: "https://pay.kiwify.com.br/sD4nqRO", desc: `<p><strong>AUTÓPSIA DA PERSONALIDADE: O Fim das Migalhas Emocionais</strong></p><p>Abertura completa da estrutura psíquica para identificar a causa mortis da sua vontade e a origem da sua submissão.</p>` },
-    { id: "e1A", img: "ebook01A.webp", title: "Know yourself First", priceVal: 11.00, price: "$11.00", link: "https://pay.kiwify.com/8S4FCE0", desc: `<p><strong>Know Yourself First: Unravel Your Essence, Transform Your Relationships</strong></p>` },
-    { id: "e2A", img: "ebook02A.webp", title: "The Engineering of Collision", priceVal: 11.50, price: "$11.50", link: "https://pay.kiwify.com/ZjtlaGh", desc: `<p><strong>The Engineering of Collision: From Fragile Clay to the Sovereignty of Steel</strong></p>` },
-    { id: "e3A", img: "ebook03A.webp", title: "The Supremacy Code", priceVal: 11.99, price: "$11.99", link: "https://pay.kiwify.com/TGmTjRA", desc: `<p><strong>The Supremacy Code: Delete Emotional Crumbs, Reclaim Your Sovereignty</strong></p>` },
-    { id: "e7", img: "ebook01B.webp", title: "Découvrez-Vous", priceVal: 10.00, price: "€10,00", link: "https://pay.kiwify.com/GFUBNBT", desc: `<p><strong>Découvrez-vous : Révélez Votre Essence, Transformez Vos Relations</strong></p>` },
-    { id: "e3B", img: "ebook03B.webp", title: "Autópsia de la Personalidad", priceVal: 11.80, price: "€11,80", link: "https://pay.kiwify.com/4zixbEz", desc: `<p><strong>Autopsia de la Personalidad: El Fin de las Migajas Emocionales</strong></p>` },
-    { id: "e3C", img: "ebook03C.webp", title: "Autopsie de la Personnalité", priceVal: 13.80, price: "€13,80", link: "https://pay.kiwify.com/4zixbEz", desc: `<p><strong>Autopsie de la Personnalité: La Fin des Miettes Émotionnelles</strong></p>` },
-    { id: "e4", img: "ebook04.webp", title: "Sherlock Holmes O Dossiê da Engenharia da Colisão", priceVal: 24.90, price: "US$ 24,90", link: "https://pay.kiwify.com.br/E0600F1", desc: `<p><strong>Sherlock Holmes & O Dossiê da Engenharia da Colisão</strong></p>` }
+{ id: "e1", img: "ebook01.webp", 
+    
+title: "Descubra Você", priceVal: 9.70, price: "R$ 9,70", 
+link: "https://pay.kiwify.com.br/P8UTO6L", desc: `<p><strong>Descubra Você: Desvende Sua Essência, Transforme Seus Relacionamentos</strong></p>
+                    <p>Você sente que está vivendo em um ciclo repetitivo de encontros frustrantes e desencontros emocionais?</p>
+                    <p>Muitas vezes, depositamos no outro a responsabilidade pela nossa felicidade, apenas para encontrar desilusão. Mas a verdade é que a chave para conexões autênticas e duradouras nunca esteve no "parceiro ideal", mas sim escondida dentro da sua própria essência.</p>
+                    <p>Em <strong>“Descubra Você”</strong>, Júlio Bhrósz convida você para uma jornada profunda de autodescoberta. Este e-book não é apenas um guia de conselhos; é um mapa prático para quem deseja parar de sobreviver a relações vazias e começar a construir vínculos reais e significativos.</p>
+                    <p><strong>O que você vai encontrar nesta jornada:</strong></p>
+                    <p>• <strong>O Elo Perdido:</strong> Entenda por que a busca externa por validação é um caminho sem fim e aprenda como o autoconhecimento é o único pilar capaz de sustentar vínculos verdadeiros.</p>
+                    <p>• <strong>Seu Mapa Relacional:</strong> Desvende como sua história familiar e os padrões invisíveis moldam suas escolhas atuais. Aprenda a romper com o passado para traçar novos caminhos de afeto.</p>
+                    <p>• <strong>Identidade e Propósito:</strong> Vá além dos rótulos que o mundo te impôs. Descubra quem você é em sua essência, mapeie seus desejos e entenda como seu propósito de vida se entrelaça com o amor.</p>
+                    <p>• <strong>Superando Barreiras Internas:</strong> Identifique os medos ocultos que geram autossabotagem e adquira a coragem necessária para viver relacionamentos plenos e transparentes.</p>
+                    <p>• <strong>A Arte da Conexão:</strong> Domine a comunicação empática. Aprenda a estabelecer limites saudáveis e a cultivar o respeito mútuo, transformando conflitos em oportunidades de crescimento recíproco.</p>
+                    <p><em>A jornada mais importante da sua vida começa agora.</em></p>
+                    <p>Não espere mais pelo amor ideal. Comece a cultivá-lo a partir do seu interior e mude para sempre a forma como você ama e é amado.</p>
+                    <p>Dê o primeiro passo para a sua transformação. Adquira agora e descubra o poder de ser você mesmo em todos os seus relacionamentos.</p>` 
+            },    
+      { id: "e2", img: "ebook02.webp", 
+
+title: "Engenharia da Colisão", priceVal: 39.57, price: "R$ 39,57", link: "https://pay.kiwify.com.br/oRZAlbz", desc: `<p><strong>Engenharia da Colisão: A Soberania do Aço nos Relacionamentos</strong></p>
+                    <p><strong>O seu relacionamento é uma estrutura de argila ou uma armadura de aço?</strong></p>
+                    <p>A maioria dos casais vive sob a fragilidade de acordos superficiais, esperando que o tempo resolva fissuras estruturais que, na verdade, exigem intervenção técnica. Em <strong>“Engenharia da Colisão”</strong>, Júlio Bhrósz apresenta o método definitivo para casais que decidiram abandonar a instabilidade emocional e assumir o controle absoluto da sua dinâmica afetiva.</p>
+                    <p>Este não é um livro de conselhos sentimentais; é um <strong>manual de Engenharia de Relacionamento</strong> de alto impacto. Aqui, o leitor assume o papel de arquiteto da própria união, aprendendo a lidar com as forças invisíveis que sustentam ou derrubam uma vida a dois.</p>
+                    <p><strong>O que você irá analisar nesta obra:</strong></p>
+                    <p><strong>Estanqueidade Emocional:</strong> Aprenda a blindar o seu relacionamento contra infiltrações externas e desgastes invisíveis. Saiba como manter a estrutura selada e protegida contra a pressão do ambiente.</p>
+                    <p><strong>O Princípio da Colisão:</strong> Entenda como transformar o impacto dos conflitos em energia de fusão. Pare de temer o choque e aprenda a utilizá-lo para <strong>forjar uma conexão inquebrável</strong>.</p>
+                    <p><strong>Do Barro ao Aço:</strong> Identifique as zonas de fragilidade e substitua a "argila" das expectativas infantis pela soberania do aço. Construa uma base que não apenas resiste ao tempo, mas se <strong>fortalece sob tensão</strong>.</p>
+                    <p><strong>Arquitetura da Soberania:</strong> Domine as leis que regem a estabilidade entre dois indivíduos autônomos. Aprenda a desenhar um projeto de vida comum onde a individualidade potencializa a força do conjunto.</p>
+                    <p><strong>Sistemas de Alta Performance:</strong> Implemente protocolos de comunicação e resolução que funcionam com a precisão de engrenagens ajustadas, eliminando o atrito desnecessário e o desperdício de energia.</p>
+                    <p><strong>Pare de remendar o que deveria ser reconstruído. Assuma o comando da sua estrutura.</strong></p>
+                    <p>Deixe para trás a vulnerabilidade do comum e eleve seu relacionamento ao nível de <strong>Soberania</strong>.</p>
+                    <p>Adquira <strong>“Engenharia da Colisão”</strong> e forje agora o destino que vocês escolheram construir juntos.</p>` 
+            },    
+          { id: "e3", img: "ebook03.webp", 
+
+title: "Autópsia da Personalidade", priceVal: 59.90, price: "R$ 59,90", link: "https://pay.kiwify.com.br/sD4nqRO", desc: `<p><strong>AUTÓPSIA DA PERSONALIDADE: O Fim das Migalhas Emocionais</strong></p>
+                    <p><strong>O que resta de você quando as camadas de autodecepção são removidas?</strong></p>
+                    <p>A maioria das pessoas passa a vida tentando "consertar" o que nunca funcionou, alimentando-se de migalhas emocionais e aceitando a falência da própria identidade. Em <strong>“Autópsia da Personalidade”</strong>, Júlio Bhrósz executa o procedimento definitivo: a abertura completa da estrutura psíquica para identificar a causa mortis da sua vontade e a origem da sua submissão.</p>
+                    <p>Este não é um convite ao diálogo; é um <strong>Exame Cadavérico do Ego</strong>. Aqui, o leitor deixa de ser um espectador passivo para se tornar o agente que disseca as próprias falhas, eliminando parasitas emocionais e resgatando a <strong>Supremacia sobre sua existência</strong>.</p>
+                    <p><strong>Os Protocolos de Exame deste Volume:</strong></p>
+                    <p><strong>Dissecação dos Padrões:</strong> Identifique os tecidos necrosados da sua história que ainda ditam suas reações presentes. Corte o que está morto para que a vida real possa emergir.</p>
+                    <p><strong>Extirpação de Migalhas:</strong> Aprenda o protocolo rigoroso para identificar e deletar dependências afetivas e necessidades de validação que drenam sua energia vital.</p>
+                    <p><strong>Identificação do Parasitismo:</strong> Saiba quem são os agentes externos que se alimentam da sua falta de limites e aprenda a neutralizar a influência deles através da soberania individual.</p>
+                    <p><strong>O Resgate da Supremacia:</strong> Reestabeleça o comando central da sua mente. Saiba como a biologia e a mentalidade operam em conjunto para criar um estado de <strong>domínio sobre as próprias decisões</strong>.</p>
+                    <p><strong>Anatomia da Vontade:</strong> Entenda como a estrutura da personalidade é formada e como você pode reconfigurar o seu núcleo operacional para <strong>nunca mais aceitar menos do que o topo</strong>.</p>` 
+            },    
+      { id: "e1", img: "ebook01A.webp", 
+
+title: "Know yourself First", priceVal: 11.00, price: "$11.00", link: "https://pay.kiwify.com/8S4FCE0", desc: `<p><strong>Know Yourself First: Unravel Your Essence, Transform Your Relationships</strong></p>
+                    <p><strong>Are you exhausted from chasing a ghost?</strong></p>
+                    <p>Many people spend their lives trapped in a loop of disappointing encounters, believing that the "right person" is the missing piece to their happiness. But looking outward for what can only be found within is a road that leads to nowhere.</p>
+                    <p>In <strong>“Know Yourself First”</strong>, Júlio Bhrósz presents a radical shift in perspective. This is not a collection of vague advice; it is a <strong>strategic blueprint</strong> for those ready to stop settling for illusions and start building a life of profound, authentic connection.</p>
+                    <p><strong>The Milestones of Your Transformation:</strong></p>
+                    <p><strong>The Missing Link:</strong> Break the cycle of external validation. Discover why your inner foundation is the only thing capable of supporting a bond that doesn't crumble under pressure.</p>
+                    <p><strong>Your Relational Blueprint:</strong> Decode the invisible forces of your past. Understand how family history and the neuroscience of attraction have been pulling the strings—and learn how to <strong>cut them to forge a new destiny</strong>.</p>
+                    <p><strong>Authentic Identity & Purpose:</strong> Strip away the labels the world gave you. Define who you are at your core and align your life’s purpose with the way you choose to love.</p>
+                    <p><strong>Dismantling Inner Barriers:</strong> Shine a light on the hidden fears and self-sabotage that keep you playing small. Gain the tools to replace hesitation with the <strong>courage to be truly seen</strong>.</p>
+                    <p><strong>The Mastery of Connection:</strong> Move beyond surface-level talk. Master the art of empathetic communication and set the boundaries that command respect and foster mutual growth.</p>
+                    <p><strong>The most important relationship you will ever have is the one you cultivate with yourself.</strong></p>
+                    <p>Stop waiting for a miracle to walk through the door. The architecture of a fulfilling life begins in your own heart.</p>
+                    <p>Claim your copy of <strong>“Know Yourself First”</strong> and embark on the only journey that actually changes everything.</p>` 
+            },    
+      { id: "e2A", img: "ebook02A.webp", 
+
+title: "The Engineering of Collision", priceVal: 11.50, price: "$11.50", link: "https://pay.kiwify.com/ZjtlaGh", desc: `<p><strong>The Engineering of Collision: From Fragile Clay to the Sovereignty of Steel</strong></p>
+                    <p><strong>Is your relationship built to withstand the pressure, or is it merely waiting for the next crack to appear?</strong></p>
+                    <p>Most couples operate on a foundation of "clay"—a fragile mix of unspoken expectations and emotional vulnerability that crumbles under the first sign of stress. In <strong>“Collision Engineering”</strong>, Júlio Bhrósz delivers the definitive manual for those who refuse to settle for a collapsing structure.</p>
+                    <p>This is not a book about "getting along"; it is a <strong>technical intervention</strong> for the Reader who chooses to architect a bond with the precision and unyielding strength of Steel.</p>
+                    <p><strong>The Technical Protocols of this Volume:</strong></p>
+                    <p><strong>Emotional Watertightness:</strong> Learn the art of sealing your union against external leaks and invisible erosion. Ensure your core structure remains impenetrable to outside pressure.</p>
+                    <p><strong>The Physics of Collision:</strong> Stop fearing the impact. Master the principles of turning relational "collisions" into the very energy required for <strong>structural fusion</strong>.</p>
+                    <p><strong>Replacing Clay with Sovereignty:</strong> Identify the zones of fragility within your dynamic. Systematic instructions on how to reinforce your foundation until it achieves the <strong>Sovereignty of Steel</strong>.</p>
+                    <p><strong>The Architecture of Autonomy:</strong> High-performance relationships require two sovereign individuals. Learn to design a common project where individual strength amplifies the power of the whole.</p>
+                    <p><strong>Zero-Friction Systems:</strong> Implement communication protocols that function like perfectly calibrated gears—eliminating the heat of unnecessary friction and the waste of emotional energy.</p>
+                    <p><strong>Stop patching up a failing design. Take command of your structural destiny.</strong></p>
+                    <p>Abandon the vulnerability of the masses and forge a relationship defined by power, stability, and <strong>Absolute Sovereignty</strong>.</p>
+                    <p>Acquire <strong>“Collision Engineering”</strong> and build the unbreakable future you both decided to command.</p>` 
+            },    
+      { id: "e3A", img: "ebook03A.webp", 
+
+title: "The Supremacy Code", priceVal: 11.99, price: "$11.99", link: "https://pay.kiwify.com/TGmTjRA", desc: `<p><strong>The Supremacy Code: Delete Emotional Crumbs, Reclaim Your Sovereignty</strong></p>
+                    <p><strong>What remains of you when the layers of self-deception are stripped away?</strong></p>
+                    <p>Most people spend their existence trying to "fix" a broken identity, feeding on emotional crumbs and accepting the slow decay of their own will. In <strong>“The Supremacy Code”</strong>, Júlio Bhrósz performs the ultimate procedure: a total opening of the psychic structure to identify the causa mortis of your drive and the root of your submission.</p>
+                    <p>This is not a self-help book; it is a <strong>Post-Mortem Examination of the Ego</strong>. Here, the Reader transitions from a passive observer to the lead specialist, dissecting their own failures, extracting emotional parasites, and reclaiming <strong>Supremacy over their existence</strong>.</p>
+                    <p><strong>The Examination Protocols of this Volume:</strong></p>
+                    <p><strong>Dissecting the Patterns:</strong> Identify the necrotic tissues of your history that still dictate your current reactions. Cut away what is dead so that real life can emerge.</p>
+                    <p><strong>Extraction of Emotional Crumbs:</strong> Learn the rigorous protocol to identify and delete affective dependencies and the desperate need for validation that drains your vital energy.</p>
+                    <p><strong>Identifying Parasitism:</strong> Recognize the external agents feeding on your lack of boundaries and learn to neutralize their influence through individual sovereignty.</p>
+                    <p><strong>The Restoration of Supremacy:</strong> Re-establish the central command of your mind. Understand how biology and mindset operate together to create a state of <strong>total dominance over your decisions</strong>.</p>
+                    <p><strong>Anatomy of the Will:</strong> Understand how the personality structure is formed and how to reconfigure your core operating system to <strong>never again accept anything less than the top</strong>.</p>
+                    <p>Bhrósz—</p>
+                    <p><strong>"TRUE SOVEREIGNTY IS NOT BORN FROM HOPE; IT IS BORN FROM THE COURAGE TO PERFORM AN AUTOPSY ON YOUR FEARS AND DELETE THE CRUMBS YOU WERE TAUGHT TO CALL A FEAST."</strong></p>` 
+            },    
+      { id: "e7", img: "ebook01B.webp", 
+
+title: "Découvrez-Vous", priceVal: 10.00, price: "€10,00", link: "https://pay.kiwify.com/GFUBNBT", desc: `<p><strong>Découvrez-vous : Révélez Votre Essence, Transformez Vos Relations</strong></p>
+                    <p>Avez-vous l'impression de vivre dans un cycle répétitif de rencontres frustrantes et de malentendus émotionnels?</p>
+                    <p>Bien souvent, nous plaçons la responsabilité de notre bonheur sur l'autre, pour ne récolter que de la déception. Mais la vérité est que la clé de connexions authentiques et durables ne s'est jamais trouvée dans le « partenaire idéal », mais plutôt cachée au cœur de votre propre essence.</p>
+                    <p>Dans <strong>« Découvrez-vous »</strong>, Júlio Bhrósz vous invite à un voyage profond de découverte de soi. Cet e-book n'est pas seulement un guide de conseils ; c'est une carte pratique pour ceux qui souhaitent cesser de survivre à des relations vides et commencer à construire des liens réels et significatifs.</p>
+                    <p><strong>Ce que vous trouverez dans ce voyage :</strong></p>
+                    <p>• <strong>Le Chaînon Manquant :</strong> Comprenez pourquoi la quête externe de validation est une impasse et apprenez comment la connaissance de soi est le seul pilier capable de soutenir des liens véritables.</p>
+                    <p>• <strong>Votre Carte Relationnelle :</strong> Découvrez comment votre histoire familiale et les schémas invisibles façonnent vos choix actuels. Apprenez à rompre avec le passé pour tracer de nouveaux chemins d'affection.</p>
+                    <p>• <strong>Identité et Mission :</strong> Allez au-delà des étiquettes que le monde vous a imposées. Découvrez qui vous êtes dans votre essence, définissez vos désirs et comprenez comment votre mission de vie s'entrelace avec l'amour.</p>
+                    <p>• <strong>Surmonter les Barrières Internes :</strong> Identifiez les peurs cachées qui génèrent l'auto-sabotage et acquérez le courage nécessaire pour vivre des relations épanouies et transparentes.</p>
+                    <p>• <strong>L'Art de la Connexion :</strong> Maîtrisez la communication empathique. Apprenez à établir des limites saines et à cultiver le respect mutuel, transformant les conflits en opportunités de croissance réciproque.</p>
+                    <p><em>Le voyage le plus important de votre vie commence maintenant.</em></p>
+                    <p>N'attendez plus l'amour idéal. Commencez à le cultiver de l'intérieur et changez à jamais la façon dont vous aimez et êtes employé.</p>
+                    <p>Faites le premier pas vers votre transformation. Procurez-le vous maintenant et découvrez le pouvoir d'être vous-même dans toutes vos relations.</p>` 
+            },    
+      { id: "e3B", img: "ebook03B.webp", 
+
+title: "Autópsia de la Personalidad", priceVal: 11.80, price: "€11,80", link: "https://pay.kiwify.com/4zixbEz", desc: `<p><strong>Autopsia de la Personalidad: El Fin de las Migajas Emocionales</strong></p>
+                    <p><strong>¿Qué queda de usted cuando las capas de autoengaño son removidas?</strong></p>
+                    <p>La mayoría de las personas pasan la vida intentando "reparar" lo que nunca funcionó, alimentándose de migajas emocionales y aceptando la quiebra de su propia identidad. En <strong>"Autopsia de la Personalidad"</strong>, Júlio Bhrósz ejecuta el procedimiento definitivo: la apertura completa de la estructura psíquica para identificar la causa mortis de su voluntad y el origen de su sumisión.</p>
+                    <p>Esto no es una invitación al diálogo; es un <strong>Examen Cadavérico del Ego</strong>. Aquí, el lector deja de ser un espectador pasivo para convertirse en el agente que diseca sus propias fallas, eliminando parásitos emocionales y rescatando la <strong>Supremacía sobre su existencia</strong>.</p>
+                    <p><strong>Los Protocolos de Examen de este Volumen:</strong></p>
+                    <p><strong>Disección de los Patrones:</strong> Identifique los tejidos necrosados de su historia que aún dictan sus reacciones presentes. Corte lo que está muerto para que la vida real pueda emerger.</p>
+                    <p><strong>Extirpación de Migajas:</strong> Aprenda el protocolo riguroso para identificar y eliminar dependencias afectivas y necesidades de validación que drenan su energía vital.</p>
+                    <p><strong>Identificación del Parasitismo:</strong> Sepa quiénes son los agentes externos que se alimentan de su falta de límites y aprenda a neutralizar su influencia a través de la soberanía individual.</p>
+                    <p><strong>El Rescate de la Supremacía:</strong> Restablezca el mando central de su mente. Sepa cómo la biología y la mentalidad operan en conjunto para crear un estado de <strong>dominio sobre las propias decisiones</strong>.</p>
+                    <p><strong>Anatomía de la Voluntad:</strong> Entienda cómo se forma la estructura de la personalidad y cómo puede reconfigurar su núcleo operativo para <strong>no volver a aceptar nunca menos que la cima</strong>.</p>`
+            },   
+      { id: "e3C", img: "ebook03C.webp", 
+
+title: "Autopsie de la Personnalité", priceVal: 13.80, price: "€13,80", link: "https://pay.kiwify.com/4zixbEz", desc: `<p><strong>Autopsie de la Personnalité: La Fin des Miettes Émotionnelles</strong></p>
+                    <p><strong>Que reste-t-il de vous lorsque les couches d'auto-tromperie sont retirées ?</strong></p>
+                    <p>La plupart des gens passent leur vie à essayer de « réparer » ce qui n'a jamais fonctionné, se nourrissant de miettes émotionnelles et acceptant la faillite de leur propre identité. Dans <strong>« Autopsie de la Personnalité »</strong>, Júlio Bhrósz exécute la procédure définitive : l'ouverture complète de la structure psychique pour identifier la causa mortis de votre volonté et l'origine de votre soumission.</p>
+                    <p>Ceci n'est pas une invitation au dialogue ; c'est un <strong>Examen Cadavérique de l'Ego</strong>. Ici, le lecteur cesse d'être un spectateur passif pour devenir l'agent qui dissèque ses propres failles, éliminant les parasites émotionnels et sauvant la <strong>Suprématie sur son existence</strong>.</p>
+                    <p><strong>Les Protocoles d'Examen de ce Volume :</strong></p>
+                    <p><strong>Dissection des Schémas :</strong> Identifiez les tissus nécrosés de votre histoire qui dictent encore vos réactions présentes. Coupez ce qui est mort pour que la vie réelle puisse émerger.</p>
+                    <p><strong>Extirpation des Miettes :</strong> Apprenez le protocole rigoureux pour identifier et supprimer les dépendances affectives et les besoins de validation qui drainent votre énergie vitale.</p>
+                    <p><strong>Identification du Parasitisme :</strong> Sachez qui sont les agents externes qui se nourrissent de votre manque de limites et apprenez à neutraliser leur influence grâce à la souveraineté individuelle.</p>
+                    <p><strong>Le Sauvetage de la Suprématie :</strong> Rétablissez le commandement central de votre esprit. Sachez comment la biologie et la mentalité opèrent ensemble pour créer un état de <strong>domination sur vos propres décisions</strong>.</p>
+                    <p><strong>Anatomie de la Volonté :</strong> Comprenez comment la structure de la personnalité est formée et comment vous pouvez reconfigurer votre noyau opérationnel pour <strong>ne plus jamais accepter moins que le sommet</strong>.</p>` 
+            },
+    { id: "e4", img: "ebook04.webp", 
+
+title: "Sherlock Holmes O Dossiê da Engenharia da Colisão", priceVal: 24.90, price: "US$ 24,90", link: "https://pay.kiwify.com.br/E0600F1", desc: `<p><strong>Sherlock Holmes & O Dossiê da Engenharia da Colisão: A Ciência da Investigação nos Relacionamentos</strong></p>
+                    <p>E se as crises, os silêncios e as dinâmicas ocultas do seu relacionamento pudessem ser decifrados com a precisão cirúrgica do maior detetive da história?</p>
+                    <p>A maioria dos casais ignora os indícios óbvios de desgaste, tratando fissuras estruturais como meros reveses do acaso. Em <strong>“Sherlock Holmes: O Dossiê da Engenharia da Colisão”</strong>, Júlio Bhrósz cruza a lógica analítica vitoriana com o método definitivo de reconstrução afetiva para criar um protocolo de investigação comportamental sem precedentes.</p>
+                    <p>Este não é um livro de teorias vagas; é um <strong>manual de autópsia relacional e engenharia reversa</strong>. Aqui, você deixa de ser refém das dúvidas e assume o papel de investigador-chefe da sua própria realidade conjugal.</p>
+                    <p><strong>O que você vai processar e desvendar neste dossiê:</strong></p>
+                    <p>• <strong>O Método Dedutivo Aplicado:</strong> Aprenda a ler os sinais invisíveis, os microcomportamentos e as omissões que revelam a real saúde da sua estrutura a dois.</p>
+                    <p>• <strong>Rastreamento de Infiltrações:</strong> Descubra como identificar parasitas emocionais e ruídos externos antes que eles causem o colapso definitivo da blindagem do casal.</p>
+                    <p>• <strong>A Física do Impacto Subliminar:</strong> Entenda a mecânica por trás dos confrontos silenciosos e saiba como usar a lógica pura para desarmar armadilhas psicológicas e jogos de manipulação.</p>
+                    <p>• <strong>Arquitetura da Evidência:</strong> Pare de agir por impulso ou emoção reativa. Aprenda a isolar os fatos das expectativas infantis para forjar uma conexão baseada na verdade e na soberania mútua.</p>
+                    <p>• <strong>Engenharia de Casos Complexos:</strong> Implemente protocolos rigorosos de comunicação que funcionam como engrenagens perfeitas, eliminando o atrito desnecessário e solidificando uma base inquebrável.</p>
+                    <p><em>A verdade por trás da colisão está diante dos seus olhos. Falta apenas você aprender a enxergar.</em></p>
+                    <p>Não espere que o tempo resolva o que exige intervenção analítica. Assuma o controle do caso, elimine as migalhas de incerteza e eleve seu vínculo ao nível de soberania absoluta.</p>
+                    <p>Abra este dossiê, execute o escaneamento definitivo e transforme o impacto em poder de fusão estrutural.</p>`}
   ]
 };
 
@@ -1500,26 +1711,62 @@ function abrirInfo(tipo) {
   ativarMenu(tipo);
 
   if (tipo === 'sobre') {
-    container.innerHTML = `
-      <div class="sobre-clean">
-          <div class="sobre-content">
-                                <div class="sobre-container-flex">
-                  <div class="sobre-foto-wrapper">
-                                            <img src="foto_autor.webp" alt="Júlio Bhrósz" class="foto-autor-img" loading="lazy">
-                  </div>
-                                    <div class="sobre-texto-wrapper">
-                      <h1 style="color: var(--gold); font-size: 1.8rem; margin-bottom: 15px;">A Mente por trás d'O Código</h1>
-                      <p><strong>Júlio Bhrósz</strong><br>
-                      O mundo não é justo. Ele é um mercado de valores invisíveis. Se você se sente ignorado, trocado ou tratado como um "plano B", não é por acaso. É porque você está jogando com as regras que foram imposed a você, não as que você domina.<br><br>
-                      <b>A Ciência do Comando:</b><br>
-                      A autoridade consolidada não vem dos diplomas emoldurados, mas da linha de frente. No Portal Pleno, somos uma equipe de estrategistas da sua reconstrução.<br><br>
-                      <b>O Código Está Aberto:</b><br>
-                      A partir de agora, a passividade é uma escolha. Você pode continuar implorando por atenção, ou pode assumir o comando do seu destino.</p>
-                      <div class="quote" style="font-style: italic; padding-left: 15px; margin-top: 20px; border-left: 2px solid var(--gold); color: var(--gold);">"O Código não é apenas um livro, é a chave para a SUA Libertação Emocional."</div>
-                  </div>
-              </div>
-          </div>
-      </div>`;
+                container.innerHTML = `
+<div class="sobre-clean">
+    <div class="sobre-content">
+        <div class="sobre-container-flex">
+            <div class="sobre-foto-wrapper">
+                <img src="foto_autor.webp" alt="Júlio Bhrósz" class="foto-autor-img">
+            </div>
+            <div class="sobre-texto-wrapper" style="flex: 1;">
+                <h1>A Mente por trás d'O Código</h1>
+                <p><strong>Júlio Bhrósz</strong><br>
+O mundo não é justo. Ele é um mercado de valores invisíveis. Se você se sente ignorado, trocado ou tratado como um "plano B", não é por acaso. É porque você está jogando com as regras que foram impostas a você, não as que você domina.
+
+Eu não estou aqui para te oferecer um abraço ou a ilusão de que "tudo vai ficar bem". Eu dediquei os últimos 15 anos a uma busca implacável: Desvendar por que alguns prosperam e outros definham, mesmo com o mesmo potencial. Cansei de ver mentes brilhantes presas na insegurança, enquanto a mediocridade ascende. <em>Por isso, eu decifrei o que a maioria teme ensinar,</em> chega de Migalhas!<br><br>
+<b>A Ciência do Comando:</b><br>
+A autoridade consolidada não vem dos diplomas emoldurados, mas da linha de frente, onde a teoria encontra a realidade. No Portal Pleno, Somos uma equipe de estrategistas da sua reconstrução.
+
+Eu condensei o que há de mais avançado <b><em>no estudo do comportamento humano</em></b> – os insights que as mentes de elite em Harvard e Stanford discutem a portas fechadas – e transformei em um arsenal de ferramentas práticas. Não é "autoajuda" genérica. É a ciência do comando aplicada à sua vida.<br>
+Você vai aprender a:<br>
+
+
+<p>• Assumir o controle absoluto sobre suas reações e a narrativa que você projeta.<br><p>
+
+<p>•  Parar de reagir por impulso e começar a agir com estratégia deliberada.<br> <p>
+
+<p>•  Reverter a percepção que o mundo tem de você, de "plano B" a prioridade.<br><p>
+
+
+<br><b>O Código Está Aberto: </b><br>
+Sua Decisão, Seu Domínio
+
+O segredo que mantinha você refém da aprovação alheia foi desvendado. O código está aberto, mas não é para todos. É para quem tem a coragem de abandonar a passividade e reescrever as próprias regras.
+
+A partir de agora, a passividade é uma escolha.<br><br>
+<b><em>Você pode continuar implorando por atenção,</em> ou </b><br><b>pode assumir o comando do seu destino e se tornar a pessoa que o mundo não apenas respeita, mas busca.</b><br>
+As regras mudaram e agora, elas pertencem a você. Pronto para dominar o jogo?<br>
+<br><b>Fundamentação Científica Aplicada:</b><br>
+A metodologia de JB integra protocolos de Inteligência Emocional da <b>Harvard University</b>, mecanismos de Neuroplasticidade da <b>University of Oxford</b> e modelos de Psicologia Social e Status de <b>Stanford,</b> para uma transformação comprovada e duradoura.<br> 
+</strong>.</p>
+           <p style="line-height: 1.7; margin-bottom: 20px; font-size: 1.2rem; color: #fff; display: flex; align-items: center; flex-wrap: wrap;">
+    <span style="white-space: nowrap;">Descubra como 
+        <span class="link-cta-aqui" style="margin-left: 5px;" onclick="abrirSinopse(hardware.e[2].img, hardware.e[2].title, hardware.e[2].price, hardware.e[2].link, hardware.e[2].desc, hardware.e[2].details)">
+            <b>Click Aqui</b>
+        </span>
+    </span>
+
+    <span class="container-seta-curva" style="display: inline-flex; width: 50px; margin-left: 10px;">
+        <svg class="seta-svg-curva" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style="transform: rotate(180deg);">
+            <path d="M 90 20 C 70 0, 30 0, 10 20 L 0 10 L 0 40 L 30 40 L 20 30 C 35 15, 65 15, 80 30 L 90 20 Z" />
+        </svg>
+    </span>
+</p>
+           <div class="quote" style="font-style: italic; padding-left: 15px; margin-top: 20px;">"O Código não é apenas um livro, é a chave para a SUA <b>Libertação Emocional</b>."</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>`;
   } else if (tipo === 'depoimentos') {
     const listaAtual = obterDepoimentos();
     container.innerHTML = `

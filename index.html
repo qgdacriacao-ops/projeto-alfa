@@ -16,13 +16,15 @@
     <style>
         :root {
             --gold: #FFD700;
+            --gold-bright: #FFF0A3;
+            --gold-deep: #C99700;
             --bg-dark: #000000;
-            --card-bg: rgba(20, 20, 20, 0.85);
+            --card-bg: rgba(20, 20, 20, 0.88);
             --text-light: #ffffff;
             --text-muted: #cccccc;
             --header-bg: rgba(0, 0, 0, 0.9);
-            --bg-gradient: radial-gradient(circle at center, #1a1a1a 0%, #000000 100%);
-            --border-color: rgba(255, 215, 0, 0.3);
+            --bg-gradient: radial-gradient(circle at center, #26200d 0%, #090807 58%, #000000 100%);
+            --border-color: rgba(255, 215, 0, 0.26);
             --box-bg: rgba(0,0,0,0.6);
             --input-bg: rgba(30, 30, 30, 0.9);
         }
@@ -46,15 +48,8 @@
             transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
         }
 
-        /* Removendo bordas de todas as imagens globalmente */
-        img {
-            border: none !important;
-            outline: none !important;
-            box-shadow: none !important;
-        }
-
         body {
-            background-color: var(--bg-dark);
+            background-color: transparent;
             color: var(--text-light);
             font-family: 'Inter', sans-serif;
             min-height: 100vh;
@@ -66,13 +61,41 @@
 
         #bg {
             position: fixed;
-            top: 0;
-            left: 0;
+            inset: 0;
             width: 100vw;
             height: 100vh;
-            background: var(--bg-gradient);
-            z-index: -1;
+            background-image:
+                linear-gradient(180deg, rgba(0, 0, 0, 0.72) 0%, rgba(0, 0, 0, 0.56) 48%, rgba(0, 0, 0, 0.84) 100%),
+                url("bg.webp"),
+                var(--bg-gradient);
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            z-index: 0;
             pointer-events: none;
+        }
+
+        body.light-theme #bg {
+            background-image:
+                linear-gradient(180deg, rgba(255, 255, 255, 0.78) 0%, rgba(255, 255, 255, 0.68) 48%, rgba(245, 245, 247, 0.88) 100%),
+                url("bg.webp"),
+                var(--bg-gradient);
+        }
+
+        body > header,
+        body > main,
+        body > .final-footer {
+            position: relative;
+            z-index: 1;
+        }
+
+        img {
+            display: block;
+            max-width: 100%;
+            border: 0 !important;
+            outline: 0;
+            box-shadow: none;
         }
 
         header {
@@ -201,21 +224,24 @@
             width: 100%;
             max-width: 320px;
             height: 480px;
+            border: 0;
             border-radius: 8px;
             overflow: hidden;
             cursor: pointer;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            transition: transform 0.3s ease;
+            background: rgba(0, 0, 0, 0.24);
+            box-shadow: 0 16px 38px rgba(0, 0, 0, 0.56);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         .display-box:hover {
-            transform: scale(1.02);
+            transform: translateY(-4px) scale(1.015);
+            box-shadow: 0 20px 44px rgba(0, 0, 0, 0.68);
         }
 
         .display-box img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain;
             transition: opacity 0.5s ease;
         }
 
@@ -242,6 +268,7 @@
 
         .card-flutuante {
             background: var(--card-bg);
+            border: 1px solid var(--border-color);
             border-radius: 6px;
             padding: 15px;
             text-align: center;
@@ -250,15 +277,17 @@
         }
 
         .card-flutuante:hover {
+            border-color: var(--gold);
             transform: translateY(-5px);
         }
 
         .card-flutuante img {
             width: 100%;
-            height: 280px;
-            object-fit: cover;
+            height: 320px;
+            object-fit: contain;
             border-radius: 4px;
             margin-bottom: 10px;
+            background: rgba(0, 0, 0, 0.18);
         }
 
         .card-title {
@@ -270,6 +299,7 @@
         .sinopse-carousel-container {
             margin-bottom: 25px;
             background: var(--card-bg);
+            border: 1px solid var(--border-color);
             border-radius: 8px;
             padding: 15px 20px;
         }
@@ -296,7 +326,8 @@
             flex: 0 0 100px;
             cursor: pointer;
             text-align: center;
-            transition: transform 0.2s;
+            transition: transform 0.2s, border-color 0.2s;
+            border: 1px solid var(--border-color);
             border-radius: 4px;
             padding: 5px;
             background: var(--box-bg);
@@ -304,14 +335,16 @@
 
         .sinopse-thumb-card:hover {
             transform: translateY(-3px);
+            border-color: var(--gold);
         }
 
         .sinopse-thumb-card img {
             width: 100%;
-            height: 120px;
-            object-fit: cover;
+            height: 135px;
+            object-fit: contain;
             border-radius: 3px;
             margin-bottom: 5px;
+            background: rgba(0, 0, 0, 0.2);
         }
 
         .sinopse-thumb-card span {
@@ -325,17 +358,94 @@
 
         .container-trindade {
             display: grid;
-            grid-template-columns: 300px 1fr 300px;
-            gap: 40px;
+            grid-template-columns: minmax(210px, 280px) minmax(0, 1fr) minmax(220px, 280px);
+            gap: 32px;
+            align-items: start;
             background: var(--card-bg);
             padding: 30px;
             border-radius: 8px;
+            border: 1px solid var(--border-color);
         }
 
         .col-mockup img {
             width: 100%;
+            max-height: 480px;
+            object-fit: contain;
             border-radius: 6px;
-            object-fit: cover;
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .asset-footer {
+            margin-top: 18px;
+            padding: 18px 22px;
+            background: rgba(0, 0, 0, 0.46);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+        }
+
+        .asset-meta-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 12px;
+        }
+
+        .asset-meta-item {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            min-width: 0;
+        }
+
+        .asset-meta-item small {
+            color: var(--text-muted);
+            font-size: 0.66rem;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+
+        .asset-meta-item strong {
+            color: var(--gold);
+            font-size: 0.82rem;
+            line-height: 1.35;
+        }
+
+        .autopsia-callout {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 18px;
+            padding-top: 16px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .autopsia-callout svg {
+            flex: 0 0 76px;
+            width: 76px;
+            height: 48px;
+            overflow: visible;
+        }
+
+        .autopsia-callout path {
+            fill: none;
+            stroke: #ef3340;
+            stroke-width: 4;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .autopsia-callout a {
+            color: #ff5c66;
+            font-weight: 800;
+            text-decoration: underline;
+            text-decoration-thickness: 2px;
+            text-underline-offset: 4px;
+            transition: color 0.2s ease, transform 0.2s ease;
+        }
+
+        .autopsia-callout a:hover {
+            color: #ffb0b5;
+            transform: translateX(3px);
         }
 
         .col-texto h1 {
@@ -351,8 +461,12 @@
         }
 
         .col-texto .description {
-            line-height: 1.6;
+            line-height: 1.72;
             font-size: 0.95rem;
+        }
+
+        .col-texto .description p {
+            margin-bottom: 12px;
         }
 
         .col-compra .buy-card {
@@ -407,37 +521,6 @@
             background: #b20000;
         }
 
-        /* Layout da Aba Sobre */
-        .sobre-container-flex {
-            display: flex;
-            align-items: flex-start;
-            gap: 30px;
-            background: var(--card-bg);
-            padding: 30px;
-            border-radius: 8px;
-        }
-
-        .sobre-foto-wrapper {
-            flex: 0 0 280px;
-        }
-
-        .foto-autor-img {
-            width: 100%;
-            height: auto;
-            border-radius: 8px;
-            object-fit: cover;
-        }
-
-        .meta-dados-rodape {
-            margin-top: 15px;
-            padding-top: 15px;
-            border-top: 1px solid var(--border-color);
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            display: flex;
-            gap: 20px;
-        }
-
         .combo-container {
             background: var(--card-bg);
             border: 1px solid var(--gold);
@@ -468,18 +551,26 @@
 
         .combo-item {
             background: var(--box-bg);
+            border: 1px solid var(--border-color);
             border-radius: 6px;
             padding: 15px;
             display: flex;
             gap: 15px;
             align-items: center;
+            transition: border-color 0.3s;
+        }
+
+        .combo-item:hover {
+            border-color: var(--gold);
         }
 
         .combo-item img {
-            width: 80px;
-            height: 110px;
-            object-fit: cover;
+            width: 96px;
+            height: 132px;
+            object-fit: contain;
             border-radius: 4px;
+            background: rgba(0, 0, 0, 0.2);
+            flex: 0 0 96px;
         }
 
         .combo-item-info {
@@ -549,6 +640,7 @@
 
         .card-depoimento {
             background: var(--card-bg);
+            border: 1px solid var(--border-color);
             border-radius: 8px;
             padding: 20px;
             display: flex;
@@ -629,14 +721,150 @@
         .btn-whatsapp { background: #25D366; }
         .btn-instagram { background: #E1306C; }
         .btn-facebook { background: #1877F2; }
-        .btn-x { background: #000000; }
+        .btn-x { background: #000000; border: 1px solid var(--border-color); }
         .btn-telegram { background: #0088cc; }
         .btn-youtube { background: #FF0000; }
+
+
+        .sobre-clean {
+            max-width: 1120px;
+            margin: 20px auto;
+        }
+
+        .sobre-content {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 30px;
+        }
+
+        .sobre-container-flex {
+            display: grid !important;
+            grid-template-columns: minmax(180px, 240px) minmax(0, 1fr) !important;
+            align-items: start !important;
+            gap: 30px !important;
+            flex-wrap: initial !important;
+        }
+
+        .sobre-foto-wrapper {
+            width: 100%;
+            max-width: 240px;
+        }
+
+        .foto-autor-img {
+            display: block;
+            width: 100% !important;
+            max-width: 240px !important;
+            max-height: 360px;
+            height: auto;
+            object-fit: contain;
+            border-radius: 8px;
+            background: rgba(0, 0, 0, 0.22);
+        }
+
+        .sobre-texto-wrapper {
+            min-width: 0;
+        }
+
+        .sobre-texto-wrapper p {
+            line-height: 1.75;
+        }
+
+        .section-heading {
+            display: flex;
+            align-items: end;
+            justify-content: space-between;
+            gap: 16px;
+            padding: 20px 0 4px;
+        }
+
+        .section-heading h1 {
+            color: var(--gold);
+            text-transform: uppercase;
+            font-size: clamp(1.25rem, 3vw, 1.75rem);
+            letter-spacing: 1.5px;
+        }
+
+        .section-heading span {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .audio-card {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            min-height: 210px;
+            background: var(--box-bg);
+            padding: 16px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .audio-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--gold);
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.38);
+        }
+
+        .audio-card-img {
+            width: 150px !important;
+            height: 178px !important;
+            flex: 0 0 150px;
+            object-fit: contain !important;
+            border-radius: 6px;
+            background: rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+        }
+
+        .audio-card-info {
+            min-width: 0;
+            flex: 1;
+        }
+
+        .audio-card-title {
+            color: var(--text-light);
+            font-size: 1rem;
+            line-height: 1.3;
+            margin-bottom: 8px;
+        }
+
+        .audio-card-price {
+            color: var(--gold);
+            font-weight: 800;
+            display: block;
+            margin-bottom: 12px;
+        }
+
+        .audio-card-button {
+            background: linear-gradient(135deg, var(--gold-bright), var(--gold), var(--gold-deep));
+            color: #000;
+            border: 0;
+            padding: 8px 14px;
+            cursor: pointer;
+            font-weight: 800;
+            border-radius: 4px;
+        }
+
+        .btn-gold,
+        .theme-toggle-btn:hover,
+        #btn-voltar {
+            background: linear-gradient(135deg, var(--gold-bright) 0%, var(--gold) 46%, var(--gold-deep) 100%);
+        }
+
+        .btn-gold:hover {
+            filter: brightness(1.08) saturate(1.12);
+            transform: translateY(-1px);
+        }
 
         .final-footer {
             text-align: center;
             padding: 20px;
             background: var(--header-bg);
+            border-top: 1px solid var(--border-color);
             font-size: 0.75rem;
             color: var(--text-muted);
             margin-top: auto;
@@ -647,12 +875,38 @@
         @media (max-width: 900px) {
             .view-home { flex-direction: column; }
             .container-trindade { grid-template-columns: 1fr; }
-            .sobre-container-flex { flex-direction: column; }
-            .sobre-foto-wrapper { flex: 0 0 100%; width: 100%; max-width: 300px; margin: 0 auto; }
+            .col-mockup { display: flex; justify-content: center; }
+            .col-mockup img { max-width: 280px; }
+            #view-audiobooks > div,
+            #view-impressos-fisicos > div { grid-template-columns: 1fr !important; }
             header { flex-direction: column; gap: 15px; }
             .logo { margin-right: 0; }
             nav ul { flex-wrap: wrap; justify-content: center; gap: 12px; }
             .combo-footer-bar { flex-direction: column; gap: 15px; text-align: center; }
+            .asset-meta-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        }
+
+        @media (max-width: 700px) {
+            main { padding: 14px; }
+            header { padding: 14px 16px; }
+            .display-box { height: 400px; }
+            .sobre-content { padding: 20px; }
+            .sobre-container-flex { grid-template-columns: 1fr !important; }
+            .sobre-foto-wrapper, .foto-autor-img { margin: 0 auto; }
+            .audio-card { align-items: flex-start; }
+            .audio-card-img { width: 118px !important; height: 150px !important; flex-basis: 118px; }
+            .asset-meta-grid { grid-template-columns: 1fr 1fr; }
+            .autopsia-callout { align-items: flex-start; }
+            .autopsia-callout svg { flex-basis: 58px; width: 58px; }
+            #content-info [style*="grid-template-columns: 1fr 1fr"] { grid-template-columns: 1fr !important; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                transition-duration: 0.01ms !important;
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+            }
         }
     </style>
 </head>
@@ -677,7 +931,7 @@
                 <li><a id="nav-contato" onclick="abrirInfo('contato')">Contato</a></li>
                 <li><a id="nav-suporte" onclick="abrirInfo('suporte')">Suporte</a></li>
                 <li><button class="theme-toggle-btn" onclick="toggleTheme()"><span id="theme-icon">🌙</span> <span id="theme-text">Noturno</span></button></li>
-                <li><div id="btn-voltar" onclick="voltarFluxo()">Voltar</div></li>
+                <li><button type="button" id="btn-voltar" onclick="voltarFluxo()">Voltar</button></li>
             </ul>
         </nav>
     </header>
@@ -722,7 +976,11 @@
         </div>
 
         <section id="view-galeria" class="view-galeria">
-             <div class="grid-produtos" id="render-grid"></div>
+            <div class="section-heading">
+                <h1>Biblioteca de Ebooks</h1>
+                <span id="ebook-count">10 títulos</span>
+            </div>
+            <div class="grid-produtos" id="render-grid"></div>
         </section>
 
         <section id="view-audiobooks" class="view-galeria" style="padding-top: 40px;">
@@ -763,11 +1021,6 @@
                         <span style="color: var(--gold); font-weight: 700; display: block; margin-bottom: 10px;">Sinopse</span>
                         <div id="target-desc"></div>
                     </div>
-                    <div class="meta-dados-rodape">
-                        <span><strong>Data:</strong> 2026</span>
-                        <span><strong>Formato:</strong> Digital / Impresso</span>
-                        <span><strong>Edição:</strong> 1ª Edição</span>
-                    </div>
                 </div>
                 <div class="col-compra">
                     <div class="buy-card">
@@ -783,6 +1036,7 @@
                     </div>
                 </div>
             </div>
+            <div id="asset-footer" class="asset-footer" aria-live="polite"></div>
         </section>
 
         <section id="view-combo" class="view-combo">
@@ -820,15 +1074,26 @@ const hardware = {
     { id: "a6", img: "audio07.webp", title: "The Supremacy Code Audio", priceVal: 15.95, price: "$15.95", link: "https://pay.kiwify.com/TGmTjRA", desc: "<p><strong>The Supremacy Code (English Audio Edition):</strong> Master emotional clarity, break dependency, and cultivate individual power through this structured audio guide.</p>" }
   ],
   e: [
-    { id: "e1", img: "ebook01.webp", title: "Descubra Você", priceVal: 9.70, price: "R$ 9,70", link: "https://pay.kiwify.com.br/P8UTO6L", desc: `<p><strong>Descubra Você: Desvende Sua Essência, Transforme Seus Relacionamentos</strong></p><p>Você sente que está vivendo em um ciclo repetitivo de encontros frustrantes e desencontros emocionais?</p><p>Muitas vezes, depositamos no outro a responsabilidade pela nossa felicidade, apenas para encontrar desilusão. Mas a verdade é que a chave para conexões autênticas e duradouras nunca esteve no "parceiro ideal", mas sim escondida dentro da sua própria essência.</p><p>Em <strong>“Descubra Você”</strong>, Júlio Bhrósz convida você para uma jornada profunda de autodescoberta.</p>` },    
-    { id: "e2", img: "ebook02.webp", title: "Engenharia da Colisão", priceVal: 39.57, price: "R$ 39,57", link: "https://pay.kiwify.com.br/oRZAlbz", desc: `<p><strong>Engenharia da Colisão: A Soberania do Aço nos Relacionamentos</strong></p><p><strong>O seu relacionamento é uma estrutura de argila ou uma armadura de aço?</strong></p><p>A maioria dos casais vive sob a fragilidade de acordos superficiais, esperando que o tempo resolva fissuras estruturais que, na verdade, exigem intervenção técnica.</p>` },    
-    { id: "e3", img: "ebook03.webp", title: "Autópsia da Personalidade", priceVal: 59.90, price: "R$ 59,90", link: "https://pay.kiwify.com.br/sD4nqRO", desc: `<p><strong>AUTÓPSIA DA PERSONALIDADE: O Fim das Migalhas Emocionais</strong></p><p><strong>O que resta de você quando as camadas de autodecepção são removidas?</strong></p><p>A maioria das pessoas passa a vida tentando "consertar" o que nunca funcionou, alimentando-se de migalhas emocionais e aceitando a falência da própria identidade.</p>` }
+    { id: "e1", img: "ebook01.webp", title: "Descubra Você", priceVal: 9.70, price: "R$ 9,70", link: "https://pay.kiwify.com.br/P8UTO6L", desc: `<p><strong>Descubra Você: Desvende Sua Essência, Transforme Seus Relacionamentos</strong></p><p>Você sente que está vivendo em um ciclo repetitivo de encontros frustrantes e desencontros emocionais?</p><p>Muitas vezes, depositamos no outro a responsabilidade pela nossa felicidade, apenas para encontrar desilusão. Mas a verdade é que a chave para conexões autênticas e duradouras nunca esteve no "parceiro ideal", mas sim escondida dentro da sua própria essência.</p><p>Em <strong>“Descubra Você”</strong>, Júlio Bhrósz convida você para uma jornada profunda de autodescoberta. Este e-book não é apenas um guia de conselhos; é um mapa prático para quem deseja parar de sobreviver a relações vazias e começar a construir vínculos reais e significativos.</p>` },
+    { id: "e2", img: "ebook02.webp", title: "Engenharia da Colisão", priceVal: 39.57, price: "R$ 39,57", link: "https://pay.kiwify.com.br/oRZAlbz", desc: `<p><strong>Engenharia da Colisão: A Soberania do Aço nos Relacionamentos</strong></p><p>A maioria dos casais vive sob a fragilidade de acordos superficiais. Em <strong>“Engenharia da Colisão”</strong>, Júlio Bhrósz apresenta o método definitivo para casais que decidiram abandonar a instabilidade emocional.</p>` },
+    { id: "e3", img: "ebook03.webp", title: "Autópsia da Personalidade", priceVal: 59.90, price: "R$ 59,90", link: "https://pay.kiwify.com.br/sD4nqRO", desc: `<p><strong>AUTÓPSIA DA PERSONALIDADE: O Fim das Migalhas Emocionais</strong></p><p>Abertura completa da estrutura psíquica para identificar a causa mortis da sua vontade e a origem da sua submissão.</p>` },
+    { id: "e1A", img: "ebook01A.webp", title: "Know yourself First", priceVal: 11.00, price: "$11.00", link: "https://pay.kiwify.com/8S4FCE0", desc: `<p><strong>Know Yourself First: Unravel Your Essence, Transform Your Relationships</strong></p>` },
+    { id: "e2A", img: "ebook02A.webp", title: "The Engineering of Collision", priceVal: 11.50, price: "$11.50", link: "https://pay.kiwify.com/ZjtlaGh", desc: `<p><strong>The Engineering of Collision: From Fragile Clay to the Sovereignty of Steel</strong></p>` },
+    { id: "e3A", img: "ebook03A.webp", title: "The Supremacy Code", priceVal: 11.99, price: "$11.99", link: "https://pay.kiwify.com/TGmTjRA", desc: `<p><strong>The Supremacy Code: Delete Emotional Crumbs, Reclaim Your Sovereignty</strong></p>` },
+    { id: "e7", img: "ebook01B.webp", title: "Découvrez-Vous", priceVal: 10.00, price: "€10,00", link: "https://pay.kiwify.com/GFUBNBT", desc: `<p><strong>Découvrez-vous : Révélez Votre Essence, Transformez Vos Relations</strong></p>` },
+    { id: "e3B", img: "ebook03B.webp", title: "Autópsia de la Personalidad", priceVal: 11.80, price: "€11,80", link: "https://pay.kiwify.com/4zixbEz", desc: `<p><strong>Autopsia de la Personalidad: El Fin de las Migajas Emocionales</strong></p>` },
+    { id: "e3C", img: "ebook03C.webp", title: "Autopsie de la Personnalité", priceVal: 13.80, price: "€13,80", link: "https://pay.kiwify.com/4zixbEz", desc: `<p><strong>Autopsie de la Personnalité: La Fin des Miettes Émotionnelles</strong></p>` },
+    { id: "e4", img: "ebook04.webp", title: "Sherlock Holmes O Dossiê da Engenharia da Colisão", priceVal: 24.90, price: "US$ 24,90", link: "https://pay.kiwify.com.br/E0600F1", desc: `<p><strong>Sherlock Holmes & O Dossiê da Engenharia da Colisão</strong></p>` }
   ]
 };
 
 const defaultReviews = [
   { text: "A descoberta de si mudou minha perspectiva completamente.", author: "Maria S.", email: "Verificado", book: "Descubra Você", rating: "★★★★★" },
-  { text: "Profundidade incomparável em cada página.", author: "Carlos O.", email: "Verificado", book: "Verdade em Vida", rating: "★★★★★" }
+  { text: "Profundidade incomparável em cada página.", author: "Carlos O.", email: "Verificado", book: "Verdade em Vida", rating: "★★★★★" },
+  { text: "A engenharia mental applied na prática diária.", author: "Ricardo F.", email: "Verificado", book: "Engenharia da Colisão", rating: "★★★★★" },
+  { text: "Essencial para quem busca verdadeira liberdade intelectual.", author: "Ana P.", email: "Verificado", book: "Autópsia da Personalidade", rating: "★★★★★" },
+  { text: "O áudio é fantástico para ouvir durante o trajeto.", author: "Lucas M.", email: "Verificado", book: "Descubra Você (Audio)", rating: "★★★★★" },
+  { text: "Júlio Bhrósz entrega exatamente o que promete.", author: "Fernanda R.", email: "Verificado", book: "O Código", rating: "★★★★★" }
 ];
 
 let linkAtual = '';
@@ -868,7 +1133,7 @@ function resetTelas() {
 
 function ativarMenu(id) {
   document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
-  let menuId = id === 'e' ? 'ebook' : id;
+  let menuId = id === 'e' ? 'ebook' : (id === 'impressos-fisicos' ? 'impressos' : id);
   const alvo = document.getElementById('nav-' + menuId);
   if (alvo) alvo.classList.add('active');
 }
@@ -882,7 +1147,52 @@ function irHome() {
 
 function escapeHtml(text) {
   if (!text) return "";
-  return text.replace(/'/g, "\\'").replace(/"/g, '&quot;').replace(/\n/g, '');
+  return String(text)
+    .replace(/\\/g, "\\\\")
+    .replace(/`/g, "\\`")
+    .replace(/'/g, "\\'")
+    .replace(/"/g, '&quot;')
+    .replace(/\n/g, '');
+}
+
+function localizarAtivo(img, title) {
+  return [...(hardware.e || []), ...(hardware.a || [])].find(item => item.img === img && item.title === title);
+}
+
+function obterMetadadosAtivo(item) {
+  const ehAudio = item.id.startsWith('a');
+  const ehIngles = /Know yourself|The Engineering|The Supremacy/i.test(item.title);
+  const ehEspanhol = /\bPersonalidad\b/i.test(item.title);
+  const ehFrances = /Personnalité|Découvrez/i.test(item.title);
+  const idioma = ehIngles ? 'Inglês' : (ehEspanhol ? 'Espanhol' : (ehFrances ? 'Francês' : 'Português'));
+  return {
+    data: '2026',
+    formato: ehAudio ? 'Audiobook digital' : 'E-book digital',
+    edicao: ehAudio ? 'Audiobook Edition' : 'Edição oficial',
+    idioma
+  };
+}
+
+function renderRodapeAtivo(item) {
+  const footer = document.getElementById('asset-footer');
+  if (!footer || !item) return;
+  const meta = obterMetadadosAtivo(item);
+  const ehAutopsiaPrincipal = item.id === 'e3';
+  footer.innerHTML = `
+    <div class="asset-meta-grid">
+      <div class="asset-meta-item"><small>Ativo</small><strong>${item.title}</strong></div>
+      <div class="asset-meta-item"><small>Data da edição</small><strong>${meta.data}</strong></div>
+      <div class="asset-meta-item"><small>Formato</small><strong>${meta.formato}</strong></div>
+      <div class="asset-meta-item"><small>Edição</small><strong>${meta.edicao}</strong></div>
+    </div>
+    ${ehAutopsiaPrincipal ? `
+      <div class="autopsia-callout">
+        <svg viewBox="0 0 100 60" role="img" aria-label="Seta curva vermelha apontando para o link">
+          <path d="M8 45 C20 10, 56 8, 76 30 C82 36, 86 40, 92 24"></path>
+          <path d="M81 22 L92 24 L88 35"></path>
+        </svg>
+        <a href="https://clubedeautores.com.br/livro/autopsia-da-personalidade?cart=true" target="_blank" rel="noopener noreferrer">Ver o livro físico: Autópsia da Personalidade</a>
+      </div>` : ''}`;
 }
 
 function renderAtalhosSinopse() {
@@ -909,6 +1219,7 @@ function abrirSinopse(img, title, price, link, desc) {
   document.getElementById('target-desc').innerHTML = desc;
   
   renderAtalhosSinopse();
+  renderRodapeAtivo(localizarAtivo(img, title));
   
   linkAtual = link;
   historico = 'sinopse';
@@ -924,14 +1235,14 @@ function irAudiobooks() {
   const col2 = document.getElementById('coluna-audio-2');
   
   const renderCardAudio = (item) => `
-    <div style="display: flex; align-items: center; gap: 15px; background: var(--box-bg); padding: 10px; border-radius: 4px;">
-      <img src="${item.img}" alt="${item.title}" onclick="abrirSinopse('${item.img}', '${item.title}', '${item.price}', '${item.link}', \`${escapeHtml(item.desc)}\`)" style="width: 100px; height: 100px; object-fit: cover; cursor: pointer;">
-      <div>
-        <h4 style="color: var(--text-light); font-size: 0.9rem; margin-bottom: 5px;">${item.title}</h4>
-        <span style="color: var(--gold); font-weight: 700; display: block; margin-bottom: 8px;">${item.price}</span>
-        <button onclick="abrirSinopse('${item.img}', '${item.title}', '${item.price}', '${item.link}', \`${escapeHtml(item.desc)}\`)" style="background: var(--gold); color: #000; border: none; padding: 5px 10px; cursor: pointer; font-weight: bold; border-radius: 2px;">Ouvir Sinopse</button>
+    <article class="audio-card">
+      <img class="audio-card-img" src="${item.img}" alt="${item.title}" onclick="abrirSinopse('${item.img}', '${item.title}', '${item.price}', '${item.link}', \`${escapeHtml(item.desc)}\`)" loading="lazy">
+      <div class="audio-card-info">
+        <h4 class="audio-card-title">${item.title}</h4>
+        <span class="audio-card-price">${item.price}</span>
+        <button class="audio-card-button" type="button" onclick="abrirSinopse('${item.img}', '${item.title}', '${item.price}', '${item.link}', \`${escapeHtml(item.desc)}\`)">Ver sinopse</button>
       </div>
-    </div>
+    </article>
   `;
   
   const meio = Math.ceil(hardware.a.length / 2);
@@ -948,11 +1259,13 @@ function irTitulos(tipo) {
   document.getElementById('btn-voltar').style.display = 'block';
   const container = document.getElementById('render-grid');
   
+  const count = document.getElementById('ebook-count');
+  if (count) count.innerText = `${hardware.e.length} títulos disponíveis`;
   container.innerHTML = hardware.e.map((item) => `
-    <div class="card-flutuante" onclick="abrirSinopse('${item.img}', '${item.title}', '${item.price}', '${item.link}', \`${escapeHtml(item.desc)}\`)">
-      <img src="${item.img}" alt="${item.title}">
+    <article class="card-flutuante" onclick="abrirSinopse('${item.img}', '${item.title}', '${item.price}', '${item.link}', \`${escapeHtml(item.desc)}\`)">
+      <img src="${item.img}" alt="${item.title}" loading="lazy">
       <div class="card-title">${item.title}</div>
-    </div>
+    </article>
   `).join('');
   
   ativarMenu(tipo);
@@ -969,28 +1282,44 @@ function irImpressosFisicos() {
 
   const impressosDura = [
     { title: "Descubra Você", price: "US$ 17,99", img: "mockup_capadura01.webp", link: "https://a.co/d/0hR1rLKH" },
-    { title: "Engenharia da Colisão", price: "R$ 63,89", img: "mockup_capadura02.webp", link: "https://a.co/d/01jBHL16" }
+    { title: "Engenharia da Colisão", price: "R$ 63,89", img: "mockup_capadura02.webp", link: "https://a.co/d/01jBHL16" },
+    { title: "Autópsia da Personalidade", price: "R$ 59,52", img: "mockup_capadura03.webp", link: "https://clubedeautores.com.br/livro/autopsia-da-personalidade?cart=true" },
+    { title: "Sherlock Holmes O Dossiê", price: "US$ 24,90", img: "mockup_capadura04.webp", link: "https://a.co/d/09j6vGMh" },
+    { title: "Know Yourself First", price: "US$ 23,90", img: "mockup_capadura01A.webp", link: "https://a.co/d/0iD2wBoB" },
+    { title: "Découvrez-Vous", price: "US$ 19,35", img: "mockup_capadura01B.webp", link: "https://amzn.eu/d/03IWBaqk" },
+    { title: "The Engineering of Collision", price: "EM BREVE", img: "mockup_capadura02A.webp", link: "https://a.co/d/01jBHL16" },
+    { title: "The Supremacy Code", price: "EM BREVE", img: "mockup_capadura03A.webp", link: "https://a.co/d/0iD2w" },
+    { title: "Autópsia de la Personalidad", price: "EM BREVE", img: "mockup_capadura03B.webp", link: "https://a.co/d/01jBH" },
+    { title: "Autopsie de la Personnalité", price: "EM BREVE", img: "mockup_capadura03C.webp", link: "https://a.co/d/01jBH" }
   ];
 
   const impressosComum = [
     { title: "Descubra Você", price: "US$ 7,75", img: "mockup_capacomum01.webp", link: "https://a.co/d/0hR1rLKH" },
-    { title: "Engenharia da Colisão", price: "R$ 38,29", img: "mockup_capacomum02.webp", link: "https://loja.uiclap.com/titulo/ua186629" }
+    { title: "Engenharia da Colisão", price: "R$ 38,29", img: "mockup_capacomum02.webp", link: "https://loja.uiclap.com/titulo/ua186629" },
+    { title: "Autópsia da Personalidade", price: "R$ 38,29", img: "mockup_capacomum03.webp", link: "https://loja.uiclap.com/titulo/ua186629" },
+    { title: "Sherlock Holmes O Dossiê", price: "US$ 15,90", img: "mockup_capacomum04.webp", link: "https://a.co/d/09j6vGMh" },
+    { title: "Know Yourself First", price: "US$ 19,99", img: "mockup_capacomum01A.webp", link: "https://a.co/d/0iD2wBoB" },
+    { title: "Découvrez-Vous", price: "US$ 16,99", img: "mockup_capacomum01B.webp", link: "https://amzn.eu/d/03IWBaqk" },
+    { title: "The Engineering of Collision", price: "EM BREVE", img: "mockup_capacocmum02A.webp", link: "https://a.co/d/01jBHL16" },
+    { title: "The Supremacy Code", price: "EM BREVE", img: "mockup_capacomum03A.webp", link: "https://a.co/d/0iD2w" },
+    { title: "Autópsia de la Personalidad", price: "EM BREVE", img: "mockup_capacomum03B.webp", link: "https://a.co/d/01jBH" },
+    { title: "Autopsie de la Personnalité", price: "EM BREVE", img: "mockup_capacomum03C.webp", link: "https://a.co/d/01jBH" }
   ];
 
   const renderImpresso = (impresso) => `
-    <div style="display: flex; align-items: center; gap: 15px; background: var(--box-bg); padding: 10px; border-radius: 4px;">
-      <img src="${impresso.img}" alt="${impresso.title}" onclick="window.open('${impresso.link}', '_blank')" style="width: 120px; height: 150px; object-fit: contain; cursor: pointer;">
-      <div style="flex: 1;">
-        <h4 style="color: var(--text-light); font-size: 0.8rem; text-transform: uppercase; margin-bottom: 5px;">${impresso.title}</h4>
-        <span style="color: var(--gold); font-weight: 700; font-size: 0.85rem; margin-bottom: 8px; display: block;">${impresso.price}</span>
-        <button onclick="window.open('${impresso.link}', '_blank')" style="background: var(--gold); color: #000; border: none; padding: 5px 10px; font-weight: 700; font-size: 0.65rem; text-transform: uppercase; cursor: pointer; border-radius: 2px;">Comprar Agora</button>
+    <article class="audio-card">
+      <img class="audio-card-img" src="${impresso.img}" alt="${impresso.title}" onclick="window.open('${impresso.link}', '_blank')" loading="lazy">
+      <div class="audio-card-info">
+        <h4 class="audio-card-title">${impresso.title}</h4>
+        <span class="audio-card-price">${impresso.price}</span>
+        <button class="audio-card-button" type="button" onclick="window.open('${impresso.link}', '_blank')">Comprar agora</button>
       </div>
-    </div>
+    </article>
   `;
 
   if (containerDura) containerDura.innerHTML = impressosDura.map(renderImpresso).join('');
   if (containerComum) containerComum.innerHTML = impressosComum.map(renderImpresso).join('');
-  ativarMenu('impressos');
+  ativarMenu('impressos-fisicos');
   historico = 'impressos-fisicos';
 }
 
@@ -1028,6 +1357,18 @@ function abrirCombo(tipo) {
     title.innerText = "Combo Audiobooks Personalizado";
     subtitle.innerText = "Marque os audiobooks que deseja adicionar ao seu pacote:";
     listaAtivos = hardware.a.map(item => ({ ...item, tipoText: "Audiobook" }));
+  } else if (tipo === 'completo') {
+    title.innerText = "Combo Completo (Trindade)";
+    subtitle.innerText = "Selecione as versões disponíveis para cada obra master:";
+    
+    listaAtivos = [
+      { id: "c1_e", img: "ebook01.webp", title: "Descubra Você (Ebook)", priceVal: 9.70, price: "R$ 9,70", link: "https://pay.kiwify.com.br/P8UTO6L" },
+      { id: "c1_a", img: "audio01.webp", title: "Descubra Você (Audiobook)", priceVal: 37.50, price: "R$ 37,50", link: "https://pay.kiwify.com.br/lDiv2Do" },
+      { id: "c1_f", img: "mockup_capadura01.webp", title: "Descubra Você (Capa Dura)", priceVal: 90.00, price: "US$ 17,99", link: "https://a.co/d/0hR1rLKH" },
+      { id: "c2_e", img: "ebook02.webp", title: "Engenharia da Colisão (Ebook)", priceVal: 39.57, price: "R$ 39,57", link: "https://pay.kiwify.com.br/oRZAlbz" },
+      { id: "c2_a", img: "audio02.webp", title: "Engenharia da Colisão (Audiobook)", priceVal: 39.50, price: "R$ 39,50", link: "https://pay.kiwify.com.br/PmaKDGV" },
+      { id: "c2_f", img: "mockup_capadura02.webp", title: "Engenharia da Colisão (Capa Dura)", priceVal: 63.89, price: "R$ 63,89", link: "https://a.co/d/01jBHL16" }
+    ];
   }
 
   grid.innerHTML = listaAtivos.map(item => `
@@ -1085,9 +1426,15 @@ function voltarFluxo() {
 }
 
 function obterDepoimentos() {
-  const salvos = localStorage.getItem('depoimentos_portal_pleno');
-  if (salvos) return JSON.parse(salvos);
-  return defaultReviews;
+  try {
+    const salvos = JSON.parse(localStorage.getItem('depoimentos_portal_pleno') || '[]');
+    if (!Array.isArray(salvos)) return defaultReviews;
+    const chaves = new Set(salvos.map(item => `${item.author}|${item.book}|${item.text}`));
+    const originaisPreservados = defaultReviews.filter(item => !chaves.has(`${item.author}|${item.book}|${item.text}`));
+    return [...salvos, ...originaisPreservados];
+  } catch (error) {
+    return defaultReviews;
+  }
 }
 
 function salvarDepoimento(event) {
@@ -1124,7 +1471,7 @@ function enviarDadosContato(event) {
   const rede = document.getElementById('cnt-rede').value;
   const userRede = document.getElementById('cnt-user').value;
 
-  alert(`Obrigado, ${nome}! Seus dados (${rede}: ${userRede}) foram registrados.`);
+  alert(`Obrigado, ${nome}! Seus dados (${rede}: ${userRede}) foram registrados para futuro contato.`);
   document.getElementById('form-contato-leitor').reset();
 }
 
@@ -1139,7 +1486,7 @@ function enviarSolicitacaoSuporte(event) {
     <div style="background: rgba(0, 255, 0, 0.1); border: 1px solid var(--gold); padding: 15px; border-radius: 6px; margin-top: 15px;">
       <h3 style="color: var(--gold); margin-bottom: 5px;">Solicitação Registrada com Sucesso!</h3>
       <p style="font-size: 0.9rem;">Protocolo: <strong>${protocolo}</strong></p>
-      <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 5px;">Obrigado, <strong>${nome}</strong>. Acompanhe seu retorno no e-mail <strong>${email}</strong>.</p>
+      <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 5px;">Obrigado, <strong>${nome}</strong>. Nossa equipe analisou sua mensagem e enviará o suporte para o e-mail <strong>${email}</strong> em tempo hábil.</p>
     </div>
   `;
   document.getElementById('form-suporte-leitor').reset();
@@ -1155,35 +1502,30 @@ function abrirInfo(tipo) {
   if (tipo === 'sobre') {
     container.innerHTML = `
       <div class="sobre-clean">
-        <div class="sobre-container-flex">
-          <div class="sobre-foto-wrapper">
-            <img src="foto_autor.webp" alt="Júlio Bhrósz" class="foto-autor-img">
+          <div class="sobre-content">
+                                <div class="sobre-container-flex">
+                  <div class="sobre-foto-wrapper">
+                                            <img src="foto_autor.webp" alt="Júlio Bhrósz" class="foto-autor-img" loading="lazy">
+                  </div>
+                                    <div class="sobre-texto-wrapper">
+                      <h1 style="color: var(--gold); font-size: 1.8rem; margin-bottom: 15px;">A Mente por trás d'O Código</h1>
+                      <p><strong>Júlio Bhrósz</strong><br>
+                      O mundo não é justo. Ele é um mercado de valores invisíveis. Se você se sente ignorado, trocado ou tratado como um "plano B", não é por acaso. É porque você está jogando com as regras que foram imposed a você, não as que você domina.<br><br>
+                      <b>A Ciência do Comando:</b><br>
+                      A autoridade consolidada não vem dos diplomas emoldurados, mas da linha de frente. No Portal Pleno, somos uma equipe de estrategistas da sua reconstrução.<br><br>
+                      <b>O Código Está Aberto:</b><br>
+                      A partir de agora, a passividade é uma escolha. Você pode continuar implorando por atenção, ou pode assumir o comando do seu destino.</p>
+                      <div class="quote" style="font-style: italic; padding-left: 15px; margin-top: 20px; border-left: 2px solid var(--gold); color: var(--gold);">"O Código não é apenas um livro, é a chave para a SUA Libertação Emocional."</div>
+                  </div>
+              </div>
           </div>
-          <div class="sobre-texto-wrapper" style="flex: 1;">
-            <h1>A Mente por trás d'O Código</h1>
-            <p><strong>Júlio Bhrósz</strong><br>
-            O mundo não é justo. Ele é um mercado de valores invisíveis. Se você se sente ignorado, trocado ou tratado como um "plano B", não é por acaso. É porque você está jogando com as regras que foram impostas a você, não as que você domina.<br><br>
-            <b>A Ciência do Comando:</b><br>
-            A autoridade consolidada não vem dos diplomas emoldurados, mas da linha de frente, onde a teoria encontra a realidade. No Portal Pleno, somos uma equipe de estrategistas da sua reconstrução.</p>
-            
-            <p style="line-height: 1.7; margin-top: 20px; font-size: 1.1rem; color: #fff; display: flex; align-items: center; gap: 10px;">
-              <span>Descubra a Autópsia da Personalidade: 
-                <span style="color: var(--gold); font-weight: bold; cursor: pointer; text-decoration: underline;" onclick="abrirSinopse(hardware.e[2].img, hardware.e[2].title, hardware.e[2].price, hardware.e[2].link, hardware.e[2].desc)">
-                  Clique Aqui
-                </span>
-              </span>
-              <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style="width: 35px; height: 35px; fill: #ff0000; transform: rotate(180deg);">
-                <path d="M 90 20 C 70 0, 30 0, 10 20 L 0 10 L 0 40 L 30 40 L 20 30 C 35 15, 65 15, 80 30 L 90 20 Z" />
-              </svg>
-            </p>
-          </div>
-        </div>
       </div>`;
   } else if (tipo === 'depoimentos') {
     const listaAtual = obterDepoimentos();
     container.innerHTML = `
       <div style="max-width: 1100px; margin: 20px auto;">
         <h1 style="color: var(--gold); text-align: center; text-transform: uppercase; margin-bottom: 20px;">Biblioteca de Depoimentos</h1>
+        
         <div class="form-container">
           <h3 style="color: var(--gold); margin-bottom: 15px; text-transform: uppercase;">Deixe seu Depoimento</h3>
           <form onsubmit="salvarDepoimento(event)">
@@ -1209,6 +1551,8 @@ function abrirInfo(tipo) {
                 <select id="dep-rating">
                   <option value="5">★★★★★ (5/5)</option>
                   <option value="4">★★★★☆ (4/5)</option>
+                  <option value="3">★★★☆☆ (3/5)</option>
+                  <option value="2">★★☆☆☆ (2/5)</option>
                 </select>
               </div>
             </div>
@@ -1219,6 +1563,7 @@ function abrirInfo(tipo) {
             <button type="submit" class="btn-gold" style="width: auto; padding: 10px 30px;">Publicar Depoimento</button>
           </form>
         </div>
+
         <div class="grid-depoimentos">
           ${listaAtual.map(rev => `
             <div class="card-depoimento">
@@ -1234,21 +1579,58 @@ function abrirInfo(tipo) {
       </div>`;
   } else if (tipo === 'contato') {
     container.innerHTML = `
-      <div style="max-width: 800px; margin: 40px auto; color: var(--text-light); line-height: 1.8; background: var(--box-bg); padding: 30px; border-radius: 8px;">
+      <div style="max-width: 800px; margin: 40px auto; color: var(--text-light); line-height: 1.8; background: var(--box-bg); padding: 30px; border-radius: 8px; border: 1px solid var(--border-color);">
         <h1 style="color: var(--gold); text-transform: uppercase; margin-bottom: 10px; text-align: center;">Conecte-se Conosco</h1>
+        <p style="text-align: center; color: var(--text-muted); font-size: 0.9rem;">Siga nossas redes sociais oficiais ou deixe seu perfil para contato direto.</p>
+        
         <div class="social-grid">
-          <a href="https://wa.me/seunumero" target="_blank" class="social-btn btn-whatsapp">WhatsApp</a>
+          <a href="https://wa.me/" target="_blank" class="social-btn btn-whatsapp">WhatsApp</a>
           <a href="https://instagram.com" target="_blank" class="social-btn btn-instagram">Instagram</a>
           <a href="https://facebook.com" target="_blank" class="social-btn btn-facebook">Facebook</a>
           <a href="https://x.com" target="_blank" class="social-btn btn-x">X / Twitter</a>
           <a href="https://t.me" target="_blank" class="social-btn btn-telegram">Telegram</a>
           <a href="https://youtube.com" target="_blank" class="social-btn btn-youtube">YouTube</a>
         </div>
+
+        <div style="border-top: 1px solid var(--border-color); padding-top: 20px; margin-top: 20px;">
+          <h3 style="color: var(--gold); text-transform: uppercase; font-size: 1rem; margin-bottom: 15px; text-align: center;">Cadastre sua Rede Social</h3>
+          <form id="form-contato-leitor" onsubmit="enviarDadosContato(event)">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+              <div class="form-group">
+                <label>Seu Nome</label>
+                <input type="text" id="cnt-nome" required placeholder="Digite seu nome">
+              </div>
+              <div class="form-group">
+                <label>Seu E-mail</label>
+                <input type="email" id="cnt-email" required placeholder="seuemail@exemplo.com">
+              </div>
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+              <div class="form-group">
+                <label>Sua Rede Social Principal</label>
+                <select id="cnt-rede">
+                  <option value="Instagram">Instagram</option>
+                  <option value="WhatsApp">WhatsApp</option>
+                  <option value="Telegram">Telegram</option>
+                  <option value="X">X (Twitter)</option>
+                  <option value="Facebook">Facebook</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Seu User / Arroba / Número</label>
+                <input type="text" id="cnt-user" required placeholder="Ex: @seuuser ou número">
+              </div>
+            </div>
+            <button type="submit" class="btn-gold" style="width: 100%;">Enviar Meus Dados</button>
+          </form>
+        </div>
       </div>`;
   } else if (tipo === 'suporte') {
     container.innerHTML = `
-      <div style="max-width: 800px; margin: 40px auto; color: var(--text-light); line-height: 1.8; background: var(--box-bg); padding: 30px; border-radius: 8px;">
+      <div style="max-width: 800px; margin: 40px auto; color: var(--text-light); line-height: 1.8; background: var(--box-bg); padding: 30px; border-radius: 8px; border: 1px solid var(--border-color);">
         <h1 style="color: var(--gold); text-transform: uppercase; margin-bottom: 10px; text-align: center;">Central Interna de Suporte</h1>
+        <p style="text-align: center; color: var(--text-muted); font-size: 0.9rem; margin-bottom: 25px;">Está com dúvidas ou dificuldades com a sua compra? Preencha o formulário interno abaixo.</p>
+        
         <form id="form-suporte-leitor" onsubmit="enviarSolicitacaoSuporte(event)">
           <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
             <div class="form-group">
@@ -1258,6 +1640,24 @@ function abrirInfo(tipo) {
             <div class="form-group">
               <label>E-mail da Compra</label>
               <input type="email" id="sup-email" required placeholder="seuemail@exemplo.com">
+            </div>
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+            <div class="form-group">
+              <label>Ativo Adquirido</label>
+              <select id="sup-ativo">
+                ${[...hardware.e, ...hardware.a].map(item => `<option value="${item.title}">${item.title}</option>`).join('')}
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Tipo de Dificuldade</label>
+              <select id="sup-tipo">
+                <option value="Acesso ao E-book">Acesso ao E-book / Download</option>
+                <option value="Acesso ao Audiobook">Acesso ao Audiobook / Áudio</option>
+                <option value="Dúvida sobre Pagamento">Dúvida sobre Pagamento</option>
+                <option value="Entrega do Livro Físico">Entrega do Livro Físico</option>
+                <option value="Outros">Outros</option>
+              </select>
             </div>
           </div>
           <div class="form-group">

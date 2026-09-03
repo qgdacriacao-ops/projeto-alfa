@@ -646,7 +646,7 @@
         <nav>
             <ul id="main-nav">
                 <li><a id="nav-home" class="active" onclick="irHome()">Início</a></li>
-                <li><a id="nav-livros" onclick="irLivrosFisicos()">Livros</a></li>
+                <li><a id="nav-impressos" onclick="irimpressosFisicos()">impressos</a></li>
                 <li><a id="nav-ebook" onclick="irTitulos('e')">Ebook</a></li>
                 <li><a id="nav-audiobooks" onclick="irAudiobooks()">Audiobooks</a></li>
                 <li><a id="nav-sinopse" onclick="abrirSinopseDefault()">Sinopse</a></li>
@@ -711,7 +711,7 @@
             </div>
         </section>
 
-        <section id="view-livros-fisicos" class="view-galeria" style="padding-top: 40px;">
+        <section id="view-impressos-fisicos" class="view-galeria" style="padding-top: 40px;">
             <div style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 40px;">
                 <div>
                     <h2 style="color: var(--gold); text-align: center; text-transform: uppercase; margin-bottom: 30px; border-bottom: 2px solid var(--gold); padding-bottom: 10px;">Capa Dura Premium</h2>
@@ -788,13 +788,15 @@ const hardware = {
     { id: "a1", img: "audio01.webp", title: "Descubra Você Audio", priceVal: 37.50, price: "R$ 37,50", link: "https://pay.kiwify.com.br/lDiv2Do", desc: "<p><strong>Descubra Você (Audiobook Edition):</strong> Mergulhe em uma experiência imersiva de autodescoberta. Narrado para proporcionar uma reflexão guiada sobre padrões emocionais e reconstrução da autoestima.</p>" },
     { id: "a2", img: "audio02.webp", title: "Engenharia da Colisão Audio", priceVal: 39.50, price: "R$ 39,50", link: "https://pay.kiwify.com.br/PmaKDGV", desc: "<p><strong>Engenharia da Colisão (Audiobook Edition):</strong> Desconstrução cirúrgica de dinâmicas relacionais e dependência afetiva. Entenda a Soberania do Aço em formato de áudio de alta fidelidade.</p>" },
     { id: "a3", img: "audio03.webp", title: "Autópsia da Personalidade Audio", priceVal: 57.50, price: "R$ 57,50", link: "https://play.google.com/store/audiobooks/details?id=AQAAAEB6N193NM", desc: "<p><strong>Autópsia da Personalidade (Audiobook Edition):</strong> O fim definitivo das migalhas emocionais. Análise comportamental profunda para tomada de consciência e transformação mental.</p>" },
-    { id: "a4", img: "audio04.webp", title: "Know yourself First Audio", priceVal: 13.95, price: "$13.95", link: "https://pay.kiwify.com/ilgU4Kg", desc: "<p><strong>Know Yourself First (English Audio Edition):</strong> Uncover your essence and break emotional cycles with this comprehensive audio experience designed for self-sovereignty.</p>" },
-    { id: "a5", img: "audio05.webp", title: "The Engineering of Collision Audio", priceVal: 14.95, price: "$14.95", link: "https://pay.kiwify.com/2LTHn10", desc: "<p><strong>The Engineering of Collision (English Audio Edition):</strong> A powerful audio narration exploring the dynamics of conflict, value, and strategic personal development in relationships.</p>" },
-    { id: "a6", img: "audio06.webp", title: "The Supremacy Code Audio", priceVal: 15.95, price: "$15.95", link: "https://pay.kiwify.com/TGmTjRA", desc: "<p><strong>The Supremacy Code (English Audio Edition):</strong> Master emotional clarity, break dependency, and cultivate individual power through this structured audio guide.</p>" }
+    { id: "a4", img: "audio05.webp", title: "Know yourself First Audio", priceVal: 13.95, price: "$13.95", link: "https://pay.kiwify.com/ilgU4Kg", desc: "<p><strong>Know Yourself First (English Audio Edition):</strong> Uncover your essence and break emotional cycles with this comprehensive audio experience designed for self-sovereignty.</p>" },
+    { id: "a5", img: "audio06.webp", title: "The Engineering of Collision Audio", priceVal: 14.95, price: "$14.95", link: "https://pay.kiwify.com/2LTHn10", desc: "<p><strong>The Engineering of Collision (English Audio Edition):</strong> A powerful audio narration exploring the dynamics of conflict, value, and strategic personal development in relationships.</p>" },
+    { id: "a6", img: "audio07.webp", title: "The Supremacy Code Audio", priceVal: 15.95, price: "$15.95", link: "https://pay.kiwify.com/TGmTjRA", desc: "<p><strong>The Supremacy Code (English Audio Edition):</strong> Master emotional clarity, break dependency, and cultivate individual power through this structured audio guide.</p>" }
   ],
   e: [
-    { id: "e1", img: "ebook01.webp", title: "Descubra Você", priceVal: 9.70, price: "R$ 9,70", link: "https://pay.kiwify.com.br/P8UTO6L", desc: `
-                    <p><strong>Descubra Você: Desvende Sua Essência, Transforme Seus Relacionamentos</strong></p>
+    { id: "e1", img: "ebook01.webp", 
+    
+title: "Descubra Você", priceVal: 9.70, price: "R$ 9,70", 
+link: "https://pay.kiwify.com.br/P8UTO6L", desc: `<p><strong>Descubra Você: Desvende Sua Essência, Transforme Seus Relacionamentos</strong></p>
                     <p>Você sente que está vivendo em um ciclo repetitivo de encontros frustrantes e desencontros emocionais?</p>
                     <p>Muitas vezes, depositamos no outro a responsabilidade pela nossa felicidade, apenas para encontrar desilusão. Mas a verdade é que a chave para conexões autênticas e duradouras nunca esteve no "parceiro ideal", mas sim escondida dentro da sua própria essência.</p>
                     <p>Em <strong>“Descubra Você”</strong>, Júlio Bhrósz convida você para uma jornada profunda de autodescoberta. Este e-book não é apenas um guia de conselhos; é um mapa prático para quem deseja parar de sobreviver a relações vazias e começar a construir vínculos reais e significativos.</p>
@@ -808,7 +810,9 @@ const hardware = {
                     <p>Não espere mais pelo amor ideal. Comece a cultivá-lo a partir do seu interior e mude para sempre a forma como você ama e é amado.</p>
                     <p>Dê o primeiro passo para a sua transformação. Adquira agora e descubra o poder de ser você mesmo em todos os seus relacionamentos.</p>` 
             },    
-      { id: "e2", img: "ebook02.webp", title: "Engenharia da Colisão", priceVal: 39.57, price: "R$ 39,57", link: "https://pay.kiwify.com.br/oRZAlbz", desc: `<p><strong>Engenharia da Colisão: A Soberania do Aço nos Relacionamentos</strong></p>
+      { id: "e2", img: "ebook02.webp", 
+
+title: "Engenharia da Colisão", priceVal: 39.57, price: "R$ 39,57", link: "https://pay.kiwify.com.br/oRZAlbz", desc: `<p><strong>Engenharia da Colisão: A Soberania do Aço nos Relacionamentos</strong></p>
                     <p><strong>O seu relacionamento é uma estrutura de argila ou uma armadura de aço?</strong></p>
                     <p>A maioria dos casais vive sob a fragilidade de acordos superficiais, esperando que o tempo resolva fissuras estruturais que, na verdade, exigem intervenção técnica. Em <strong>“Engenharia da Colisão”</strong>, Júlio Bhrósz apresenta o método definitivo para casais que decidiram abandonar a instabilidade emocional e assumir o controle absoluto da sua dinâmica afetiva.</p>
                     <p>Este não é um livro de conselhos sentimentais; é um <strong>manual de Engenharia de Relacionamento</strong> de alto impacto. Aqui, o leitor assume o papel de arquiteto da própria união, aprendendo a lidar com as forças invisíveis que sustentam ou derrubam uma vida a dois.</p>
@@ -822,7 +826,9 @@ const hardware = {
                     <p>Deixe para trás a vulnerabilidade do comum e eleve seu relacionamento ao nível de <strong>Soberania</strong>.</p>
                     <p>Adquira <strong>“Engenharia da Colisão”</strong> e forje agora o destino que vocês escolheram construir juntos.</p>` 
             },    
-          { id: "e3", img: "ebook03.webp", title: "Autópsia da Personalidade", priceVal: 59.90, price: "R$ 59,90", link: "https://pay.kiwify.com.br/sD4nqRO", desc: `<p><strong>AUTÓPSIA DA PERSONALIDADE: O Fim das Migalhas Emocionais</strong></p>
+          { id: "e3", img: "ebook03.webp", 
+
+title: "Autópsia da Personalidade", priceVal: 59.90, price: "R$ 59,90", link: "https://pay.kiwify.com.br/sD4nqRO", desc: `<p><strong>AUTÓPSIA DA PERSONALIDADE: O Fim das Migalhas Emocionais</strong></p>
                     <p><strong>O que resta de você quando as camadas de autodecepção são removidas?</strong></p>
                     <p>A maioria das pessoas passa a vida tentando "consertar" o que nunca funcionou, alimentando-se de migalhas emocionais e aceitando a falência da própria identidade. Em <strong>“Autópsia da Personalidade”</strong>, Júlio Bhrósz executa o procedimento definitivo: a abertura completa da estrutura psíquica para identificar a causa mortis da sua vontade e a origem da sua submissão.</p>
                     <p>Este não é um convite ao diálogo; é um <strong>Exame Cadavérico do Ego</strong>. Aqui, o leitor deixa de ser um espectador passivo para se tornar o agente que disseca as próprias falhas, eliminando parasitas emocionais e resgatando a <strong>Supremacia sobre sua existência</strong>.</p>
@@ -833,7 +839,9 @@ const hardware = {
                     <p><strong>O Resgate da Supremacia:</strong> Reestabeleça o comando central da sua mente. Saiba como a biologia e a mentalidade operam em conjunto para criar um estado de <strong>domínio sobre as próprias decisões</strong>.</p>
                     <p><strong>Anatomia da Vontade:</strong> Entenda como a estrutura da personalidade é formada e como você pode reconfigurar o seu núcleo operacional para <strong>nunca mais aceitar menos do que o topo</strong>.</p>` 
             },    
-      { id: "e4", img: "ebook04.webp", title: "Know yourself First", priceVal: 11.00, price: "$11.00", link: "https://pay.kiwify.com/8S4FCE0", desc: `<p><strong>Know Yourself First: Unravel Your Essence, Transform Your Relationships</strong></p>
+      { id: "e1", img: "ebook01A.webp", 
+
+title: "Know yourself First", priceVal: 11.00, price: "$11.00", link: "https://pay.kiwify.com/8S4FCE0", desc: `<p><strong>Know Yourself First: Unravel Your Essence, Transform Your Relationships</strong></p>
                     <p><strong>Are you exhausted from chasing a ghost?</strong></p>
                     <p>Many people spend their lives trapped in a loop of disappointing encounters, believing that the "right person" is the missing piece to their happiness. But looking outward for what can only be found within is a road that leads to nowhere.</p>
                     <p>In <strong>“Know Yourself First”</strong>, Júlio Bhrósz presents a radical shift in perspective. This is not a collection of vague advice; it is a <strong>strategic blueprint</strong> for those ready to stop settling for illusions and start building a life of profound, authentic connection.</p>
@@ -847,7 +855,9 @@ const hardware = {
                     <p>Stop waiting for a miracle to walk through the door. The architecture of a fulfilling life begins in your own heart.</p>
                     <p>Claim your copy of <strong>“Know Yourself First”</strong> and embark on the only journey that actually changes everything.</p>` 
             },    
-      { id: "e5", img: "ebook05.webp", title: "The Engineering of Collision", priceVal: 11.50, price: "$11.50", link: "https://pay.kiwify.com/ZjtlaGh", desc: `<p><strong>The Engineering of Collision: From Fragile Clay to the Sovereignty of Steel</strong></p>
+      { id: "e2A", img: "ebook02A.webp", 
+
+title: "The Engineering of Collision", priceVal: 11.50, price: "$11.50", link: "https://pay.kiwify.com/ZjtlaGh", desc: `<p><strong>The Engineering of Collision: From Fragile Clay to the Sovereignty of Steel</strong></p>
                     <p><strong>Is your relationship built to withstand the pressure, or is it merely waiting for the next crack to appear?</strong></p>
                     <p>Most couples operate on a foundation of "clay"—a fragile mix of unspoken expectations and emotional vulnerability that crumbles under the first sign of stress. In <strong>“Collision Engineering”</strong>, Júlio Bhrósz delivers the definitive manual for those who refuse to settle for a collapsing structure.</p>
                     <p>This is not a book about "getting along"; it is a <strong>technical intervention</strong> for the Reader who chooses to architect a bond with the precision and unyielding strength of Steel.</p>
@@ -861,7 +871,9 @@ const hardware = {
                     <p>Abandon the vulnerability of the masses and forge a relationship defined by power, stability, and <strong>Absolute Sovereignty</strong>.</p>
                     <p>Acquire <strong>“Collision Engineering”</strong> and build the unbreakable future you both decided to command.</p>` 
             },    
-      { id: "e6", img: "ebook06.webp", title: "The Supremacy Code", priceVal: 11.99, price: "$11.99", link: "https://pay.kiwify.com/TGmTjRA", desc: `<p><strong>The Supremacy Code: Delete Emotional Crumbs, Reclaim Your Sovereignty</strong></p>
+      { id: "e3A", img: "ebook03A.webp", 
+
+title: "The Supremacy Code", priceVal: 11.99, price: "$11.99", link: "https://pay.kiwify.com/TGmTjRA", desc: `<p><strong>The Supremacy Code: Delete Emotional Crumbs, Reclaim Your Sovereignty</strong></p>
                     <p><strong>What remains of you when the layers of self-deception are stripped away?</strong></p>
                     <p>Most people spend their existence trying to "fix" a broken identity, feeding on emotional crumbs and accepting the slow decay of their own will. In <strong>“The Supremacy Code”</strong>, Júlio Bhrósz performs the ultimate procedure: a total opening of the psychic structure to identify the causa mortis of your drive and the root of your submission.</p>
                     <p>This is not a self-help book; it is a <strong>Post-Mortem Examination of the Ego</strong>. Here, the Reader transitions from a passive observer to the lead specialist, dissecting their own failures, extracting emotional parasites, and reclaiming <strong>Supremacy over their existence</strong>.</p>
@@ -874,7 +886,9 @@ const hardware = {
                     <p>Bhrósz—</p>
                     <p><strong>"TRUE SOVEREIGNTY IS NOT BORN FROM HOPE; IT IS BORN FROM THE COURAGE TO PERFORM AN AUTOPSY ON YOUR FEARS AND DELETE THE CRUMBS YOU WERE TAUGHT TO CALL A FEAST."</strong></p>` 
             },    
-      { id: "e7", img: "ebook07.webp", title: "Découvrez-Vous", priceVal: 10.00, price: "€10,00", link: "https://pay.kiwify.com/GFUBNBT", desc: `<p><strong>Découvrez-vous : Révélez Votre Essence, Transformez Vos Relations</strong></p>
+      { id: "e7", img: "ebook01B.webp", 
+
+title: "Découvrez-Vous", priceVal: 10.00, price: "€10,00", link: "https://pay.kiwify.com/GFUBNBT", desc: `<p><strong>Découvrez-vous : Révélez Votre Essence, Transformez Vos Relations</strong></p>
                     <p>Avez-vous l'impression de vivre dans un cycle répétitif de rencontres frustrantes et de malentendus émotionnels?</p>
                     <p>Bien souvent, nous plaçons la responsabilité de notre bonheur sur l'autre, pour ne récolter que de la déception. Mais la vérité est que la clé de connexions authentiques et durables ne s'est jamais trouvée dans le « partenaire idéal », mais plutôt cachée au cœur de votre propre essence.</p>
                     <p>Dans <strong>« Découvrez-vous »</strong>, Júlio Bhrósz vous invite à un voyage profond de découverte de soi. Cet e-book n'est pas seulement un guide de conseils ; c'est une carte pratique pour ceux qui souhaitent cesser de survivre à des relations vides et commencer à construire des liens réels et significatifs.</p>
@@ -888,7 +902,9 @@ const hardware = {
                     <p>N'attendez plus l'amour idéal. Commencez à le cultiver de l'intérieur et changez à jamais la façon dont vous aimez et êtes employé.</p>
                     <p>Faites le premier pas vers votre transformation. Procurez-le vous maintenant et découvrez le pouvoir d'être vous-même dans toutes vos relations.</p>` 
             },    
-      { id: "e8", img: "ebook08.webp", title: "Autópsia de la Personalidad", priceVal: 11.80, price: "€11,80", link: "https://pay.kiwify.com/4zixbEz", desc: `<p><strong>Autopsia de la Personalidad: El Fin de las Migajas Emocionales</strong></p>
+      { id: "e3B", img: "ebook03B.webp", 
+
+title: "Autópsia de la Personalidad", priceVal: 11.80, price: "€11,80", link: "https://pay.kiwify.com/4zixbEz", desc: `<p><strong>Autopsia de la Personalidad: El Fin de las Migajas Emocionales</strong></p>
                     <p><strong>¿Qué queda de usted cuando las capas de autoengaño son removidas?</strong></p>
                     <p>La mayoría de las personas pasan la vida intentando "reparar" lo que nunca funcionó, alimentándose de migajas emocionales y aceptando la quiebra de su propia identidad. En <strong>"Autopsia de la Personalidad"</strong>, Júlio Bhrósz ejecuta el procedimiento definitivo: la apertura completa de la estructura psíquica para identificar la causa mortis de su voluntad y el origen de su sumisión.</p>
                     <p>Esto no es una invitación al diálogo; es un <strong>Examen Cadavérico del Ego</strong>. Aquí, el lector deja de ser un espectador pasivo para convertirse en el agente que diseca sus propias fallas, eliminando parásitos emocionales y rescatando la <strong>Supremacía sobre su existencia</strong>.</p>
@@ -899,7 +915,9 @@ const hardware = {
                     <p><strong>El Rescate de la Supremacía:</strong> Restablezca el mando central de su mente. Sepa cómo la biología y la mentalidad operan en conjunto para crear un estado de <strong>dominio sobre las propias decisiones</strong>.</p>
                     <p><strong>Anatomía de la Voluntad:</strong> Entienda cómo se forma la estructura de la personalidad y cómo puede reconfigurar su núcleo operativo para <strong>no volver a aceptar nunca menos que la cima</strong>.</p>`
             },   
-      { id: "e9", img: "ebook09.webp", title: "Autopsie de la Personnalité", priceVal: 13.80, price: "€13,80", link: "https://pay.kiwify.com/4zixbEz", desc: `<p><strong>Autopsie de la Personnalité: La Fin des Miettes Émotionnelles</strong></p>
+      { id: "e3C", img: "ebook03C.webp", 
+
+title: "Autopsie de la Personnalité", priceVal: 13.80, price: "€13,80", link: "https://pay.kiwify.com/4zixbEz", desc: `<p><strong>Autopsie de la Personnalité: La Fin des Miettes Émotionnelles</strong></p>
                     <p><strong>Que reste-t-il de vous lorsque les couches d'auto-tromperie sont retirées ?</strong></p>
                     <p>La plupart des gens passent leur vie à essayer de « réparer » ce qui n'a jamais fonctionné, se nourrissant de miettes émotionnelles et acceptant la faillite de leur propre identité. Dans <strong>« Autopsie de la Personnalité »</strong>, Júlio Bhrósz exécute la procédure définitive : l'ouverture complète de la structure psychique pour identifier la causa mortis de votre volonté et l'origine de votre soumission.</p>
                     <p>Ceci n'est pas une invitation au dialogue ; c'est un <strong>Examen Cadavérique de l'Ego</strong>. Ici, le lecteur cesse d'être un spectateur passif pour devenir l'agent qui dissèque ses propres failles, éliminant les parasites émotionnels et sauvant la <strong>Suprématie sur son existence</strong>.</p>
@@ -910,7 +928,9 @@ const hardware = {
                     <p><strong>Le Sauvetage de la Suprématie :</strong> Rétablissez le commandement central de votre esprit. Sachez comment la biologie et la mentalité opèrent ensemble pour créer un état de <strong>domination sur vos propres décisions</strong>.</p>
                     <p><strong>Anatomie de la Volonté :</strong> Comprenez comment la structure de la personnalité est formée et comment vous pouvez reconfigurer votre noyau opérationnel pour <strong>ne plus jamais accepter moins que le sommet</strong>.</p>` 
             },
-    { id: "e10", img: "ebook10.webp", title: "Sherlock Holmes O Dossiê da Engenharia da Colisão", priceVal: 24.90, price: "US$ 24,90", link: "https://pay.kiwify.com.br/E0600F1", desc: `<p><strong>Sherlock Holmes & O Dossiê da Engenharia da Colisão: A Ciência da Investigação nos Relacionamentos</strong></p>
+    { id: "e4", img: "ebook04.webp", 
+
+title: "Sherlock Holmes O Dossiê da Engenharia da Colisão", priceVal: 24.90, price: "US$ 24,90", link: "https://pay.kiwify.com.br/E0600F1", desc: `<p><strong>Sherlock Holmes & O Dossiê da Engenharia da Colisão: A Ciência da Investigação nos Relacionamentos</strong></p>
                     <p>E se as crises, os silêncios e as dinâmicas ocultas do seu relacionamento pudessem ser decifrados com a precisão cirúrgica do maior detetive da história?</p>
                     <p>A maioria dos casais ignora os indícios óbvios de desgaste, tratando fissuras estruturais como meros reveses do acaso. Em <strong>“Sherlock Holmes: O Dossiê da Engenharia da Colisão”</strong>, Júlio Bhrósz cruza a lógica analítica vitoriana com o método definitivo de reconstrução afetiva para criar um protocolo de investigação comportamental sem precedentes.</p>
                     <p>Este não é um livro de teorias vagas; é um <strong>manual de autópsia relacional e engenharia reversa</strong>. Aqui, você deixa de ser refém das dúvidas e assume o papel de investigador-chefe da sua própria realidade conjugal.</p>
@@ -963,7 +983,7 @@ function inicializarTema() {
 }
 
 function resetTelas() {
-  ['view-home', 'view-galeria', 'view-sinopse', 'view-info-extra', 'view-livros-fisicos', 'view-audiobooks', 'view-combo', 'btn-voltar'].forEach(id => {
+  ['view-home', 'view-galeria', 'view-sinopse', 'view-info-extra', 'view-impressos-fisicos', 'view-audiobooks', 'view-combo', 'btn-voltar'].forEach(id => {
     const el = document.getElementById(id);
     if (el) el.style.display = 'none';
   });
@@ -1065,38 +1085,53 @@ function irTitulos(tipo) {
 
 function irLivrosFisicos() {
   resetTelas();
-  document.getElementById('view-livros-fisicos').style.display = 'block';
+  document.getElementById('view-limpressos-fisicos').style.display = 'block';
   document.getElementById('btn-voltar').style.display = 'block';
   
   const containerDura = document.getElementById('coluna-capa-dura');
   const containerComum = document.getElementById('coluna-capa-comum');
 
   const livrosDura = [
-    { title: "Descubra Você", price: "US$ 17,99", img: "capadura01.webp", link: "https://a.co/d/0hR1rLKH" },
-    { title: "Engenharia da Colisão", price: "R$ 63,89", img: "capadura02.webp", link: "https://a.co/d/01jBHL16" },
-    { title: "Autópsia da Personalidade", price: "R$ 59,52", img: "capadura03.webp", link: "https://clubedeautores.com.br/livro/autopsia-da-personalidade?cart=true" }
+    { title: "Descubra Você", price: "US$ 17,99", img: "mockup_capadura01.webp", link: "https://a.co/d/0hR1rLKH" },
+    { title: "Engenharia da Colisão", price: "R$ 63,89", img: "mockup_capadura02.webp", link: "https://a.co/d/01jBHL16" },
+    { title: "Autópsia da Personalidade", price: "R$ 59,52", img: "mockup_capadura03.webp", link:"https://clubedeautores.com.br/livro/autopsia-da-personalidade?cart=true" }
+    { title: "Sherlock Holmes O Dossiê", price: "US$ 24,90", img: "mockup_capadura04.webp", link: "https://a.co/d/09j6vGMh" },
+    { title: "Know Yourself First", price: "US$ 23,90", img: "mockup_capadura01A.webp", link: "https://a.co/d/0iD2wBoB" },
+    { title: "Découvrez-Vous", price: "US$ 19,35", img: "mockup_capadura01B.webp", link: "https://amzn.eu/d/03IWBaqk" },
+    { title: "The Engineering of Collision", price: "EM BREVE", img: "mockup_capadura02A.webp", link: "https://a.co/d/01jBHL16" },
+    { title: "The Supremacy Code", price: "EM BREVE", img: "mockup_capadura03A.webp", link: "https://a.co/d/0iD2w" },
+    { title: "Autópsia de la Personalidad", price: "EM BREVE", img: "mockup_capadura03B.webp", link: "https://a.co/d/01jBH" },
+    { title: "Autopsie de la Personnalité", price: "EM BREVE", img: "mockup_capadura03C.webp", link: "https://a.co/d/01jBH" },
   ];
 
   const livrosComum = [
-    { title: "Descubra Você", price: "US$ 7,75", img: "capadura01.webp", link: "https://a.co/d/0hR1rLKH" },
-    { title: "Engenharia da Colisão", price: "R$ 38,29", img: "capacomum02.webp", link: "https://loja.uiclap.com/titulo/ua186629" }
+    { title: "Descubra Você", price: "US$ 7,75", img: "mockup_capacomum01.webp", link: "https://a.co/d/0hR1rLKH" },
+    { title: "Engenharia da Colisão", price: "R$ 38,29", img: "mockup_capacomum02.webp", link:"https://loja.uiclap.com/titulo/ua186629" }
+    { title: "Autópsia da Personalidade", price: "R$ 38,29", img: "mockup_capacomum03.webp", link:"https://loja.uiclap.com/titulo/ua186629" }
+    { title: "Sherlock Holmes O Dossiê", price: "US$ 15,90", img: "mockup_capacomum04.webp", link: "https://a.co/d/09j6vGMh" },
+    { title: "Know Yourself First", price: "US$ 19,99", img: "mockup_capacomum01A.webp", link: "https://a.co/d/0iD2wBoB" },
+    { title: "Découvrez-Vous", price: "US$ 16,99", img: "mockup_capacomum01B.webp", link: "https://amzn.eu/d/03IWBaqk" },
+    { title: "The Engineering of Collision", price: "EM BREVE", img: "mockup_capacocmum02A.webp", link: "https://a.co/d/01jBHL16" },
+    { title: "The Supremacy Code", price: "EM BREVE", img: "mockup_capacomum03A.webp", link: "https://a.co/d/0iD2w" },
+    { title: "Autópsia de la Personalidad", price: "EM BREVE", img: "mockup_capacomum03B.webp", link: "https://a.co/d/01jBH" },
+    { title: "Autopsie de la Personnalité", price: "EM BREVE", img: "mockup_capacomum03C.webp", link: "https://a.co/d/
   ];
 
-  const renderLivro = (livro) => `
+  const renderImpresso = (impresso) => `
     <div style="display: flex; align-items: center; gap: 15px; background: var(--box-bg); padding: 10px; border-radius: 4px; border: 1px solid var(--border-color);">
       <img src="${livro.img}" alt="${livro.title}" onclick="window.open('${livro.link}', '_blank')" style="width: 120px; height: 150px; object-fit: contain; cursor: pointer;">
       <div style="flex: 1;">
-        <h4 style="color: var(--text-light); font-size: 0.8rem; text-transform: uppercase; margin-bottom: 5px;">${livro.title}</h4>
-        <span style="color: var(--gold); font-weight: 700; font-size: 0.85rem; margin-bottom: 8px; display: block;">${livro.price}</span>
-        <button onclick="window.open('${livro.link}', '_blank')" style="background: var(--gold); color: #000; border: none; padding: 5px 10px; font-weight: 700; font-size: 0.65rem; text-transform: uppercase; cursor: pointer; border-radius: 2px;">Comprar Agora</button>
+        <h4 style="color: var(--text-light); font-size: 0.8rem; text-transform: uppercase; margin-bottom: 5px;">${impresso.title}</h4>
+        <span style="color: var(--gold); font-weight: 700; font-size: 0.85rem; margin-bottom: 8px; display: block;">${impresso.price}</span>
+        <button onclick="window.open('${impresso.link}', '_blank')" style="background: var(--gold); color: #000; border: none; padding: 5px 10px; font-weight: 700; font-size: 0.65rem; text-transform: uppercase; cursor: pointer; border-radius: 2px;">Comprar Agora</button>
       </div>
     </div>
   `;
 
-  if (containerDura) containerDura.innerHTML = livrosDura.map(renderLivro).join('');
-  if (containerComum) containerComum.innerHTML = livrosComum.map(renderLivro).join('');
-  ativarMenu('livros');
-  historico = 'livros-fisicos';
+  if (containerDura) containerDura.innerHTML = impressosDura.map(renderImpresso).join('');
+  if (containerComum) containerComum.innerHTML = impressosComum.map(renderImpresso).join('');
+  ativarMenu('impressos');
+  historico = 'impressos-fisicos';
 }
 
 function irSinopseHome(tipo) {
@@ -1140,10 +1175,10 @@ function abrirCombo(tipo) {
     listaAtivos = [
       { id: "c1_e", img: "ebook01.webp", title: "Descubra Você (Ebook)", priceVal: 9.70, price: "R$ 9,70", link: "https://pay.kiwify.com.br/P8UTO6L" },
       { id: "c1_a", img: "audio01.webp", title: "Descubra Você (Audiobook)", priceVal: 37.50, price: "R$ 37,50", link: "https://pay.kiwify.com.br/lDiv2Do" },
-      { id: "c1_f", img: "capadura01.webp", title: "Descubra Você (Capa Dura)", priceVal: 90.00, price: "US$ 17,99", link: "https://a.co/d/0hR1rLKH" },
+      { id: "c1_f", img: "mockup_capadura01.webp", title: "Descubra Você (Capa Dura)", priceVal: 90.00, price: "US$ 17,99", link: "https://a.co/d/0hR1rLKH" },
       { id: "c2_e", img: "ebook02.webp", title: "Engenharia da Colisão (Ebook)", priceVal: 39.57, price: "R$ 39,57", link: "https://pay.kiwify.com.br/oRZAlbz" },
       { id: "c2_a", img: "audio02.webp", title: "Engenharia da Colisão (Audiobook)", priceVal: 39.50, price: "R$ 39,50", link: "https://pay.kiwify.com.br/PmaKDGV" },
-      { id: "c2_f", img: "capadura02.webp", title: "Engenharia da Colisão (Capa Dura)", priceVal: 63.89, price: "R$ 63,89", link: "https://a.co/d/01jBHL16" }
+      { id: "c2_f", img: "mockup_capadura02.webp", title: "Engenharia da Colisão (Capa Dura)", priceVal: 63.89, price: "R$ 63,89", link: "https://a.co/d/01jBHL16" }
     ];
   }
 
@@ -1258,7 +1293,7 @@ function enviarSolicitacaoSuporte(event) {
     <div style="background: rgba(0, 255, 0, 0.1); border: 1px solid var(--gold); padding: 15px; border-radius: 6px; margin-top: 15px;">
       <h3 style="color: var(--gold); margin-bottom: 5px;">Solicitação Registrada com Sucesso!</h3>
       <p style="font-size: 0.9rem;">Protocolo: <strong>${protocolo}</strong></p>
-      <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 5px;">Obrigado, <strong>${nome}</strong>. Nossa equipe analisou sua mensagem e enviará o suporte para o e-mail <strong>${email}</strong> dentro de poucas horas.</p>
+      <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 5px;">Obrigado, <strong>${nome}</strong>. Nossa equipe analisou sua mensagem e enviará o suporte para o e-mail <strong>${email}</strong> em tempo hábil.</p>
     </div>
   `;
   document.getElementById('form-suporte-leitor').reset();
@@ -1277,7 +1312,7 @@ function abrirInfo(tipo) {
     <div class="sobre-content">
         <div class="sobre-container-flex">
             <div class="sobre-foto-wrapper">
-                <img src="foto_autor.png" alt="Júlio Bhrósz" class="foto-autor-img">
+                <img src="foto_autor.webp" alt="Júlio Bhrósz" class="foto-autor-img">
             </div>
             <div class="sobre-texto-wrapper" style="flex: 1;">
                 <h1>A Mente por trás d'O Código</h1>
@@ -1344,7 +1379,7 @@ A metodologia de JB integra protocolos de Inteligência Emocional da <b>Harvard 
               </div>
               <div class="form-group">
                 <label>Seu E-mail (Informativo)</label>
-                <input type="email" id="dep-email" placeholder="seuemail@exemplo.com">
+                <input type="email" id="dep-email" placeholder="seu email@exemplo.com">
               </div>
             </div>
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
@@ -1360,6 +1395,7 @@ A metodologia de JB integra protocolos de Inteligência Emocional da <b>Harvard 
                   <option value="5">★★★★★ (5/5)</option>
                   <option value="4">★★★★☆ (4/5)</option>
                   <option value="3">★★★☆☆ (3/5)</option>
+                  <option value="2">★★★☆☆ (2/5)</option>
                 </select>
               </div>
             </div>

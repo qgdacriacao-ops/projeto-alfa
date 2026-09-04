@@ -16,8 +16,9 @@
     <style>
         :root {
             --gold: #FFD700;
-            --gold-bright: #FFF0A3;
+            --gold-bright: #FFD700;
             --gold-deep: #C99700;
+            --glow: rgba(255, 215, 0, 0.8);
             --bg-dark: #000000;
             --card-bg: rgba(20, 20, 20, 0.88);
             --text-light: #ffffff;
@@ -27,8 +28,12 @@
             --border-color: rgba(255, 215, 0, 0.26);
             --box-bg: rgba(0,0,0,0.6);
             --input-bg: rgba(30, 30, 30, 0.9);
-            --red-vivid: #ff1744;
-            --red-vivid-dark: #e6002d;
+            --red-btn: #d30000;
+            --red-btn-dark: #a80000;
+            --red-ferrari: #d30000;
+            --red-ferrari-dark: #a80000;
+            --red-vivid: #d30000;
+            --red-vivid-dark: #a80000;
         }
 
         body.light-theme {
@@ -41,8 +46,12 @@
             --border-color: rgba(180, 140, 0, 0.4);
             --box-bg: rgba(255, 255, 255, 0.85);
             --input-bg: rgba(240, 240, 240, 0.9);
-            --red-vivid: #e6002d;
-            --red-vivid-dark: #c40026;
+            --red-btn: #d30000;
+            --red-btn-dark: #a80000;
+            --red-ferrari: #d30000;
+            --red-ferrari-dark: #a80000;
+            --red-vivid: #d30000;
+            --red-vivid-dark: #a80000;
         }
 
         * {
@@ -328,37 +337,36 @@
         }
 
         .sinopse-thumb-card {
-            flex: 0 0 100px;
+            flex: 0 0 112px;
+            width: 112px;
+            min-height: 155px;
             cursor: pointer;
             text-align: center;
-            transition: transform 0.2s, border-color 0.2s;
+            transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
             border: 1px solid var(--border-color);
             border-radius: 4px;
             padding: 5px;
             background: var(--box-bg);
+            overflow: hidden;
         }
 
         .sinopse-thumb-card:hover {
             transform: translateY(-3px);
             border-color: var(--gold);
+            box-shadow: 0 8px 16px var(--glow);
         }
 
         .sinopse-thumb-card img {
-            width: 100%;
-            height: 135px;
-            object-fit: contain;
-            border-radius: 3px;
-            margin-bottom: 5px;
-            background: rgba(0, 0, 0, 0.2);
-        }
-
-        .sinopse-thumb-card span {
             display: block;
-            font-size: 0.65rem;
-            color: var(--text-muted);
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
+            width: 100%;
+            height: 145px;
+            aspect-ratio: 3 / 4;
+            object-fit: cover;
+            object-position: center;
+            border: 0;
+            border-radius: 3px;
+            margin: 0 auto 5px;
+            background: rgba(0, 0, 0, 0.2);
         }
 
         .container-trindade {
@@ -416,61 +424,94 @@
 
         .sinopse-print-cta {
             margin-top: 20px;
-            padding: 18px;
-            border: 1px solid rgba(255, 23, 68, 0.72);
-            border-radius: 8px;
-            background: linear-gradient(135deg, rgba(255, 23, 68, 0.14), rgba(0, 0, 0, 0.42));
-            box-shadow: 0 10px 26px rgba(255, 23, 68, 0.12);
+            padding: 20px;
+            border: 1px solid var(--gold);
+            border-radius: 6px;
+            background: var(--box-bg);
+            text-align: center;
+            box-shadow: 0 10px 26px rgba(0, 0, 0, 0.32);
         }
 
-        .sinopse-print-cta h3 {
-            color: var(--red-vivid);
-            font-size: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
-            margin-bottom: 6px;
+        .sinopse-print-cta .price-label {
+            display: block;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+        }
+
+        .sinopse-print-price {
+            color: var(--gold);
+            font-size: 1.65rem;
+            font-weight: 700;
+            margin: 8px 0 10px;
         }
 
         .sinopse-print-cta > p {
-            color: var(--text-muted);
-            font-size: 0.84rem;
+            color: var(--gold);
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
             margin-bottom: 12px;
         }
 
         .sinopse-print-cta-grid {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
+            display: flex;
+            flex-direction: column;
             gap: 10px;
+        }
+
+        .sinopse-print-link {
+            display: block;
+            text-decoration: none;
+            text-align: center;
         }
 
         .sinopse-print-option {
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 5px;
-            min-height: 68px;
-            padding: 10px 12px;
-            border-radius: 5px;
-            background: linear-gradient(135deg, var(--red-vivid), var(--red-vivid-dark));
+            min-height: 42px;
+            padding: 11px 12px;
+            border: none;
+            border-radius: 4px;
             color: #fff;
             text-align: center;
             text-decoration: none;
-            font-weight: 800;
-            font-size: 0.78rem;
+            font-weight: 700;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            cursor: pointer;
             transition: transform 0.2s ease, filter 0.2s ease, box-shadow 0.2s ease;
-        }
-
-        .sinopse-print-option strong {
-            color: #fff;
-            font-size: 0.92rem;
         }
 
         .sinopse-print-option:hover {
             color: #fff;
-            filter: brightness(1.15) saturate(1.2);
+            filter: brightness(1.2) saturate(1.25);
             transform: translateY(-2px);
-            box-shadow: 0 7px 18px rgba(255, 23, 68, 0.35);
+            box-shadow: 0 8px 20px rgba(225, 6, 0, 0.48);
+        }
+
+        .sinopse-print-option strong {
+            margin-left: 8px;
+            font-size: 0.95rem;
+        }
+
+        @media (max-width: 700px) {
+            .sinopse-thumb-card {
+                flex-basis: 100px;
+                width: 100px;
+                min-height: 140px;
+            }
+            .sinopse-thumb-card img {
+                height: 130px;
+            }
+            .sinopse-print-cta {
+                margin-top: 16px;
+                padding: 15px;
+            }
+            .sinopse-print-price {
+                font-size: 1.35rem;
+            }
         }
 
         .autopsia-callout {
@@ -567,7 +608,7 @@
         }
 
         .btn-red {
-            background: #8b0000;
+            background: linear-gradient(135deg, var(--red-btn), var(--red-btn-dark));
             color: #fff;
             border: none;
             width: 100%;
@@ -582,7 +623,9 @@
         }
 
         .btn-red:hover {
-            background: #b20000;
+            background: var(--red-btn);
+            filter: brightness(1.18) saturate(1.2);
+            box-shadow: 0 7px 18px rgba(225, 6, 0, 0.42);
         }
 
         .combo-container {
@@ -1168,6 +1211,7 @@
                             <button class="btn-red" onclick="abrirCombo('completo')">COMBO COMPLETO</button>
                         </div>
                     </div>
+                    <div id="asset-print-cta-slot" aria-live="polite"></div>
                 </div>
             </div>
             <div id="asset-footer" class="asset-footer" aria-live="polite"></div>
@@ -1466,10 +1510,21 @@ function obterOpcoesImpressas(item) {
 
 function renderRodapeAtivo(item) {
   const footer = document.getElementById('asset-footer');
-  if (!footer || !item) return;
+  const printSlot = document.getElementById('asset-print-cta-slot');
+  if (!footer || !printSlot || !item) return;
   const meta = obterMetadadosAtivo(item);
   const opcoesImpressas = obterOpcoesImpressas(item);
   const ehAutopsiaPrincipal = item.id === 'e3';
+  printSlot.innerHTML = opcoesImpressas ? `
+    <div class="sinopse-print-cta buy-card">
+      <span class="price-label">Por Apenas</span>
+      <div class="sinopse-print-price">CAPA DURA / COMUM</div>
+      <div class="sinopse-print-cta-grid">
+        <p style="font-size: 0.65rem; color: var(--gold); font-weight: 700; text-transform: uppercase; margin-bottom: 0;">Pagamento seguro via loja oficial.</p>
+        <a class="btn-gold sinopse-print-link" href="${opcoesImpressas.dura[1]}" target="_blank" rel="noopener noreferrer" aria-label="Comprar ${item.title} em capa dura">COMPRE CAPA DURA — ${opcoesImpressas.dura[0]}</a>
+        <a class="btn-red sinopse-print-link" href="${opcoesImpressas.comum[1]}" target="_blank" rel="noopener noreferrer" aria-label="Comprar ${item.title} em capa comum">COMPRE CAPA COMUM — ${opcoesImpressas.comum[0]}</a>
+      </div>
+    </div>` : '';
   footer.innerHTML = `
     <div class="asset-meta-grid">
       <div class="asset-meta-item"><small>Ativo</small><strong>${item.title}</strong></div>
@@ -1477,15 +1532,6 @@ function renderRodapeAtivo(item) {
       <div class="asset-meta-item"><small>Formato</small><strong>${meta.formato}</strong></div>
       <div class="asset-meta-item"><small>Edição</small><strong>${meta.edicao}</strong></div>
     </div>
-    ${opcoesImpressas ? `
-      <div class="sinopse-print-cta">
-        <h3>Adquira a versão impressa</h3>
-        <p>Escolha exclusivamente entre capa dura e capa comum.</p>
-        <div class="sinopse-print-cta-grid">
-          <a class="sinopse-print-option" href="${opcoesImpressas.dura[1]}" target="_blank" rel="noopener noreferrer">Capa dura<strong>${opcoesImpressas.dura[0]}</strong></a>
-          <a class="sinopse-print-option" href="${opcoesImpressas.comum[1]}" target="_blank" rel="noopener noreferrer">Capa comum<strong>${opcoesImpressas.comum[0]}</strong></a>
-        </div>
-      </div>` : ''}
     ${ehAutopsiaPrincipal ? `
       <div class="autopsia-callout">
         <svg viewBox="0 0 100 60" role="img" aria-label="Seta curva vermelha apontando para o link">
@@ -1504,7 +1550,6 @@ function renderAtalhosSinopse() {
   container.innerHTML = todos.map(item => `
     <div class="sinopse-thumb-card" onclick="abrirSinopse('${item.img}', '${item.title}', '${item.price}', '${item.link}', \`${escapeHtml(item.desc)}\`)">
       <img src="${item.img}" alt="${item.title}">
-      <span>${item.title}</span>
     </div>
   `).join('');
 }

@@ -27,6 +27,8 @@
             --border-color: rgba(255, 215, 0, 0.26);
             --box-bg: rgba(0,0,0,0.6);
             --input-bg: rgba(30, 30, 30, 0.9);
+            --red-vivid: #ff1744;
+            --red-vivid-dark: #e6002d;
         }
 
         body.light-theme {
@@ -39,6 +41,8 @@
             --border-color: rgba(180, 140, 0, 0.4);
             --box-bg: rgba(255, 255, 255, 0.85);
             --input-bg: rgba(240, 240, 240, 0.9);
+            --red-vivid: #e6002d;
+            --red-vivid-dark: #c40026;
         }
 
         * {
@@ -410,6 +414,65 @@
             line-height: 1.35;
         }
 
+        .sinopse-print-cta {
+            margin-top: 20px;
+            padding: 18px;
+            border: 1px solid rgba(255, 23, 68, 0.72);
+            border-radius: 8px;
+            background: linear-gradient(135deg, rgba(255, 23, 68, 0.14), rgba(0, 0, 0, 0.42));
+            box-shadow: 0 10px 26px rgba(255, 23, 68, 0.12);
+        }
+
+        .sinopse-print-cta h3 {
+            color: var(--red-vivid);
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-bottom: 6px;
+        }
+
+        .sinopse-print-cta > p {
+            color: var(--text-muted);
+            font-size: 0.84rem;
+            margin-bottom: 12px;
+        }
+
+        .sinopse-print-cta-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 10px;
+        }
+
+        .sinopse-print-option {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            min-height: 68px;
+            padding: 10px 12px;
+            border-radius: 5px;
+            background: linear-gradient(135deg, var(--red-vivid), var(--red-vivid-dark));
+            color: #fff;
+            text-align: center;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 0.78rem;
+            transition: transform 0.2s ease, filter 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .sinopse-print-option strong {
+            color: #fff;
+            font-size: 0.92rem;
+        }
+
+        .sinopse-print-option:hover {
+            color: #fff;
+            filter: brightness(1.15) saturate(1.2);
+            transform: translateY(-2px);
+            box-shadow: 0 7px 18px rgba(255, 23, 68, 0.35);
+        }
+
         .autopsia-callout {
             display: flex;
             align-items: center;
@@ -429,14 +492,14 @@
 
         .autopsia-callout path {
             fill: none;
-            stroke: #ef3340;
+            stroke: var(--red-vivid);
             stroke-width: 4;
             stroke-linecap: round;
             stroke-linejoin: round;
         }
 
         .autopsia-callout a {
-            color: #ff5c66;
+            color: var(--red-vivid);
             font-weight: 800;
             text-decoration: underline;
             text-decoration-thickness: 2px;
@@ -445,7 +508,7 @@
         }
 
         .autopsia-callout a:hover {
-            color: #ffb0b5;
+            color: #ff9aaa;
             transform: translateX(3px);
         }
 
@@ -1384,10 +1447,28 @@ function obterMetadadosAtivo(item) {
   };
 }
 
+function obterOpcoesImpressas(item) {
+  if (!item || item.id.startsWith('a')) return null;
+  const opcoes = {
+    'Descubra Você': { dura: ['US$ 17,99', 'https://a.co/d/0hR1rLKH'], comum: ['US$ 7,75', 'https://a.co/d/0hR1rLKH'] },
+    'Engenharia da Colisão': { dura: ['R$ 63,89', 'https://a.co/d/01jBHL16'], comum: ['R$ 38,29', 'https://loja.uiclap.com/titulo/ua186629'] },
+    'Autópsia da Personalidade': { dura: ['R$ 59,52', 'https://clubedeautores.com.br/livro/autopsia-da-personalidade?cart=true'], comum: ['R$ 38,29', 'https://loja.uiclap.com/titulo/ua186629'] },
+    'Sherlock Holmes O Dossiê da Engenharia da Colisão': { dura: ['US$ 24,90', 'https://a.co/d/09j6vGMh'], comum: ['US$ 15,90', 'https://a.co/d/09j6vGMh'] },
+    'Know yourself First': { dura: ['US$ 23,90', 'https://a.co/d/0iD2wBoB'], comum: ['US$ 19,99', 'https://a.co/d/0iD2wBoB'] },
+    'Découvrez-Vous': { dura: ['US$ 19,35', 'https://amzn.eu/d/03IWBaqk'], comum: ['US$ 16,99', 'https://amzn.eu/d/03IWBaqk'] },
+    'The Engineering of Collision': { dura: ['EM BREVE', 'https://a.co/d/01jBHL16'], comum: ['EM BREVE', 'https://a.co/d/01jBHL16'] },
+    'The Supremacy Code': { dura: ['EM BREVE', 'https://a.co/d/0iD2w'], comum: ['EM BREVE', 'https://a.co/d/0iD2w'] },
+    'Autópsia de la Personalidad': { dura: ['EM BREVE', 'https://a.co/d/01jBH'], comum: ['EM BREVE', 'https://a.co/d/01jBH'] },
+    'Autopsie de la Personnalité': { dura: ['EM BREVE', 'https://a.co/d/01jBH'], comum: ['EM BREVE', 'https://a.co/d/01jBH'] }
+  };
+  return opcoes[item.title] || null;
+}
+
 function renderRodapeAtivo(item) {
   const footer = document.getElementById('asset-footer');
   if (!footer || !item) return;
   const meta = obterMetadadosAtivo(item);
+  const opcoesImpressas = obterOpcoesImpressas(item);
   const ehAutopsiaPrincipal = item.id === 'e3';
   footer.innerHTML = `
     <div class="asset-meta-grid">
@@ -1396,6 +1477,15 @@ function renderRodapeAtivo(item) {
       <div class="asset-meta-item"><small>Formato</small><strong>${meta.formato}</strong></div>
       <div class="asset-meta-item"><small>Edição</small><strong>${meta.edicao}</strong></div>
     </div>
+    ${opcoesImpressas ? `
+      <div class="sinopse-print-cta">
+        <h3>Adquira a versão impressa</h3>
+        <p>Escolha exclusivamente entre capa dura e capa comum.</p>
+        <div class="sinopse-print-cta-grid">
+          <a class="sinopse-print-option" href="${opcoesImpressas.dura[1]}" target="_blank" rel="noopener noreferrer">Capa dura<strong>${opcoesImpressas.dura[0]}</strong></a>
+          <a class="sinopse-print-option" href="${opcoesImpressas.comum[1]}" target="_blank" rel="noopener noreferrer">Capa comum<strong>${opcoesImpressas.comum[0]}</strong></a>
+        </div>
+      </div>` : ''}
     ${ehAutopsiaPrincipal ? `
       <div class="autopsia-callout">
         <svg viewBox="0 0 100 60" role="img" aria-label="Seta curva vermelha apontando para o link">
@@ -1676,31 +1766,60 @@ function salvarDepoimento(event) {
   abrirInfo('depoimentos');
 }
 
+async function enviarFormularioWeb3(form, statusEl, mensagemSucesso) {
+  const botao = form.querySelector('button[type="submit"]');
+  if (botao) {
+    botao.disabled = true;
+    botao.dataset.textoOriginal = botao.textContent;
+    botao.textContent = 'Enviando...';
+  }
+  statusEl.style.display = 'block';
+  statusEl.style.color = 'var(--text-muted)';
+  statusEl.textContent = 'Enviando sua mensagem...';
+
+  try {
+    const dados = Object.fromEntries(new FormData(form).entries());
+    const resposta = await fetch(form.action, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify(dados)
+    });
+    const resultado = await resposta.json();
+    if (!resposta.ok || !resultado.success) {
+      throw new Error(resultado.message || resultado.body?.message || 'O serviço recusou o envio.');
+    }
+
+    statusEl.style.color = '#39e58c';
+    statusEl.innerHTML = `<strong>${mensagemSucesso}</strong>`;
+    form.reset();
+  } catch (erro) {
+    console.error('Falha no envio do formulário:', erro);
+    statusEl.style.color = '#ff6675';
+    statusEl.textContent = 'Não foi possível enviar agora. Verifique sua conexão e tente novamente.';
+  } finally {
+    if (botao) {
+      botao.disabled = false;
+      botao.textContent = botao.dataset.textoOriginal || 'Enviar';
+    }
+  }
+}
+
 function enviarDadosContato(event) {
   event.preventDefault();
-  const nome = document.getElementById('cnt-nome').value;
-  const rede = document.getElementById('cnt-rede').value;
-  const userRede = document.getElementById('cnt-user').value;
-
-  alert(`Obrigado, ${nome}! Seus dados (${rede}: ${userRede}) foram registrados para futuro contato.`);
-  document.getElementById('form-contato-leitor').reset();
+  const form = event.currentTarget;
+  const status = document.getElementById('contato-form-status');
+  enviarFormularioWeb3(form, status, 'Mensagem enviada com sucesso. Nossa equipe entrará em contato.');
 }
 
 function enviarSolicitacaoSuporte(event) {
   event.preventDefault();
-  const nome = document.getElementById('sup-nome').value;
-  const email = document.getElementById('sup-email').value;
-  const protocolo = "PP-" + Math.floor(100000 + Math.random() * 900000);
-
-  document.getElementById('suporte-ticket-status').style.display = 'block';
-  document.getElementById('suporte-ticket-status').innerHTML = `
-    <div style="background: rgba(0, 255, 0, 0.1); border: 1px solid var(--gold); padding: 15px; border-radius: 6px; margin-top: 15px;">
-      <h3 style="color: var(--gold); margin-bottom: 5px;">Solicitação Registrada com Sucesso!</h3>
-      <p style="font-size: 0.9rem;">Protocolo: <strong>${protocolo}</strong></p>
-      <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 5px;">Obrigado, <strong>${nome}</strong>. Nossa equipe analisou sua mensagem e enviará o suporte para o e-mail <strong>${email}</strong> em tempo hábil.</p>
-    </div>
-  `;
-  document.getElementById('form-suporte-leitor').reset();
+  const form = event.currentTarget;
+  const status = document.getElementById('suporte-ticket-status');
+  const protocolo = 'PP-' + Math.floor(100000 + Math.random() * 900000);
+  enviarFormularioWeb3(form, status, `Solicitação enviada com sucesso. Protocolo: ${protocolo}.`);
 }
 
 function abrirInfo(tipo) {
@@ -1841,21 +1960,26 @@ A metodologia de JB integra protocolos de Inteligência Emocional da <b>Harvard 
 
         <div style="border-top: 1px solid var(--border-color); padding-top: 20px; margin-top: 20px;">
           <h3 style="color: var(--gold); text-transform: uppercase; font-size: 1rem; margin-bottom: 15px; text-align: center;">Cadastre sua Rede Social</h3>
-          <form id="form-contato-leitor" onsubmit="enviarDadosContato(event)">
+          <form id="form-contato-leitor" action="https://api.web3forms.com/submit" method="POST" onsubmit="enviarDadosContato(event)">
+            <input type="hidden" name="access_key" value="8536bd7b-cee6-4dca-a8fd-4ba6ba0cff13">
+            <input type="hidden" name="subject" value="Nova mensagem de contato via Portal Pleno">
+            <input type="hidden" name="ccemail" value="contato@portalpleno.com.br;comercial@portalpleno.com.br">
+            <input type="hidden" name="from_name" value="Portal Pleno | O Código">
+            <input type="checkbox" name="botcheck" style="display:none">
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
               <div class="form-group">
                 <label>Seu Nome</label>
-                <input type="text" id="cnt-nome" required placeholder="Digite seu nome">
+                <input type="text" id="cnt-nome" name="name" required placeholder="Digite seu nome">
               </div>
               <div class="form-group">
                 <label>Seu E-mail</label>
-                <input type="email" id="cnt-email" required placeholder="seuemail@exemplo.com">
+                <input type="email" id="cnt-email" name="email" required placeholder="seuemail@exemplo.com">
               </div>
             </div>
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
               <div class="form-group">
                 <label>Sua Rede Social Principal</label>
-                <select id="cnt-rede">
+                <select id="cnt-rede" name="rede_social">
                   <option value="Instagram">Instagram</option>
                   <option value="WhatsApp">WhatsApp</option>
                   <option value="Telegram">Telegram</option>
@@ -1865,11 +1989,12 @@ A metodologia de JB integra protocolos de Inteligência Emocional da <b>Harvard 
               </div>
               <div class="form-group">
                 <label>Seu User / Arroba / Número</label>
-                <input type="text" id="cnt-user" required placeholder="Ex: @seuuser ou número">
+                <input type="text" id="cnt-user" name="usuario_rede" required placeholder="Ex: @seuuser ou número">
               </div>
             </div>
             <button type="submit" class="btn-gold" style="width: 100%;">Enviar Meus Dados</button>
           </form>
+          <div id="contato-form-status" role="status" style="display:none; margin-top:15px;"></div>
         </div>
       </div>`;
   } else if (tipo === 'suporte') {
@@ -1878,27 +2003,32 @@ A metodologia de JB integra protocolos de Inteligência Emocional da <b>Harvard 
         <h1 style="color: var(--gold); text-transform: uppercase; margin-bottom: 10px; text-align: center;">Central Interna de Suporte</h1>
         <p style="text-align: center; color: var(--text-muted); font-size: 0.9rem; margin-bottom: 25px;">Está com dúvidas ou dificuldades com a sua compra? Preencha o formulário interno abaixo.</p>
         
-        <form id="form-suporte-leitor" onsubmit="enviarSolicitacaoSuporte(event)">
+        <form id="form-suporte-leitor" action="https://api.web3forms.com/submit" method="POST" onsubmit="enviarSolicitacaoSuporte(event)">
+          <input type="hidden" name="access_key" value="8536bd7b-cee6-4dca-a8fd-4ba6ba0cff13">
+          <input type="hidden" name="subject" value="Nova solicitação de suporte via Portal Pleno">
+          <input type="hidden" name="ccemail" value="suportebook@portalpleno.com.br">
+          <input type="hidden" name="from_name" value="Portal Pleno | O Código">
+          <input type="checkbox" name="botcheck" style="display:none">
           <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
             <div class="form-group">
               <label>Nome Completo</label>
-              <input type="text" id="sup-nome" required placeholder="Seu nome completo">
+              <input type="text" id="sup-nome" name="name" required placeholder="Seu nome completo">
             </div>
             <div class="form-group">
               <label>E-mail da Compra</label>
-              <input type="email" id="sup-email" required placeholder="seuemail@exemplo.com">
+              <input type="email" id="sup-email" name="email" required placeholder="seuemail@exemplo.com">
             </div>
           </div>
           <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
             <div class="form-group">
               <label>Ativo Adquirido</label>
-              <select id="sup-ativo">
+              <select id="sup-ativo" name="ativo_adquirido">
                 ${[...hardware.e, ...hardware.a].map(item => `<option value="${item.title}">${item.title}</option>`).join('')}
               </select>
             </div>
             <div class="form-group">
               <label>Tipo de Dificuldade</label>
-              <select id="sup-tipo">
+              <select id="sup-tipo" name="tipo_dificuldade">
                 <option value="Acesso ao E-book">Acesso ao E-book / Download</option>
                 <option value="Acesso ao Audiobook">Acesso ao Audiobook / Áudio</option>
                 <option value="Dúvida sobre Pagamento">Dúvida sobre Pagamento</option>
@@ -1909,7 +2039,7 @@ A metodologia de JB integra protocolos de Inteligência Emocional da <b>Harvard 
           </div>
           <div class="form-group">
             <label>Descrição do Problema</label>
-            <textarea id="sup-mensagem" rows="4" required placeholder="Relate o que aconteceu detalhadamente..."></textarea>
+            <textarea id="sup-mensagem" name="message" rows="4" required placeholder="Relate o que aconteceu detalhadamente..."></textarea>
           </div>
           <button type="submit" class="btn-gold">Solicitar Ajuda e Gerar Ticket</button>
         </form>

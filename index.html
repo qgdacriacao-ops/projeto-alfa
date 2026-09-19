@@ -1624,11 +1624,10 @@ function irTitulos(tipo) {
   const count = document.getElementById('ebook-count');
   if (count) count.innerText = `${hardware.e.length} títulos disponíveis`;
   container.innerHTML = hardware.e.map((item) => `
-    <article class="card-flutuante" onclick="abrirSinopse('${item.img}', '${item.title}', '${item.price}', '${item.link}', \`${escapeHtml(item.desc)}\`)">
-      <img src="${item.img}" alt="${item.title}" loading="lazy">
-      <div class="card-title">${item.title}</div>
-    </article>
-  `).join('');
+  <article class="card-flutuante" onclick="abrirSinopse('${item.img}', '${item.title}', '${item.price}', '${item.link}', \`${escapeHtml(item.desc)}\`)">
+    <img src="${item.img}" alt="${item.title}" loading="lazy">
+  </article>
+`).join('');
   
   ativarMenu(tipo);
   historico = 'titulos';

@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Autorização TikTok | Portal Pleno</title>
+  <style>body{margin:0;background:#080808;color:#fff;font:16px/1.6 Arial,sans-serif;padding:32px}main{max-width:760px;margin:auto;background:#151515;border:1px solid #ffd700;border-radius:12px;padding:28px}h1{color:#ffd700}code{display:block;word-break:break-all;background:#000;padding:14px;border-radius:8px;color:#8fffa0}p{color:#ddd}</style>
+</head>
+<body><main>
+<h1>Autorização recebida</h1>
+<p>O Portal Pleno recebeu o retorno da autorização do TikTok. Esta página não exibe nem armazena o código em servidor.</p>
+<p id="status">Verificando o retorno…</p>
+<code id="data">Aguardando parâmetros OAuth.</code>
+<script>
+const params = new URLSearchParams(location.search);
+const code = params.get('code');
+const state = params.get('state');
+const error = params.get('error');
+const data = document.getElementById('data');
+const status = document.getElementById('status');
+if (error) { status.textContent = 'A autorização foi recusada ou falhou.'; data.textContent = error; }
+else if (code) { status.textContent = 'Código recebido. Copie-o somente para o procedimento seguro de troca por token.'; data.textContent = code; }
+else { status.textContent = 'Nenhum código foi recebido nesta abertura.'; }
+</script>
+</main></body></html>

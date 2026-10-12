@@ -9,10 +9,9 @@
     })(window, document, "clarity", "script", "vxqqwilkqh");
 </script>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=0.4">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <title>Portal Pleno | O Código</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-    
+    <!-- Fontes externas foram removidas do caminho crítico; o site usa fallbacks do sistema. -->
     <style>
         :root {
             --gold: #FFD700;
@@ -58,7 +57,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+            transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
         }
 
         body {
@@ -1043,6 +1042,9 @@
         }
 
         @media (max-width: 700px) {
+            #bg { background-attachment: scroll; }
+            header { position: relative; }
+            body { min-width: 0; }
             main { padding: 12px; overflow-x: hidden; }
             header { padding: 12px 14px; width: 100%; }
             .logo { max-width: 100%; }
@@ -1118,7 +1120,7 @@
             <div class="column-box">
                 <p>EBOOKS</p>
                 <div class="display-box" onclick="irSinopseHome('e')">
-                    <img id="loop-e" src="ebook01.webp" alt="Ebook">
+                    <img id="loop-e" src="ebook01.webp" alt="Ebook" decoding="async" fetchpriority="high">
                 </div>
             </div>
             
@@ -1147,7 +1149,7 @@
             <div class="column-box">
                 <p>AUDIOS</p>
                 <div class="display-box" onclick="irSinopseHome('a')">
-                    <img id="loop-a" src="audio01.webp" alt="Audiobook">
+                    <img id="loop-a" src="audio01.webp" alt="Audiobook" decoding="async" fetchpriority="high">
                 </div>
             </div>
         </div>
@@ -1569,7 +1571,7 @@ function renderAtalhosSinopse() {
   const todos = [...hardware.e, ...hardware.a];
   container.innerHTML = todos.map(item => `
     <div class="sinopse-thumb-card" onclick="abrirSinopse('${item.img}', '${item.title}', '${item.price}', '${item.link}', \`${escapeHtml(item.desc)}\`)">
-      <img src="${item.img}" alt="${item.title}">
+      <img src="${item.img}" alt="${item.title}" loading="lazy" decoding="async">
     </div>
   `).join('');
 }
@@ -1602,7 +1604,7 @@ function irAudiobooks() {
   
   const renderCardAudio = (item) => `
     <article class="audio-card">
-      <img class="audio-card-img" src="${item.img}" alt="${item.title}" onclick="abrirSinopse('${item.img}', '${item.title}', '${item.price}', '${item.link}', \`${escapeHtml(item.desc)}\`)" loading="lazy">
+      <img class="audio-card-img" src="${item.img}" alt="${item.title}" loading="lazy" decoding="async" onclick="abrirSinopse('${item.img}', '${item.title}', '${item.price}', '${item.link}', \`${escapeHtml(item.desc)}\`)" >
       <div class="audio-card-info">
         <h4 class="audio-card-title">${item.title}</h4>
         <span class="audio-card-price">${item.price}</span>
@@ -1629,7 +1631,7 @@ function irTitulos(tipo) {
   if (count) count.innerText = `${hardware.e.length} títulos disponíveis`;
   container.innerHTML = hardware.e.map((item) => `
   <article class="card-flutuante" onclick="abrirSinopse('${item.img}', '${item.title}', '${item.price}', '${item.link}', \`${escapeHtml(item.desc)}\`)">
-    <img src="${item.img}" alt="${item.title}" loading="lazy">
+    <img src="${item.img}" alt="${item.title}" loading="lazy" decoding="async">
   </article>
 `).join('');
   
@@ -1675,7 +1677,7 @@ function irImpressosFisicos() {
 
   const renderImpresso = (impresso) => `
     <article class="audio-card">
-      <img class="audio-card-img" src="${impresso.img}" alt="${impresso.title}" onclick="window.open('${impresso.link}', '_blank')" loading="lazy">
+      <img class="audio-card-img" src="${impresso.img}" alt="${impresso.title}" loading="lazy" decoding="async" onclick="window.open('${impresso.link}', '_blank')">
       <div class="audio-card-info">
         <h4 class="audio-card-title">${impresso.title}</h4>
         <span class="audio-card-price">${impresso.price}</span>
@@ -1747,7 +1749,7 @@ function abrirCombo(tipo) {
 
   grid.innerHTML = listaAtivos.map(item => `
     <div class="combo-item">
-      <img src="${item.img}" alt="${item.title}">
+      <img src="${item.img}" alt="${item.title}" loading="lazy" decoding="async">
       <div class="combo-item-info">
         <div class="combo-item-title">${item.title}</div>
         <div class="combo-item-price">${item.price}</div>
@@ -1924,7 +1926,7 @@ function abrirInfo(tipo) {
     <div class="sobre-content">
         <div class="sobre-container-flex">
             <div class="sobre-foto-wrapper">
-                <img src="foto_autor.webp" alt="Júlio Bhrósz" class="foto-autor-img">
+                <img src="foto_autor.webp" alt="Júlio Bhrósz" class="foto-autor-img" loading="lazy" decoding="async">
             </div>
             <div class="sobre-texto-wrapper" style="flex: 1;">
                 <h1>A Mente por trás d'O Código</h1>
